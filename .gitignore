@@ -126,7 +126,7 @@ crashlytics-build.properties
 [Aa]ssets/Smitesoft*/
 [Aa]ssets/Feel/
 [Aa]ssets/RapidIcon/
-[Aa]ssets/TextMesh*/
+**/TextMesh*/
 /[Rr]ecordings/
 /[Aa]ssets/Plugins/Editor/JetBrains*
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
