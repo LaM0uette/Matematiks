@@ -25,6 +25,8 @@ namespace Proto.Modules.NumBall
         
         private void OnMouseEnter()
         {
+            if (_isDownVariable.Value == false) return;
+            
             Debug.Log("Enter");
         }
 
