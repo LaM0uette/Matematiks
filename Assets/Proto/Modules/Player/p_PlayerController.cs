@@ -1,4 +1,6 @@
+using Obvious.Soap;
 using Proto.Modules.Player.Inputs;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Proto.Modules.Player
@@ -6,6 +8,9 @@ namespace Proto.Modules.Player
     public class p_PlayerController : MonoBehaviour
     {
         #region Statements
+        
+        [Space, Title("Soap")]
+        [SerializeField] private BoolVariable _isDownVariable;
 
         private p_PlayerInputsReader _inputsReader;
 
@@ -34,7 +39,7 @@ namespace Proto.Modules.Player
         
         private void OnRelease()
         {
-            Debug.Log("Release");
+            _isDownVariable.Value = false;
         }
 
         #endregion

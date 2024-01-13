@@ -375,6 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: 1
+  _isDownVariable: {fileID: 11400000, guid: 18893d1c21b9c5243974f95ea21d6865, type: 2}
 --- !u!1 &9085605719583879721
 GameObject:
   m_ObjectHideFlags: 0
