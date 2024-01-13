@@ -16,10 +16,12 @@ namespace Proto.Modules.Player
         [SerializeField] private ScriptableListP_NumBall _numBallsSelected;
 
         private p_PlayerInputsReader _inputsReader;
+        private LineRenderer _lineRenderer;
 
         private void Awake()
         {
             _inputsReader = GetComponent<p_PlayerInputsReader>();
+            _lineRenderer = GetComponent<LineRenderer>();
         }
 
         #endregion
@@ -46,15 +48,30 @@ namespace Proto.Modules.Player
         {
             _isDownVariable.Value = false;
             _numBallsSelected.Clear();
+            _lineRenderer.positionCount = 0;
         }
         
         private void OnNumBallSelected(p_NumBall pNumBall)
         {
-            if (_isDownVariable.Value == false) return;
+            if (_isDownVariable.Value == false) 
+                return;
             
             if (_numBallsSelected.Count == 0)
             {
                 _numBallsSelected.Add(pNumBall);
+                _lineRenderer.positionCount = 1;
+                _lineRenderer.SetPosition(0, pNumBall.transform.position);
+                return;
+            }
+            
+            if (_numBallsSelected.Contains(pNumBall))
+            {
+                if (_numBallsSelected[^2] == pNumBall)
+                {
+                    _numBallsSelected.Remove(_numBallsSelected[^1]);
+                    _lineRenderer.positionCount = _numBallsSelected.Count;
+                }
+                
                 return;
             }
 
@@ -63,6 +80,8 @@ namespace Proto.Modules.Player
                 return;
             
             _numBallsSelected.Add(pNumBall);
+            _lineRenderer.positionCount = _numBallsSelected.Count;
+            _lineRenderer.SetPosition(_numBallsSelected.Count - 1, pNumBall.transform.position);
         }
 
         #endregion
