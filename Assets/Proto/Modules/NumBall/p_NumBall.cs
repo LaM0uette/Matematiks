@@ -1,6 +1,7 @@
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Proto.Modules.NumBall
 {
@@ -8,11 +9,12 @@ namespace Proto.Modules.NumBall
     {
         #region Statements
         
-        [Space, Title("Properties")]
-        public int num;
+        [FormerlySerializedAs("num")] [Space, Title("Properties")]
+        public int Num;
 
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _isDownVariable;
+        [SerializeField] private ScriptableEventP_NumBall _numBallSelectedEvent;
 
         #endregion
         
@@ -27,7 +29,7 @@ namespace Proto.Modules.NumBall
         {
             if (_isDownVariable.Value == false) return;
             
-            Debug.Log("Enter");
+            _numBallSelectedEvent.Raise(this);
         }
 
         #endregion
