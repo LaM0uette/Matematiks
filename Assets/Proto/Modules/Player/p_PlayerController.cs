@@ -10,6 +10,9 @@ namespace Proto.Modules.Player
     {
         #region Statements
         
+        [Space, Title("Properties")]
+        [SerializeField] private float _maxDistanceBetweenNumBalls = 1.3f;
+        
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _isDownVariable;
         [SerializeField] private ScriptableEventP_NumBall _numBallSelectedEvent;
@@ -85,7 +88,7 @@ namespace Proto.Modules.Player
             {
                 var distance = Vector3.Distance(_numBallsSelected[^2].transform.position, _numBallsSelected[^1].transform.position);
 
-                if (distance > 1.3f)
+                if (distance > _maxDistanceBetweenNumBalls)
                 {
                     _numBallsSelected.Remove(_numBallsSelected[^1]);
                     _lineRenderer.positionCount = _numBallsSelected.Count;
