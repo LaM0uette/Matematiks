@@ -80,6 +80,19 @@ namespace Proto.Modules.Player
                 return;
             
             _numBallsSelected.Add(pNumBall);
+            
+            if (_numBallsSelected.Count >= 2)
+            {
+                var distance = Vector3.Distance(_numBallsSelected[^2].transform.position, _numBallsSelected[^1].transform.position);
+
+                if (distance > 1.3f)
+                {
+                    _numBallsSelected.Remove(_numBallsSelected[^1]);
+                    _lineRenderer.positionCount = _numBallsSelected.Count;
+                    return;
+                }
+            }
+            
             _lineRenderer.positionCount = _numBallsSelected.Count;
             _lineRenderer.SetPosition(_numBallsSelected.Count - 1, pNumBall.transform.position);
         }
