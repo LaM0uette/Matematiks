@@ -374,7 +374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d7f1e169c4da74a8b82d18384a705b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 1
+  Num: 1
+  _numText: {fileID: 7400955112744079957}
   _isDownVariable: {fileID: 11400000, guid: 18893d1c21b9c5243974f95ea21d6865, type: 2}
   _numBallSelectedEvent: {fileID: 11400000, guid: a866acdf44fe97a4a8a8abdea2a136d9, type: 2}
 --- !u!1 &9085605719583879721

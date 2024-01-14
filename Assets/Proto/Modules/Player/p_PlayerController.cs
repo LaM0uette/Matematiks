@@ -1,3 +1,4 @@
+using System.Linq;
 using Obvious.Soap;
 using Proto.Modules.NumBall;
 using Proto.Modules.Player.Inputs;
@@ -49,6 +50,19 @@ namespace Proto.Modules.Player
         
         private void OnRelease()
         {
+            if (_numBallsSelected.Count >= 3)
+            {
+                var lastNumBall = _numBallsSelected[^1];
+                var numBallsToDelete = _numBallsSelected.Take(_numBallsSelected.Count - 1).ToList();
+                
+                foreach (var numBall in numBallsToDelete)
+                {
+                    Destroy(numBall.gameObject);
+                }
+                
+                lastNumBall.SetNum(lastNumBall.Num + 1);
+            }
+            
             _isDownVariable.Value = false;
             _numBallsSelected.Clear();
             _lineRenderer.positionCount = 0;
