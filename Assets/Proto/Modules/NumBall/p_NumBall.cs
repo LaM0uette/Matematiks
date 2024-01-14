@@ -1,3 +1,4 @@
+using System;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -8,6 +9,8 @@ namespace Proto.Modules.NumBall
     public class p_NumBall : MonoBehaviour
     {
         #region Statements
+        
+        public bool IsBlocked { get; set; }
         
         [Space, Title("Properties")]
         public int Num;

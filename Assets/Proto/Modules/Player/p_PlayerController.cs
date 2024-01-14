@@ -134,11 +134,7 @@ namespace Proto.Modules.Player
         {
             foreach (var ball in FindObjectsOfType<p_NumBall>()) 
             {
-                var rb = ball.GetComponent<Rigidbody2D>();
-                if (rb != null) 
-                {
-                    rb.simulated = false;
-                }
+                ball.IsBlocked = true;
             }
         }
         
@@ -146,11 +142,7 @@ namespace Proto.Modules.Player
         {
             foreach (var ball in FindObjectsOfType<p_NumBall>()) 
             {
-                var rb = ball.GetComponent<Rigidbody2D>();
-                if (rb != null) 
-                {
-                    rb.simulated = true;
-                }
+                ball.IsBlocked = false;
             }
         }
         
