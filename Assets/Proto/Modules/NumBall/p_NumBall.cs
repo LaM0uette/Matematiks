@@ -25,12 +25,16 @@ namespace Proto.Modules.NumBall
         
         private void OnMouseDown()
         {
-            _isDownVariable.Value = true;
+            if (_isDownVariable.Value == false) 
+                return;
+            
+            _numBallSelectedEvent.Raise(this);
         }
         
         private void OnMouseEnter()
         {
-            if (_isDownVariable.Value == false) return;
+            if (_isDownVariable.Value == false) 
+                return;
             
             _numBallSelectedEvent.Raise(this);
         }

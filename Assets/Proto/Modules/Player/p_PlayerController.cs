@@ -34,12 +34,14 @@ namespace Proto.Modules.Player
 
         private void OnEnable()
         {
+            _inputsReader.PressAction += OnPress;
             _inputsReader.ReleaseAction += OnRelease;
             _numBallSelectedEvent.OnRaised += OnNumBallSelected;
         }
 
         private void OnDisable()
         {
+            _inputsReader.PressAction -= OnPress;
             _inputsReader.ReleaseAction -= OnRelease;
             _numBallSelectedEvent.OnRaised -= OnNumBallSelected;
         }
@@ -47,6 +49,11 @@ namespace Proto.Modules.Player
         #endregion
 
         #region Functions
+
+        private void OnPress()
+        {
+            _isDownVariable.Value = true;
+        }
         
         private void OnRelease()
         {
@@ -59,8 +66,12 @@ namespace Proto.Modules.Player
         
         private IEnumerator AnimateAndMergeBalls() 
         {
-            if (_numBallsSelected.Count < 3) 
+            if (_numBallsSelected.Count < 3)
+            {
+                _numBallsSelected.Clear();
+                _lineRenderer.positionCount = 0;
                 yield break;
+            }
 
             DisablePhysicsForAllBalls();
             //_lineRenderer.positionCount = 0;
@@ -161,7 +172,7 @@ namespace Proto.Modules.Player
                 return;
             }
             
-            if (_numBallsSelected.Contains(pNumBall))
+            if (_numBallsSelected.Contains(pNumBall) && _numBallsSelected.Count > 1)
             {
                 if (_numBallsSelected[^2] == pNumBall)
                 {

@@ -7,11 +7,17 @@ namespace Proto.Modules.Player.Inputs
     {
         #region Statements
 
+        public Action PressAction { get; set; }
         public Action ReleaseAction { get; set; }
 
         #endregion
 
         #region Events
+        
+        public void OnPress()
+        {
+            PressAction?.Invoke();
+        }
 
         public void OnRelease()
         {
