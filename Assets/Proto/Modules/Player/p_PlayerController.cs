@@ -50,6 +50,9 @@ namespace Proto.Modules.Player
         
         private void OnRelease()
         {
+            if (_isDownVariable.Value == false) 
+                return;
+            
             if (_numBallsSelected.Count >= 3)
             {
                 var lastNumBall = _numBallsSelected[^1];
