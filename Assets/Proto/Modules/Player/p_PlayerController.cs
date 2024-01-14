@@ -121,7 +121,7 @@ namespace Proto.Modules.Player
                 var rb = ball.GetComponent<Rigidbody2D>();
                 if (rb != null) 
                 {
-                    rb.simulated = false;
+                    rb.isKinematic = true;
                 }
             }
         }
@@ -133,7 +133,7 @@ namespace Proto.Modules.Player
                 var rb = ball.GetComponent<Rigidbody2D>();
                 if (rb != null) 
                 {
-                    rb.simulated = true;
+                    rb.isKinematic = false;
                 }
             }
         }
