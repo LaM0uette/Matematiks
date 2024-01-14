@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Obvious.Soap;
 using Proto.Modules.NumBall;
 using Proto.Modules.Player.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Proto.Modules.Player
 {
@@ -24,7 +27,7 @@ namespace Proto.Modules.Player
 
         private p_PlayerInputsReader _inputsReader;
         private LineRenderer _lineRenderer;
-        private List<float> _positionsToSpawnBalls = new();
+        private readonly List<float> _positionsToSpawnBalls = new();
 
         private void Awake()
         {
@@ -215,7 +218,19 @@ namespace Proto.Modules.Player
             }
             
             _lineRenderer.positionCount = _numBallsSelected.Count;
-            _lineRenderer.SetPosition(_numBallsSelected.Count - 1, pNumBall.transform.position);
+            
+            var newYPosition = pNumBall.transform.position;
+            
+            foreach (var selectedBall in _numBallsSelected)
+            {
+                if (!(Mathf.Abs(selectedBall.transform.position.y - pNumBall.transform.position.y) <= 0.2f)) 
+                    continue;
+                
+                newYPosition.y = selectedBall.transform.position.y;
+                break;
+            }
+            
+            _lineRenderer.SetPosition(_numBallsSelected.Count - 1, newYPosition);
         }
 
         #endregion
