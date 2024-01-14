@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 5836614464718252527}
   - component: {fileID: 3914362475310004670}
   - component: {fileID: 3469596001055806356}
+  - component: {fileID: 1863316344565158961}
   m_Layer: 0
   m_Name: p_NumBall
   m_TagString: Untagged
@@ -266,11 +267,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
+  m_Mass: 5
+  m_LinearDrag: 2
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: bd8b8089dcde6454a843e743f7f8019d, type: 2}
+  m_Material: {fileID: 6200000, guid: f279c6aba72710a4ea4fed37ff1fe981, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -278,8 +279,8 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!58 &3914362475310004670
 CircleCollider2D:
@@ -288,9 +289,9 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8184979030387622311}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: bd8b8089dcde6454a843e743f7f8019d, type: 2}
+  m_Material: {fileID: 6200000, guid: f279c6aba72710a4ea4fed37ff1fe981, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -315,7 +316,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.7
 --- !u!114 &3469596001055806356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +333,51 @@ MonoBehaviour:
   _numText: {fileID: 7400955112744079957}
   _isDownVariable: {fileID: 11400000, guid: 18893d1c21b9c5243974f95ea21d6865, type: 2}
   _numBallSelectedEvent: {fileID: 11400000, guid: a866acdf44fe97a4a8a8abdea2a136d9, type: 2}
+--- !u!61 &1863316344565158961
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8184979030387622311}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: f279c6aba72710a4ea4fed37ff1fe981, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 1.4}
+  m_EdgeRadius: 0
 --- !u!1 &9085605719583879721
 GameObject:
   m_ObjectHideFlags: 0

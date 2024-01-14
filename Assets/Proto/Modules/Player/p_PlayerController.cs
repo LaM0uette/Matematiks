@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Obvious.Soap;
 using Proto.Modules.NumBall;
 using Proto.Modules.Player.Inputs;
@@ -13,6 +14,8 @@ namespace Proto.Modules.Player
         
         [Space, Title("Properties")]
         [SerializeField] private float _maxDistanceBetweenNumBalls = 1.3f;
+        [SerializeField] private GameObject _ballPrefabParent;
+        [SerializeField] private GameObject _ballPrefab;
         
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _isDownVariable;
@@ -21,6 +24,7 @@ namespace Proto.Modules.Player
 
         private p_PlayerInputsReader _inputsReader;
         private LineRenderer _lineRenderer;
+        private List<float> _positionsToSpawnBalls = new();
 
         private void Awake()
         {
@@ -74,18 +78,13 @@ namespace Proto.Modules.Player
             }
 
             DisablePhysicsForAllBalls();
-            //_lineRenderer.positionCount = 0;
             
             for (var i = 0; i < _numBallsSelected.Count - 1; i++) 
             {
                 var currentBall = _numBallsSelected[i];
                 var nextBall = _numBallsSelected[i + 1];
-
-                var coll = currentBall.GetComponent<Collider2D>();
-                if (coll != null) 
-                {
-                    coll.enabled = false;
-                }
+                
+                _positionsToSpawnBalls.Add(currentBall.gameObject.transform.position.x);
                 
                 // Animation
                 const float duration = 0.1f;
@@ -101,7 +100,7 @@ namespace Proto.Modules.Player
                     elapsed += Time.deltaTime;
                     yield return null;
                 }
-
+                
                 Destroy(currentBall.gameObject);
             }
 
@@ -112,6 +111,20 @@ namespace Proto.Modules.Player
             // Réinitialiser les variables après la fusion
             EnablePhysicsForAllBalls();
             _numBallsSelected.Clear();
+            
+            // Spawn de nouvelles balles
+            var yOffSet = 0f;
+            foreach (var position in _positionsToSpawnBalls) 
+            {
+                var ball = Instantiate(_ballPrefab, new Vector3(position, 2f + yOffSet, 0f), Quaternion.identity, _ballPrefabParent.transform);
+                var numBall = ball.GetComponent<p_NumBall>();
+                numBall.SetNum(Random.Range(1, 3));
+                
+                yOffSet += 1f;
+                //yield return new WaitForSeconds(0.2f);
+            }
+            
+            _positionsToSpawnBalls.Clear();
         }
         
         private void DisablePhysicsForAllBalls() 
