@@ -49,13 +49,19 @@ namespace Proto.Modules.Point
             StartCoroutine(AnimateMoveBalls(childGo, childGo.transform.localPosition, Vector3.zero));
         }
 
-        private IEnumerator AnimateMoveBalls(GameObject childGo, Vector3 startPosition, Vector3 endPosition)
+        private IEnumerator AnimateMoveBalls([CanBeNull] GameObject childGo, Vector3 startPosition, Vector3 endPosition)
         {
+            if (childGo == null) 
+                yield break;
+            
             const float duration = 0.1f;
             var elapsed = 0f;
             
             while (elapsed < duration)
             {
+                if (childGo == null) 
+                    yield break;
+                
                 elapsed += Time.deltaTime;
                 var t = elapsed / duration;
                 var position = Vector3.Lerp(startPosition, endPosition, t);
