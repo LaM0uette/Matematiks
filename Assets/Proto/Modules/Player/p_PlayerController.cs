@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections;
 using Obvious.Soap;
 using Proto.Modules.NumBall;
 using Proto.Modules.Player.Inputs;
@@ -53,22 +53,76 @@ namespace Proto.Modules.Player
             if (_isDownVariable.Value == false) 
                 return;
             
-            if (_numBallsSelected.Count >= 3)
+            StartCoroutine(AnimateAndMergeBalls());
+            _isDownVariable.Value = false;
+        }
+        
+        private IEnumerator AnimateAndMergeBalls() 
+        {
+            if (_numBallsSelected.Count < 3) 
+                yield break;
+
+            DisablePhysicsForAllBalls();
+            
+            for (var i = 0; i < _numBallsSelected.Count - 1; i++) 
             {
-                var lastNumBall = _numBallsSelected[^1];
-                var numBallsToDelete = _numBallsSelected.Take(_numBallsSelected.Count - 1).ToList();
-                
-                foreach (var numBall in numBallsToDelete)
+                var currentBall = _numBallsSelected[i];
+                var nextBall = _numBallsSelected[i + 1];
+
+                var coll = currentBall.GetComponent<Collider2D>();
+                if (coll != null) 
                 {
-                    Destroy(numBall.gameObject);
+                    coll.enabled = false;
                 }
                 
-                lastNumBall.SetNum(lastNumBall.Num + 1);
+                // Animation
+                const float duration = 0.1f;
+                var elapsed = 0f;
+                var startPosition = currentBall.transform.position;
+                var endPosition = nextBall.transform.position;
+                
+                while (elapsed < duration) 
+                {
+                    currentBall.transform.position = Vector3.Lerp(startPosition, endPosition, elapsed / duration);
+                    elapsed += Time.deltaTime;
+                    yield return null;
+                }
+
+                Destroy(currentBall.gameObject);
             }
-            
-            _isDownVariable.Value = false;
+
+            // Mettre à jour la dernière ball
+            var lastNumBall = _numBallsSelected[^1];
+            lastNumBall.SetNum(lastNumBall.Num + 1);
+
+            // Réinitialiser les variables après la fusion
+            EnablePhysicsForAllBalls();
             _numBallsSelected.Clear();
             _lineRenderer.positionCount = 0;
+        }
+        
+        private void DisablePhysicsForAllBalls() 
+        {
+            foreach (var ball in FindObjectsOfType<p_NumBall>()) 
+            {
+                var rb = ball.GetComponent<Rigidbody2D>();
+                if (rb != null) 
+                {
+                    rb.simulated = false;
+                }
+            }
+        }
+        
+        private void EnablePhysicsForAllBalls() 
+        {
+            foreach (var ball in FindObjectsOfType<p_NumBall>()) 
+            {
+                var rb = ball.GetComponent<Rigidbody2D>();
+                if (rb != null) 
+                {
+                    rb.simulated = true;
+                }
+            }
         }
         
         private void OnNumBallSelected(p_NumBall pNumBall)
