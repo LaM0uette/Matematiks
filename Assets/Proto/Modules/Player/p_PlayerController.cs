@@ -63,6 +63,7 @@ namespace Proto.Modules.Player
                 yield break;
 
             DisablePhysicsForAllBalls();
+            //_lineRenderer.positionCount = 0;
             
             for (var i = 0; i < _numBallsSelected.Count - 1; i++) 
             {
@@ -81,6 +82,8 @@ namespace Proto.Modules.Player
                 var startPosition = currentBall.transform.position;
                 var endPosition = nextBall.transform.position;
                 
+                RemoveFirstPosition(_lineRenderer);
+                
                 while (elapsed < duration) 
                 {
                     currentBall.transform.position = Vector3.Lerp(startPosition, endPosition, elapsed / duration);
@@ -98,7 +101,6 @@ namespace Proto.Modules.Player
             // Réinitialiser les variables après la fusion
             EnablePhysicsForAllBalls();
             _numBallsSelected.Clear();
-            _lineRenderer.positionCount = 0;
         }
         
         private void DisablePhysicsForAllBalls() 
@@ -123,6 +125,27 @@ namespace Proto.Modules.Player
                     rb.simulated = true;
                 }
             }
+        }
+        
+        private void RemoveFirstPosition(LineRenderer lineRenderer) {
+            int positionsCount = lineRenderer.positionCount;
+            if (positionsCount <= 1) {
+                // Si le LineRenderer n'a qu'une ou aucune position, réinitialisez-le simplement.
+                lineRenderer.positionCount = 0;
+                return;
+            }
+
+            // Créer un tableau temporaire pour stocker les nouvelles positions
+            Vector3[] newPositions = new Vector3[positionsCount - 1];
+
+            // Copier toutes les positions sauf la première dans le nouveau tableau
+            for (int i = 1; i < positionsCount; i++) {
+                newPositions[i - 1] = lineRenderer.GetPosition(i);
+            }
+
+            // Appliquer le nouveau tableau de positions au LineRenderer et ajuster le nombre de positions
+            lineRenderer.positionCount = positionsCount - 1;
+            lineRenderer.SetPositions(newPositions);
         }
         
         private void OnNumBallSelected(p_NumBall pNumBall)
