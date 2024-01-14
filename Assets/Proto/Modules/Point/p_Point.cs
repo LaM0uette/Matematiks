@@ -1,3 +1,4 @@
+using System.Collections;
 using JetBrains.Annotations;
 using Proto.Modules.NumBall;
 using UnityEngine;
@@ -45,9 +46,24 @@ namespace Proto.Modules.Point
                 return;
             
             childGo.transform.SetParent(_nextPoint.transform);
-            childGo.transform.localPosition = Vector3.zero;
+            StartCoroutine(AnimateMoveBalls(childGo, childGo.transform.localPosition, Vector3.zero));
         }
-        
+
+        private IEnumerator AnimateMoveBalls(GameObject childGo, Vector3 startPosition, Vector3 endPosition)
+        {
+            const float duration = 0.1f;
+            var elapsed = 0f;
+            
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                var t = elapsed / duration;
+                var position = Vector3.Lerp(startPosition, endPosition, t);
+                childGo.transform.localPosition = position;
+                yield return null;
+            }
+        }
+
         private bool NextPointIsEmpty()
         {
             if (_nextPoint == null) 
