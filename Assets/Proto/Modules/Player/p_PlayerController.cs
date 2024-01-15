@@ -17,7 +17,6 @@ namespace Proto.Modules.Player
         
         [Space, Title("Properties")]
         [SerializeField] private float _maxDistanceBetweenNumBalls = 1.3f;
-        [SerializeField] private GameObject _ballPrefabParent;
         [SerializeField] private GameObject _ballPrefab;
         
         [Space, Title("Soap")]
@@ -114,19 +113,6 @@ namespace Proto.Modules.Player
             // Réinitialiser les variables après la fusion
             EnablePhysicsForAllBalls();
             _numBallsSelected.Clear();
-            
-            // Spawn de nouvelles balles
-            var yOffSet = 0f;
-            foreach (var position in _positionsToSpawnBalls) 
-            {
-                var ball = Instantiate(_ballPrefab, new Vector3(position, 2f + yOffSet, 0f), Quaternion.identity, _ballPrefabParent.transform);
-                var numBall = ball.GetComponent<p_NumBall>();
-                numBall.SetNum(Random.Range(1, 3));
-                
-                yOffSet += 1f;
-                //yield return new WaitForSeconds(0.2f);
-            }
-            
             _positionsToSpawnBalls.Clear();
         }
         

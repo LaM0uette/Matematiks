@@ -54,7 +54,7 @@ namespace Proto.Modules.Point
             if (childGo == null) 
                 yield break;
             
-            const float duration = 0.1f;
+            const float duration = 0.2f;
             var elapsed = 0f;
             
             while (elapsed < duration)
