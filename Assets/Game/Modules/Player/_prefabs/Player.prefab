@@ -88,3 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 166675d45b3bad041be1c7e47cf7b9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lineRenderer: {fileID: 0}
+  _maxDistanceBetweenTwoBalls: 1.3
+  _mouseIsDownVariable: {fileID: 11400000, guid: 70b95a273ac164e4f8a0708ded305f6d, type: 2}
+  _ballSelectedEvent: {fileID: 11400000, guid: 4727b4ecdae118d4c80ec6e16c32f125, type: 2}
+  _ballsSelected: {fileID: 11400000, guid: 73681f7aad8ec5845bff3d7df39792a9, type: 2}
