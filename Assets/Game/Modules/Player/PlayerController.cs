@@ -62,25 +62,77 @@ namespace Game.Modules.Player
         
         private void OnBallSelected(Ball ball)
         {
+            // if (_mouseIsDownVariable.Value == false) 
+            //     return;
+            //
+            // if (AddFirstBall(ball)) return;
+            // if (CheckIsSameBall(ball)) return;
+            //
+            // var firstBall = _ballsSelected[0];
+            // if (firstBall.Number != ball.Number) 
+            //     return;
+            //
+            // _ballsSelected.Add(ball);
+            //
+            // if (CheckDistanceBetweenTwoLastBalls()) return;
+            //
+            // _lineRenderer.positionCount = _ballsSelected.Count;
+            // _lineRenderer.SetPosition(_ballsSelected.Count - 1, ball.transform.position);
+            
             if (_mouseIsDownVariable.Value == false) 
                 return;
             
-            var lastBall = _ballsSelected.Count > 0 ? _ballsSelected[^1] : null;
-            var secondLastBall = _ballsSelected.Count > 1 ? _ballsSelected[^2] : null;
+            if (_ballsSelected.Count == 0)
+            {
+                _ballsSelected.Add(ball);
+                _lineRenderer.positionCount = 1;
+                _lineRenderer.SetPosition(0, ball.transform.position);
+                return;
+            }
             
-            if (AddFirstBall(ball)) return;
-            if (CheckIsSameBall(ball, lastBall, secondLastBall)) return;
-            
-            var firstBall = _ballsSelected[0];
-            if (firstBall.Number != ball.Number) 
+            if (_ballsSelected.Contains(ball) && _ballsSelected.Count > 1)
+            {
+                if (_ballsSelected[^2] == ball)
+                {
+                    _ballsSelected.Remove(_ballsSelected[^1]);
+                    _lineRenderer.positionCount = _ballsSelected.Count;
+                }
+                
+                return;
+            }
+
+            var firstNumBall = _ballsSelected[0];
+            if (firstNumBall.Number != ball.Number) 
                 return;
             
             _ballsSelected.Add(ball);
             
-            if (CheckDistanceBetweenTwoBalls(lastBall, secondLastBall)) return;
+            if (_ballsSelected.Count >= 2)
+            {
+                var distance = Vector3.Distance(_ballsSelected[^2].transform.position, _ballsSelected[^1].transform.position);
+
+                if (distance > _maxDistanceBetweenTwoBalls)
+                {
+                    _ballsSelected.Remove(_ballsSelected[^1]);
+                    _lineRenderer.positionCount = _ballsSelected.Count;
+                    return;
+                }
+            }
             
             _lineRenderer.positionCount = _ballsSelected.Count;
-            _lineRenderer.SetPosition(_ballsSelected.Count - 1, ball.transform.position);
+            
+            var newYPosition = ball.transform.position;
+            
+            foreach (var selectedBall in _ballsSelected)
+            {
+                if (!(Mathf.Abs(selectedBall.transform.position.y - ball.transform.position.y) <= 0.2f)) 
+                    continue;
+                
+                newYPosition.y = selectedBall.transform.position.y;
+                break;
+            }
+            
+            _lineRenderer.SetPosition(_ballsSelected.Count - 1, newYPosition);
         }
         
         #endregion
@@ -100,11 +152,14 @@ namespace Game.Modules.Player
             return true;
         }
 
-        private bool CheckIsSameBall(Ball ball, Ball lastBall, Object secondLastBall)
+        private bool CheckIsSameBall(Ball ball)
         {
             if (!_ballsSelected.Contains(ball) || _ballsSelected.Count <= 1) 
                 return false;
 
+            var lastBall = _ballsSelected[^1];
+            var secondLastBall = _ballsSelected[^2];
+            
             if (secondLastBall != ball) 
                 return false;
             
@@ -114,18 +169,25 @@ namespace Game.Modules.Player
             return true;
         }
         
-        private bool CheckDistanceBetweenTwoBalls(Ball lastBall, Component secondLastBall)
+        private bool CheckDistanceBetweenTwoLastBalls()
         {
+            if (_ballsSelected.Count <= 1) 
+                return false;
+            
+            var lastBall = _ballsSelected[^1];
+            var secondLastBall = _ballsSelected[^2];
+            
             if (lastBall == null || secondLastBall == null)
                 return false;
             
-            var distanceBetweenBalls = Vector3.Distance(lastBall.transform.position, secondLastBall.transform.position);
+            var distanceBetweenBalls = Vector3.Distance(secondLastBall.transform.position, lastBall.transform.position);
 
-            if (!(distanceBetweenBalls > _maxDistanceBetweenTwoBalls)) 
-                return true;
-            
-            _ballsSelected.Remove(lastBall);
-            _lineRenderer.positionCount = _ballsSelected.Count;
+            if (distanceBetweenBalls > _maxDistanceBetweenTwoBalls)
+            {
+                _ballsSelected.Remove(lastBall);
+                _lineRenderer.positionCount = _ballsSelected.Count;
+                return false;
+            }
 
             return true;
         }
@@ -139,7 +201,7 @@ namespace Game.Modules.Player
                 yield break;
             }
             
-            BlockAllBalls();
+            SetBlockAllBalls(true);
             
             for (var i = 0; i < _ballsSelected.Count - 1; i++) 
             {
@@ -166,23 +228,15 @@ namespace Game.Modules.Player
             var lastNumBall = _ballsSelected[^1];
             lastNumBall.SetNum(lastNumBall.Number + 1);
 
-            UnblockAllBalls();
+            SetBlockAllBalls(false);
             _ballsSelected.Clear();
         }
         
-        private static void BlockAllBalls() 
+        private static void SetBlockAllBalls(bool value) 
         {
             foreach (var ball in FindObjectsOfType<Ball>()) 
             {
-                ball.IsBlocked = true;
-            }
-        }
-        
-        private static void UnblockAllBalls() 
-        {
-            foreach (var ball in FindObjectsOfType<Ball>()) 
-            {
-                ball.IsBlocked = false;
+                ball.IsBlocked = value;
             }
         }
         
