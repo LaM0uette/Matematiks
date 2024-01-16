@@ -1,6 +1,7 @@
 using System.Collections;
 using Game.Modules._utils;
 using Game.Modules.Board.Balls;
+using Game.Modules.Manager;
 using Game.Modules.Player.Inputs;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
@@ -153,8 +154,11 @@ namespace Game.Modules.Player
             }
             
             var lastNumBall = _ballsSelected[^1];
-            lastNumBall.SetNum(lastNumBall.Number + 1);
-
+            var newBallNumber = lastNumBall.Number + 1;
+            
+            lastNumBall.SetNum(newBallNumber);
+            GameManager.Instance.UpdateBallNumbers(newBallNumber);
+            
             SetBlockAllBalls(false);
             _ballsSelected.Clear();
         }

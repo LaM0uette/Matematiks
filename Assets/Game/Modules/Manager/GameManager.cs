@@ -11,11 +11,25 @@ namespace Game.Modules.Manager
         public static GameManager Instance { get; private set; }
         
         [SerializeField] private List<BallNumber> _ballNumbers = new();
-        public BallNumber[] BallNumbers => _ballNumbers.ToArray();
+        public BallNumber[] BallNumbers;
 
         private void Awake()
         {
             Instance ??= this;
+
+            BallNumbers = _ballNumbers.ToArray();
+        }
+
+        #endregion
+
+        #region Functions
+
+        public void UpdateBallNumbers(int ballNumber)
+        {
+            if (BallNumbers[ballNumber - 1].IsLocked)
+            {
+                BallNumbers[ballNumber - 1].IsLocked = false;
+            }
         }
 
         #endregion
