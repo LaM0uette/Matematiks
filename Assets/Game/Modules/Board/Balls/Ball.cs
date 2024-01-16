@@ -22,7 +22,7 @@ namespace Game.Modules.Board.Balls
         private void Start()
         {
             var randomInt = Random.Range(1, 4);
-            SetNum(randomInt);
+            SetNum(1);
         }
 
         #endregion

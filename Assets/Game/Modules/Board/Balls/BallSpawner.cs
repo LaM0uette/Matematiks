@@ -34,7 +34,8 @@ namespace Game.Modules.Board.Balls
         
         private void SpawnBall()
         {
-            Instantiate(_ballPrefab, Vector3.zero, Quaternion.identity, _firstCell.transform);
+            var ballGo = Instantiate(_ballPrefab, _firstCell.transform);
+            ballGo.transform.localPosition = Vector3.zero;
         }
 
         #endregion
