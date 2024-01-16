@@ -139,6 +139,8 @@ namespace Game.Modules.Player
                 yield break;
             }
             
+            BlockAllBalls();
+            
             for (var i = 0; i < _ballsSelected.Count - 1; i++) 
             {
                 var currentBall = _ballsSelected[i];
@@ -159,6 +161,28 @@ namespace Game.Modules.Player
                 }
                 
                 Destroy(currentBall.gameObject);
+            }
+            
+            var lastNumBall = _ballsSelected[^1];
+            lastNumBall.SetNum(lastNumBall.Number + 1);
+
+            UnblockAllBalls();
+            _ballsSelected.Clear();
+        }
+        
+        private static void BlockAllBalls() 
+        {
+            foreach (var ball in FindObjectsOfType<Ball>()) 
+            {
+                ball.IsBlocked = true;
+            }
+        }
+        
+        private static void UnblockAllBalls() 
+        {
+            foreach (var ball in FindObjectsOfType<Ball>()) 
+            {
+                ball.IsBlocked = false;
             }
         }
         

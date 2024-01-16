@@ -19,6 +19,12 @@ namespace Game.Modules.Board.Balls
         [SerializeField] private BoolVariable _mouseIsDownVariable;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
 
+        private void Start()
+        {
+            var randomInt = Random.Range(1, 4);
+            SetNum(randomInt);
+        }
+
         #endregion
         
         #region Events
