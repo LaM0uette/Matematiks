@@ -62,42 +62,18 @@ namespace Game.Modules.Player
         
         private void OnBallSelected(Ball ball)
         {
-            // if (_mouseIsDownVariable.Value == false) 
-            //     return;
-            //
-            // if (AddFirstBall(ball)) return;
-            // if (CheckIsSameBall(ball)) return;
-            //
-            // var firstBall = _ballsSelected[0];
-            // if (firstBall.Number != ball.Number) 
-            //     return;
-            //
-            // _ballsSelected.Add(ball);
-            //
-            // if (CheckDistanceBetweenTwoLastBalls()) return;
-            //
-            // _lineRenderer.positionCount = _ballsSelected.Count;
-            // _lineRenderer.SetPosition(_ballsSelected.Count - 1, ball.transform.position);
-            
             if (_mouseIsDownVariable.Value == false) 
                 return;
             
             if (_ballsSelected.Count == 0)
             {
-                _ballsSelected.Add(ball);
-                _lineRenderer.positionCount = 1;
-                _lineRenderer.SetPosition(0, ball.transform.position);
+                AddFirstBall(ball);
                 return;
             }
             
             if (_ballsSelected.Contains(ball) && _ballsSelected.Count > 1)
             {
-                if (_ballsSelected[^2] == ball)
-                {
-                    _ballsSelected.Remove(_ballsSelected[^1]);
-                    _lineRenderer.positionCount = _ballsSelected.Count;
-                }
-                
+                RemovePreviousBall(ball);
                 return;
             }
 
@@ -107,7 +83,7 @@ namespace Game.Modules.Player
             
             _ballsSelected.Add(ball);
             
-            if (_ballsSelected.Count >= 2)
+            if (_ballsSelected.Count > 1)
             {
                 var distance = Vector3.Distance(_ballsSelected[^2].transform.position, _ballsSelected[^1].transform.position);
 
@@ -120,76 +96,27 @@ namespace Game.Modules.Player
             }
             
             _lineRenderer.positionCount = _ballsSelected.Count;
-            
-            var newYPosition = ball.transform.position;
-            
-            foreach (var selectedBall in _ballsSelected)
-            {
-                if (!(Mathf.Abs(selectedBall.transform.position.y - ball.transform.position.y) <= 0.2f)) 
-                    continue;
-                
-                newYPosition.y = selectedBall.transform.position.y;
-                break;
-            }
-            
-            _lineRenderer.SetPosition(_ballsSelected.Count - 1, newYPosition);
+            _lineRenderer.SetPosition(_ballsSelected.Count - 1, ball.transform.position);
         }
         
         #endregion
 
         #region Functions
         
-        private bool AddFirstBall(Ball ball)
+        private void AddFirstBall(Ball ball)
         {
-            if (_ballsSelected.Count != 0) 
-                return false;
-            
             _ballsSelected.Add(ball);
-            
             _lineRenderer.positionCount = 1;
             _lineRenderer.SetPosition(0, ball.transform.position);
-            
-            return true;
         }
 
-        private bool CheckIsSameBall(Ball ball)
+        private void RemovePreviousBall(Object ball)
         {
-            if (!_ballsSelected.Contains(ball) || _ballsSelected.Count <= 1) 
-                return false;
-
-            var lastBall = _ballsSelected[^1];
-            var secondLastBall = _ballsSelected[^2];
+            if (_ballsSelected[^2] != ball) 
+                return;
             
-            if (secondLastBall != ball) 
-                return false;
-            
-            _ballsSelected.Remove(lastBall);
+            _ballsSelected.Remove(_ballsSelected[^1]);
             _lineRenderer.positionCount = _ballsSelected.Count;
-            
-            return true;
-        }
-        
-        private bool CheckDistanceBetweenTwoLastBalls()
-        {
-            if (_ballsSelected.Count <= 1) 
-                return false;
-            
-            var lastBall = _ballsSelected[^1];
-            var secondLastBall = _ballsSelected[^2];
-            
-            if (lastBall == null || secondLastBall == null)
-                return false;
-            
-            var distanceBetweenBalls = Vector3.Distance(secondLastBall.transform.position, lastBall.transform.position);
-
-            if (distanceBetweenBalls > _maxDistanceBetweenTwoBalls)
-            {
-                _ballsSelected.Remove(lastBall);
-                _lineRenderer.positionCount = _ballsSelected.Count;
-                return false;
-            }
-
-            return true;
         }
         
         private IEnumerator AnimateAndMergeBalls() 
