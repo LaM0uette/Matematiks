@@ -1,3 +1,5 @@
+using System.Linq;
+using Game.Modules.Manager;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -21,8 +23,8 @@ namespace Game.Modules.Board.Balls
 
         private void Start()
         {
-            var randomInt = Random.Range(1, 4);
-            SetNum(1);
+            var randomNumber = GetWeightedRandomNumber();
+            SetNum(randomNumber);
         }
 
         #endregion
@@ -47,6 +49,30 @@ namespace Game.Modules.Board.Balls
         {
             Number = number;
             _tmpNumber.text = number.ToString();
+        }
+
+        private static int GetWeightedRandomNumber()
+        {
+            var ballNumbers = GameManager.Instance.BallNumbers;
+            
+            var totalWeight = ballNumbers.Where(ballNumber => !ballNumber.IsLocked).Sum(ballNumber => ballNumber.Weight);
+
+            var randomNumber = Random.Range(1, totalWeight + 1);
+            var sum = 0;
+            
+            foreach (var ballNumber in ballNumbers)
+            {
+                if (ballNumber.IsLocked) 
+                    continue;
+                
+                sum += ballNumber.Weight;
+                if (randomNumber <= sum)
+                {
+                    return ballNumber.Number;
+                }
+            }
+
+            return -1;
         }
 
         private void OnBallSelected()
