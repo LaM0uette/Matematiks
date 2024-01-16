@@ -54,11 +54,10 @@ namespace Game.Modules.Board.Balls
         private static int GetWeightedRandomNumber()
         {
             var ballNumbers = GameManager.Instance.BallNumbers;
-            
             var totalWeight = ballNumbers.Where(ballNumber => !ballNumber.IsLocked).Sum(ballNumber => ballNumber.Weight);
 
             var randomNumber = Random.Range(1, totalWeight + 1);
-            var sum = 0;
+            var sum = 0f;
             
             foreach (var ballNumber in ballNumbers)
             {

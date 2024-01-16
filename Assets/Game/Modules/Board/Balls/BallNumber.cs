@@ -6,7 +6,7 @@ namespace Game.Modules.Board.Balls
     public struct BallNumber
     {
         public int Number;
-        public int Weight;
+        public float Weight;
         public bool IsLocked;
     }
 }
