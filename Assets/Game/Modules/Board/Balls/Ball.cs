@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Game.Modules.Manager;
+using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -91,24 +92,24 @@ namespace Game.Modules.Board.Balls
         
         private static Color GetBallColor(int number) 
         {
-            if (number <= 3) return new Color32(244, 242, 243, 255);
-            if (number >= 9) return new Color32(4, 4, 10, 255);
-
             return number switch
             {
-                4 => new Color32(64, 143, 178, 255),
-                5 => new Color32(65, 181, 129, 255),
-                6 => new Color32(212, 204, 34, 255),
-                7 => new Color32(196, 95, 84, 255),
-                8 => new Color32(192, 113, 205, 255),
-                _ => throw new Exception("Invalid number")
+                1 => ColorVar.WhiteColor,
+                2 => new Color32(152, 213, 235, 255),
+                3 => new Color32(179, 238, 179, 255),
+                4 => new Color32(255, 247, 146, 255),
+                5 => new Color32(255, 197, 128, 255),
+                6 => new Color32(192, 99, 101, 255),
+                7 => new Color32(152, 140, 203, 255),
+                8 => new Color32(44, 71, 131, 255),
+                _ => new Color32(5, 10, 21, 255)
             };
         }
         
         private static Color GetContrastingTextColor(Color backgroundColor)
         {
             var luminance = 0.2126f * backgroundColor.r + 0.7152f * backgroundColor.g + 0.0722f * backgroundColor.b;
-            return luminance > 0.5f ? new Color32(4, 4, 10, 255) : new Color32(244, 242, 243, 255);
+            return luminance > 0.5f ? ColorVar.BlackColor : ColorVar.WhiteColor;
         }
 
         private void OnBallSelected()
