@@ -2,6 +2,7 @@ using System.Collections;
 using Game.Modules.Board.Balls;
 using Game.Modules.Utils;
 using JetBrains.Annotations;
+using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Game.Modules.Board.Cells
         [ShowInInspector, ReadOnly] public bool IsEmpty { get; set; }
         
         [SerializeField, CanBeNull] private GameObject _nextCell;
+        [SerializeField] private BoolVariable _isInAnimationVariable;
 
         #endregion
 
@@ -61,10 +63,12 @@ namespace Game.Modules.Board.Cells
             return nextCell.IsEmpty;
         }
 
-        private static IEnumerator AnimateMoveBalls([CanBeNull] GameObject childGo, Vector3 startPosition, Vector3 endPosition)
+        private IEnumerator AnimateMoveBalls([CanBeNull] GameObject childGo, Vector3 startPosition, Vector3 endPosition)
         {
             if (childGo == null) 
                 yield break;
+            
+            _isInAnimationVariable.Value = true;
             
             var duration = GameVar.BallDropDuration;
             var elapsedTime = 0f;
@@ -82,6 +86,8 @@ namespace Game.Modules.Board.Cells
                 
                 yield return null;
             }
+            
+            _isInAnimationVariable.Value = false;
         }
 
         

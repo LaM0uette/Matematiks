@@ -19,11 +19,11 @@ namespace Game.Modules.Player
         
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _mouseIsDownVariable;
+        [SerializeField] private BoolVariable _isInAnimationVariable;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private ScriptableListBall _ballsSelected;
 
         private PlayerInputsReader _inputsReader;
-        private bool _isInAnimation;
         
         private void Awake()
         {
@@ -50,7 +50,7 @@ namespace Game.Modules.Player
 
         private void OnPress()
         {
-            if (_isInAnimation) 
+            if (_isInAnimationVariable.Value) 
                 return;
             
             _mouseIsDownVariable.Value = true;
@@ -133,7 +133,7 @@ namespace Game.Modules.Player
                 yield break;
             }
             
-            _isInAnimation = true;
+            _isInAnimationVariable.Value = true;
             SetBlockAllBalls(true);
             
             for (var i = 0; i < _ballsSelected.Count - 1; i++) 
@@ -165,7 +165,7 @@ namespace Game.Modules.Player
             GameManager.Instance.UpdateBallNumbers(newBallNumber);
             
             SetBlockAllBalls(false);
-            _isInAnimation = false;
+            _isInAnimationVariable.Value = false;
             _ballsSelected.Clear();
         }
         
