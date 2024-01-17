@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.Modules.Board.Balls;
 using Sirenix.OdinInspector;
@@ -19,6 +20,12 @@ namespace Game.Modules.Manager
             Instance ??= this;
 
             BallNumbers = _ballNumbers.ToArray();
+        }
+
+        private void Start()
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 240;
         }
 
         #endregion
