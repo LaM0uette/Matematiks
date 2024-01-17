@@ -47,6 +47,11 @@ namespace Game.Modules.Board.Balls
 
         public void SetNum(int number)
         {
+            if (number < 1)
+            {
+                number = 1;
+            }
+            
             Number = number;
             _tmpNumber.text = number.ToString();
         }
