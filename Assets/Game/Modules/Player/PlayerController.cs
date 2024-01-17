@@ -20,6 +20,7 @@ namespace Game.Modules.Player
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _mouseIsDownVariable;
         [SerializeField] private BoolVariable _isInAnimationVariable;
+        [SerializeField] private IntVariable _scoreVariable;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private ScriptableListBall _ballsSelected;
 
@@ -164,9 +165,12 @@ namespace Game.Modules.Player
             lastNumBall.SetNum(newBallNumber);
             GameManager.Instance.UpdateBallNumbers(newBallNumber);
             
+            _scoreVariable.Value += (newBallNumber * newBallNumber + (_ballsSelected.Count - 1) * newBallNumber) / 5;
+            
             SetBlockAllBalls(false);
             _isInAnimationVariable.Value = false;
             _ballsSelected.Clear();
+            
         }
         
         private static void SetBlockAllBalls(bool value) 
