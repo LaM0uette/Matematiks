@@ -34,7 +34,7 @@ namespace Game.Modules.Manager
 
             if (ballNumber > 2)
             {
-                BallNumbers[ballNumber - 1].Weight += ballNumber / 20f;
+                BallNumbers[ballNumber - 1].Weight += ballNumber / 30f;
             }
         }
 

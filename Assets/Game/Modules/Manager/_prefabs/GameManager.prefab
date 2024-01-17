@@ -46,10 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ballNumbers:
   - Number: 1
-    Weight: 60
+    Weight: 80
     IsLocked: 0
   - Number: 2
-    Weight: 30
+    Weight: 40
     IsLocked: 0
   - Number: 3
     Weight: 15
@@ -64,11 +64,12 @@ MonoBehaviour:
     Weight: 1
     IsLocked: 1
   - Number: 7
-    Weight: 0
+    Weight: 0.7
     IsLocked: 1
   - Number: 8
-    Weight: 0
+    Weight: 0.3
     IsLocked: 1
   - Number: 9
-    Weight: 0
+    Weight: 0.1
     IsLocked: 1
+  BallNumbers: []
