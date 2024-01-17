@@ -4,6 +4,7 @@ using Game.Modules.Utils;
 using JetBrains.Annotations;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.Modules.Board.Cells
@@ -75,8 +76,11 @@ namespace Game.Modules.Board.Cells
             
             while (elapsedTime < duration)
             {
-                if (childGo == null) 
+                if (childGo.IsDestroyed())
+                {
+                    _isInAnimationVariable.Value = false;
                     yield break;
+                }
                 
                 elapsedTime += Time.deltaTime;
                 var remainingTime = elapsedTime / duration;
