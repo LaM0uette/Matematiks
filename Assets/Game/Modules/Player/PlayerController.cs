@@ -23,6 +23,7 @@ namespace Game.Modules.Player
         [SerializeField] private ScriptableListBall _ballsSelected;
 
         private PlayerInputsReader _inputsReader;
+        private bool _isInAnimation;
         
         private void Awake()
         {
@@ -49,6 +50,9 @@ namespace Game.Modules.Player
 
         private void OnPress()
         {
+            if (_isInAnimation) 
+                return;
+            
             _mouseIsDownVariable.Value = true;
         }
         
@@ -57,8 +61,8 @@ namespace Game.Modules.Player
             if (_mouseIsDownVariable.Value == false) 
                 return;
             
-            StartCoroutine(AnimateAndMergeBalls());
             _mouseIsDownVariable.Value = false;
+            StartCoroutine(AnimateAndMergeBalls());
         }
         
         private void OnBallSelected(Ball ball)
@@ -129,6 +133,7 @@ namespace Game.Modules.Player
                 yield break;
             }
             
+            _isInAnimation = true;
             SetBlockAllBalls(true);
             
             for (var i = 0; i < _ballsSelected.Count - 1; i++) 
@@ -160,6 +165,7 @@ namespace Game.Modules.Player
             GameManager.Instance.UpdateBallNumbers(newBallNumber);
             
             SetBlockAllBalls(false);
+            _isInAnimation = false;
             _ballsSelected.Clear();
         }
         
