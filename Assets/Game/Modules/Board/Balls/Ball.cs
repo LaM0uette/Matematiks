@@ -14,7 +14,8 @@ namespace Game.Modules.Board.Balls
         public bool IsBlocked { get; set; }
         [ShowInInspector, ReadOnly] public int Number { get; set; }
         
-        [Space, Title("TMP")]
+        [Space, Title("Ui")]
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private TMP_Text _tmpNumber;
 
         [Space, Title("Soap")]
@@ -53,6 +54,9 @@ namespace Game.Modules.Board.Balls
             }
             
             Number = number;
+            
+            _spriteRenderer.color = GetBallColor(number);
+            _tmpNumber.color = GetContrastingTextColor(_spriteRenderer.color);
             _tmpNumber.text = number.ToString();
         }
 
@@ -78,6 +82,24 @@ namespace Game.Modules.Board.Balls
 
             return -1;
         }
+        
+        private static Color GetBallColor(int number) 
+        {
+            if (number <= 3) return Color.white;
+            if (number >= 99) return Color.black;
+
+            var hue = (number - 1) / 99f;
+            const float saturation = 0.7f;
+            const float value = 0.8f;
+
+            return Color.HSVToRGB(hue, saturation, value);
+        }
+        
+        private static Color GetContrastingTextColor(Color backgroundColor)
+        {
+            var luminance = 0.2126f * backgroundColor.r + 0.7152f * backgroundColor.g + 0.0722f * backgroundColor.b;
+            return luminance > 0.5f ? Color.black : Color.white;
+        }
 
         private void OnBallSelected()
         {
@@ -85,6 +107,17 @@ namespace Game.Modules.Board.Balls
                 return;
             
             _ballSelectedEvent.Raise(this);
+        }
+
+        #endregion
+
+        #region Odin
+
+        [Button]
+        public void SetNumAndColor()
+        {
+            Number += 1;
+            SetNum(Number);
         }
 
         #endregion
