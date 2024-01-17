@@ -1,6 +1,6 @@
 using System.Collections;
-using Game.Modules._utils;
 using Game.Modules.Board.Balls;
+using Game.Modules.Utils;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEngine;

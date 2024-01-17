@@ -1,4 +1,4 @@
-namespace Game.Modules._utils
+namespace Game.Modules.Utils
 {
     public static class GameVar
     {
