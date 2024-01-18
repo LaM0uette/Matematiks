@@ -11,6 +11,7 @@ namespace Game.Modules.Manager
 
         public static GameManager Instance { get; private set; }
         
+        [Space, Title("Balls")]
         [SerializeField] private List<BallNumber> _ballNumbers = new();
         [ShowInInspector, ReadOnly] public BallNumber[] BallNumbers;
 
