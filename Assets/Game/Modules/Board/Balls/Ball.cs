@@ -15,6 +15,7 @@ namespace Game.Modules.Board.Balls
         #region Statements
         
         public bool IsBlocked { get; set; }
+        public bool IsVisited { get; set; }
         [ShowInInspector, ReadOnly] public int Number { get; set; }
         
         [Space, Title("Ui")]
