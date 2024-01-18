@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
 using Obvious.Soap;
@@ -160,6 +159,81 @@ namespace Game.Modules.Manager
                     continue;
                 
                 ball.IsVisited = false;
+            }
+        }
+
+        #endregion
+        
+        #region Odin
+
+        [Button]
+        public void SetAllNumForLoose()
+        {
+            var board = new GameObject[6, 5];
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
+
+                var position = ExtractPositionFromName(cell.name);
+                board[position.x, position.y] = cell.gameObject;
+            }
+            
+            var width = board.GetLength(0);
+            var height = board.GetLength(1);
+            
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = board[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+            
+            int[] lstNum = {1,3,1,3,1,2,5,2,5,2,1,3,1,3,1,2,5,2,5,2,6,7,6,7,6,2,5,1,1,1};
+
+            for (var i = 0; i < balls.Count; i++)
+            {
+                var ball = balls[i];
+                ball.SetNum(lstNum[i]);
+            }
+        }
+        
+        [Button]
+        public void ResetAllNumForLoose()
+        {
+            var board = new GameObject[6, 5];
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
+
+                var position = ExtractPositionFromName(cell.name);
+                board[position.x, position.y] = cell.gameObject;
+            }
+            
+            var width = board.GetLength(0);
+            var height = board.GetLength(1);
+            
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = board[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+
+            foreach (var ball in balls)
+            {
+                ball.SetNum(1);
             }
         }
 
