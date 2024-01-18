@@ -21,6 +21,10 @@ namespace Game.Modules.Manager
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _isInAnimationVariable;
         
+        [Space, Title("Score")]
+        public Ball BallScore;
+        [ShowInInspector, ReadOnly] public int MaxBallNumber = 1;
+        
         private readonly GameObject[,] _boardGrid = new GameObject[6, 5];
         
         private void Awake()
