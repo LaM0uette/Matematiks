@@ -73,3 +73,4 @@ MonoBehaviour:
     Weight: 0.1
     IsLocked: 1
   BallNumbers: []
+  _isInAnimationVariable: {fileID: 11400000, guid: f4a32da14267b9d4baf4217026db3a0d, type: 2}

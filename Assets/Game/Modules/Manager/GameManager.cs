@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
+using Obvious.Soap;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,7 +19,10 @@ namespace Game.Modules.Manager
         [SerializeField] private List<BallNumber> _ballNumbers = new();
         [ShowInInspector, ReadOnly] public BallNumber[] BallNumbers;
 
-        private GameObject[,] _boardGrid = new GameObject[6, 5];
+        [Space, Title("Soap")]
+        [SerializeField] private BoolVariable _isInAnimationVariable;
+        
+        private readonly GameObject[,] _boardGrid = new GameObject[6, 5];
         
         private void Awake()
         {
@@ -81,6 +85,9 @@ namespace Game.Modules.Manager
         
         private void CheckLoose()
         {
+            if (_isInAnimationVariable.Value)
+                return;
+            
             var width = _boardGrid.GetLength(0);
             var height = _boardGrid.GetLength(1);
 
@@ -149,7 +156,7 @@ namespace Game.Modules.Manager
         {
             foreach (var ball in balls)
             {
-                if (ball.IsDestroyed())
+                if (ball.IsDestroyed() || ball == null)
                     continue;
                 
                 ball.IsVisited = false;
