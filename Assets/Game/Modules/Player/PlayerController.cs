@@ -170,7 +170,6 @@ namespace Game.Modules.Player
             SetBlockAllBalls(false);
             _isInAnimationVariable.Value = false;
             _ballsSelected.Clear();
-            
         }
         
         private static void SetBlockAllBalls(bool value) 
