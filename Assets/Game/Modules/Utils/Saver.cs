@@ -4,7 +4,6 @@ namespace Game.Modules.Utils
 {
     public static class Saver
     {
-        
         #region BestScore
         
         private const string BestScore = "BestScore";
@@ -17,6 +16,11 @@ namespace Game.Modules.Utils
         public static int GetBestScore()
         {
             return PlayerPrefs.GetInt(BestScore, 0);
+        }
+        
+        public static void ResetBestScore()
+        {
+            PlayerPrefs.SetInt(BestScore, 0);
         }
 
         #endregion
@@ -33,6 +37,11 @@ namespace Game.Modules.Utils
         public static int GetMaxBall()
         {
             return PlayerPrefs.GetInt(MaxBall, 1);
+        }
+        
+        public static void ResetMaxBall()
+        {
+            PlayerPrefs.SetInt(MaxBall, 1);
         }
 
         #endregion

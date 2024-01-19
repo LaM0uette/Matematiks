@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
+using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
@@ -39,6 +40,9 @@ namespace Game.Modules.Manager
             SetQualitySettings();
             FillBoardGrid();
             InvokeRepeating(nameof(CheckLoose), 1f, 2f);
+            
+            //Saver.ResetBestScore();
+            //Saver.ResetMaxBall();
         }
 
         #endregion
