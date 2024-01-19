@@ -410,7 +410,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: c2856b289437c364291d19f225813787, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9529412, g: 0.93333334, b: 0.9607843, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1114,8 +1114,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294307571
-  m_fontColor: {r: 0.9529412, g: 0.93333334, b: 0.9607843, a: 1}
+    rgba: 4288978076
+  m_fontColor: {r: 0.6117647, g: 0.6117647, b: 0.6431373, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1578,7 +1578,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f12333d09d088ab498622d85d011b96b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.60822356, g: 0.6107576, b: 0.6415094, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2053,7 +2053,6 @@ GameObject:
   - component: {fileID: 879454071}
   - component: {fileID: 879454070}
   - component: {fileID: 879454069}
-  - component: {fileID: 879454068}
   m_Layer: 5
   m_Name: ScoreCanvas
   m_TagString: Untagged
@@ -2083,20 +2082,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.013}
   m_SizeDelta: {x: 1.301, y: 0.721}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &879454068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879454066}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be435a1a46721484fa50d7234324723c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scoreText: {fileID: 980524195}
-  _scoreVariable: {fileID: 11400000, guid: 2fbac4ffdc430ca4fa328747d36d121c, type: 2}
 --- !u!114 &879454069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2633,8 +2618,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294307571
-  m_fontColor: {r: 0.9529412, g: 0.93333334, b: 0.9607843, a: 1}
+    rgba: 4288978076
+  m_fontColor: {r: 0.6117647, g: 0.6117647, b: 0.6431373, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3571,8 +3556,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294307571
-  m_fontColor: {r: 0.9529412, g: 0.93333334, b: 0.9607843, a: 1}
+    rgba: 4288978076
+  m_fontColor: {r: 0.6117647, g: 0.6117647, b: 0.6431373, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
