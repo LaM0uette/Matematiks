@@ -80,12 +80,6 @@ namespace Game.Modules.Board.Balls
                 number = 1;
             }
             
-            if (Application.isPlaying && number > GameManager.Instance.MaxBallNumber)
-            {
-                GameManager.Instance.MaxBallNumber = number;
-                GameManager.Instance.BallScore.SetNum(number);
-            }
-            
             Number = number;
             SetBallColor(number);
         }

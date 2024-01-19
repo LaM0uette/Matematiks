@@ -167,6 +167,18 @@ namespace Game.Modules.Player
             
             _scoreVariable.Value += (newBallNumber * newBallNumber + (_ballsSelected.Count - 1) * newBallNumber) / 5;
             
+            if (Application.isPlaying && newBallNumber > GameManager.Instance.MaxBallNumber)
+            {
+                GameManager.Instance.MaxBallNumber = newBallNumber;
+                GameManager.Instance.BallScore.gameObject.SetActive(true);
+                GameManager.Instance.BallScore.SetNum(newBallNumber);
+                
+                if (newBallNumber > Saver.GetMaxBall())
+                {
+                    Saver.SaveMaxBall(newBallNumber);
+                }
+            }
+            
             SetBlockAllBalls(false);
             _isInAnimationVariable.Value = false;
             _ballsSelected.Clear();

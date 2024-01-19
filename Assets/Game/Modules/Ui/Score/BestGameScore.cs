@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game.Modules.Ui.Score
 {
-    public class GameScore : MonoBehaviour
+    public class BestGameScore : MonoBehaviour
     {
         #region Statements
 
@@ -16,16 +16,23 @@ namespace Game.Modules.Ui.Score
 
         private void Start()
         {
+            _scoreText.text = Saver.GetBestScore().ToString();
             InvokeRepeating(nameof(UpdateScore), 0, 0.2f);
         }
-
+        
         #endregion
-
+        
         #region Functions
 
         private void UpdateScore()
         {
-            _scoreText.text = _scoreVariable.Value.ToString();
+            var bestScore = Saver.GetBestScore();
+            
+            if (_scoreVariable.Value > bestScore)
+            {
+                Saver.SaveBestScore(_scoreVariable.Value);
+                _scoreText.text = _scoreVariable.Value.ToString();
+            }
         }
 
         #endregion
