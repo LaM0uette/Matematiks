@@ -21,6 +21,7 @@ namespace Game.Modules.Manager
 
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _isInAnimationVariable;
+        [SerializeField] private ScriptableEventNoParam _looseEvent;
         
         [Space, Title("Score")]
         public Ball BallScore;
@@ -123,7 +124,6 @@ namespace Game.Modules.Manager
                     {
                         if (DFS(x, y, ball.Number) >= 3)
                         {
-                            Debug.Log("Good");
                             return;
                         }
                     }
@@ -131,6 +131,7 @@ namespace Game.Modules.Manager
             }
             
             Debug.Log("Loose");
+            _looseEvent.Raise();
         }
         
         private int DFS(int x, int y, int number)
