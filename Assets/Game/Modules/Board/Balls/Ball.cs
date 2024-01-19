@@ -80,10 +80,10 @@ namespace Game.Modules.Board.Balls
                 number = 1;
             }
             
-            if (number > GameManager.Instance.MaxBallNumber)
+            if (Application.isPlaying && number > GameManager.Instance.MaxBallNumber)
             {
                 GameManager.Instance.MaxBallNumber = number;
-                GameManager.Instance.BallScore.SetNum(GameManager.Instance.MaxBallNumber);
+                GameManager.Instance.BallScore.SetNum(number);
             }
             
             Number = number;
@@ -106,10 +106,10 @@ namespace Game.Modules.Board.Balls
                 3 => new Color32(179, 238, 179, 255),
                 4 => new Color32(255, 247, 146, 255),
                 5 => new Color32(255, 197, 128, 255),
-                6 => new Color32(192, 99, 101, 255),
+                6 => new Color32(192, 119, 152, 255),
                 7 => new Color32(152, 140, 203, 255),
-                8 => new Color32(44, 71, 131, 255),
-                _ => new Color32(5, 10, 21, 255)
+                8 => new Color32(56, 83, 131, 255),
+                _ => new Color32(102, 36, 45, 255)
             };
         }
         
