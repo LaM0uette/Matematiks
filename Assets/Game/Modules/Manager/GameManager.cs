@@ -51,6 +51,9 @@ namespace Game.Modules.Manager
 
         public void UpdateBallNumbers(int ballNumber)
         {
+            if (ballNumber > BallNumbers.Length)
+                return;
+            
             if (BallNumbers[ballNumber - 1].IsLocked)
             {
                 BallNumbers[ballNumber - 1].IsLocked = false;
@@ -202,7 +205,7 @@ namespace Game.Modules.Manager
                 }
             }
             
-            int[] lstNum = {1,3,1,3,1,2,5,2,5,2,1,3,1,3,1,2,5,2,5,2,6,7,6,7,6,2,5,1,1,1};
+            int[] lstNum = {1,3,1,3,1,2,5,2,5,2,1,3,1,3,1,2,5,2,5,2,6,7,6,7,6,2,5,9,9,9};
 
             for (var i = 0; i < balls.Count; i++)
             {
