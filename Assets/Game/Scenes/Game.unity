@@ -4824,15 +4824,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5801580282767181302, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_Color.b
-      value: 0.92156863
+      value: 0.9607843
       objectReference: {fileID: 0}
     - target: {fileID: 5801580282767181302, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_Color.g
-      value: 0.8352941
+      value: 0.93333334
       objectReference: {fileID: 0}
     - target: {fileID: 5801580282767181302, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_Color.r
-      value: 0.59607846
+      value: 0.9529412
       objectReference: {fileID: 0}
     - target: {fileID: 5801580282767181302, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_SortingOrder
@@ -4896,11 +4896,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8865435523036503855, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_Name
-      value: Ball
+      value: BallMaxScore
       objectReference: {fileID: 0}
     - target: {fileID: 8865435523036503855, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8865435523036503855, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
+      propertyPath: m_TagString
+      value: BallMaxScore
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5423,7 +5427,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: REJOUER !
+  m_text: PERDU !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

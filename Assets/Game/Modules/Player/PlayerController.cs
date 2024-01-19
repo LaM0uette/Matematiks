@@ -169,9 +169,9 @@ namespace Game.Modules.Player
             
             if (Application.isPlaying && newBallNumber >= GameManager.Instance.MaxBallNumber)
             {
-                GameManager.Instance.BallScore.gameObject.SetActive(true);
+                GameManager.BallScore.gameObject.SetActive(true);
                 GameManager.Instance.MaxBallNumber = newBallNumber;
-                GameManager.Instance.BallScore.SetNum(newBallNumber);
+                GameManager.BallScore.SetNum(newBallNumber);
                 
                 if (newBallNumber > Saver.GetMaxBall())
                 {

@@ -23,8 +23,8 @@ namespace Game.Modules.Manager
         [SerializeField] private BoolVariable _isInAnimationVariable;
         [SerializeField] private ScriptableEventNoParam _looseEvent;
         
+        public static Ball BallScore { get; set; }
         [Space, Title("Score")]
-        public Ball BallScore;
         [ShowInInspector, ReadOnly] public int MaxBallNumber = 1;
         
         private readonly GameObject[,] _boardGrid = new GameObject[6, 5];
@@ -38,6 +38,10 @@ namespace Game.Modules.Manager
 
         private void Start()
         {
+            MaxBallNumber = 1;
+            BallScore = GameObject.FindGameObjectWithTag("BallMaxScore").transform.GetComponent<Ball>();
+            BallScore.gameObject.SetActive(false);
+            
             SetQualitySettings();
             FillBoardGrid();
             InvokeRepeating(nameof(CheckLoose), 1f, 2f);

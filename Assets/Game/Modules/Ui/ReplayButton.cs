@@ -9,7 +9,8 @@ namespace Game.Modules.Ui
 
         private void OnMouseDown()
         {
-            SceneManager.LoadScene("Game");
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
         }
 
         #endregion

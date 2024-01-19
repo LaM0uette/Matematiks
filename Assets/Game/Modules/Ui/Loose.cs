@@ -1,7 +1,5 @@
-using System;
 using Obvious.Soap;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game.Modules.Ui
 {
