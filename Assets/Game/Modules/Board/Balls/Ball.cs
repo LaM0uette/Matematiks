@@ -95,15 +95,15 @@ namespace Game.Modules.Board.Balls
         {
             return number switch
             {
-                1 => ColorVar.WhiteColor,
-                2 => new Color32(152, 213, 235, 255),
-                3 => new Color32(179, 238, 179, 255),
-                4 => new Color32(255, 247, 146, 255),
-                5 => new Color32(255, 197, 128, 255),
-                6 => new Color32(192, 119, 152, 255),
-                7 => new Color32(152, 140, 203, 255),
-                8 => new Color32(56, 83, 131, 255),
-                _ => new Color32(102, 36, 45, 255)
+                1 => ColorVar.Ball1Color,
+                2 => ColorVar.Ball2Color,
+                3 => ColorVar.Ball3Color,
+                4 => ColorVar.Ball4Color,
+                5 => ColorVar.Ball5Color,
+                6 => ColorVar.Ball6Color,
+                7 => ColorVar.Ball7Color,
+                8 => ColorVar.Ball8Color,
+                _ => ColorVar.OtherBallColor
             };
         }
         
