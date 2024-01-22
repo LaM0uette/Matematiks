@@ -4809,15 +4809,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5801580282767181302, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_Color.b
-      value: 0.9607843
+      value: 0.92156863
       objectReference: {fileID: 0}
     - target: {fileID: 5801580282767181302, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_Color.g
-      value: 0.93333334
+      value: 0.8352941
       objectReference: {fileID: 0}
     - target: {fileID: 5801580282767181302, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_Color.r
-      value: 0.9529412
+      value: 0.59607846
       objectReference: {fileID: 0}
     - target: {fileID: 5801580282767181302, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_SortingOrder
@@ -4885,7 +4885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8865435523036503855, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8865435523036503855, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
       propertyPath: m_TagString
@@ -4904,6 +4904,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7802694726835230908, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
   m_PrefabInstance: {fileID: 1840300622}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1840300624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3467829413105831162, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
+  m_PrefabInstance: {fileID: 1840300622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff540b3bc3e46b449f55736a2b31858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1867381018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5654,6 +5665,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5975422263484483861, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
+      propertyPath: _ballScore
+      value: 
+      objectReference: {fileID: 1840300624}
     - target: {fileID: 5975422263484483861, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
       propertyPath: _loosePanel
       value: 

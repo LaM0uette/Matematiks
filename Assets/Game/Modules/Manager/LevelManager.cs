@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
@@ -29,8 +28,12 @@ namespace Game.Modules.Manager
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
 
+        [Space, Title("Score")]
+        [ShowInInspector, ReadOnly] private int _maxBallNumber = 1;
+        
         [Space, Title("Ui")]
         [SerializeField] private GameObject _loosePanel;
+        [SerializeField] private Ball _ballScore;
         
         private IGameMode _gameMode;
         
@@ -44,11 +47,7 @@ namespace Game.Modules.Manager
 
         private void Start()
         {
-            
-            //InvokeRepeating(nameof(CheckLoose), 1f, 2f);
-            
             _gameMode = gameObject.AddComponent<StandardGameMode>();
-            
             _gameMode.StartGame();
         }
 
@@ -168,12 +167,14 @@ namespace Game.Modules.Manager
             _gameMode.MergeBalls(mergedBall);
             
             // TODO: à supprimer/deplacer
-            var newBallNumber = mergedBall.Number + 1;
-            if (Application.isPlaying && newBallNumber >= GameManager.Instance.MaxBallNumber)
+            var newBallNumber = mergedBall.Number;
+            if (Application.isPlaying && newBallNumber >= _maxBallNumber)
             {
-                GameManager.BallScore.gameObject.SetActive(true);
-                GameManager.Instance.MaxBallNumber = newBallNumber;
-                GameManager.BallScore.SetNum(newBallNumber);
+                if (!_ballScore.isActiveAndEnabled)
+                    _ballScore.gameObject.SetActive(true);
+
+                _maxBallNumber = newBallNumber;
+                _ballScore.SetNum(newBallNumber);
                 
                 if (newBallNumber > Saver.GetMaxBall())
                 {
@@ -288,13 +289,13 @@ namespace Game.Modules.Manager
                 for (var y = 0; y < height; y++)
                 {
                     var ball = _boardGrid[x, y].transform.GetComponentInChildren<Ball>();
+
+                    if (ball == null || ball.IsVisited) 
+                        continue;
                     
-                    if (!ball.IsVisited)
+                    if (DFS(x, y, ball.Number) >= 3)
                     {
-                        if (DFS(x, y, ball.Number) >= 3)
-                        {
-                            return;
-                        }
+                        return;
                     }
                 }
             }
