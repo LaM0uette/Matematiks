@@ -20,14 +20,13 @@ namespace Game.Modules.Manager
         [Space, Title("Soap")]
         [SerializeField] private ScriptableEventNoParam _mergeBallsEvent;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
-        [SerializeField] private ScriptableListBall _ballsSelected;
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _inAnimationVariable;
         [SerializeField] private IntVariable _scoreValueVariable;
         
+        private readonly List<Ball> _ballsSelected = new();
+        
         private IGameMode _gameMode;
-
-        //public List<Ball> _ballsSelected = new();
 
         private void Start()
         {
@@ -64,13 +63,13 @@ namespace Game.Modules.Manager
         {
             if (_mouseDownVariable.Value == false) 
                 return;
-            
+
             if (_ballsSelected.Count == 0)
             {
                 AddFirstBall(ball);
                 return;
             }
-            
+
             if (_ballsSelected.Contains(ball) && _ballsSelected.Count > 1)
             {
                 RemovePreviousBall(ball);

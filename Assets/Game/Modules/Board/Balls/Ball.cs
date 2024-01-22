@@ -28,6 +28,8 @@ namespace Game.Modules.Board.Balls
         [SerializeField] private BoolVariable _mouseIsDownVariable;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
 
+        private bool _isAlreadySelected;
+        
         private void Start()
         {
             var randomNumber = GetWeightedRandomNumber();
@@ -40,12 +42,21 @@ namespace Game.Modules.Board.Balls
         
         private void OnMouseDown()
         {
+            _isAlreadySelected = true;
             OnBallSelected();
         }
         
         private void OnMouseEnter()
         {
+            if (_isAlreadySelected)
+                return;
+            
             OnBallSelected();
+        }
+        
+        private void OnMouseExit()
+        {
+            _isAlreadySelected = false;
         }
 
         #endregion
