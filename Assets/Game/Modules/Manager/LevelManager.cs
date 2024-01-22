@@ -39,16 +39,61 @@ namespace Game.Modules.Manager
         private void OnEnable()
         {
             _mergeBallsEvent.OnRaised += OnMergeBalls;
+            _ballSelectedEvent.OnRaised += OnBallSelected;
         }
 
         private void OnDisable()
         {
             _mergeBallsEvent.OnRaised -= OnMergeBalls;
+            _ballSelectedEvent.OnRaised -= OnBallSelected;
         }
 
         private void Update()
         {
             _gameMode.Update();
+        }
+
+        #endregion
+
+        #region SoapEvents
+
+        private void OnBallSelected(Ball ball)
+        {
+            if (_mouseDownVariable.Value == false) 
+                return;
+            
+            if (_ballsSelected.Count == 0)
+            {
+                AddFirstBall(ball);
+                return;
+            }
+            
+            if (_ballsSelected.Contains(ball) && _ballsSelected.Count > 1)
+            {
+                RemovePreviousBall(ball);
+                return;
+            }
+
+            var firstNumBall = _ballsSelected[0];
+            if (firstNumBall.Number != ball.Number) 
+                return;
+            
+            _ballsSelected.Add(ball);
+            
+            if (_ballsSelected.Count > 1)
+            {
+                var distance = Vector3.Distance(_ballsSelected[^2].transform.position, _ballsSelected[^1].transform.position);
+
+                if (distance > _maxDistanceBetweenBalls)
+                {
+                    _ballsSelected.Remove(_ballsSelected[^1]);
+                    _lineRenderer.positionCount = _ballsSelected.Count;
+                    return;
+                }
+            }
+            
+            _lineRenderer.positionCount = _ballsSelected.Count;
+            _lineRenderer.SetPosition(_ballsSelected.Count - 1, ball.transform.position);
         }
 
         #endregion
@@ -146,6 +191,22 @@ namespace Game.Modules.Manager
 
             lineRenderer.positionCount = positionsCount - 1;
             lineRenderer.SetPositions(newPositions);
+        }
+        
+        private void AddFirstBall(Ball ball)
+        {
+            _ballsSelected.Add(ball);
+            _lineRenderer.positionCount = 1;
+            _lineRenderer.SetPosition(0, ball.transform.position);
+        }
+
+        private void RemovePreviousBall(Object ball)
+        {
+            if (_ballsSelected[^2] != ball) 
+                return;
+            
+            _ballsSelected.Remove(_ballsSelected[^1]);
+            _lineRenderer.positionCount = _ballsSelected.Count;
         }
 
         #endregion
