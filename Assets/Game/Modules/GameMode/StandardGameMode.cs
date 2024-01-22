@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game.Modules.Board.Balls;
 using Game.Modules.Manager;
+using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,9 +14,6 @@ namespace Game.Modules.GameMode
 
         // Components
         private LevelManager _levelManager;
-        
-        [ShowInInspector, ReadOnly]
-        private List<WeightedBall> _weightedBalls = new();
         
         private void Awake()
         {
@@ -49,9 +47,9 @@ namespace Game.Modules.GameMode
 
         private void InitializeWeightedBalls()
         {
-            _weightedBalls.Add(new WeightedBall(1, 100f));
-            _weightedBalls.Add(new WeightedBall(2, 25f));
-            _weightedBalls.Add(new WeightedBall(3, 10f));
+            _levelManager.WeightedBalls.Add(new WeightedBall(1, 100f));
+            _levelManager.WeightedBalls.Add(new WeightedBall(2, 25f));
+            _levelManager.WeightedBalls.Add(new WeightedBall(3, 10f));
         }
         
         private void UpdateScore(int value)

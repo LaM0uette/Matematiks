@@ -26,6 +26,7 @@ namespace Game.Modules.Board.Balls
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _mouseIsDownVariable;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
+        [SerializeField] private ScriptableListWeightedBall _weightedBalls;
 
         private bool _isAlreadySelected;
         
@@ -74,19 +75,16 @@ namespace Game.Modules.Board.Balls
 
         #region Functions
         
-        private static int GetWeightedRandomNumber()
+        private int GetWeightedRandomNumber()
         {
-            var ballNumbers = GameManager.Instance.BallNumbers;
-            var totalWeight = ballNumbers.Where(ballNumber => !ballNumber.IsLocked).Sum(ballNumber => ballNumber.Weight);
+            var ballNumbers = _weightedBalls;
+            var totalWeight = ballNumbers.Sum(ballNumber => ballNumber.Weight);
 
             var randomNumber = Random.Range(0, totalWeight + 1);
             var sum = 0f;
             
             foreach (var ballNumber in ballNumbers)
             {
-                if (ballNumber.IsLocked) 
-                    continue;
-                
                 sum += ballNumber.Weight;
                 if (randomNumber <= sum)
                 {

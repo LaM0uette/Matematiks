@@ -19,6 +19,7 @@ namespace Game.Modules.Manager
         
         [Space, Title("Soap")]
         public IntVariable ScoreValueVariable;
+        public ScriptableListWeightedBall WeightedBalls;
         [SerializeField] private ScriptableEventNoParam _releaseEvent;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private BoolVariable _mouseDownVariable;
