@@ -1,4 +1,6 @@
-﻿using Game.Modules.Manager;
+﻿using System.Collections.Generic;
+using Game.Modules.Board.Balls;
+using Game.Modules.Manager;
 using UnityEngine;
 
 namespace Game.Modules.GameMode
@@ -7,7 +9,10 @@ namespace Game.Modules.GameMode
     {
         #region Statements
 
+        // Components
         private LevelManager _levelManager;
+        
+        private List<WeightedBall> _weightedBalls = new();
         
         private void Awake()
         {
@@ -20,6 +25,7 @@ namespace Game.Modules.GameMode
 
         public void Start()
         {
+            InitializeWeightedBalls();
         }
 
         public void Update()
@@ -31,7 +37,16 @@ namespace Game.Modules.GameMode
         }
 
         #endregion
-        
-        
+
+        #region Functions
+
+        private void InitializeWeightedBalls()
+        {
+            _weightedBalls.Add(new WeightedBall(1, 100f));
+            _weightedBalls.Add(new WeightedBall(2, 25f));
+            _weightedBalls.Add(new WeightedBall(3, 10f));
+        }
+
+        #endregion
     }
 }

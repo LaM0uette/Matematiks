@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Game.Modules.Board.Balls;
 using Game.Modules.GameMode;
 using Game.Modules.Utils;
@@ -23,8 +24,10 @@ namespace Game.Modules.Manager
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _inAnimationVariable;
         [SerializeField] private IntVariable _scoreValueVariable;
-
+        
         private IGameMode _gameMode;
+
+        //public List<Ball> _ballsSelected = new();
 
         private void Start()
         {
@@ -127,7 +130,7 @@ namespace Game.Modules.Manager
                 var startPosition = currentBall.transform.position;
                 var endPosition = nextBall.transform.position;
                 
-                RemoveLineRendererFirstPosition(_lineRenderer);
+                RemoveLineRendererFirstPosition();
                 
                 while (elapsedTime < duration) 
                 {
@@ -135,7 +138,7 @@ namespace Game.Modules.Manager
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
-                
+
                 Destroy(currentBall.gameObject);
             }
             
@@ -172,13 +175,14 @@ namespace Game.Modules.Manager
             }
         }
         
-        private static void RemoveLineRendererFirstPosition(LineRenderer lineRenderer) 
+        private void RemoveLineRendererFirstPosition() 
         {
-            var positionsCount = lineRenderer.positionCount;
+            Debug.Log("RemoveLineRendererFirstPosition");
+            var positionsCount = _lineRenderer.positionCount;
             
             if (positionsCount <= 1) 
             {
-                lineRenderer.positionCount = 0;
+                _lineRenderer.positionCount = 0;
                 return;
             }
 
@@ -186,11 +190,11 @@ namespace Game.Modules.Manager
 
             for (var i = 1; i < positionsCount; i++) 
             {
-                newPositions[i - 1] = lineRenderer.GetPosition(i);
+                newPositions[i - 1] = _lineRenderer.GetPosition(i);
             }
 
-            lineRenderer.positionCount = positionsCount - 1;
-            lineRenderer.SetPositions(newPositions);
+            _lineRenderer.positionCount = positionsCount - 1;
+            _lineRenderer.SetPositions(newPositions);
         }
         
         private void AddFirstBall(Ball ball)

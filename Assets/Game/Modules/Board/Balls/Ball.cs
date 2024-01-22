@@ -16,6 +16,8 @@ namespace Game.Modules.Board.Balls
         
         public bool IsBlocked { get; set; }
         public bool IsVisited { get; set; }
+        
+        [Title("Number")]
         [ShowInInspector, ReadOnly] public int Number { get; set; }
         
         [Space, Title("Ui")]
@@ -48,6 +50,18 @@ namespace Game.Modules.Board.Balls
 
         #endregion
 
+        #region MouseEvents
+
+        private void OnBallSelected()
+        {
+            if (_mouseIsDownVariable.Value == false) 
+                return;
+            
+            _ballSelectedEvent.Raise(this);
+        }
+
+        #endregion
+
         #region Functions
         
         private static int GetWeightedRandomNumber()
@@ -75,10 +89,7 @@ namespace Game.Modules.Board.Balls
 
         public void SetNum(int number)
         {
-            if (number < 1)
-            {
-                number = 1;
-            }
+            if (number < 1) number = 1;
             
             Number = number;
             SetBallColor(number);
@@ -111,14 +122,6 @@ namespace Game.Modules.Board.Balls
         {
             var luminance = 0.2126f * backgroundColor.r + 0.7152f * backgroundColor.g + 0.0722f * backgroundColor.b;
             return luminance > 0.5f ? ColorVar.BlackColor : ColorVar.WhiteColor;
-        }
-
-        private void OnBallSelected()
-        {
-            if (_mouseIsDownVariable.Value == false) 
-                return;
-            
-            _ballSelectedEvent.Raise(this);
         }
 
         #endregion
