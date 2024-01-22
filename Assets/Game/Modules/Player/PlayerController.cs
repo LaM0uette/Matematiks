@@ -18,11 +18,12 @@ namespace Game.Modules.Player
         [SerializeField] private float _maxDistanceBetweenTwoBalls = 1.3f;
         
         [Space, Title("Soap")]
+        [SerializeField] private ScriptableEventNoParam _mergeBallsEvent;
+        [SerializeField] private ScriptableEventBall _ballSelectedEvent;
+        [SerializeField] private ScriptableListBall _ballsSelected;
         [SerializeField] private BoolVariable _mouseIsDownVariable;
         [SerializeField] private BoolVariable _isInAnimationVariable;
         [SerializeField] private IntVariable _scoreVariable;
-        [SerializeField] private ScriptableEventBall _ballSelectedEvent;
-        [SerializeField] private ScriptableListBall _ballsSelected;
 
         private PlayerInputsReader _inputsReader;
         
@@ -63,7 +64,7 @@ namespace Game.Modules.Player
                 return;
             
             _mouseIsDownVariable.Value = false;
-            StartCoroutine(AnimateAndMergeBalls());
+            _mergeBallsEvent.Raise();
         }
         
         private void OnBallSelected(Ball ball)
@@ -123,94 +124,6 @@ namespace Game.Modules.Player
             
             _ballsSelected.Remove(_ballsSelected[^1]);
             _lineRenderer.positionCount = _ballsSelected.Count;
-        }
-        
-        private IEnumerator AnimateAndMergeBalls() 
-        {
-            if (_ballsSelected.Count < 3)
-            {
-                _ballsSelected.Clear();
-                _lineRenderer.positionCount = 0;
-                yield break;
-            }
-            
-            _isInAnimationVariable.Value = true;
-            SetBlockAllBalls(true);
-            
-            for (var i = 0; i < _ballsSelected.Count - 1; i++) 
-            {
-                var currentBall = _ballsSelected[i];
-                var nextBall = _ballsSelected[i + 1];
-                
-                var duration = GameVar.BallMoveDuration;
-                var elapsedTime = 0f;
-                var startPosition = currentBall.transform.position;
-                var endPosition = nextBall.transform.position;
-                
-                RemoveLineRendererFirstPosition(_lineRenderer);
-                
-                while (elapsedTime < duration) 
-                {
-                    currentBall.transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / duration);
-                    elapsedTime += Time.deltaTime;
-                    yield return null;
-                }
-                
-                Destroy(currentBall.gameObject);
-            }
-            
-            var lastNumBall = _ballsSelected[^1];
-            var newBallNumber = lastNumBall.Number + 1;
-            
-            lastNumBall.SetNum(newBallNumber);
-            GameManager.Instance.UpdateBallNumbers(newBallNumber);
-            
-            _scoreVariable.Value += (newBallNumber * newBallNumber + (_ballsSelected.Count - 1) * newBallNumber) / 5;
-            
-            if (Application.isPlaying && newBallNumber >= GameManager.Instance.MaxBallNumber)
-            {
-                GameManager.BallScore.gameObject.SetActive(true);
-                GameManager.Instance.MaxBallNumber = newBallNumber;
-                GameManager.BallScore.SetNum(newBallNumber);
-                
-                if (newBallNumber > Saver.GetMaxBall())
-                {
-                    Saver.SaveMaxBall(newBallNumber);
-                }
-            }
-            
-            SetBlockAllBalls(false);
-            _isInAnimationVariable.Value = false;
-            _ballsSelected.Clear();
-        }
-        
-        private static void SetBlockAllBalls(bool value) 
-        {
-            foreach (var ball in FindObjectsOfType<Ball>()) 
-            {
-                ball.IsBlocked = value;
-            }
-        }
-        
-        private static void RemoveLineRendererFirstPosition(LineRenderer lineRenderer) 
-        {
-            var positionsCount = lineRenderer.positionCount;
-            
-            if (positionsCount <= 1) 
-            {
-                lineRenderer.positionCount = 0;
-                return;
-            }
-
-            var newPositions = new Vector3[positionsCount - 1];
-
-            for (var i = 1; i < positionsCount; i++) 
-            {
-                newPositions[i - 1] = lineRenderer.GetPosition(i);
-            }
-
-            lineRenderer.positionCount = positionsCount - 1;
-            lineRenderer.SetPositions(newPositions);
         }
 
         #endregion
