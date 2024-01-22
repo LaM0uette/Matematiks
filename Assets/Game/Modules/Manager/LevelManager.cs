@@ -8,7 +8,6 @@ using Obvious.Soap;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Game.Modules.Manager
 {
@@ -118,11 +117,6 @@ namespace Game.Modules.Manager
             
             _lineRenderer.positionCount = _ballsSelected.Count;
             _lineRenderer.SetPosition(_ballsSelected.Count - 1, ball.transform.position);
-        }
-        
-        private void OnLoose()
-        {
-            _loosePanel.SetActive(true);
         }
         
         #endregion
