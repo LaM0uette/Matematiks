@@ -16,7 +16,7 @@ namespace Game.Modules.Board.Cells
         [ShowInInspector, ReadOnly] public bool IsEmpty { get; set; }
         
         [SerializeField, CanBeNull] private GameObject _nextCell;
-        [SerializeField] private BoolVariable _isInAnimationVariable;
+        [SerializeField] private BoolVariable _ongoingAction;
 
         #endregion
 
@@ -69,7 +69,7 @@ namespace Game.Modules.Board.Cells
             if (childGo == null) 
                 yield break;
             
-            _isInAnimationVariable.Value = true;
+            _ongoingAction.Value = true;
             
             var duration = GameVar.BallDropDuration;
             var elapsedTime = 0f;
@@ -78,7 +78,7 @@ namespace Game.Modules.Board.Cells
             {
                 if (childGo.IsDestroyed())
                 {
-                    _isInAnimationVariable.Value = false;
+                    _ongoingAction.Value = false;
                     yield break;
                 }
                 
@@ -91,7 +91,7 @@ namespace Game.Modules.Board.Cells
                 yield return null;
             }
             
-            _isInAnimationVariable.Value = false;
+            _ongoingAction.Value = false;
         }
 
         

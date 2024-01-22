@@ -19,7 +19,7 @@ namespace Game.Modules.Manager
         [ShowInInspector, ReadOnly] public BallNumber[] BallNumbers;
 
         [Space, Title("Soap")]
-        [SerializeField] private BoolVariable _isInAnimationVariable;
+        [SerializeField] private BoolVariable _ongoingAction;
         [SerializeField] private ScriptableEventNoParam _looseEvent;
         
         public static Ball BallScore { get; set; }
@@ -99,7 +99,7 @@ namespace Game.Modules.Manager
         
         private void CheckLoose()
         {
-            if (_isInAnimationVariable.Value)
+            if (_ongoingAction.Value)
                 return;
             
             var width = _boardGrid.GetLength(0);

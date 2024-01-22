@@ -12,7 +12,7 @@ namespace Game.Modules.Player
         [Space, Title("Soap")]
         [SerializeField] private ScriptableEventNoParam _mergeBallsEvent;
         [SerializeField] private BoolVariable _mouseDownVariable;
-        [SerializeField] private BoolVariable _inAnimationVariable;
+        [SerializeField] private BoolVariable _ongoingAction;
 
         private PlayerInputsReader _inputsReader;
         
@@ -43,7 +43,7 @@ namespace Game.Modules.Player
 
         private void OnPress()
         {
-            if (_inAnimationVariable.Value) 
+            if (_ongoingAction.Value) 
                 return;
             
             _mouseDownVariable.Value = true;

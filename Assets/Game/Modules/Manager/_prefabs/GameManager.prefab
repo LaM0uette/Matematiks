@@ -73,7 +73,6 @@ MonoBehaviour:
     Weight: 0.1
     IsLocked: 1
   BallNumbers: []
-  _isInAnimationVariable: {fileID: 11400000, guid: f4a32da14267b9d4baf4217026db3a0d, type: 2}
+  _ongoingAction: {fileID: 11400000, guid: f4a32da14267b9d4baf4217026db3a0d, type: 2}
   _looseEvent: {fileID: 11400000, guid: 7f55554a1ac311f418c2adbda1a14de6, type: 2}
-  BallScore: {fileID: 0}
   MaxBallNumber: 1

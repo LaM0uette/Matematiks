@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextCell: {fileID: 0}
-  _isInAnimationVariable: {fileID: 11400000, guid: f4a32da14267b9d4baf4217026db3a0d, type: 2}
+  _ongoingAction: {fileID: 11400000, guid: f4a32da14267b9d4baf4217026db3a0d, type: 2}
 --- !u!1001 &5016410027754786251
 PrefabInstance:
   m_ObjectHideFlags: 0

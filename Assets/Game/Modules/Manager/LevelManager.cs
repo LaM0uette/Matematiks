@@ -21,7 +21,7 @@ namespace Game.Modules.Manager
         [SerializeField] private ScriptableEventNoParam _mergeBallsEvent;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private BoolVariable _mouseDownVariable;
-        [SerializeField] private BoolVariable _inAnimationVariable;
+        [SerializeField] private BoolVariable _ongoingAction;
         [SerializeField] private IntVariable _scoreValueVariable;
         
         private readonly List<Ball> _ballsSelected = new();
@@ -116,7 +116,7 @@ namespace Game.Modules.Manager
                 yield break;
             }
             
-            _inAnimationVariable.Value = true;
+            _ongoingAction.Value = true;
             SetBlockAllBalls(true);
             
             for (var i = 0; i < _ballsSelected.Count - 1; i++) 
@@ -162,7 +162,7 @@ namespace Game.Modules.Manager
             }
             
             SetBlockAllBalls(false);
-            _inAnimationVariable.Value = false;
+            _ongoingAction.Value = false;
             _ballsSelected.Clear();
         }
         
@@ -176,7 +176,6 @@ namespace Game.Modules.Manager
         
         private void RemoveLineRendererFirstPosition() 
         {
-            Debug.Log("RemoveLineRendererFirstPosition");
             var positionsCount = _lineRenderer.positionCount;
             
             if (positionsCount <= 1) 
