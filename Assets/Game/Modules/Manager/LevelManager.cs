@@ -18,12 +18,12 @@ namespace Game.Modules.Manager
         [SerializeField] private float _maxDistanceBetweenBalls = 1.3f;
         
         [Space, Title("Soap")]
-        [SerializeField] private ScriptableEventNoParam _mergeBallsEvent;
+        public IntVariable ScoreValueVariable;
+        [SerializeField] private ScriptableEventNoParam _releaseEvent;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
-        [SerializeField] private IntVariable _scoreValueVariable;
-        
+
         private readonly List<Ball> _ballsSelected = new();
         
         private IGameMode _gameMode;
@@ -31,7 +31,7 @@ namespace Game.Modules.Manager
         private void Start()
         {
             _gameMode = gameObject.AddComponent<StandardGameMode>();
-            _gameMode.Start();
+            _gameMode.StartGame();
         }
 
         #endregion
@@ -40,24 +40,24 @@ namespace Game.Modules.Manager
         
         private void OnEnable()
         {
-            _mergeBallsEvent.OnRaised += OnMergeBalls;
+            _releaseEvent.OnRaised += OnRelease;
             _ballSelectedEvent.OnRaised += OnBallSelected;
         }
 
         private void OnDisable()
         {
-            _mergeBallsEvent.OnRaised -= OnMergeBalls;
+            _releaseEvent.OnRaised -= OnRelease;
             _ballSelectedEvent.OnRaised -= OnBallSelected;
-        }
-
-        private void Update()
-        {
-            _gameMode.Update();
         }
 
         #endregion
 
         #region SoapEvents
+        
+        private void OnRelease()
+        {
+            StartCoroutine(MergeBalls());
+        }
 
         private void OnBallSelected(Ball ball)
         {
@@ -97,19 +97,14 @@ namespace Game.Modules.Manager
             _lineRenderer.positionCount = _ballsSelected.Count;
             _lineRenderer.SetPosition(_ballsSelected.Count - 1, ball.transform.position);
         }
-
+        
         #endregion
 
         #region Functions
-
-        private void OnMergeBalls()
-        {
-            StartCoroutine(MergeBalls());
-        }
-
+        
         private IEnumerator MergeBalls() 
         {
-            if (_ballsSelected.Count < 3)
+            if (_ballsSelected.Count < 3) // TODO: ajouter aussi un maximum sui sera initialisé dans les modes de jeux
             {
                 _ballsSelected.Clear();
                 _lineRenderer.positionCount = 0;
@@ -141,14 +136,12 @@ namespace Game.Modules.Manager
                 Destroy(currentBall.gameObject);
             }
             
-            var lastNumBall = _ballsSelected[^1];
-            var newBallNumber = lastNumBall.Number + 1;
+            var mergedBall = _ballsSelected[^1];
+            _gameMode.MergedBall(mergedBall);
             
-            lastNumBall.SetNum(newBallNumber);
+            // TODO: à supprimer/deplacer
+            var newBallNumber = mergedBall.Number + 1;
             GameManager.Instance.UpdateBallNumbers(newBallNumber);
-            
-            _scoreValueVariable.Value += (newBallNumber * newBallNumber + (_ballsSelected.Count - 1) * newBallNumber) / 5;
-            
             if (Application.isPlaying && newBallNumber >= GameManager.Instance.MaxBallNumber)
             {
                 GameManager.BallScore.gameObject.SetActive(true);
@@ -161,8 +154,9 @@ namespace Game.Modules.Manager
                 }
             }
             
-            SetBlockAllBalls(false);
             _ongoingAction.Value = false;
+            SetBlockAllBalls(false);
+            
             _ballsSelected.Clear();
         }
         

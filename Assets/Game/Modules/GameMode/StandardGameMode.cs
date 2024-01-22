@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Modules.Board.Balls;
 using Game.Modules.Manager;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Modules.GameMode
@@ -12,6 +14,7 @@ namespace Game.Modules.GameMode
         // Components
         private LevelManager _levelManager;
         
+        [ShowInInspector, ReadOnly]
         private List<WeightedBall> _weightedBalls = new();
         
         private void Awake()
@@ -23,16 +26,20 @@ namespace Game.Modules.GameMode
         
         #region Events
 
-        public void Start()
+        public void StartGame()
         {
             InitializeWeightedBalls();
         }
 
-        public void Update()
+        public void MergedBall(Ball mergedBall)
         {
+            var mergedBallNumber = mergedBall.Number + 1;
+            
+            mergedBall.SetNum(mergedBallNumber);
+            UpdateScore(mergedBallNumber);
         }
 
-        public void End()
+        public void EndGame()
         {
         }
 
@@ -45,6 +52,11 @@ namespace Game.Modules.GameMode
             _weightedBalls.Add(new WeightedBall(1, 100f));
             _weightedBalls.Add(new WeightedBall(2, 25f));
             _weightedBalls.Add(new WeightedBall(3, 10f));
+        }
+        
+        private void UpdateScore(int value)
+        {
+            _levelManager.ScoreValueVariable.Value += (int)Math.Pow(2, value) / 2;
         }
 
         #endregion
