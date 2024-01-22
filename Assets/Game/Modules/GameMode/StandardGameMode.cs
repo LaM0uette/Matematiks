@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Modules.Manager;
+﻿using Game.Modules.Manager;
 using UnityEngine;
 
 namespace Game.Modules.GameMode
