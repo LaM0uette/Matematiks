@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Game.Modules.Board.Balls;
+using Game.Modules.Board.Cells;
 using Game.Modules.GameMode;
 using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.Modules.Manager
 {
@@ -25,13 +29,26 @@ namespace Game.Modules.Manager
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
 
-        private readonly List<Ball> _ballsSelected = new();
+        [Space, Title("Ui")]
+        [SerializeField] private GameObject _loosePanel;
         
         private IGameMode _gameMode;
+        
+        private readonly List<Ball> _ballsSelected = new();
+        private readonly GameObject[,] _boardGrid = new GameObject[6, 5];
+
+        private void Awake()
+        {
+            FillBoardGrid();
+        }
 
         private void Start()
         {
+            
+            //InvokeRepeating(nameof(CheckLoose), 1f, 2f);
+            
             _gameMode = gameObject.AddComponent<StandardGameMode>();
+            
             _gameMode.StartGame();
         }
 
@@ -49,6 +66,11 @@ namespace Game.Modules.Manager
         {
             _releaseEvent.OnRaised -= OnRelease;
             _ballSelectedEvent.OnRaised -= OnBallSelected;
+        }
+
+        private void LateUpdate()
+        {
+            CheckLoose();
         }
 
         #endregion
@@ -97,6 +119,11 @@ namespace Game.Modules.Manager
             
             _lineRenderer.positionCount = _ballsSelected.Count;
             _lineRenderer.SetPosition(_ballsSelected.Count - 1, ball.transform.position);
+        }
+        
+        private void OnLoose()
+        {
+            _loosePanel.SetActive(true);
         }
         
         #endregion
@@ -203,6 +230,191 @@ namespace Game.Modules.Manager
             
             _ballsSelected.Remove(_ballsSelected[^1]);
             _lineRenderer.positionCount = _ballsSelected.Count;
+        }
+
+        #endregion
+
+        #region Loose
+        
+        public void ShowLoosePanel()
+        {
+            _loosePanel.SetActive(true);
+        }
+
+        private void FillBoardGrid()
+        {
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
+
+                var position = ExtractCellPositionFromName(cell.name);
+                _boardGrid[position.x, position.y] = cell.gameObject;
+            }
+        }
+        
+        private static Vector2Int ExtractCellPositionFromName(string name)
+        {
+            var parts = name.Split('_');
+            var x = int.Parse(parts[1]);
+            var y = int.Parse(parts[2]);
+            return new Vector2Int(x, y);
+        }
+        
+        private void CheckLoose()
+        {
+            if (_ongoingAction.Value)
+                return;
+            
+            var width = _boardGrid.GetLength(0);
+            var height = _boardGrid.GetLength(1);
+
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = _boardGrid[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+            
+            ResetVisited(balls);
+
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = _boardGrid[x, y].transform.GetComponentInChildren<Ball>();
+                    
+                    if (!ball.IsVisited)
+                    {
+                        if (DFS(x, y, ball.Number) >= 3)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+            
+            _gameMode.EndGame();
+        }
+        
+        private static void ResetVisited(IEnumerable<Ball> balls)
+        {
+            foreach (var ball in balls)
+            {
+                if (ball.IsDestroyed() || ball == null)
+                    continue;
+                
+                ball.IsVisited = false;
+            }
+        }
+        
+        private int DFS(int x, int y, int number)
+        {
+            var width = _boardGrid.GetLength(0);
+            var height = _boardGrid.GetLength(1);
+            
+            if (x < 0 || y < 0 || x >= width || y >= height)
+                return 0;
+            
+            var ball = _boardGrid[x, y].transform.GetComponentInChildren<Ball>();
+            
+            if (ball == null || ball.IsDestroyed() || ball.IsVisited || ball.Number != number)
+                return 0;
+
+            ball.IsVisited = true;
+            var count = 1;
+
+            // Vérifier les huit directions (verticales, horizontales et diagonales)
+            count += DFS(x + 1, y, number);
+            count += DFS(x - 1, y, number);
+            count += DFS(x, y + 1, number);
+            count += DFS(x, y - 1, number);
+            count += DFS(x + 1, y + 1, number);
+            count += DFS(x - 1, y - 1, number);
+            count += DFS(x + 1, y - 1, number);
+            count += DFS(x - 1, y + 1, number);
+
+            return count;
+        }
+
+        #endregion
+        
+        #region Odin
+
+        [Button]
+        public void SetAllNumForLoose()
+        {
+            var board = new GameObject[6, 5];
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
+
+                var position = ExtractCellPositionFromName(cell.name);
+                board[position.x, position.y] = cell.gameObject;
+            }
+            
+            var width = board.GetLength(0);
+            var height = board.GetLength(1);
+            
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = board[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+            
+            int[] lstNum = {1,3,1,3,1,2,5,2,5,2,1,3,1,3,1,2,5,2,5,2,6,7,6,7,6,2,5,9,9,9};
+
+            for (var i = 0; i < balls.Count; i++)
+            {
+                var ball = balls[i];
+                ball.SetNum(lstNum[i]);
+            }
+        }
+        
+        [Button]
+        public void ResetAllNumForLoose()
+        {
+            var board = new GameObject[6, 5];
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
+
+                var position = ExtractCellPositionFromName(cell.name);
+                board[position.x, position.y] = cell.gameObject;
+            }
+            
+            var width = board.GetLength(0);
+            var height = board.GetLength(1);
+            
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = board[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+
+            foreach (var ball in balls)
+            {
+                ball.SetNum(1);
+            }
         }
 
         #endregion

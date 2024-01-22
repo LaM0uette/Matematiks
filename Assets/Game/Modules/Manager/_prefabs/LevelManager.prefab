@@ -50,5 +50,7 @@ MonoBehaviour:
   WeightedBalls: {fileID: 11400000, guid: a598ed44596a594489727fc9ea6b4474, type: 2}
   _releaseEvent: {fileID: 11400000, guid: aa747f3ac7922494699d8bf4c315dedd, type: 2}
   _ballSelectedEvent: {fileID: 11400000, guid: 4727b4ecdae118d4c80ec6e16c32f125, type: 2}
+  _looseEvent: {fileID: 11400000, guid: 7f55554a1ac311f418c2adbda1a14de6, type: 2}
   _mouseDownVariable: {fileID: 11400000, guid: 70b95a273ac164e4f8a0708ded305f6d, type: 2}
   _ongoingAction: {fileID: 11400000, guid: f4a32da14267b9d4baf4217026db3a0d, type: 2}
+  _loosePanel: {fileID: 0}

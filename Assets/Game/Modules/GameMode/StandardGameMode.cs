@@ -38,6 +38,7 @@ namespace Game.Modules.GameMode
 
         public void EndGame()
         {
+            _levelManager.ShowLoosePanel();
         }
 
         #endregion
@@ -58,7 +59,7 @@ namespace Game.Modules.GameMode
             
             var weightedBall = _levelManager.WeightedBalls.FirstOrDefault(wb => wb.Number == mergedBall.Number);
 
-            if (!_levelManager.WeightedBalls.Contains(weightedBall))
+            if (!_levelManager.WeightedBalls.Contains(weightedBall) || weightedBall == null)
             {
                 var newWeightedBall = new WeightedBall(mergedBall.Number, 1f);
                 _levelManager.WeightedBalls.Add(newWeightedBall);

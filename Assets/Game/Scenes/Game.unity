@@ -482,14 +482,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 225190726}
-  - component: {fileID: 225190727}
   m_Layer: 0
-  m_Name: Loose
+  m_Name: LoosePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &225190726
 Transform:
   m_ObjectHideFlags: 0
@@ -506,20 +505,6 @@ Transform:
   - {fileID: 1905876141}
   m_Father: {fileID: 1764050988}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &225190727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225190725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0688199e3263e0c49844ff2d0aace6c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _replayButton: {fileID: 1905876139}
-  _looseEvent: {fileID: 11400000, guid: 7f55554a1ac311f418c2adbda1a14de6, type: 2}
 --- !u!1001 &256697320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -959,7 +944,7 @@ GameObject:
   - component: {fileID: 485411602}
   - component: {fileID: 485411603}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5095,7 +5080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1905876140
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5669,6 +5654,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5975422263484483861, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
+      propertyPath: _loosePanel
+      value: 
+      objectReference: {fileID: 225190725}
     - target: {fileID: 5975422263484483861, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
       propertyPath: _lineRenderer
       value: 
