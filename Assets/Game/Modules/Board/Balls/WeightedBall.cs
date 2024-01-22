@@ -1,6 +1,9 @@
-﻿namespace Game.Modules.Board.Balls
+﻿using System;
+
+namespace Game.Modules.Board.Balls
 {
-    public struct WeightedBall
+    [Serializable]
+    public class WeightedBall
     {
         public int Number;
         public float Weight;

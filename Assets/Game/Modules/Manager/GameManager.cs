@@ -13,10 +13,6 @@ namespace Game.Modules.Manager
         #region Statements
 
         public static GameManager Instance { get; private set; }
-        
-        [Space, Title("Balls")]
-        [SerializeField] private List<BallNumber> _ballNumbers = new();
-        [ShowInInspector, ReadOnly] public BallNumber[] BallNumbers;
 
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _ongoingAction;
@@ -31,8 +27,6 @@ namespace Game.Modules.Manager
         private void Awake()
         {
             Instance ??= this;
-
-            BallNumbers = _ballNumbers.ToArray();
         }
 
         private void Start()
@@ -52,22 +46,6 @@ namespace Game.Modules.Manager
         #endregion
 
         #region Functions
-
-        public void UpdateBallNumbers(int ballNumber)
-        {
-            if (ballNumber > BallNumbers.Length)
-                return;
-            
-            if (BallNumbers[ballNumber - 1].IsLocked)
-            {
-                BallNumbers[ballNumber - 1].IsLocked = false;
-            }
-
-            if (ballNumber > 2)
-            {
-                BallNumbers[ballNumber - 1].Weight += ballNumber / 30f;
-            }
-        }
 
         private static void SetQualitySettings()
         {

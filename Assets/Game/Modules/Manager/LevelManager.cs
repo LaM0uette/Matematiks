@@ -142,7 +142,6 @@ namespace Game.Modules.Manager
             
             // TODO: à supprimer/deplacer
             var newBallNumber = mergedBall.Number + 1;
-            GameManager.Instance.UpdateBallNumbers(newBallNumber);
             if (Application.isPlaying && newBallNumber >= GameManager.Instance.MaxBallNumber)
             {
                 GameManager.BallScore.gameObject.SetActive(true);
