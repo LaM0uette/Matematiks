@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56cdb8ad39a5bdd4f8ed3d18fae14a63, type: 3}
-  m_Name: Score
+  m_Script: {fileID: 11500000, guid: 6a11231538da9894d8dce88b47df6a36, type: 3}
+  m_Name: InAnimation
   m_EditorClassIdentifier: 
   CategoryIndex: 0
-  _guid: 2fbac4ffdc430ca4fa328747d36d121c
+  _guid: f4a32da14267b9d4baf4217026db3a0d
   _saveGuid: 0
   _value: 0
   _debugLogEnabled: 0
   _saved: 0
   _defaultValue: 0
   _resetOn: 0
-  _isClamped: 0
-  _minMax: {x: 0, y: 2147483647}
