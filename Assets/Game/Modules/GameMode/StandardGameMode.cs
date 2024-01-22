@@ -31,7 +31,7 @@ namespace Game.Modules.GameMode
             InitializeWeightedBalls();
         }
 
-        public void MergedBall(Ball mergedBall)
+        public void MergeBalls(Ball mergedBall)
         {
             var mergedBallNumber = mergedBall.Number + 1;
             
