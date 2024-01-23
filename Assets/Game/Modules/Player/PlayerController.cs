@@ -53,7 +53,7 @@ namespace Game.Modules.Player
         {
             if (_mouseDownVariable.Value == false) 
                 return;
-            
+
             _mouseDownVariable.Value = false;
             _releaseEvent.Raise();
         }

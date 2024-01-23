@@ -26,8 +26,6 @@ namespace Game.Modules.Board.Balls
         [SerializeField] private BoolVariable _mouseIsDownVariable;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private ScriptableListWeightedBall _weightedBalls;
-
-        private bool _isAlreadySelected;
         
         private void Start()
         {
@@ -41,21 +39,12 @@ namespace Game.Modules.Board.Balls
         
         private void OnMouseDown()
         {
-            _isAlreadySelected = true;
             OnBallSelected();
         }
         
         private void OnMouseEnter()
         {
-            if (_isAlreadySelected)
-                return;
-            
             OnBallSelected();
-        }
-        
-        private void OnMouseExit()
-        {
-            _isAlreadySelected = false;
         }
 
         #endregion

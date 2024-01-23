@@ -6,66 +6,35 @@
             "id": "d82878bf-754f-4b9d-92ec-09604cbe3c70",
             "actions": [
                 {
-                    "name": "Press",
+                    "name": "Click",
                     "type": "Button",
-                    "id": "076657dc-2d93-4627-8ff3-ec8aa48298cb",
+                    "id": "cbf6e205-4f5f-4d2b-abd6-d52cc472b57b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Release",
-                    "type": "Button",
-                    "id": "1c45249a-6887-459e-a53a-b8fb388a075a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "ac3f0dfc-8283-4ee5-b13c-d12d41bfb7db",
+                    "id": "33370bf9-6f46-4ad2-9bc5-bbfe3982c9c7",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Desktop",
-                    "action": "Release",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "dd49e26d-f457-47c4-91ce-1688aeedff3b",
+                    "id": "c11604a4-46f3-44d8-bd04-58e70c5e87ec",
                     "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch",
-                    "action": "Release",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f4db3947-7243-4ae7-a5f8-1a06e0f4fb9a",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Desktop",
-                    "action": "Press",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e0169b1f-6145-46ea-af0f-3dea5b5c40b6",
-                    "path": "<Touchscreen>/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Press",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

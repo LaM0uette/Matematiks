@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8eec617c7bf4a41bcad5c1bf452071, type: 3}
-  m_Name: WeightedBalls
+  m_Script: {fileID: 11500000, guid: ad22c82d6c7c12c4084a449da6133bfe, type: 3}
+  m_Name: SelectedBalls
   m_EditorClassIdentifier: 
   CategoryIndex: 0
   _resetOn: 0
   _list: []
-  references:
-    version: 2
-    RefIds: []

@@ -24,6 +24,7 @@ namespace Game.Modules.Manager
         public ScriptableListWeightedBall WeightedBalls;
         [SerializeField] private ScriptableEventNoParam _releaseEvent;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
+        [SerializeField] private ScriptableListBall _ballsSelected;
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
 
@@ -36,18 +37,14 @@ namespace Game.Modules.Manager
         
         private IGameMode _gameMode;
         
-        private readonly List<Ball> _ballsSelected = new();
         private readonly GameObject[,] _boardGrid = new GameObject[6, 5];
 
         private void Awake()
         {
-            FillBoardGrid();
-        }
-
-        private void Start()
-        {
             _gameMode = gameObject.AddComponent<StandardGameMode>();
             _gameMode.StartGame();
+            
+            FillBoardGrid();
         }
 
         #endregion
