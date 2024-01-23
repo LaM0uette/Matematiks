@@ -63,11 +63,6 @@ namespace Game.Modules.Manager
             _ballSelectedEvent.OnRaised -= OnBallSelected;
         }
 
-        private void LateUpdate()
-        {
-            CheckLoose();
-        }
-
         #endregion
 
         #region SoapEvents
@@ -173,10 +168,11 @@ namespace Game.Modules.Manager
                 }
             }
             
-            _ongoingAction.Value = false;
             SetBlockAllBalls(false);
-            
             _ballsSelected.Clear();
+            _ongoingAction.Value = false;
+            
+            Invoke(nameof(CheckLoose), 1f);
         }
         
         private static void SetBlockAllBalls(bool value) 
