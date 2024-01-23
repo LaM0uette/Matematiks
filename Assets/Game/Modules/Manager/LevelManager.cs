@@ -37,7 +37,7 @@ namespace Game.Modules.Manager
         
         private IGameMode _gameMode;
         
-        private readonly GameObject[,] _boardGrid = new GameObject[6, 5];
+        private readonly GameObject[,] _boardGrid = new GameObject[7, 5];
 
         private void Awake()
         {
@@ -337,7 +337,7 @@ namespace Game.Modules.Manager
         [Button]
         public void SetAllNumForLoose()
         {
-            var board = new GameObject[6, 5];
+            var board = new GameObject[7, 5];
             var cells = FindObjectsOfType<Cell>();
             
             foreach (var cell in cells)
@@ -362,7 +362,8 @@ namespace Game.Modules.Manager
                 }
             }
             
-            int[] lstNum = {1,3,1,3,1,2,5,2,5,2,1,3,1,3,1,2,5,2,5,2,6,7,6,7,6,2,5,9,9,9};
+            
+            int[] lstNum = {1,3,1,3,1,2,5,2,5,2,1,3,1,3,1,2,5,2,5,2,6,7,6,7,6,6,7,6,7,6,2,5,9,9,9};
 
             for (var i = 0; i < balls.Count; i++)
             {
@@ -374,7 +375,7 @@ namespace Game.Modules.Manager
         [Button]
         public void ResetAllNumForLoose()
         {
-            var board = new GameObject[6, 5];
+            var board = new GameObject[7, 5];
             var cells = FindObjectsOfType<Cell>();
             
             foreach (var cell in cells)
