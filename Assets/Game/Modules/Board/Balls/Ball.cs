@@ -1,10 +1,8 @@
-using System.Linq;
 using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Game.Modules.Board.Balls
 {
@@ -24,13 +22,6 @@ namespace Game.Modules.Board.Balls
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _mouseIsDownVariable;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
-        [SerializeField] private ScriptableListWeightedBall _weightedBalls;
-        
-        private void Start()
-        {
-            var randomNumber = GetWeightedRandomNumber();
-            SetNum(randomNumber);
-        }
 
         #endregion
         
@@ -61,26 +52,6 @@ namespace Game.Modules.Board.Balls
         #endregion
 
         #region Functions
-        
-        private int GetWeightedRandomNumber()
-        {
-            var ballNumbers = _weightedBalls;
-            var totalWeight = ballNumbers.Sum(ballNumber => ballNumber.Weight);
-
-            var randomNumber = Random.Range(0, totalWeight + 1);
-            var sum = 0f;
-            
-            foreach (var ballNumber in ballNumbers)
-            {
-                sum += ballNumber.Weight;
-                if (randomNumber <= sum)
-                {
-                    return ballNumber.Number;
-                }
-            }
-
-            return -1;
-        }
 
         public void SetNum(int number)
         {

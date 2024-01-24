@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ballPrefab: {fileID: 8865435523036503855, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
   _firstCell: {fileID: 0}
+  _weightedBalls: {fileID: 11400000, guid: a598ed44596a594489727fc9ea6b4474, type: 2}
