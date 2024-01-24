@@ -11,7 +11,6 @@ namespace Game.Modules.GameMode
     {
         #region Statements
 
-        // Components
         private LevelManager _levelManager;
         
         private void Awake()

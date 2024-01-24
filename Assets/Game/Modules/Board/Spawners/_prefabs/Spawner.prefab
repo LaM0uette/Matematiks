@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3891091869483043400}
-  - component: {fileID: 4528834047726731662}
+  - component: {fileID: -6322917560598260104}
   m_Layer: 0
-  m_Name: BallSpawner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4528834047726731662
+--- !u!114 &-6322917560598260104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 844770238305605863}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a579fc3a1f8e01848ad62a117957ec14, type: 3}
+  m_Script: {fileID: 11500000, guid: a4a542a1b0c093448ac5a97e121f5bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ballPrefab: {fileID: 8865435523036503855, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
-  _firstCell: {fileID: 0}
-  _weightedBalls: {fileID: 11400000, guid: a598ed44596a594489727fc9ea6b4474, type: 2}
+  WeightedBalls: {fileID: 11400000, guid: a598ed44596a594489727fc9ea6b4474, type: 2}
+  BallPrefab: {fileID: 8865435523036503855, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
+  FirstCell: {fileID: 0}
