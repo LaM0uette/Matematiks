@@ -150,7 +150,7 @@ namespace Game.Modules.Manager
             }
             
             var mergedBall = _ballsSelected[^1];
-            _gameMode.MergeBalls(mergedBall);
+            _gameMode.MergeBalls(mergedBall, _ballsSelected.Count);
             
             // TODO: à supprimer/deplacer
             var newBallNumber = mergedBall.Number;

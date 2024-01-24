@@ -2,6 +2,7 @@
 using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Manager;
+using Game.Modules.Utils;
 using UnityEngine;
 
 namespace Game.Modules.GameMode
@@ -27,12 +28,12 @@ namespace Game.Modules.GameMode
             InitializeWeightedBalls();
         }
 
-        public void MergeBalls(Ball mergedBall)
+        public void MergeBalls(Ball mergedBall, int countBallsSelected)
         {
             var mergedBallNumber = mergedBall.Number + 1;
             
             mergedBall.SetNum(mergedBallNumber);
-            UpdateWeightedBalls(mergedBall);
+            UpdateWeightedBalls(mergedBall, countBallsSelected);
             UpdateScore(mergedBallNumber);
         }
 
@@ -52,7 +53,7 @@ namespace Game.Modules.GameMode
             _levelManager.WeightedBalls.Add(new WeightedBall(3, 10f));
         }
 
-        private void UpdateWeightedBalls(Ball mergedBall)
+        private void UpdateWeightedBalls(Ball mergedBall, int countBallsSelected)
         {
             if (mergedBall.Number <= 2)
                 return;
@@ -61,12 +62,12 @@ namespace Game.Modules.GameMode
 
             if (!_levelManager.WeightedBalls.Contains(weightedBall) || weightedBall == null)
             {
-                var newWeightedBall = new WeightedBall(mergedBall.Number, 1f);
+                var newWeightedBall = new WeightedBall(mergedBall.Number, GameVar.DefaultNewBallWeight + countBallsSelected / 15f);
                 _levelManager.WeightedBalls.Add(newWeightedBall);
             }
             else
             {
-                weightedBall.Weight += mergedBall.Number / 10f;
+                weightedBall.Weight += mergedBall.Number /GameVar.DefaultBallWeightDiviser + countBallsSelected / GameVar.DefaultBallWeightDiviser;
             }
         }
         
