@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
@@ -7,6 +8,7 @@ using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.Modules.Manager
 {
@@ -45,9 +47,14 @@ namespace Game.Modules.Manager
         private void Awake()
         {
             _gameMode = gameObject.AddComponent<StandardGameMode>();
-            _gameMode.Initialize();
+            
             
             FillBoardGrid();
+        }
+
+        private void Start()
+        {
+            _gameMode.Initialize();
         }
 
         #endregion
@@ -130,7 +137,7 @@ namespace Game.Modules.Manager
         
         private IEnumerator MergeBalls() 
         {
-            if (_ballsSelected.Count < _minBallsToMerge)
+            if (_ballsSelected.Count < _minBallsToMerge || _lineRenderer == null)
             {
                 _ballsSelected.Clear();
                 _lineRenderer.positionCount = 0;

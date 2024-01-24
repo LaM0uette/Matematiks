@@ -9,7 +9,7 @@ namespace Game.Modules.Ui
 
         private void OnMouseDown()
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         }
 
