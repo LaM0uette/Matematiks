@@ -38,6 +38,8 @@ namespace Game.Modules.Manager
         private IGameMode _gameMode;
         
         private readonly GameObject[,] _boardGrid = new GameObject[7, 5];
+        private int _minBallsToMerge;
+        private int _maxBallsToMerge;
 
         private void Awake()
         {
@@ -89,6 +91,9 @@ namespace Game.Modules.Manager
                 return;
             }
 
+            if (_ballsSelected.Count >= _maxBallsToMerge) 
+                return;
+            
             var firstNumBall = _ballsSelected[0];
             if (firstNumBall.Number != ball.Number) 
                 return;
@@ -114,10 +119,16 @@ namespace Game.Modules.Manager
         #endregion
 
         #region Functions
+
+        public void InitializeBallsToMerge(int min, int max)
+        {
+            _minBallsToMerge = min;
+            _maxBallsToMerge = max;
+        }
         
         private IEnumerator MergeBalls() 
         {
-            if (_ballsSelected.Count < 3) // TODO: ajouter aussi un maximum sui sera initialisé dans les modes de jeux
+            if (_ballsSelected.Count < _minBallsToMerge)
             {
                 _ballsSelected.Clear();
                 _lineRenderer.positionCount = 0;

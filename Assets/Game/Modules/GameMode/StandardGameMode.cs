@@ -26,6 +26,7 @@ namespace Game.Modules.GameMode
         public void Initialize()
         {
             InitializeWeightedBalls();
+            _levelManager.InitializeBallsToMerge(3, 99);
         }
 
         public void MergeBalls(Ball mergedBall, int countBallsSelected)
