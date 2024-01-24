@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lineRenderer: {fileID: 0}
+  _lineRendererMaterial: {fileID: 2100000, guid: 1b8e15c9470d1444e95dd0b618b57df6, type: 2}
   _maxDistanceBetweenBalls: 1.3
   ScoreValueVariable: {fileID: 11400000, guid: 2fbac4ffdc430ca4fa328747d36d121c, type: 2}
   WeightedBalls: {fileID: 11400000, guid: a598ed44596a594489727fc9ea6b4474, type: 2}
@@ -53,5 +54,6 @@ MonoBehaviour:
   _ballsSelected: {fileID: 11400000, guid: 492bb046a1e5c9c47adf1a2f362e5219, type: 2}
   _mouseDownVariable: {fileID: 11400000, guid: 70b95a273ac164e4f8a0708ded305f6d, type: 2}
   _ongoingAction: {fileID: 11400000, guid: f4a32da14267b9d4baf4217026db3a0d, type: 2}
+  _isLoose: {fileID: 11400000, guid: 8009f57eba80a9b4f9af97cff8f11624, type: 2}
   _loosePanel: {fileID: 0}
   _ballScore: {fileID: 0}

@@ -6,7 +6,6 @@ using Game.Modules.GameMode;
 using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.Modules.Manager
@@ -28,6 +27,7 @@ namespace Game.Modules.Manager
         [SerializeField] private ScriptableListBall _ballsSelected;
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
+        [SerializeField] private BoolVariable _isLoose;
 
         [Space, Title("Score")]
         [ShowInInspector, ReadOnly] private int _maxBallNumber = 1;
@@ -38,7 +38,7 @@ namespace Game.Modules.Manager
         
         private IGameMode _gameMode;
         
-        private readonly GameObject[,] _boardGrid = new GameObject[7, 5];
+        public readonly GameObject[,] BoardGrid = new GameObject[7, 5];
         private int _minBallsToMerge;
         private int _maxBallsToMerge;
 
@@ -77,7 +77,7 @@ namespace Game.Modules.Manager
 
         private void OnBallSelected(Ball ball)
         {
-            if (_mouseDownVariable.Value == false) 
+            if (_mouseDownVariable.Value == false || _isLoose.Value) 
                 return;
             
             if (_ballsSelected.Count == 0)
@@ -227,9 +227,10 @@ namespace Game.Modules.Manager
 
         #region Loose
         
-        public void ShowLoosePanel()
+        public void LooseGame()
         {
             _loosePanel.SetActive(true);
+            _isLoose.Value = true;
         }
 
         private void FillBoardGrid()
@@ -242,7 +243,7 @@ namespace Game.Modules.Manager
                     continue;
 
                 var position = ExtractCellPositionFromName(cell.name);
-                _boardGrid[position.x, position.y] = cell.gameObject;
+                BoardGrid[position.x, position.y] = cell.gameObject;
             }
         }
         
@@ -253,86 +254,12 @@ namespace Game.Modules.Manager
             var y = int.Parse(parts[2]);
             return new Vector2Int(x, y);
         }
-        
+
         private void CheckLoose()
         {
-            if (_ongoingAction.Value)
-                return;
-            
-            var width = _boardGrid.GetLength(0);
-            var height = _boardGrid.GetLength(1);
-
-            List<Ball> balls = new();
-            for (var x = 0; x < width; x++)
-            {
-                for (var y = 0; y < height; y++)
-                {
-                    var ball = _boardGrid[x, y].transform.GetComponentInChildren<Ball>();
-                    balls.Add(ball);
-                }
-            }
-            
-            ResetVisited(balls);
-
-            for (var x = 0; x < width; x++)
-            {
-                for (var y = 0; y < height; y++)
-                {
-                    var ball = _boardGrid[x, y].transform.GetComponentInChildren<Ball>();
-
-                    if (ball == null || ball.IsVisited) 
-                        continue;
-                    
-                    if (DFS(x, y, ball.Number) >= 3)
-                    {
-                        return;
-                    }
-                }
-            }
-            
-            _gameMode.End();
+            _gameMode.CheckLoose();
         }
         
-        private static void ResetVisited(IEnumerable<Ball> balls)
-        {
-            foreach (var ball in balls)
-            {
-                if (ball.IsDestroyed() || ball == null)
-                    continue;
-                
-                ball.IsVisited = false;
-            }
-        }
-        
-        private int DFS(int x, int y, int number)
-        {
-            var width = _boardGrid.GetLength(0);
-            var height = _boardGrid.GetLength(1);
-            
-            if (x < 0 || y < 0 || x >= width || y >= height)
-                return 0;
-            
-            var ball = _boardGrid[x, y].transform.GetComponentInChildren<Ball>();
-            
-            if (ball == null || ball.IsDestroyed() || ball.IsVisited || ball.Number != number)
-                return 0;
-
-            ball.IsVisited = true;
-            var count = 1;
-
-            // Vérifier les huit directions (verticales, horizontales et diagonales)
-            count += DFS(x + 1, y, number);
-            count += DFS(x - 1, y, number);
-            count += DFS(x, y + 1, number);
-            count += DFS(x, y - 1, number);
-            count += DFS(x + 1, y + 1, number);
-            count += DFS(x - 1, y - 1, number);
-            count += DFS(x + 1, y - 1, number);
-            count += DFS(x - 1, y + 1, number);
-
-            return count;
-        }
-
         #endregion
         
         #region Odin

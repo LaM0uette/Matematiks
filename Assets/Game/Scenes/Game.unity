@@ -6105,10 +6105,6 @@ PrefabInstance:
       propertyPath: _lineRenderer
       value: 
       objectReference: {fileID: 1556546700}
-    - target: {fileID: 5975422263484483861, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
-      propertyPath: _lineRendererMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 1b8e15c9470d1444e95dd0b618b57df6, type: 2}
     - target: {fileID: 8787136138896609841, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
       propertyPath: m_Name
       value: LevelManager
