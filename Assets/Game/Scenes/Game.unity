@@ -6355,10 +6355,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 9006225886355180844, guid: 1b77415d522ec8042a6eaa6f9906f0ec, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: Touch
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
