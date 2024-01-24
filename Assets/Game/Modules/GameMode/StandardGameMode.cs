@@ -47,8 +47,8 @@ namespace Game.Modules.GameMode
 
         private void InitializeWeightedBalls()
         {
-            _levelManager.WeightedBalls.Add(new WeightedBall(1, 100f));
-            _levelManager.WeightedBalls.Add(new WeightedBall(2, 25f));
+            _levelManager.WeightedBalls.Add(new WeightedBall(1, 80f));
+            _levelManager.WeightedBalls.Add(new WeightedBall(2, 30f));
             _levelManager.WeightedBalls.Add(new WeightedBall(3, 10f));
         }
 
