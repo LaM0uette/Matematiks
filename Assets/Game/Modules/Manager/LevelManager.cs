@@ -336,6 +336,44 @@ namespace Game.Modules.Manager
         #region Odin
 
         [Button]
+        public void SetAllNumForTestLineRenderer()
+        {
+            var board = new GameObject[7, 5];
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
+
+                var position = ExtractCellPositionFromName(cell.name);
+                board[position.x, position.y] = cell.gameObject;
+            }
+            
+            var width = board.GetLength(0);
+            var height = board.GetLength(1);
+            
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = board[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+            
+            
+            int[] lstNum = {1,1,1,1,1, 2,2,2,2,2, 3,3,3,3,3, 4,4,4,4,4, 5,5,5,8,9, 6,6,6,8,9, 7,7,7,8,9};
+
+            for (var i = 0; i < balls.Count; i++)
+            {
+                var ball = balls[i];
+                ball.SetNum(lstNum[i]);
+            }
+        }
+        
+        [Button]
         public void SetAllNumForLoose()
         {
             var board = new GameObject[7, 5];
@@ -364,7 +402,7 @@ namespace Game.Modules.Manager
             }
             
             
-            int[] lstNum = {1,3,1,3,1,2,5,2,5,2,1,3,1,3,1,2,5,2,5,2,6,7,6,7,6,6,7,6,7,6,2,5,9,9,9};
+            int[] lstNum = {1,3,1,3,1, 2,5,2,5,2, 1,3,1,3,1, 2,5,2,5,2, 6,7,6,7,6, 6,7,6,7,6, 2,5,9,9,9};
 
             for (var i = 0; i < balls.Count; i++)
             {
