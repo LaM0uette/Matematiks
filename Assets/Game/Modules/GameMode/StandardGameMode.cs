@@ -22,7 +22,7 @@ namespace Game.Modules.GameMode
         
         #region Events
 
-        public void StartGame()
+        public void Initialize()
         {
             InitializeWeightedBalls();
         }
@@ -36,7 +36,7 @@ namespace Game.Modules.GameMode
             UpdateScore(mergedBallNumber);
         }
 
-        public void EndGame()
+        public void End()
         {
             _levelManager.ShowLoosePanel();
         }

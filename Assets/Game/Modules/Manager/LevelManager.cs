@@ -42,7 +42,7 @@ namespace Game.Modules.Manager
         private void Awake()
         {
             _gameMode = gameObject.AddComponent<StandardGameMode>();
-            _gameMode.StartGame();
+            _gameMode.Initialize();
             
             FillBoardGrid();
         }
@@ -287,7 +287,7 @@ namespace Game.Modules.Manager
                 }
             }
             
-            _gameMode.EndGame();
+            _gameMode.End();
         }
         
         private static void ResetVisited(IEnumerable<Ball> balls)

@@ -4,10 +4,10 @@ namespace Game.Modules.GameMode
 {
     public interface IGameMode
     {
-        public void StartGame();
+        public void Initialize();
         
         public void MergeBalls(Ball mergedBall);
         
-        public void EndGame();
+        public void End();
     }
 }
