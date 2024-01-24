@@ -16,6 +16,7 @@ namespace Game.Modules.Ui
         public void OnReplay()
         {
             Saver.ResetCurrentScore();
+            Saver.ResetCurrentBalls();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game.Modules.Utils
 {
@@ -48,6 +49,7 @@ namespace Game.Modules.Utils
         
         #region CurrentScore
         
+        // CurrentScore
         private const string CurrentScore = "CurrentScore";
 
         public static void SaveCurrentScore(int score)
@@ -64,7 +66,44 @@ namespace Game.Modules.Utils
         {
             PlayerPrefs.SetInt(CurrentScore, 0);
         }
+        
+        // Balls
+        private const string CurrentBalls = "CurrentBalls";
+
+        public static void SaveCurrentBalls(IEnumerable<int> ballNumbers)
+        {
+            var ballsParsed = "";
+            
+            foreach (var ballNumber in ballNumbers)
+            {
+                ballsParsed += ballNumber + ";";
+            }
+            
+            PlayerPrefs.SetString(CurrentBalls, ballsParsed);
+        }
+        
+        public static List<int> GetCurrentBalls()
+        {
+            var ballsParsed = PlayerPrefs.GetString(CurrentBalls, "");
+            var balls = new List<int>();
+            
+            foreach (var ballNumber in ballsParsed.Split(';'))
+            {
+                if (ballNumber == "") 
+                    continue;
+                
+                balls.Add(int.Parse(ballNumber));
+            }
+
+            return balls;
+        }
+        
+        public static void ResetCurrentBalls()
+        {
+            PlayerPrefs.SetString(CurrentBalls, "");
+        }
 
         #endregion
+        
     }
 }

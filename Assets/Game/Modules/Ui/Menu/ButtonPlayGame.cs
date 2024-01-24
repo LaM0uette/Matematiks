@@ -16,6 +16,7 @@ namespace Game.Modules.Ui.Menu
         public void OnNewGame()
         {
             Saver.ResetCurrentScore();
+            Saver.ResetCurrentBalls();
             SceneManager.LoadScene(GameVar.GameScene);
         }
 

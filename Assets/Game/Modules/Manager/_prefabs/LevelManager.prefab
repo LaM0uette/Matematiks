@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ff989498994938a36d27a1361265d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ballPrefab: {fileID: 8865435523036503855, guid: 00afa0de9d9c5f74dbde44a4341b62ac, type: 3}
   _lineRenderer: {fileID: 0}
   _lineRendererMaterial: {fileID: 2100000, guid: 1b8e15c9470d1444e95dd0b618b57df6, type: 2}
   _maxDistanceBetweenBalls: 1.3

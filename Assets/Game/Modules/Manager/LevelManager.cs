@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
 using Game.Modules.GameMode;
 using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -16,6 +18,7 @@ namespace Game.Modules.Manager
         #region Statements
         
         [Space, Title("Board")]
+        [SerializeField] private GameObject _ballPrefab;
         [SerializeField] private LineRenderer _lineRenderer;
         [SerializeField] private Material _lineRendererMaterial;
         [SerializeField] private float _maxDistanceBetweenBalls = 1.3f;
@@ -46,7 +49,6 @@ namespace Game.Modules.Manager
         {
             _gameMode = gameObject.AddComponent<StandardGameMode>();
             
-            
             FillBoardGrid();
         }
 
@@ -59,6 +61,27 @@ namespace Game.Modules.Manager
         private void Initialize()
         {
             ScoreValueVariable.Value = Saver.GetCurrentScore();
+            
+            var ballNumbers = Saver.GetCurrentBalls();
+            if (ballNumbers.Count <= 0)
+                return;
+
+            var width = BoardGrid.GetLength(0);
+            var height = BoardGrid.GetLength(1);
+            
+            var i = 0;
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ballGo = Instantiate(_ballPrefab, BoardGrid[x, y].transform);
+                    ballGo.transform.localPosition = Vector3.zero;
+                    
+                    var ball = ballGo.GetComponent<Ball>();
+                    ball.SetNum(ballNumbers[i]);
+                    i++;
+                }
+            }
         }
 
         #endregion
@@ -190,7 +213,7 @@ namespace Game.Modules.Manager
             _ballsSelected.Clear();
             _ongoingAction.Value = false;
             
-            Invoke(nameof(CheckLoose), 1f);
+            Invoke(nameof(AfterMergeBalls), 1f);
         }
         
         private void RemoveLineRendererFirstPosition() 
@@ -262,8 +285,30 @@ namespace Game.Modules.Manager
             return new Vector2Int(x, y);
         }
 
-        private void CheckLoose()
+        private void AfterMergeBalls()
         {
+            var width = BoardGrid.GetLength(0);
+            var height = BoardGrid.GetLength(1);
+            
+            List<int> ballNumbers = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    if (_ongoingAction.Value)
+                        return;
+
+                    var cellGrid = BoardGrid[x, y].transform;
+                    
+                    if (cellGrid.childCount <= 0)
+                        return;
+                    
+                    var ball = cellGrid.GetComponentInChildren<Ball>();
+                    ballNumbers.Add(ball.Number);
+                }
+            }
+            
+            Saver.SaveCurrentBalls(ballNumbers);
             _gameMode.CheckLoose();
         }
         
@@ -336,7 +381,6 @@ namespace Game.Modules.Manager
                     balls.Add(ball);
                 }
             }
-            
             
             int[] lstNum = {1,3,1,3,1, 2,5,2,5,2, 1,3,1,3,1, 2,5,2,5,2, 6,7,6,7,6, 6,7,6,7,6, 2,5,9,9,9};
 
