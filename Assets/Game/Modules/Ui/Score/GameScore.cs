@@ -1,3 +1,4 @@
+using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -25,6 +26,7 @@ namespace Game.Modules.Ui.Score
         private void UpdateScore()
         {
             _scoreText.text = _scoreVariable.Value.ToString();
+            Saver.SaveCurrentScore(_scoreVariable.Value);
         }
 
         #endregion

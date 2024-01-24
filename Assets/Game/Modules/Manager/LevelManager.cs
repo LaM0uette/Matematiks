@@ -53,6 +53,12 @@ namespace Game.Modules.Manager
         private void Start()
         {
             _gameMode.Initialize();
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            ScoreValueVariable.Value = Saver.GetCurrentScore();
         }
 
         #endregion

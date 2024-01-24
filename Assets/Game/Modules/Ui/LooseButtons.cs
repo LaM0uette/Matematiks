@@ -11,13 +11,12 @@ namespace Game.Modules.Ui
         public void OnMenu()
         {
             SceneManager.LoadScene(GameVar.MenuScene);
-
         }
         
         public void OnReplay()
         {
+            Saver.ResetCurrentScore();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
         }
 
         #endregion

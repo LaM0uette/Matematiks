@@ -45,5 +45,26 @@ namespace Game.Modules.Utils
         }
 
         #endregion
+        
+        #region CurrentScore
+        
+        private const string CurrentScore = "CurrentScore";
+
+        public static void SaveCurrentScore(int score)
+        {
+            PlayerPrefs.SetInt(CurrentScore, score);
+        }
+        
+        public static int GetCurrentScore()
+        {
+            return PlayerPrefs.GetInt(CurrentScore, 0);
+        }
+        
+        public static void ResetCurrentScore()
+        {
+            PlayerPrefs.SetInt(CurrentScore, 0);
+        }
+
+        #endregion
     }
 }
