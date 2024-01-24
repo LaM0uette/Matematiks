@@ -62,7 +62,7 @@ namespace Game.Modules.GameMode
 
             if (!_levelManager.WeightedBalls.Contains(weightedBall) || weightedBall == null)
             {
-                var newWeightedBall = new WeightedBall(mergedBall.Number, GameVar.DefaultNewBallWeight + countBallsSelected / 15f);
+                var newWeightedBall = new WeightedBall(mergedBall.Number, GameVar.DefaultNewBallWeight + countBallsSelected / GameVar.DefaultBallWeightDiviser);
                 _levelManager.WeightedBalls.Add(newWeightedBall);
             }
             else
