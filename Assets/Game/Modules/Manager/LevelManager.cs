@@ -125,7 +125,6 @@ namespace Game.Modules.Manager
             }
             
             _ongoingAction.Value = true;
-            SetBlockAllBalls(true);
             
             for (var i = 0; i < _ballsSelected.Count - 1; i++) 
             {
@@ -168,19 +167,10 @@ namespace Game.Modules.Manager
                 }
             }
             
-            SetBlockAllBalls(false);
             _ballsSelected.Clear();
             _ongoingAction.Value = false;
             
             Invoke(nameof(CheckLoose), 1f);
-        }
-        
-        private static void SetBlockAllBalls(bool value) 
-        {
-            foreach (var ball in FindObjectsOfType<Ball>()) 
-            {
-                ball.IsBlocked = value;
-            }
         }
         
         private void RemoveLineRendererFirstPosition() 

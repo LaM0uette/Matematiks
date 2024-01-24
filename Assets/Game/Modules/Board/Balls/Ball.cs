@@ -12,7 +12,6 @@ namespace Game.Modules.Board.Balls
     {
         #region Statements
         
-        public bool IsBlocked { get; set; }
         public bool IsVisited { get; set; }
         
         [Title("Number")]
