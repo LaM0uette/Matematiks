@@ -11,6 +11,7 @@ namespace Game.Modules.Board.Balls
         #region Statements
         
         public bool IsVisited { get; set; }
+        public Color Color { get; private set; }
         
         [Title("Number")]
         [ShowInInspector, ReadOnly] public int Number { get; set; }
@@ -63,7 +64,10 @@ namespace Game.Modules.Board.Balls
 
         private void SetBallColor(int number)
         {
-            _spriteRenderer.color = GetBallColor(number);
+            var color = GetBallColor(number);
+            _spriteRenderer.color = color;
+            Color = color;
+            
             _tmpNumber.color = GetContrastingTextColor(_spriteRenderer.color);
             _tmpNumber.text = number.ToString();
         }

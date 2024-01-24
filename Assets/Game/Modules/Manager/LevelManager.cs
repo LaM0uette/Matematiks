@@ -17,6 +17,7 @@ namespace Game.Modules.Manager
         
         [Space, Title("Board")]
         [SerializeField] private LineRenderer _lineRenderer;
+        [SerializeField] private Material _lineRendererMaterial;
         [SerializeField] private float _maxDistanceBetweenBalls = 1.3f;
         
         [Space, Title("Soap")]
@@ -78,7 +79,7 @@ namespace Game.Modules.Manager
         {
             if (_mouseDownVariable.Value == false) 
                 return;
-
+            
             if (_ballsSelected.Count == 0)
             {
                 AddFirstBall(ball);
@@ -98,6 +99,7 @@ namespace Game.Modules.Manager
             if (firstNumBall.Number != ball.Number) 
                 return;
             
+            _lineRendererMaterial.color = ball.Color;
             _ballsSelected.Add(ball);
             
             if (_ballsSelected.Count > 1)
