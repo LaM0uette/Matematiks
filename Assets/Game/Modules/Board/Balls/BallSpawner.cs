@@ -46,18 +46,17 @@ namespace Game.Modules.Board.Balls
         
         private int GetWeightedRandomNumber()
         {
-            var ballNumbers = _weightedBalls;
-            var totalWeight = ballNumbers.Sum(ballNumber => ballNumber.Weight);
-
-            var randomNumber = Random.Range(0, totalWeight + 1);
-            var sum = 0f;
+            var balls = _weightedBalls;
             
-            foreach (var ballNumber in ballNumbers)
+            var totalWeight = balls.Sum(ballNumber => ballNumber.Weight);
+            var randomNumber = Random.Range(0, totalWeight);
+            
+            foreach (var ball in balls)
             {
-                sum += ballNumber.Weight;
-                if (randomNumber <= sum)
+                randomNumber -= ball.Weight;
+                if (randomNumber <= 0)
                 {
-                    return ballNumber.Number;
+                    return ball.Number;
                 }
             }
 
