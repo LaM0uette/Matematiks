@@ -2,6 +2,9 @@ namespace Game.Modules.Utils
 {
     public static class GameVar
     {
+        public static string GameScene { get; private set; } = "Game";
+        public static string MenuScene { get; private set; } = "Menu";
+        
         public static float BallDropDuration { get; private set; } = 0.2f;
         public static float BallMoveDuration { get; private set; } = 0.1f;
         

@@ -1,13 +1,20 @@
+using Game.Modules.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game.Modules.Ui
 {
-    public class ReplayButton : MonoBehaviour
+    public class LooseButtons : MonoBehaviour
     {
         #region Events
 
-        private void OnMouseDown()
+        public void OnMenu()
+        {
+            SceneManager.LoadScene(GameVar.MenuScene);
+
+        }
+        
+        public void OnReplay()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
