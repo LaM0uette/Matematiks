@@ -1,5 +1,4 @@
 using System.Collections;
-using Game.Modules.Board.Balls;
 using Game.Modules.Utils;
 using JetBrains.Annotations;
 using Obvious.Soap;
@@ -46,9 +45,8 @@ namespace Game.Modules.Board.Cells
                 return;
             
             var childGo = transform.GetChild(0).gameObject;
-            var ball = childGo.GetComponent<Ball>();
             
-            if (ball.IsBlocked) 
+            if (_ongoingAction) 
                 return;
             
             childGo.transform.SetParent(_nextCell.transform);
@@ -64,12 +62,10 @@ namespace Game.Modules.Board.Cells
             return nextCell.IsEmpty;
         }
 
-        private IEnumerator AnimateMoveBalls([CanBeNull] GameObject childGo, Vector3 startPosition, Vector3 endPosition)
+        private static IEnumerator AnimateMoveBalls([CanBeNull] GameObject childGo, Vector3 startPosition, Vector3 endPosition)
         {
             if (childGo == null) 
                 yield break;
-            
-            _ongoingAction.Value = true;
             
             var duration = GameVar.BallDropDuration;
             var elapsedTime = 0f;
@@ -77,10 +73,7 @@ namespace Game.Modules.Board.Cells
             while (elapsedTime < duration)
             {
                 if (childGo.IsDestroyed())
-                {
-                    _ongoingAction.Value = false;
                     yield break;
-                }
                 
                 elapsedTime += Time.deltaTime;
                 var remainingTime = elapsedTime / duration;
@@ -90,8 +83,6 @@ namespace Game.Modules.Board.Cells
                 
                 yield return null;
             }
-            
-            _ongoingAction.Value = false;
         }
 
         
