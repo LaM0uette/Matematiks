@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
@@ -36,7 +35,6 @@ namespace Game.Modules.Manager
         
         [Space, Title("Ui")]
         [SerializeField] private GameObject _loosePanel;
-        [SerializeField] private Ball _ballScore;
         
         private IGameMode _gameMode;
         
@@ -175,11 +173,7 @@ namespace Game.Modules.Manager
             var newBallNumber = mergedBall.Number;
             if (Application.isPlaying && newBallNumber >= _maxBallNumber)
             {
-                if (!_ballScore.isActiveAndEnabled)
-                    _ballScore.gameObject.SetActive(true);
-
                 _maxBallNumber = newBallNumber;
-                _ballScore.SetNum(newBallNumber);
                 
                 if (newBallNumber > Saver.GetMaxBall())
                 {
