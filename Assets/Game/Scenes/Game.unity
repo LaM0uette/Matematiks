@@ -6027,10 +6027,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5975422263484483861, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
-      propertyPath: _ballScore
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5975422263484483861, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
       propertyPath: _loosePanel
       value: 
       objectReference: {fileID: 225190725}

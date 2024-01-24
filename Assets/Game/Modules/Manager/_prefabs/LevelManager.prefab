@@ -56,4 +56,3 @@ MonoBehaviour:
   _ongoingAction: {fileID: 11400000, guid: f4a32da14267b9d4baf4217026db3a0d, type: 2}
   _isLoose: {fileID: 11400000, guid: 8009f57eba80a9b4f9af97cff8f11624, type: 2}
   _loosePanel: {fileID: 0}
-  _ballScore: {fileID: 0}
