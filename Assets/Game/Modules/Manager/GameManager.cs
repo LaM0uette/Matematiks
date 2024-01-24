@@ -25,7 +25,7 @@ namespace Game.Modules.Manager
         private static void SetQualitySettings()
         {
             QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = 120;
+            Application.targetFrameRate = 240;
         }
 
         #endregion
