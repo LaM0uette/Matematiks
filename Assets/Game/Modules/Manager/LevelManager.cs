@@ -60,8 +60,10 @@ namespace Game.Modules.Manager
 
         private void Initialize()
         {
+            // CurrentScore
             ScoreValueVariable.Value = Saver.GetCurrentScore();
             
+            // CurrentBalls
             var ballNumbers = Saver.GetCurrentBalls();
             if (ballNumbers.Count <= 0)
                 return;
@@ -81,6 +83,18 @@ namespace Game.Modules.Manager
                     ball.SetNum(ballNumbers[i]);
                     i++;
                 }
+            }
+            
+            // CurrentWeightedBalls
+            var weightedBalls = Saver.GetCurrentWeightedBalls();
+            
+            if (weightedBalls.Count <= 0)
+                return;
+
+            WeightedBalls.Reset();
+            foreach (var weightedBall in weightedBalls)
+            {
+                WeightedBalls.Add(weightedBall);
             }
         }
 
@@ -287,8 +301,8 @@ namespace Game.Modules.Manager
 
         private void AfterMergeBalls()
         {
-            SaveCurrentBalls();
             RemoveOldWeightedBalls();
+            SaveCurrentBalls();
             _gameMode.AfterMergeBalls();
         }
         
@@ -362,6 +376,7 @@ namespace Game.Modules.Manager
             }
             
             Saver.SaveCurrentBalls(ballNumbers);
+            Saver.SaveCurrentWeightedBalls(WeightedBalls.ToList());
         }
         
         #endregion

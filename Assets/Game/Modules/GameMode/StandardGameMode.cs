@@ -76,6 +76,7 @@ namespace Game.Modules.GameMode
         private void UpdateScore(int value)
         {
             _levelManager.ScoreValueVariable.Value += (int)Math.Pow(2, value) / 2;
+            Saver.SaveCurrentScore(_levelManager.ScoreValueVariable.Value);
         }
 
         private void CheckLoose()
@@ -156,6 +157,10 @@ namespace Game.Modules.GameMode
 
         private void LooseGame()
         {
+            Saver.ResetCurrentScore();
+            Saver.ResetCurrentBalls();
+            Saver.ResetCurrentWeightedBalls();
+            
             _levelManager.LooseGame();
         }
         

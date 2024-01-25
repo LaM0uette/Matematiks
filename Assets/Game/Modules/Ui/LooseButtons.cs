@@ -17,6 +17,7 @@ namespace Game.Modules.Ui
         {
             Saver.ResetCurrentScore();
             Saver.ResetCurrentBalls();
+            Saver.ResetCurrentWeightedBalls();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Modules.Board.Balls;
 using UnityEngine;
 
 namespace Game.Modules.Utils
@@ -21,7 +22,7 @@ namespace Game.Modules.Utils
         
         public static void ResetBestScore()
         {
-            PlayerPrefs.SetInt(BestScore, 0);
+            PlayerPrefs.DeleteKey(BestScore);
         }
 
         #endregion
@@ -42,7 +43,7 @@ namespace Game.Modules.Utils
         
         public static void ResetMaxBall()
         {
-            PlayerPrefs.SetInt(MaxBall, 1);
+            PlayerPrefs.DeleteKey(MaxBall);
         }
 
         #endregion
@@ -64,7 +65,7 @@ namespace Game.Modules.Utils
         
         public static void ResetCurrentScore()
         {
-            PlayerPrefs.SetInt(CurrentScore, 0);
+            PlayerPrefs.DeleteKey(CurrentScore);
         }
         
         // Balls
@@ -100,9 +101,35 @@ namespace Game.Modules.Utils
         
         public static void ResetCurrentBalls()
         {
-            PlayerPrefs.SetString(CurrentBalls, "");
+            PlayerPrefs.DeleteKey(CurrentBalls);
         }
+        
+        // WeightedBalls
+        private const string CurrentWeightedBalls = "CurrentWeightedBalls";
 
+        public static void SaveCurrentWeightedBalls(List<WeightedBall> weightedBalls)
+        {
+            var json = JsonUtility.ToJson(new Serialization<List<WeightedBall>>(weightedBalls));
+            PlayerPrefs.SetString(CurrentWeightedBalls, json);
+        }
+        
+        public static List<WeightedBall> GetCurrentWeightedBalls()
+        {
+            if (PlayerPrefs.HasKey(CurrentWeightedBalls))
+            {
+                var json = PlayerPrefs.GetString(CurrentWeightedBalls);
+                var serialization = JsonUtility.FromJson<Serialization<List<WeightedBall>>>(json);
+                return serialization.data;
+            }
+
+            return new List<WeightedBall>();
+        }
+        
+        public static void ResetCurrentWeightedBalls()
+        {
+            PlayerPrefs.DeleteKey(CurrentWeightedBalls);
+        }
+        
         #endregion
         
     }
