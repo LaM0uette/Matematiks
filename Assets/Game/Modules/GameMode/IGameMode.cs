@@ -8,6 +8,6 @@ namespace Game.Modules.GameMode
         
         public void MergeBalls(Ball mergedBall, int countBallsSelected);
 
-        public void CheckLoose();
+        public void AfterMergeBalls();
     }
 }

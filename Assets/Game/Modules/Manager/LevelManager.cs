@@ -287,6 +287,59 @@ namespace Game.Modules.Manager
 
         private void AfterMergeBalls()
         {
+            SaveCurrentBalls();
+            RemoveOldWeightedBalls();
+            _gameMode.AfterMergeBalls();
+        }
+        
+        private void RemoveOldWeightedBalls()
+        {
+            var width = BoardGrid.GetLength(0);
+            var height = BoardGrid.GetLength(1);
+
+            var minBallNumber = int.MaxValue;
+            var maxBallNumber = int.MinValue;
+                
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var cellGrid = BoardGrid[x, y].transform;
+                    
+                    if (cellGrid.childCount <= 0)
+                        continue;
+                    
+                    var ball = cellGrid.GetComponentInChildren<Ball>();
+                    var ballNumber = ball.Number;
+                    
+                    if (ballNumber < minBallNumber)
+                        minBallNumber = ballNumber;
+                    
+                    if (ballNumber > maxBallNumber)
+                        maxBallNumber = ballNumber;
+                }
+            }
+            
+            var balls = FindObjectsOfType<Ball>();
+            for (var i = WeightedBalls.Count - 1; i >= 0; i--)
+            {
+                if (WeightedBalls[i].Number < minBallNumber)
+                {
+                    foreach (var ball in balls)
+                    {
+                        if (ball.Number == WeightedBalls[i].Number)
+                        {
+                            Destroy(ball.gameObject);
+                        }
+                    }
+                    
+                    WeightedBalls.Remove(WeightedBalls[i]);
+                }
+            }
+        }
+
+        private void SaveCurrentBalls()
+        {
             var width = BoardGrid.GetLength(0);
             var height = BoardGrid.GetLength(1);
             
@@ -309,7 +362,6 @@ namespace Game.Modules.Manager
             }
             
             Saver.SaveCurrentBalls(ballNumbers);
-            _gameMode.CheckLoose();
         }
         
         #endregion

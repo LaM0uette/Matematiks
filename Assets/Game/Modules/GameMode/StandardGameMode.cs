@@ -39,40 +39,9 @@ namespace Game.Modules.GameMode
             UpdateScore(mergedBallNumber);
         }
 
-        public void CheckLoose()
+        public void AfterMergeBalls()
         {
-            var width = _levelManager.BoardGrid.GetLength(0);
-            var height = _levelManager.BoardGrid.GetLength(1);
-
-            List<Ball> balls = new();
-            for (var x = 0; x < width; x++)
-            {
-                for (var y = 0; y < height; y++)
-                {
-                    var ball = _levelManager.BoardGrid[x, y].transform.GetComponentInChildren<Ball>();
-                    balls.Add(ball);
-                }
-            }
-            
-            ResetVisited(balls);
-
-            for (var x = 0; x < width; x++)
-            {
-                for (var y = 0; y < height; y++)
-                {
-                    var ball = _levelManager.BoardGrid[x, y].transform.GetComponentInChildren<Ball>();
-
-                    if (ball == null || ball.IsVisited) 
-                        continue;
-                    
-                    if (DFS(x, y, ball.Number) >= 3)
-                    {
-                        return;
-                    }
-                }
-            }
-            
-            LooseGame();
+            CheckLoose();
         }
         
         #endregion
@@ -107,6 +76,42 @@ namespace Game.Modules.GameMode
         private void UpdateScore(int value)
         {
             _levelManager.ScoreValueVariable.Value += (int)Math.Pow(2, value) / 2;
+        }
+
+        private void CheckLoose()
+        {
+            var width = _levelManager.BoardGrid.GetLength(0);
+            var height = _levelManager.BoardGrid.GetLength(1);
+
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = _levelManager.BoardGrid[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+            
+            ResetVisited(balls);
+
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = _levelManager.BoardGrid[x, y].transform.GetComponentInChildren<Ball>();
+
+                    if (ball == null || ball.IsVisited) 
+                        continue;
+                    
+                    if (DFS(x, y, ball.Number) >= 3)
+                    {
+                        return;
+                    }
+                }
+            }
+            
+            LooseGame();
         }
         
         private static void ResetVisited(IEnumerable<Ball> balls)
