@@ -22,6 +22,7 @@ namespace Game.Modules.Manager
         [SerializeField] private LineRenderer _lineRenderer;
         [SerializeField] private Material _lineRendererMaterial;
         [SerializeField] private float _maxDistanceBetweenBalls = 1.3f;
+        [SerializeField] private int _removeOldBallsThreshold = 8;
         
         [Space, Title("Soap")]
         public IntVariable ScoreValueVariable;
@@ -337,7 +338,7 @@ namespace Game.Modules.Manager
             var balls = FindObjectsOfType<Ball>();
             for (var i = WeightedBalls.Count - 1; i >= 0; i--)
             {
-                if (WeightedBalls[i].Number < minBallNumber)
+                if (WeightedBalls[i].Number <= maxBallNumber - _removeOldBallsThreshold && WeightedBalls[i].Number < minBallNumber)
                 {
                     foreach (var ball in balls)
                     {
@@ -382,6 +383,43 @@ namespace Game.Modules.Manager
         #endregion
         
         #region Odin
+        
+        [Button]
+        public void SetAllNumForRemoveOldBalls()
+        {
+            var board = new GameObject[7, 5];
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
+
+                var position = ExtractCellPositionFromName(cell.name);
+                board[position.x, position.y] = cell.gameObject;
+            }
+            
+            var width = board.GetLength(0);
+            var height = board.GetLength(1);
+            
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = board[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+            
+            int[] lstNum = {9,9,9,4,4, 4,4,4,4,4, 4,4,4,4,4, 4,4,4,4,4, 4,4,4,4,4, 4,4,4,4,4, 4,4,4,4,4};
+
+            for (var i = 0; i < balls.Count; i++)
+            {
+                var ball = balls[i];
+                ball.SetNum(lstNum[i]);
+            }
+        }
 
         [Button]
         public void SetAllNumForTestLineRenderer()
@@ -414,6 +452,17 @@ namespace Game.Modules.Manager
             
             int[] lstNum = {1,1,1,1,1, 2,2,2,2,2, 3,3,3,3,3, 4,4,4,4,4, 5,5,5,8,9, 6,6,6,8,9, 7,7,7,8,9};
 
+            WeightedBalls.Reset();
+            WeightedBalls.Add(new WeightedBall(1, 80f));
+            WeightedBalls.Add(new WeightedBall(2, 30f));
+            WeightedBalls.Add(new WeightedBall(3, 1f));
+            WeightedBalls.Add(new WeightedBall(4, 1f));
+            WeightedBalls.Add(new WeightedBall(5, 1f));
+            WeightedBalls.Add(new WeightedBall(6, 1f));
+            WeightedBalls.Add(new WeightedBall(7, 1f));
+            WeightedBalls.Add(new WeightedBall(8, 1f));
+            WeightedBalls.Add(new WeightedBall(9, 1f));
+            
             for (var i = 0; i < balls.Count; i++)
             {
                 var ball = balls[i];

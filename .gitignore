@@ -46,7 +46,6 @@ node_modules/
 /Assets/Feel/
 /Assets/HotReload*/
 /Packages/com.singularitygroup.hotreload/
-/Packages/com.singularitygroup.hotreload/*
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
