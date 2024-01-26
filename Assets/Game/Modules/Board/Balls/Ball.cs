@@ -111,8 +111,8 @@ namespace Game.Modules.Board.Balls
         [Button]
         public void SetNumAndColor()
         {
-            Number += 1;
-            SetNum(Number);
+            var number = Number + 1;
+            SetNum(number);
         }
 
         #endregion
