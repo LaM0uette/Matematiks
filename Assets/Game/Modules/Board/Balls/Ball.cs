@@ -77,27 +77,23 @@ namespace Game.Modules.Board.Balls
         
         private static Color GetBallColor(int number)
         {
-            return number switch
+            if (number % 10 == 0)
+                return ColorVar.Ball10Color;
+
+            var colorIndex = number % 10;
+            var isDark = number > 10;
+
+            return colorIndex switch
             {
-                1 => ColorVar.Ball1Color,
-                2 => ColorVar.Ball2Color,
-                3 => ColorVar.Ball3Color,
-                4 => ColorVar.Ball4Color,
-                5 => ColorVar.Ball5Color,
-                6 => ColorVar.Ball6Color,
-                7 => ColorVar.Ball7Color,
-                8 => ColorVar.Ball8Color,
-                9 => ColorVar.Ball9Color,
-                10 or 20 or 30 or 40 or 50 or 60 or 70 or 80 or 90 => ColorVar.Ball10Color,
-                11 or 21 or 31 or 41 or 51 or 61 or 71 or 81 or 91 => ColorVar.Ball1ColorDark,
-                12 or 22 or 32 or 42 or 52 or 62 or 72 or 82 or 92 => ColorVar.Ball2ColorDark,
-                13 or 23 or 33 or 43 or 53 or 63 or 73 or 83 or 93 => ColorVar.Ball3ColorDark,
-                14 or 24 or 34 or 44 or 54 or 64 or 74 or 84 or 94 => ColorVar.Ball4ColorDark,
-                15 or 25 or 35 or 45 or 55 or 65 or 75 or 85 or 95 => ColorVar.Ball5ColorDark,
-                16 or 26 or 36 or 46 or 56 or 66 or 76 or 86 or 96 => ColorVar.Ball6ColorDark,
-                17 or 27 or 37 or 47 or 57 or 67 or 77 or 87 or 97 => ColorVar.Ball7ColorDark,
-                18 or 28 or 38 or 48 or 58 or 68 or 78 or 88 or 98 => ColorVar.Ball8ColorDark,
-                19 or 29 or 39 or 49 or 59 or 69 or 79 or 89 or 99 => ColorVar.Ball9ColorDark,
+                1 => isDark ? ColorVar.Ball1ColorDark : ColorVar.Ball1Color,
+                2 => isDark ? ColorVar.Ball2ColorDark : ColorVar.Ball2Color,
+                3 => isDark ? ColorVar.Ball3ColorDark : ColorVar.Ball3Color,
+                4 => isDark ? ColorVar.Ball4ColorDark : ColorVar.Ball4Color,
+                5 => isDark ? ColorVar.Ball5ColorDark : ColorVar.Ball5Color,
+                6 => isDark ? ColorVar.Ball6ColorDark : ColorVar.Ball6Color,
+                7 => isDark ? ColorVar.Ball7ColorDark : ColorVar.Ball7Color,
+                8 => isDark ? ColorVar.Ball8ColorDark : ColorVar.Ball8Color,
+                9 => isDark ? ColorVar.Ball9ColorDark : ColorVar.Ball9Color,
                 _ => ColorVar.Ball10ColorDark
             };
         }
