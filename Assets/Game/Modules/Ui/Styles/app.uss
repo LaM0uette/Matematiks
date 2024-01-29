@@ -1,0 +1,32 @@
+Label {
+    color: rgb(236, 236, 236);
+}
+
+.button-action {
+    width: 700px;
+    height: 135px;
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-left-color: rgb(44, 46, 51);
+    border-right-color: rgb(44, 46, 51);
+    border-top-color: rgb(44, 46, 51);
+    border-bottom-color: rgb(44, 46, 51);
+    background-color: rgb(78, 83, 93);
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 45px;
+    -unity-font-style: bold;
+    color: rgb(236, 236, 236);
+}

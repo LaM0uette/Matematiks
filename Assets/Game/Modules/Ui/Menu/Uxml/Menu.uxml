@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="BestScore" src="project://database/Assets/Game/Modules/Ui/Score/Uxml/BestScore.uxml?fileID=9197481963319205126&amp;guid=cf2292ea704cf2741a693aceb2fdab0c&amp;type=3#BestScore" />
+    <Style src="project://database/Assets/Game/Modules/Ui/Styles/app.uss?fileID=7433441132597879392&amp;guid=40391dc5c1ed1484099ddce61860a21f&amp;type=3#app" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Instance template="BestScore" name="BestScore" style="margin-top: 200px;" />
+        <ui:VisualElement name="ve_lastscore" style="-unity-text-align: upper-center; align-items: center; justify-content: center; margin-top: 200px;">
+            <ui:Label tabindex="-1" text="15423" parse-escape-sequences="true" display-tooltip-when-elided="true" name="label_lastscore" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-style: bold; font-size: 100px;" />
+            <ui:Label tabindex="-1" text="LAST SCORE" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 50px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; right: 50%; bottom: 50%;">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" text="Continue" name="button_continue-off" class="button-action" style="color: rgb(176, 176, 176); background-color: rgb(115, 115, 115); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;">
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/play.svg?fileID=7388822144124034973&amp;guid=6a204af9c9fa66e4cbc1a61ec9ec862a&amp;type=3#play&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(176, 176, 176); margin-top: 25px; margin-right: 25px; margin-bottom: 25px; margin-left: 25px; align-self: flex-start; width: 135px;" />
+            </ui:Button>
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" text="Continue" name="button_continue" class="button-action">
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/play.svg?fileID=7388822144124034973&amp;guid=6a204af9c9fa66e4cbc1a61ec9ec862a&amp;type=3#play&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(236, 236, 236); margin-top: 25px; margin-right: 25px; margin-bottom: 25px; margin-left: 25px; align-self: flex-start; width: 135px;" />
+            </ui:Button>
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" text="New game" name="button_newgame" class="button-action">
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/modes.svg?fileID=7388822144124034973&amp;guid=71d9e71f473301c4998d3010bebb5777&amp;type=3#modes&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(236, 236, 236); margin-top: 25px; margin-right: 25px; margin-bottom: 25px; margin-left: 25px; align-self: flex-start; width: 135px;" />
+            </ui:Button>
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" text="Settings" name="button_settings" class="button-action">
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/settings.svg?fileID=7388822144124034973&amp;guid=6423938ccaebe124da39d6aa69383499&amp;type=3#settings&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(236, 236, 236); margin-top: 25px; margin-right: 25px; margin-bottom: 25px; margin-left: 25px; align-self: flex-start; width: 135px;" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
