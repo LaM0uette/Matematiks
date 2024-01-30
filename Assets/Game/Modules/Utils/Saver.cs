@@ -6,6 +6,27 @@ namespace Game.Modules.Utils
 {
     public static class Saver
     {
+        #region Gem
+        
+        private const string Gem = "Gem";
+
+        public static void SaveGem(int score)
+        {
+            PlayerPrefs.SetInt(Gem, score);
+        }
+        
+        public static int GetGem()
+        {
+            return PlayerPrefs.GetInt(Gem, 0);
+        }
+        
+        public static void ResetGem()
+        {
+            PlayerPrefs.DeleteKey(Gem);
+        }
+
+        #endregion
+        
         #region BestScore
         
         private const string BestScore = "BestScore";
@@ -27,7 +48,28 @@ namespace Game.Modules.Utils
 
         #endregion
         
-        #region BestScore
+        #region LastScore
+        
+        private const string LastScore = "LastScore";
+
+        public static void SaveLastScore(int score)
+        {
+            PlayerPrefs.SetInt(LastScore, score);
+        }
+        
+        public static int GetLastScore()
+        {
+            return PlayerPrefs.GetInt(LastScore, 0);
+        }
+        
+        public static void ResetLastScore()
+        {
+            PlayerPrefs.DeleteKey(LastScore);
+        }
+
+        #endregion
+        
+        #region MaxBall
         
         private const string MaxBall = "MaxBall";
 
