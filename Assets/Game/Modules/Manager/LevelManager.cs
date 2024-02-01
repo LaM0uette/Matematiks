@@ -62,10 +62,10 @@ namespace Game.Modules.Manager
         private void Initialize()
         {
             // CurrentScore
-            ScoreValueVariable.Value = Saver.GetCurrentScore();
+            ScoreValueVariable.Value = Saver.CurrentScore.LoadInt();
             
             // CurrentBalls
-            var ballNumbers = Saver.GetCurrentBalls();
+            var ballNumbers = Saver.CurrentBalls.LoadListInt();
             if (ballNumbers.Count <= 0)
                 return;
 
@@ -87,7 +87,7 @@ namespace Game.Modules.Manager
             }
             
             // CurrentWeightedBalls
-            var weightedBalls = Saver.GetCurrentWeightedBalls();
+            var weightedBalls = Saver.CurrentWeightedBalls.LoadListWeightedBall();
             
             if (weightedBalls.Count <= 0)
                 return;
@@ -219,9 +219,9 @@ namespace Game.Modules.Manager
             {
                 _maxBallNumber = newBallNumber;
                 
-                if (newBallNumber > Saver.GetMaxBall())
+                if (newBallNumber > Saver.HighBall.LoadInt())
                 {
-                    Saver.SaveMaxBall(newBallNumber);
+                    Saver.HighBall.Save(newBallNumber);
                 }
             }
             
@@ -376,8 +376,8 @@ namespace Game.Modules.Manager
                 }
             }
             
-            Saver.SaveCurrentBalls(ballNumbers);
-            Saver.SaveCurrentWeightedBalls(WeightedBalls.ToList());
+            Saver.CurrentBalls.Save(ballNumbers);
+            Saver.CurrentWeightedBalls.Save(WeightedBalls.ToList());
         }
         
         #endregion

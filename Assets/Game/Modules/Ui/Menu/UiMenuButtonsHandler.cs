@@ -55,9 +55,9 @@ namespace Game.Modules.Ui.Menu
         
         private static void OnNewGameButton()
         {
-            Saver.ResetCurrentScore();
-            Saver.ResetCurrentBalls();
-            Saver.ResetCurrentWeightedBalls();
+            Saver.CurrentScore.Delete();
+            Saver.CurrentBalls.Delete();
+            Saver.CurrentWeightedBalls.Delete();
             SceneManager.LoadScene(GameVar.GameScene);
         }
         

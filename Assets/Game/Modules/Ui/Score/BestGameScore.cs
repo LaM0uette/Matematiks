@@ -16,7 +16,7 @@ namespace Game.Modules.Ui.Score
 
         private void Start()
         {
-            _scoreText.text = Saver.GetBestScore().ToString();
+            _scoreText.text = Saver.HighScore.LoadInt().ToString();
             InvokeRepeating(nameof(UpdateScore), 0, 0.2f);
         }
         
@@ -26,11 +26,11 @@ namespace Game.Modules.Ui.Score
 
         private void UpdateScore()
         {
-            var bestScore = Saver.GetBestScore();
+            var bestScore = Saver.HighScore.LoadInt();
             
             if (_scoreVariable.Value > bestScore)
             {
-                Saver.SaveBestScore(_scoreVariable.Value);
+                Saver.HighScore.Save(_scoreVariable.Value);
                 _scoreText.text = _scoreVariable.Value.ToString();
             }
         }

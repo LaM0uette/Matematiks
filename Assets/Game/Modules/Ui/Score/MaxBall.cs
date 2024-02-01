@@ -15,7 +15,10 @@ namespace Game.Modules.Ui.Score
 
         private void Start()
         {
-            _maxBall.SetNum(Saver.GetMaxBall());
+            var highBall = Saver.HighBall.LoadInt();
+            if (highBall <= 0) highBall = 1;
+            
+            _maxBall.SetNum(highBall);
             InvokeRepeating(nameof(UpdateMaxBall), 0, 0.2f);
         }
         
@@ -25,7 +28,7 @@ namespace Game.Modules.Ui.Score
 
         private void UpdateMaxBall()
         {
-            var maxBall = Saver.GetMaxBall();
+            var maxBall = Saver.HighBall.LoadInt();
             
             if (maxBall > _maxBall.Number)
             {

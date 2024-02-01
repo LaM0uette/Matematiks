@@ -25,9 +25,9 @@ namespace Game.Modules.Ui.Menu
         
         private void Start()
         {
-            _gemLabel.text = Saver.GetGem().ToString();
-            _highscoreLabel.text = Saver.GetBestScore().ToString();
-            _lastscoreLabel.text = Saver.GetLastScore().ToString();
+            _gemLabel.text = Saver.Gem.LoadInt().ToString();
+            _highscoreLabel.text = Saver.HighScore.LoadInt().ToString();
+            _lastscoreLabel.text = Saver.LastScore.LoadInt().ToString();
         }
 
         #endregion

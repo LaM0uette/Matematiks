@@ -6,128 +6,55 @@ namespace Game.Modules.Utils
 {
     public static class Saver
     {
-        #region Gem
-        
-        private const string Gem = "Gem";
+        #region Keys
 
-        public static void SaveGem(int score)
-        {
-            PlayerPrefs.SetInt(Gem, score);
-        }
+        public const string Gem = "Gem";
+        public const string HighScore = "BestScore";
+        public const string HighBall = "HighBall";
+        public const string LastScore = "LastScore";
+        public const string CurrentScore = "CurrentScore";
+        public const string CurrentBalls = "CurrentBalls";
+        public const string CurrentWeightedBalls = "CurrentWeightedBalls";
         
-        public static int GetGem()
-        {
-            return PlayerPrefs.GetInt(Gem, 0);
-        }
-        
-        public static void ResetGem()
-        {
-            PlayerPrefs.DeleteKey(Gem);
-        }
-
         #endregion
-        
-        #region BestScore
-        
-        private const string BestScore = "BestScore";
 
-        public static void SaveBestScore(int score)
-        {
-            PlayerPrefs.SetInt(BestScore, score);
-        }
-        
-        public static int GetBestScore()
-        {
-            return PlayerPrefs.GetInt(BestScore, 0);
-        }
-        
-        public static void ResetBestScore()
-        {
-            PlayerPrefs.DeleteKey(BestScore);
-        }
+        #region Save
 
-        #endregion
-        
-        #region LastScore
-        
-        private const string LastScore = "LastScore";
-
-        public static void SaveLastScore(int score)
+        public static void Save(this string key, int value)
         {
-            PlayerPrefs.SetInt(LastScore, score);
+            PlayerPrefs.SetInt(key, value);
         }
         
-        public static int GetLastScore()
+        public static void Save(this string key, IEnumerable<int> values)
         {
-            return PlayerPrefs.GetInt(LastScore, 0);
-        }
-        
-        public static void ResetLastScore()
-        {
-            PlayerPrefs.DeleteKey(LastScore);
-        }
-
-        #endregion
-        
-        #region MaxBall
-        
-        private const string MaxBall = "MaxBall";
-
-        public static void SaveMaxBall(int ballNumber)
-        {
-            PlayerPrefs.SetInt(MaxBall, ballNumber);
-        }
-        
-        public static int GetMaxBall()
-        {
-            return PlayerPrefs.GetInt(MaxBall, 1);
-        }
-        
-        public static void ResetMaxBall()
-        {
-            PlayerPrefs.DeleteKey(MaxBall);
-        }
-
-        #endregion
-        
-        #region CurrentScore
-        
-        // CurrentScore
-        private const string CurrentScore = "CurrentScore";
-
-        public static void SaveCurrentScore(int score)
-        {
-            PlayerPrefs.SetInt(CurrentScore, score);
-        }
-        
-        public static int GetCurrentScore()
-        {
-            return PlayerPrefs.GetInt(CurrentScore, 0);
-        }
-        
-        public static void ResetCurrentScore()
-        {
-            PlayerPrefs.DeleteKey(CurrentScore);
-        }
-        
-        // Balls
-        private const string CurrentBalls = "CurrentBalls";
-
-        public static void SaveCurrentBalls(IEnumerable<int> ballNumbers)
-        {
-            var ballsParsed = "";
+            var parsedValue = "";
             
-            foreach (var ballNumber in ballNumbers)
+            foreach (var value in values)
             {
-                ballsParsed += ballNumber + ";";
+                parsedValue += value + ";";
             }
             
-            PlayerPrefs.SetString(CurrentBalls, ballsParsed);
+            PlayerPrefs.SetString(key, parsedValue);
         }
         
-        public static List<int> GetCurrentBalls()
+        public static void Save(this string key, List<WeightedBall> weightedBalls)
         {
-            var ballsParsed = PlayerPrefs.GetString(CurrentBalls, "");
+            var json = JsonUtility.ToJson(new Serialization<List<WeightedBall>>(weightedBalls));
+            PlayerPrefs.SetString(key, json);
+        }
+
+        #endregion
+
+        #region Load
+
+        public static int LoadInt(this string key)
+        {
+            return PlayerPrefs.GetInt(key, 0);
+        }
+        
+        public static List<int> LoadListInt(this string key)
+        {
+            var ballsParsed = PlayerPrefs.GetString(key, "");
             var balls = new List<int>();
             
             foreach (var ballNumber in ballsParsed.Split(';'))
@@ -141,38 +68,27 @@ namespace Game.Modules.Utils
             return balls;
         }
         
-        public static void ResetCurrentBalls()
+        public static List<WeightedBall> LoadListWeightedBall(this string key)
         {
-            PlayerPrefs.DeleteKey(CurrentBalls);
-        }
-        
-        // WeightedBalls
-        private const string CurrentWeightedBalls = "CurrentWeightedBalls";
-
-        public static void SaveCurrentWeightedBalls(List<WeightedBall> weightedBalls)
-        {
-            var json = JsonUtility.ToJson(new Serialization<List<WeightedBall>>(weightedBalls));
-            PlayerPrefs.SetString(CurrentWeightedBalls, json);
-        }
-        
-        public static List<WeightedBall> GetCurrentWeightedBalls()
-        {
-            if (PlayerPrefs.HasKey(CurrentWeightedBalls))
+            if (PlayerPrefs.HasKey(key))
             {
-                var json = PlayerPrefs.GetString(CurrentWeightedBalls);
+                var json = PlayerPrefs.GetString(key);
                 var serialization = JsonUtility.FromJson<Serialization<List<WeightedBall>>>(json);
                 return serialization.data;
             }
 
             return new List<WeightedBall>();
         }
-        
-        public static void ResetCurrentWeightedBalls()
-        {
-            PlayerPrefs.DeleteKey(CurrentWeightedBalls);
-        }
-        
+
         #endregion
         
+        #region Delete
+
+        public static void Delete(this string key)
+        {
+            PlayerPrefs.DeleteKey(key);
+        }
+
+        #endregion
     }
 }

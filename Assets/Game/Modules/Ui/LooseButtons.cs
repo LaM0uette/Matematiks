@@ -15,9 +15,9 @@ namespace Game.Modules.Ui
         
         public void OnReplay()
         {
-            Saver.ResetCurrentScore();
-            Saver.ResetCurrentBalls();
-            Saver.ResetCurrentWeightedBalls();
+            Saver.CurrentScore.Delete();
+            Saver.CurrentBalls.Delete();
+            Saver.CurrentWeightedBalls.Delete();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 

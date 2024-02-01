@@ -23,7 +23,7 @@ namespace Game.Modules.Ui.Menu
         
         private void Start()
         {
-            var currentScore = Saver.GetCurrentScore();
+            var currentScore = Saver.CurrentScore.LoadInt();
             
             if (currentScore > 0)
             {
