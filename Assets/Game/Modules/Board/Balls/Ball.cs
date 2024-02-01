@@ -10,11 +10,11 @@ namespace Game.Modules.Board.Balls
     {
         #region Statements
         
-        public bool IsVisited { get; set; }
+        [Title("Properties")]
+        [ShowInInspector, ReadOnly] public int Number { get; set; }
         public Color Color { get; private set; }
         
-        [Title("Number")]
-        [ShowInInspector, ReadOnly] public int Number { get; set; }
+        public bool IsVisited { get; set; }
         
         [Space, Title("Ui")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -56,11 +56,12 @@ namespace Game.Modules.Board.Balls
 
         public void SetNum(int number)
         {
-            if (number > 99) 
-                return;
-            
-            if (number < 1) number = 1;
-            
+            switch (number)
+            {
+                case > 99: return;
+                case < 1: number = 1; break;
+            }
+
             Number = number;
             SetBallColor(number);
         }
