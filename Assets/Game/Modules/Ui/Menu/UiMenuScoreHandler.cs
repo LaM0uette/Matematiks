@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Game.Modules.Ui.Menu
 {
-    public class UiMenuScore : MonoBehaviour
+    public class UiMenuScoreHandler : MonoBehaviour
     {
         #region Statements
 
