@@ -9,8 +9,9 @@ namespace Game.Modules.Board.Spawners
         #region Statements
 
         public ScriptableListWeightedBall WeightedBalls;
-        public GameObject BallPrefab;
-        public GameObject FirstCell;
+        
+        [SerializeField] private GameObject _ballPrefab;
+        [SerializeField] private GameObject _firstCell;
         
         private ISpawnMode _spawnMode;
 
@@ -28,7 +29,7 @@ namespace Game.Modules.Board.Spawners
             if (!FirstCellIsEmpty())
                 return;
             
-            _spawnMode.SpawnBall();
+            _spawnMode.SpawnBall(_ballPrefab, _firstCell.transform);
         }
 
         #endregion
@@ -37,7 +38,7 @@ namespace Game.Modules.Board.Spawners
 
         private bool FirstCellIsEmpty()
         {
-            var firstCell = FirstCell.GetComponent<Cell>();
+            var firstCell = _firstCell.GetComponent<Cell>();
             return firstCell.IsEmpty;
         }
 

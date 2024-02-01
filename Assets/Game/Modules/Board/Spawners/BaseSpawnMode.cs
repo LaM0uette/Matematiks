@@ -19,9 +19,9 @@ namespace Game.Modules.Board.Spawners
         
         #region Functions
         
-        public void SpawnBall()
+        public void SpawnBall(GameObject prefab, Transform spawnTransform)
         {
-            var ballGo = Instantiate(_spawner.BallPrefab, _spawner.FirstCell.transform);
+            var ballGo = Instantiate(prefab, spawnTransform);
             ballGo.transform.localPosition = Vector3.zero;
             
             var ball = ballGo.GetComponent<Ball>();
