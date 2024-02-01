@@ -24,9 +24,9 @@ namespace Game.Modules.Manager
         [SerializeField] private int _removeOldBallsThreshold = 8;
         
         [Space, Title("Soap")]
-        public IntVariable ScoreValueVariable;
         public ScriptableListWeightedBall WeightedBalls;
         [SerializeField] private ScriptableEventNoParam _releaseEvent;
+        [SerializeField] private ScriptableEventInt _scoreEvent;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private ScriptableListBall _ballsSelected;
         [SerializeField] private BoolVariable _mouseDownVariable;
@@ -60,9 +60,6 @@ namespace Game.Modules.Manager
 
         private void Initialize()
         {
-            // CurrentScore
-            ScoreValueVariable.Value = Saver.CurrentScore.LoadInt();
-            
             // CurrentBalls
             var ballNumbers = Saver.CurrentBalls.LoadListInt();
             if (ballNumbers.Count <= 0)
@@ -117,6 +114,11 @@ namespace Game.Modules.Manager
         #endregion
 
         #region SoapEvents
+        
+        public void RaiseScoreEvent(int value)
+        {
+            _scoreEvent.Raise(value);
+        }
         
         private void OnRelease()
         {

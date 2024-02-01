@@ -433,8 +433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be435a1a46721484fa50d7234324723c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreText: {fileID: 1044271627}
-  _scoreVariable: {fileID: 11400000, guid: 2fbac4ffdc430ca4fa328747d36d121c, type: 2}
+  _tmpCurrentScore: {fileID: 1044271627}
+  _scoreEvent: {fileID: 11400000, guid: b4623d526e8229740959cd5e54662433, type: 2}
 --- !u!1 &118135616
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,8 +3025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2776827676e39c459d7f6866aea9053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreText: {fileID: 980524195}
-  _scoreVariable: {fileID: 11400000, guid: 2fbac4ffdc430ca4fa328747d36d121c, type: 2}
+  _tmpHighScore: {fileID: 980524195}
+  _scoreEvent: {fileID: 11400000, guid: b4623d526e8229740959cd5e54662433, type: 2}
 --- !u!114 &879454073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3039,7 +3039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4d2ee40f0c9b940a02e0cec6dcde6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxBall: {fileID: 1223182803}
+  _highBall: {fileID: 1223182803}
 --- !u!1001 &879533906
 PrefabInstance:
   m_ObjectHideFlags: 0

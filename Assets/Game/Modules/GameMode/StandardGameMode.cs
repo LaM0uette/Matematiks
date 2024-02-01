@@ -14,10 +14,16 @@ namespace Game.Modules.GameMode
         #region Statements
 
         private LevelManager _levelManager;
+        private int _currentScore;
         
         private void Awake()
         {
             _levelManager = GetComponent<LevelManager>();
+        }
+
+        private void Start()
+        {
+            _currentScore = Saver.CurrentScore.LoadInt();
         }
 
         #endregion
@@ -75,8 +81,10 @@ namespace Game.Modules.GameMode
         
         private void UpdateScore(int value)
         {
-            _levelManager.ScoreValueVariable.Value += (int)Math.Pow(2, value) / 2;
-            Saver.CurrentScore.Save(_levelManager.ScoreValueVariable.Value);
+            _currentScore += (int)Math.Pow(2, value) / 2;
+            
+            Saver.CurrentScore.Save(_currentScore);
+            _levelManager.RaiseScoreEvent(_currentScore);
         }
 
         private void CheckLoose()
