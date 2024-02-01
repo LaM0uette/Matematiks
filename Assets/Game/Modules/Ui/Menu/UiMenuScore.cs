@@ -14,6 +14,7 @@ namespace Game.Modules.Ui.Menu
         private Label _gemLabel;
         private Label _highscoreLabel;
         private Label _lastscoreLabel;
+        private Label _lastscoreTitleLabel;
 
         private void Awake()
         {
@@ -27,7 +28,12 @@ namespace Game.Modules.Ui.Menu
         {
             _gemLabel.text = Saver.Gem.LoadInt().ToString();
             _highscoreLabel.text = Saver.HighScore.LoadInt().ToString();
-            _lastscoreLabel.text = Saver.LastScore.LoadInt().ToString();
+            
+            var currentScore = Saver.CurrentScore.LoadInt();
+            _lastscoreTitleLabel.text = currentScore > 0 ? "Current score" : "Last score";
+            
+            var score = currentScore > 0 ? currentScore : Saver.LastScore.LoadInt();
+            _lastscoreLabel.text = score.ToString();
         }
 
         #endregion
@@ -39,6 +45,7 @@ namespace Game.Modules.Ui.Menu
             _gemLabel = _rootElement.Q<Label>("label_nbrgems");
             _highscoreLabel = _rootElement.Q<Label>("label_highscore");
             _lastscoreLabel = _rootElement.Q<Label>("label_lastscore");
+            _lastscoreTitleLabel = _rootElement.Q<Label>("label_lastscore_title");
         }
 
         #endregion
