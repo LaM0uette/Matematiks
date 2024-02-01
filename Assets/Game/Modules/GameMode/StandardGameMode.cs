@@ -165,6 +165,9 @@ namespace Game.Modules.GameMode
 
         private void LooseGame()
         {
+            Saver.LastScore.Save(_currentScore);
+            _currentScore = 0;
+            
             Saver.CurrentScore.Delete();
             Saver.CurrentBalls.Delete();
             Saver.CurrentWeightedBalls.Delete();
