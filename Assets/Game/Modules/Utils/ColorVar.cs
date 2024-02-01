@@ -12,11 +12,11 @@ namespace Game.Modules.Utils
         public static Color32 Ball3Color = new(165, 212, 155, 255);
         public static Color32 Ball4Color = new(220, 212, 146, 255);
         public static Color32 Ball5Color = new(248, 206, 163, 255);
-        public static Color32 Ball6Color = new(200, 135, 170, 255);
-        public static Color32 Ball7Color = new(192, 170, 195, 255);
-        public static Color32 Ball8Color = new(77, 117, 147, 255);
-        public static Color32 Ball9Color = new(93, 83, 105, 255);
-        public static Color32 Ball10Color = new(84, 38, 44, 255);
+        public static Color32 Ball6Color = new(198, 119, 126, 255);
+        public static Color32 Ball7Color = new(190, 153, 176, 255);
+        public static Color32 Ball8Color = new(97, 125, 160, 255);
+        public static Color32 Ball9Color = new(108, 91, 124, 255);
+        public static Color32 Ball10Color = new(74, 36, 39, 255);
 
         public static Color32 Ball1ColorDark = WhiteColor.MakeDarker();
         public static Color32 Ball2ColorDark = Ball2Color.MakeDarker();
