@@ -187,6 +187,7 @@ namespace Game.Modules.Manager
                 yield break;
             }
             
+            CancelInvoke();
             _ongoingAction.Value = true;
             
             for (var i = 0; i < _ballsSelected.Count - 1; i++) 
@@ -303,6 +304,9 @@ namespace Game.Modules.Manager
 
         private void AfterMergeBalls()
         {
+            if (_ongoingAction.Value)
+                return;
+            
             RemoveOldWeightedBalls();
             SaveCurrentBalls();
             _gameMode.AfterMergeBalls();
