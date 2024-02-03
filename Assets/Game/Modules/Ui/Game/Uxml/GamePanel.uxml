@@ -2,12 +2,45 @@
     <ui:Template name="BestScore" src="project://database/Assets/Game/Modules/Ui/Score/Uxml/HighScorePanel.uxml?fileID=9197481963319205126&amp;guid=cf2292ea704cf2741a693aceb2fdab0c&amp;type=3#HighScorePanel" />
     <Style src="project://database/Assets/Game/Modules/Ui/Styles/app.uss?fileID=7433441132597879392&amp;guid=40391dc5c1ed1484099ddce61860a21f&amp;type=3#app" />
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;">
-        <ui:VisualElement name="ve_highscore">
-            <ui:Instance template="BestScore" name="HighScorePanel" style="margin-top: 200px; align-self: center; flex-direction: row;" />
+        <ui:VisualElement picking-mode="Ignore" name="ve_scores">
+            <ui:VisualElement name="ve_highscore">
+                <ui:Instance template="BestScore" name="HighScorePanel" style="margin-top: 200px; align-self: center; flex-direction: row;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ve_lastscore" style="-unity-text-align: upper-center; align-items: center; justify-content: center; margin-top: 75px;">
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="label_currentscore" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-style: bold; font-size: 75px;" />
+                <ui:Label tabindex="-1" text="SCORE" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 35px; color: rgb(33, 36, 41);" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="ve_lastscore" style="-unity-text-align: upper-center; align-items: center; justify-content: center; margin-top: 60px;">
-            <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="label_currentscore" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-style: bold; font-size: 75px;" />
-            <ui:Label tabindex="-1" text="SCORE" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 35px; color: rgb(33, 36, 41);" />
+        <ui:VisualElement style="flex-direction: row; height: 260px; position: absolute; bottom: 0; left: 0; right: 0; align-items: flex-start;">
+            <ui:VisualElement name="ve_shopicon">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_shop" class="button-icon" style="background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/shop.svg?fileID=7388822144124034973&amp;guid=dd63091a0c353e94f8f79a3442ba5a73&amp;type=3#shop&apos;); margin-top: 20px; margin-bottom: 0; margin-right: 0; margin-left: 50px; width: 100px; height: 100px; visibility: hidden;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ve_bonusicons" style="flex-grow: 1; flex-direction: row; align-items: flex-start; justify-content: center; margin-top: 20px;">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_bonus1" class="button-bonus">
+                    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/refresh.svg?fileID=7388822144124034973&amp;guid=7ee91c37c3dea594d81a11650978a71b&amp;type=3#refresh&apos;); -unity-background-scale-mode: scale-to-fit; margin-top: 25px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; -unity-background-image-tint-color: rgb(44, 46, 51);" />
+                    <ui:VisualElement style="flex-direction: row;">
+                        <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/diamond.svg?fileID=7388822144124034973&amp;guid=f3703b269aadc3d468e241c2e823526d&amp;type=3#diamond&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(44, 46, 51); margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;" />
+                        <ui:Label tabindex="-1" text="150" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 35px;" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_bonus2" class="button-bonus">
+                    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/refresh.svg?fileID=7388822144124034973&amp;guid=7ee91c37c3dea594d81a11650978a71b&amp;type=3#refresh&apos;); -unity-background-scale-mode: scale-to-fit; margin-top: 25px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; -unity-background-image-tint-color: rgb(44, 46, 51);" />
+                    <ui:VisualElement style="flex-direction: row;">
+                        <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/diamond.svg?fileID=7388822144124034973&amp;guid=f3703b269aadc3d468e241c2e823526d&amp;type=3#diamond&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(44, 46, 51); margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;" />
+                        <ui:Label tabindex="-1" text="300" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 35px;" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_bonus3" class="button-bonus">
+                    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/refresh.svg?fileID=7388822144124034973&amp;guid=7ee91c37c3dea594d81a11650978a71b&amp;type=3#refresh&apos;); -unity-background-scale-mode: scale-to-fit; margin-top: 25px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; -unity-background-image-tint-color: rgb(44, 46, 51);" />
+                    <ui:VisualElement style="flex-direction: row;">
+                        <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/diamond.svg?fileID=7388822144124034973&amp;guid=f3703b269aadc3d468e241c2e823526d&amp;type=3#diamond&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(44, 46, 51); margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;" />
+                        <ui:Label tabindex="-1" text="600" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 35px;" />
+                    </ui:VisualElement>
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:VisualElement name="ve_pauseicon">
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_pause" class="button-icon" style="background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/home.svg?fileID=7388822144124034973&amp;guid=fa1ae8b73620f464ea641ee8faf89a4e&amp;type=3#home&apos;); margin-top: 20px; margin-bottom: 0; margin-right: 50px; margin-left: 0; width: 100px; height: 100px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

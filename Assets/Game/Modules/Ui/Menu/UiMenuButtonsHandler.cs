@@ -1,3 +1,4 @@
+using System;
 using Game.Modules.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,8 +28,12 @@ namespace Game.Modules.Ui.Menu
             
             SetElements();
         }
-        
-        private void Start()
+
+        #endregion
+
+        #region Events
+
+        private void OnEnable()
         {
             _continueButton.clicked += OnContinueButton;
             _newGameButton.clicked += OnNewGameButton;
@@ -42,6 +47,17 @@ namespace Game.Modules.Ui.Menu
             _shopButtonIcon.SetEnabled(false);
             _profilButtonIcon.SetEnabled(false);
             _rankButtonIcon.SetEnabled(false);
+        }
+        
+        private void OnDisable()
+        {
+            _continueButton.clicked -= OnContinueButton;
+            _newGameButton.clicked -= OnNewGameButton;
+            _settingsButton.clicked -= OnSettingsButton;
+            
+            _shopButtonIcon.clicked -= OnShopButton;
+            _profilButtonIcon.clicked -= OnProfilButton;
+            _rankButtonIcon.clicked -= OnRankButton;
         }
 
         #endregion
