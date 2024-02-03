@@ -33,12 +33,10 @@ namespace Game.Modules.Manager
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
         [SerializeField] private BoolVariable _isLoose;
+        [SerializeField] private ScriptableEventNoParam _looseEvent;
 
         [Space, Title("Score")]
         [ShowInInspector, ReadOnly] private int _maxBallNumber = 1;
-        
-        [Space, Title("Ui")]
-        [SerializeField] private GameObject _loosePanel;
         
         private IGameMode _gameMode;
         
@@ -270,8 +268,8 @@ namespace Game.Modules.Manager
         
         public void LooseGame()
         {
-            _loosePanel.SetActive(true);
             _isLoose.Value = true;
+            _looseEvent.Raise();
         }
 
         private void FillBoardGrid()

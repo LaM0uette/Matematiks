@@ -1,4 +1,5 @@
 using Game.Modules.Utils;
+using Obvious.Soap;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -8,15 +9,23 @@ namespace Game.Modules.Ui.Game
     public class UiGameButtonsHandler : MonoBehaviour
     {
         #region Statements
+        
+        [SerializeField] private ScriptableEventNoParam _looseEvent;
 
         private UIDocument _uiDocument;
         private VisualElement _rootElement;
+        
+        private VisualElement _veBonus;
+        private VisualElement _veLoose;
         
         private Button _shopButton;
         private Button _pauseButton;
         private Button _bonusButton1;
         private Button _bonusButton2;
         private Button _bonusButton3;
+        
+        private Button _looseHomeButton;
+        private Button _looseReplayButton;
 
         private void Awake()
         {
@@ -32,20 +41,35 @@ namespace Game.Modules.Ui.Game
 
         private void OnEnable()
         {
+            _looseEvent.OnRaised += OnLooseEvent;
+            
             _shopButton.clicked += OnShopButton;
             _pauseButton.clicked += OnPauseButton;
             _bonusButton1.clicked += OnBonus1Button;
             _bonusButton2.clicked += OnBonus2Button;
             _bonusButton3.clicked += OnBonus3Button;
+            
+            _looseHomeButton.clicked += OnLooseHomeButton;
+            _looseReplayButton.clicked += OnLooseReplayButton;
+            
+            _shopButton.style.visibility = Visibility.Visible;
+            _pauseButton.style.visibility = Visibility.Visible;
+            _veBonus.style.display = DisplayStyle.Flex;
+            _veLoose.style.display = DisplayStyle.None;
         }
         
         private void OnDisable()
         {
+            _looseEvent.OnRaised += OnLooseEvent;
+            
             _shopButton.clicked -= OnShopButton;
             _pauseButton.clicked -= OnPauseButton;
             _bonusButton1.clicked -= OnBonus1Button;
             _bonusButton2.clicked -= OnBonus2Button;
             _bonusButton3.clicked -= OnBonus3Button;
+            
+            _looseHomeButton.clicked += OnLooseHomeButton;
+            _looseReplayButton.clicked += OnLooseReplayButton;
         }
 
         #endregion
@@ -54,11 +78,26 @@ namespace Game.Modules.Ui.Game
 
         private void SetElements()
         {
+            _veBonus = _rootElement.Q<VisualElement>("ve_bonusicons");
+            _veLoose = _rootElement.Q<VisualElement>("ve_loose");
+            
             _shopButton = _rootElement.Q<Button>("button_shop");
             _pauseButton = _rootElement.Q<Button>("button_pause");
             _bonusButton1 = _rootElement.Q<Button>("button_bonus1");
             _bonusButton2 = _rootElement.Q<Button>("button_bonus2");
             _bonusButton3 = _rootElement.Q<Button>("button_bonus3");
+            
+            _looseHomeButton = _rootElement.Q<Button>("button_loose-home");
+            _looseReplayButton = _rootElement.Q<Button>("button_loose-replay");
+        }
+
+        private void OnLooseEvent()
+        {
+            _veBonus.style.display = DisplayStyle.None;
+            _veLoose.style.display = DisplayStyle.Flex;
+            
+            _shopButton.style.visibility = Visibility.Hidden;
+            _pauseButton.style.visibility = Visibility.Hidden;
         }
         
         private void OnShopButton()
@@ -86,6 +125,18 @@ namespace Game.Modules.Ui.Game
             Debug.Log("Bonus 3 button clicked");
         }
         
+        private void OnLooseHomeButton()
+        {
+            SceneManager.LoadScene(GameVar.MenuScene);
+        }
+        
+        private void OnLooseReplayButton()
+        {
+            Saver.CurrentScore.Delete();
+            Saver.CurrentBalls.Delete();
+            Saver.CurrentWeightedBalls.Delete();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         #endregion
     }
 }
