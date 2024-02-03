@@ -26,6 +26,7 @@ namespace Game.Modules.Manager
         [Space, Title("Soap")]
         public ScriptableListWeightedBall WeightedBalls;
         [SerializeField] private ScriptableEventNoParam _releaseEvent;
+        [SerializeField] private ScriptableEventInt _gemEvent;
         [SerializeField] private ScriptableEventInt _scoreEvent;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private ScriptableListBall _ballsSelected;
@@ -114,6 +115,11 @@ namespace Game.Modules.Manager
         #endregion
 
         #region SoapEvents
+        
+        public void RaiseGemEvent(int value)
+        {
+            _gemEvent.Raise(value);
+        }
         
         public void RaiseScoreEvent(int value)
         {

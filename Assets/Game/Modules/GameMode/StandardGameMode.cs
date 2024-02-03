@@ -15,6 +15,7 @@ namespace Game.Modules.GameMode
 
         private LevelManager _levelManager;
         private int _currentScore;
+        private int _gem;
         
         private void Awake()
         {
@@ -24,6 +25,7 @@ namespace Game.Modules.GameMode
         private void Start()
         {
             _currentScore = Saver.CurrentScore.LoadInt();
+            _gem = Saver.Gem.LoadInt();
         }
 
         #endregion
@@ -42,6 +44,8 @@ namespace Game.Modules.GameMode
             
             mergedBall.SetNum(mergedBallNumber);
             UpdateWeightedBalls(mergedBall, countBallsSelected);
+            
+            GainGem(mergedBallNumber, countBallsSelected);
             UpdateScore(mergedBallNumber);
         }
 
@@ -77,6 +81,14 @@ namespace Game.Modules.GameMode
             {
                 weightedBall.Weight += mergedBall.Number /GameVar.DefaultBallWeightDiviser + countBallsSelected / GameVar.DefaultBallWeightDiviser;
             }
+        }
+        
+        private void GainGem(int mergedBallNumber, int countBallsSelected)
+        {
+            _gem += 1 + mergedBallNumber / 6 + countBallsSelected / 4;
+            
+            Saver.Gem.Save(_gem);
+            _levelManager.RaiseGemEvent(_gem);
         }
         
         private void UpdateScore(int value)
