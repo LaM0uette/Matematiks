@@ -14,8 +14,9 @@ namespace Game.Modules.GameMode
         #region Statements
 
         private LevelManager _levelManager;
-        private int _currentScore;
         private int _gem;
+        private int _highBallNumber;
+        private int _currentScore;
         
         private void Awake()
         {
@@ -46,6 +47,7 @@ namespace Game.Modules.GameMode
             UpdateWeightedBalls(mergedBall, countBallsSelected);
             
             GainGem(mergedBallNumber, countBallsSelected);
+            UpdateHighBall(mergedBallNumber);
             UpdateScore(mergedBallNumber);
         }
 
@@ -89,6 +91,18 @@ namespace Game.Modules.GameMode
             
             Saver.Gem.Save(_gem);
             _levelManager.RaiseGemEvent(_gem);
+        }
+
+        private void UpdateHighBall(int newBallNumber)
+        {
+            if (!Application.isPlaying || newBallNumber <= _highBallNumber)
+                return;
+            
+            _highBallNumber = newBallNumber;
+            if (newBallNumber > Saver.HighBall.LoadInt())
+            {
+                Saver.HighBall.Save(newBallNumber);
+            }
         }
         
         private void UpdateScore(int value)

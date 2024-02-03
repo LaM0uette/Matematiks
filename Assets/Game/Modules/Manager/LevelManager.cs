@@ -221,18 +221,6 @@ namespace Game.Modules.Manager
             var mergedBall = _ballsSelected[^1];
             _gameMode.MergeBalls(mergedBall, _ballsSelected.Count);
             
-            // TODO: à supprimer/deplacer
-            var newBallNumber = mergedBall.Number;
-            if (Application.isPlaying && newBallNumber >= _maxBallNumber)
-            {
-                _maxBallNumber = newBallNumber;
-                
-                if (newBallNumber > Saver.HighBall.LoadInt())
-                {
-                    Saver.HighBall.Save(newBallNumber);
-                }
-            }
-            
             _ballsSelected.Clear();
             _ongoingAction.Value = false;
             
