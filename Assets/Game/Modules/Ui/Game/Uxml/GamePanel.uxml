@@ -13,7 +13,7 @@
         </ui:VisualElement>
         <ui:VisualElement picking-mode="Ignore" style="flex-direction: row; height: 260px; position: absolute; bottom: 0; left: 0; right: 0; align-items: flex-start;">
             <ui:VisualElement name="ve_shopicon">
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_shop" class="button-icon" style="background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/shop.svg?fileID=7388822144124034973&amp;guid=dd63091a0c353e94f8f79a3442ba5a73&amp;type=3#shop&apos;); margin-top: 20px; margin-bottom: 0; margin-right: 0; margin-left: 50px; width: 100px; height: 100px;" />
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_shop" class="button-icon" style="background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/shop.svg?fileID=7388822144124034973&amp;guid=dd63091a0c353e94f8f79a3442ba5a73&amp;type=3#shop&apos;); margin-top: 20px; margin-bottom: 0; margin-right: 0; margin-left: 50px; width: 100px; height: 100px; visibility: hidden;" />
             </ui:VisualElement>
             <ui:VisualElement name="ve_bonusicons" style="flex-grow: 1; flex-direction: row; align-items: flex-start; justify-content: center; margin-top: 20px; display: flex;">
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_bonus1" class="button-bonus">
