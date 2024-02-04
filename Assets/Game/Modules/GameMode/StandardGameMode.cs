@@ -216,18 +216,42 @@ namespace Game.Modules.GameMode
             switch (value)
             {
                 case 1:
+                    if (_gem < 150)
+                    {
+                        GameManager.Instance.CurrentBonus = 0;
+                        _levelManager.UpdateBoardEvent.Raise();
+                        return;
+                    }
                     GameManager.Instance.CurrentBonus = 1;
+                    _gem -= 150;
                     break;
                 case 2:
+                    if (_gem < 300)
+                    {
+                        GameManager.Instance.CurrentBonus = 0;
+                        _levelManager.UpdateBoardEvent.Raise();
+                        return;
+                    }
                     GameManager.Instance.CurrentBonus = 2;
+                    _gem -= 300;
                     break;
                 case 3:
+                    if (_gem < 600)
+                    {
+                        GameManager.Instance.CurrentBonus = 0;
+                        _levelManager.UpdateBoardEvent.Raise();
+                        return;
+                    }
                     GameManager.Instance.CurrentBonus = 3;
+                    _gem -= 600;
                     break;
                 default:
                     GameManager.Instance.CurrentBonus = 0;
                     break;
             }
+            
+            Saver.Gem.Save(_gem);
+            _levelManager.RaiseGemEvent(_gem);
         }
         
         #endregion
