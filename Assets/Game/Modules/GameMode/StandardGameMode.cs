@@ -26,6 +26,9 @@ namespace Game.Modules.GameMode
         private void Start()
         {
             _currentScore = Saver.CurrentScore.LoadInt();
+#if UNITY_EDITOR
+            Saver.Gem.Save(5000);
+#endif
             _gem = Saver.Gem.LoadInt();
         }
 
@@ -244,6 +247,16 @@ namespace Game.Modules.GameMode
                     }
                     GameManager.Instance.CurrentBonus = 3;
                     _gem -= 600;
+                    break;
+                case 4:
+                    if (_gem < 999)
+                    {
+                        GameManager.Instance.CurrentBonus = 0;
+                        _levelManager.UpdateBoardEvent.Raise();
+                        return;
+                    }
+                    GameManager.Instance.CurrentBonus = 4;
+                    _gem -= 999;
                     break;
                 default:
                     GameManager.Instance.CurrentBonus = 0;

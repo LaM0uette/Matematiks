@@ -26,9 +26,11 @@ namespace Game.Modules.Ui.Game
         private Button _bonusButton1;
         private Button _bonusButton2;
         private Button _bonusButton3;
+        private Button _bonusButton4;
         private VisualElement _veBonus1;
         private VisualElement _veBonus2;
         private VisualElement _veBonus3;
+        private VisualElement _veBonus4;
         
         private Button _looseHomeButton;
         private Button _looseReplayButton;
@@ -56,6 +58,7 @@ namespace Game.Modules.Ui.Game
             _bonusButton1.clicked += OnBonus1Button;
             _bonusButton2.clicked += OnBonus2Button;
             _bonusButton3.clicked += OnBonus3Button;
+            _bonusButton4.clicked += OnBonus4Button;
             
             _looseHomeButton.clicked += OnLooseHomeButton;
             _looseReplayButton.clicked += OnLooseReplayButton;
@@ -68,9 +71,11 @@ namespace Game.Modules.Ui.Game
             _bonusButton1.style.display = DisplayStyle.Flex;
             _bonusButton2.style.display = DisplayStyle.Flex;
             _bonusButton3.style.display = DisplayStyle.Flex;
+            _bonusButton4.style.display = DisplayStyle.Flex;
             _veBonus1.style.display = DisplayStyle.None;
             _veBonus2.style.display = DisplayStyle.None;
             _veBonus3.style.display = DisplayStyle.None;
+            _veBonus4.style.display = DisplayStyle.None;
         }
         
         private void OnDisable()
@@ -84,6 +89,7 @@ namespace Game.Modules.Ui.Game
             _bonusButton1.clicked -= OnBonus1Button;
             _bonusButton2.clicked -= OnBonus2Button;
             _bonusButton3.clicked -= OnBonus3Button;
+            _bonusButton4.clicked += OnBonus4Button;
             
             _looseHomeButton.clicked -= OnLooseHomeButton;
             _looseReplayButton.clicked -= OnLooseReplayButton;
@@ -104,9 +110,11 @@ namespace Game.Modules.Ui.Game
             _bonusButton1 = _rootElement.Q<Button>("button_bonus1");
             _bonusButton2 = _rootElement.Q<Button>("button_bonus2");
             _bonusButton3 = _rootElement.Q<Button>("button_bonus3");
+            _bonusButton4 = _rootElement.Q<Button>("button_bonus4");
             _veBonus1 = _rootElement.Q<VisualElement>("ve_bonus1");
             _veBonus2 = _rootElement.Q<VisualElement>("ve_bonus2");
             _veBonus3 = _rootElement.Q<VisualElement>("ve_bonus3");
+            _veBonus4 = _rootElement.Q<VisualElement>("ve_bonus4");
             
             _looseHomeButton = _rootElement.Q<Button>("button_loose-home");
             _looseReplayButton = _rootElement.Q<Button>("button_loose-replay");
@@ -136,9 +144,11 @@ namespace Game.Modules.Ui.Game
             _bonusButton1.style.display = DisplayStyle.Flex;
             _bonusButton2.style.display = DisplayStyle.Flex;
             _bonusButton3.style.display = DisplayStyle.Flex;
+            _bonusButton4.style.display = DisplayStyle.Flex;
             _veBonus1.style.display = DisplayStyle.None;
             _veBonus2.style.display = DisplayStyle.None;
             _veBonus3.style.display = DisplayStyle.None;
+            _veBonus4.style.display = DisplayStyle.None;
         }
 
         private void HideButtons()
@@ -146,6 +156,7 @@ namespace Game.Modules.Ui.Game
             _bonusButton1.style.display = DisplayStyle.None;
             _bonusButton2.style.display = DisplayStyle.None;
             _bonusButton3.style.display = DisplayStyle.None;
+            _bonusButton4.style.display = DisplayStyle.None;
         }
         
         private void OnBonus1Button()
@@ -167,6 +178,13 @@ namespace Game.Modules.Ui.Game
             HideButtons();
             _veBonus3.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(3);
+        }
+        
+        private void OnBonus4Button()
+        {
+            HideButtons();
+            _veBonus4.style.display = DisplayStyle.Flex;
+            _bonusEvent.Raise(4);
         }
         
         private void OnLooseHomeButton()

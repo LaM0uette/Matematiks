@@ -39,23 +39,39 @@ namespace Game.Modules.Board.Balls
                 Destroy(gameObject);
                 return;
             }
-            
             if (GameManager.Instance.CurrentBonus == 2)
             {
                 if (Number <= 1)
                     return;
                 
                 GameManager.Instance.CurrentBonus = 0;
-                _updateBoardEvent.Raise();
+                
                 SetNum(--Number);
+                
+                _updateBoardEvent.Raise();
                 return;
             }
-            
             if (GameManager.Instance.CurrentBonus == 3)
             {
                 GameManager.Instance.CurrentBonus = 0;
-                _updateBoardEvent.Raise();
+                
                 SetNum(++Number);
+                
+                _updateBoardEvent.Raise();
+                return;
+            }
+            if (GameManager.Instance.CurrentBonus == 4)
+            {
+                GameManager.Instance.CurrentBonus = 0;
+                
+                var balls = FindObjectsOfType<Ball>();
+                foreach (var ball in balls)
+                {
+                    if (ball.Number == Number)
+                        Destroy(ball.gameObject);
+                }
+                
+                _updateBoardEvent.Raise();
                 return;
             }
             
