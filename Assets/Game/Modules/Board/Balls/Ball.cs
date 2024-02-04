@@ -42,6 +42,17 @@ namespace Game.Modules.Board.Balls
             
             if (GameManager.Instance.CurrentBonus == 2)
             {
+                if (Number <= 1)
+                    return;
+                
+                GameManager.Instance.CurrentBonus = 0;
+                _updateBoardEvent.Raise();
+                SetNum(--Number);
+                return;
+            }
+            
+            if (GameManager.Instance.CurrentBonus == 3)
+            {
                 GameManager.Instance.CurrentBonus = 0;
                 _updateBoardEvent.Raise();
                 SetNum(++Number);

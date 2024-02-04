@@ -226,24 +226,24 @@ namespace Game.Modules.GameMode
                     _gem -= 200;
                     break;
                 case 2:
-                    if (_gem < 600)
+                    if (_gem < 400)
                     {
                         GameManager.Instance.CurrentBonus = 0;
                         _levelManager.UpdateBoardEvent.Raise();
                         return;
                     }
                     GameManager.Instance.CurrentBonus = 2;
-                    _gem -= 600;
+                    _gem -= 400;
                     break;
                 case 3:
-                    if (_gem < 999)
+                    if (_gem < 600)
                     {
                         GameManager.Instance.CurrentBonus = 0;
                         _levelManager.UpdateBoardEvent.Raise();
                         return;
                     }
                     GameManager.Instance.CurrentBonus = 3;
-                    _gem -= 999;
+                    _gem -= 600;
                     break;
                 default:
                     GameManager.Instance.CurrentBonus = 0;
