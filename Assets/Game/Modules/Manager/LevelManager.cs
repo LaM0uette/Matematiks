@@ -25,6 +25,8 @@ namespace Game.Modules.Manager
         
         [Space, Title("Soap")]
         public ScriptableListWeightedBall WeightedBalls;
+        public ScriptableEventInt BonusEvent;
+        [SerializeField] private ScriptableEventNoParam _updateBoardEvent;
         [SerializeField] private ScriptableEventNoParam _releaseEvent;
         [SerializeField] private ScriptableEventInt _gemEvent;
         [SerializeField] private ScriptableEventInt _scoreEvent;
@@ -101,12 +103,14 @@ namespace Game.Modules.Manager
         private void OnEnable()
         {
             _releaseEvent.OnRaised += OnRelease;
+            _updateBoardEvent.OnRaised += OnUpdateBoard;
             _ballSelectedEvent.OnRaised += OnBallSelected;
         }
 
         private void OnDisable()
         {
             _releaseEvent.OnRaised -= OnRelease;
+            _updateBoardEvent.OnRaised -= OnUpdateBoard;
             _ballSelectedEvent.OnRaised -= OnBallSelected;
         }
 
@@ -127,6 +131,11 @@ namespace Game.Modules.Manager
         private void OnRelease()
         {
             StartCoroutine(MergeBalls());
+        }
+
+        private void OnUpdateBoard()
+        {
+            Invoke(nameof(AfterMergeBalls), 1f);
         }
 
         private void OnBallSelected(Ball ball)

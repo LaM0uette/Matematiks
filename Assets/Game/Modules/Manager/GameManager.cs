@@ -8,6 +8,8 @@ namespace Game.Modules.Manager
 
         public static GameManager Instance { get; private set; }
         
+        public int CurrentBonus { get; set; }
+        
         private void Awake()
         {
             Instance ??= this;

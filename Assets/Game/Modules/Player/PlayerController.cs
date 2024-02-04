@@ -1,3 +1,4 @@
+using Game.Modules.Manager;
 using Game.Modules.Player.Inputs;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
@@ -43,7 +44,7 @@ namespace Game.Modules.Player
 
         private void OnPress()
         {
-            if (_ongoingAction.Value) 
+            if (_ongoingAction.Value || GameManager.Instance.CurrentBonus != 0) 
                 return;
             
             _mouseDownVariable.Value = true;
@@ -51,7 +52,7 @@ namespace Game.Modules.Player
         
         private void OnRelease()
         {
-            if (_mouseDownVariable.Value == false) 
+            if (_mouseDownVariable.Value == false || GameManager.Instance.CurrentBonus != 0) 
                 return;
 
             _mouseDownVariable.Value = false;

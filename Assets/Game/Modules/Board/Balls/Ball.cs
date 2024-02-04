@@ -1,3 +1,4 @@
+using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
@@ -23,6 +24,7 @@ namespace Game.Modules.Board.Balls
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _mouseIsDownVariable;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
+        [SerializeField] private ScriptableEventNoParam _updateBoardEvent;
 
         #endregion
         
@@ -30,6 +32,14 @@ namespace Game.Modules.Board.Balls
         
         private void OnMouseDown()
         {
+            if (GameManager.Instance.CurrentBonus == 1)
+            {
+                GameManager.Instance.CurrentBonus = 0;
+                _updateBoardEvent.Raise();
+                Destroy(gameObject);
+                return;
+            }
+            
             OnBallSelected();
         }
         

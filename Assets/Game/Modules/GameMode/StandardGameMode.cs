@@ -33,6 +33,16 @@ namespace Game.Modules.GameMode
         
         #region Events
 
+        private void OnEnable()
+        {
+            _levelManager.BonusEvent.OnRaised += OnBonusEvent;
+        }
+
+        private void OnDisable()
+        {
+            _levelManager.BonusEvent.OnRaised -= OnBonusEvent;
+        }
+        
         public void Initialize()
         {
             InitializeWeightedBalls();
@@ -199,6 +209,25 @@ namespace Game.Modules.GameMode
             Saver.CurrentWeightedBalls.Delete();
             
             _levelManager.LooseGame();
+        }
+        
+        private void OnBonusEvent(int value)
+        {
+            switch (value)
+            {
+                case 1:
+                    GameManager.Instance.CurrentBonus = 1;
+                    break;
+                case 2:
+                    GameManager.Instance.CurrentBonus = 2;
+                    break;
+                case 3:
+                    GameManager.Instance.CurrentBonus = 3;
+                    break;
+                default:
+                    GameManager.Instance.CurrentBonus = 0;
+                    break;
+            }
         }
         
         #endregion

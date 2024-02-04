@@ -10,6 +10,7 @@ namespace Game.Modules.Ui.Game
     {
         #region Statements
         
+        [SerializeField] private ScriptableEventInt _bonusEvent;
         [SerializeField] private ScriptableEventNoParam _looseEvent;
 
         private UIDocument _uiDocument;
@@ -112,17 +113,17 @@ namespace Game.Modules.Ui.Game
         
         private void OnBonus1Button()
         {
-            Debug.Log("Bonus 1 button clicked");
+            _bonusEvent.Raise(1);
         }
         
         private void OnBonus2Button()
         {
-            Debug.Log("Bonus 2 button clicked");
+            _bonusEvent.Raise(2);
         }
         
         private void OnBonus3Button()
         {
-            Debug.Log("Bonus 3 button clicked");
+            _bonusEvent.Raise(3);
         }
         
         private void OnLooseHomeButton()
