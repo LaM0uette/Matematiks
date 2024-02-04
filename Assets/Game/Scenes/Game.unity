@@ -1958,6 +1958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bonusEvent: {fileID: 11400000, guid: 2d3da0ee2e318414dac63c4569fd34c3, type: 2}
   _looseEvent: {fileID: 11400000, guid: 7f55554a1ac311f418c2adbda1a14de6, type: 2}
+  _updateBoardEvent: {fileID: 11400000, guid: 53a79b5d038c0a641a9986c0f56a9210, type: 2}
 --- !u!1001 &879533906
 PrefabInstance:
   m_ObjectHideFlags: 0

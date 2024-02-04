@@ -12,6 +12,7 @@ namespace Game.Modules.Ui.Game
         
         [SerializeField] private ScriptableEventInt _bonusEvent;
         [SerializeField] private ScriptableEventNoParam _looseEvent;
+        [SerializeField] private ScriptableEventNoParam _updateBoardEvent;
 
         private UIDocument _uiDocument;
         private VisualElement _rootElement;
@@ -21,9 +22,13 @@ namespace Game.Modules.Ui.Game
         
         private Button _shopButton;
         private Button _pauseButton;
+        
         private Button _bonusButton1;
         private Button _bonusButton2;
         private Button _bonusButton3;
+        private VisualElement _veBonus1;
+        private VisualElement _veBonus2;
+        private VisualElement _veBonus3;
         
         private Button _looseHomeButton;
         private Button _looseReplayButton;
@@ -42,6 +47,8 @@ namespace Game.Modules.Ui.Game
 
         private void OnEnable()
         {
+            _updateBoardEvent.OnRaised += OnUpdateBoardEvent;
+            
             _looseEvent.OnRaised += OnLooseEvent;
             
             _shopButton.clicked += OnShopButton;
@@ -57,11 +64,20 @@ namespace Game.Modules.Ui.Game
             _pauseButton.style.visibility = Visibility.Visible;
             _veBonus.style.display = DisplayStyle.Flex;
             _veLoose.style.display = DisplayStyle.None;
+            
+            _bonusButton1.style.display = DisplayStyle.Flex;
+            _bonusButton2.style.display = DisplayStyle.Flex;
+            _bonusButton3.style.display = DisplayStyle.Flex;
+            _veBonus1.style.display = DisplayStyle.None;
+            _veBonus2.style.display = DisplayStyle.None;
+            _veBonus3.style.display = DisplayStyle.None;
         }
         
         private void OnDisable()
         {
-            _looseEvent.OnRaised += OnLooseEvent;
+            _updateBoardEvent.OnRaised -= OnUpdateBoardEvent;
+            
+            _looseEvent.OnRaised -= OnLooseEvent;
             
             _shopButton.clicked -= OnShopButton;
             _pauseButton.clicked -= OnPauseButton;
@@ -69,8 +85,8 @@ namespace Game.Modules.Ui.Game
             _bonusButton2.clicked -= OnBonus2Button;
             _bonusButton3.clicked -= OnBonus3Button;
             
-            _looseHomeButton.clicked += OnLooseHomeButton;
-            _looseReplayButton.clicked += OnLooseReplayButton;
+            _looseHomeButton.clicked -= OnLooseHomeButton;
+            _looseReplayButton.clicked -= OnLooseReplayButton;
         }
 
         #endregion
@@ -84,9 +100,13 @@ namespace Game.Modules.Ui.Game
             
             _shopButton = _rootElement.Q<Button>("button_shop");
             _pauseButton = _rootElement.Q<Button>("button_pause");
+            
             _bonusButton1 = _rootElement.Q<Button>("button_bonus1");
             _bonusButton2 = _rootElement.Q<Button>("button_bonus2");
             _bonusButton3 = _rootElement.Q<Button>("button_bonus3");
+            _veBonus1 = _rootElement.Q<VisualElement>("ve_bonus1");
+            _veBonus2 = _rootElement.Q<VisualElement>("ve_bonus2");
+            _veBonus3 = _rootElement.Q<VisualElement>("ve_bonus3");
             
             _looseHomeButton = _rootElement.Q<Button>("button_loose-home");
             _looseReplayButton = _rootElement.Q<Button>("button_loose-replay");
@@ -110,19 +130,42 @@ namespace Game.Modules.Ui.Game
         {
             SceneManager.LoadScene(GameVar.MenuScene);
         }
+
+        private void OnUpdateBoardEvent()
+        {
+            _bonusButton1.style.display = DisplayStyle.Flex;
+            _bonusButton2.style.display = DisplayStyle.Flex;
+            _bonusButton3.style.display = DisplayStyle.Flex;
+            _veBonus1.style.display = DisplayStyle.None;
+            _veBonus2.style.display = DisplayStyle.None;
+            _veBonus3.style.display = DisplayStyle.None;
+        }
+
+        private void HideButtons()
+        {
+            _bonusButton1.style.display = DisplayStyle.None;
+            _bonusButton2.style.display = DisplayStyle.None;
+            _bonusButton3.style.display = DisplayStyle.None;
+        }
         
         private void OnBonus1Button()
         {
+            HideButtons();
+            _veBonus1.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(1);
         }
         
         private void OnBonus2Button()
         {
+            HideButtons();
+            _veBonus2.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(2);
         }
         
         private void OnBonus3Button()
         {
+            HideButtons();
+            _veBonus3.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(3);
         }
         
