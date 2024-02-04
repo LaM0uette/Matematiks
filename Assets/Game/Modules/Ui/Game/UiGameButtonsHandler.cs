@@ -67,7 +67,7 @@ namespace Game.Modules.Ui.Game
             
             _bonusButton1.style.display = DisplayStyle.Flex;
             _bonusButton2.style.display = DisplayStyle.Flex;
-            _bonusButton3.style.display = DisplayStyle.Flex;
+            //_bonusButton3.style.display = DisplayStyle.Flex;
             _veBonus1.style.display = DisplayStyle.None;
             _veBonus2.style.display = DisplayStyle.None;
             _veBonus3.style.display = DisplayStyle.None;
@@ -135,7 +135,7 @@ namespace Game.Modules.Ui.Game
         {
             _bonusButton1.style.display = DisplayStyle.Flex;
             _bonusButton2.style.display = DisplayStyle.Flex;
-            _bonusButton3.style.display = DisplayStyle.Flex;
+            //_bonusButton3.style.display = DisplayStyle.Flex;
             _veBonus1.style.display = DisplayStyle.None;
             _veBonus2.style.display = DisplayStyle.None;
             _veBonus3.style.display = DisplayStyle.None;

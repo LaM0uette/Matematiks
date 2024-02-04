@@ -40,6 +40,14 @@ namespace Game.Modules.Board.Balls
                 return;
             }
             
+            if (GameManager.Instance.CurrentBonus == 2)
+            {
+                GameManager.Instance.CurrentBonus = 0;
+                _updateBoardEvent.Raise();
+                SetNum(++Number);
+                return;
+            }
+            
             OnBallSelected();
         }
         
