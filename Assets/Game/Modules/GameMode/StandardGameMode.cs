@@ -100,7 +100,7 @@ namespace Game.Modules.GameMode
         
         private void GainGem(int mergedBallNumber, int countBallsSelected)
         {
-            _gem += 1 + mergedBallNumber / 6 + countBallsSelected / 4;
+            _gem += 1 + mergedBallNumber / 3 + countBallsSelected / 3;
             
             Saver.Gem.Save(_gem);
             _levelManager.RaiseGemEvent(_gem);
@@ -120,7 +120,7 @@ namespace Game.Modules.GameMode
         
         private void UpdateScore(int value)
         {
-            _currentScore += (int)Math.Pow(2, value) / 2;
+            _currentScore += (int)Math.Pow(value, 3);
             
             Saver.CurrentScore.Save(_currentScore);
             _levelManager.RaiseScoreEvent(_currentScore);
