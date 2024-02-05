@@ -76,25 +76,25 @@ namespace Game.Modules.GameMode
         private void InitializeWeightedBalls()
         {
             _levelManager.WeightedBalls.Add(new WeightedBall(1, 80f));
-            _levelManager.WeightedBalls.Add(new WeightedBall(2, 30f));
-            _levelManager.WeightedBalls.Add(new WeightedBall(3, 10f));
+            _levelManager.WeightedBalls.Add(new WeightedBall(2, 40f));
+            _levelManager.WeightedBalls.Add(new WeightedBall(3, 20f));
         }
 
         private void UpdateWeightedBalls(Ball mergedBall, int countBallsSelected)
         {
-            if (mergedBall.Number <= 2)
+            if (mergedBall.Number <= 1)
                 return;
             
             var weightedBall = _levelManager.WeightedBalls.FirstOrDefault(wb => wb.Number == mergedBall.Number);
 
             if (!_levelManager.WeightedBalls.Contains(weightedBall) || weightedBall == null)
             {
-                var newWeightedBall = new WeightedBall(mergedBall.Number, GameVar.DefaultNewBallWeight + countBallsSelected / GameVar.DefaultBallWeightDiviser);
+                var newWeightedBall = new WeightedBall(mergedBall.Number, GameVar.DefaultNewBallWeight + countBallsSelected);
                 _levelManager.WeightedBalls.Add(newWeightedBall);
             }
             else
             {
-                weightedBall.Weight += mergedBall.Number /GameVar.DefaultBallWeightDiviser + countBallsSelected / GameVar.DefaultBallWeightDiviser;
+                weightedBall.Weight += mergedBall.Number /GameVar.DefaultBallWeightDiviser + countBallsSelected;
             }
         }
         

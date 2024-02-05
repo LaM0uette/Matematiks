@@ -18,8 +18,8 @@ namespace Game.Modules.Utils
 
         #region BallWeightProperties
 
-        public static float DefaultNewBallWeight { get; private set; } = 1f;
-        public static float DefaultBallWeightDiviser { get; private set; } = 15f;
+        public static float DefaultNewBallWeight { get; private set; } = 5f;
+        public static float DefaultBallWeightDiviser { get; private set; } = 2f;
 
         #endregion
     }
