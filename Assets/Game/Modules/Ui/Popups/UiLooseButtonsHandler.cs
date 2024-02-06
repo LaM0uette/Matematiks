@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace Game.Modules.Ui.Popups
 {
-    public class UiPauseButtonsHandler : MonoBehaviour
+    public class UiLooseButtonsHandler : MonoBehaviour
     {
         #region Statements
         
@@ -15,9 +15,9 @@ namespace Game.Modules.Ui.Popups
         
         private Button _closeButton;
         private Button _homeButton;
-        private Button _continueButton;
         private Button _replayButton;
-        private Button _settingsButton;
+        
+        private Label _scoreLabel;
 
         private void Awake()
         {
@@ -35,66 +35,68 @@ namespace Game.Modules.Ui.Popups
         {
             _closeButton.clicked += OnClose;
             _homeButton.clicked += OnHome;
-            _continueButton.clicked += OnContinue;
             _replayButton.clicked += OnReplay;
-            _settingsButton.clicked += OnSettings;
-            
-            _settingsButton.SetEnabled(false);
         }
         
         private void OnDisable()
         {
             _closeButton.clicked -= OnClose;
             _homeButton.clicked -= OnHome;
-            _continueButton.clicked -= OnContinue;
             _replayButton.clicked -= OnReplay;
-            _settingsButton.clicked -= OnSettings;
         }
 
         #endregion
         
         #region Functions
+        
+        public void Show()
+        {
+            var score = Saver.LastScore.LoadInt();
+            
+            SetScore(score);
+            _veContainer.style.display = DisplayStyle.Flex;
+        }
+        
+        public void Hide()
+        {
+            _veContainer.style.display = DisplayStyle.None;
+        }
+        
+        public void SetScore(int score)
+        {
+            _scoreLabel.text = score.ToString();
+        }
 
         private void SetElements()
         {
             _veContainer = _rootElement.Q<VisualElement>("ve_container");
             
-            _closeButton = _rootElement.Q<Button>("button_pause-close");
-            _homeButton = _rootElement.Q<Button>("button_pause-home");
-            _continueButton = _rootElement.Q<Button>("button_pause-continue");
-            _replayButton = _rootElement.Q<Button>("button_pause-replay");
-            _settingsButton = _rootElement.Q<Button>("button_pause-settings");
+            _closeButton = _rootElement.Q<Button>("button_loose-close");
+            _homeButton = _rootElement.Q<Button>("button_loose-home");
+            _replayButton = _rootElement.Q<Button>("button_loose-replay");
+            
+            _scoreLabel = _rootElement.Q<Label>("label_loose-score");
         }
 
         private void OnClose()
         {
-            _veContainer.style.display = DisplayStyle.None;
+            Hide();
         }
         
         private void OnHome()
         {
-            OnClose();
+            Hide();
             SceneManager.LoadScene(GameVar.MenuScene);
-        }
-        
-        private void OnContinue()
-        {
-            OnClose();
         }
         
         private void OnReplay()
         {
-            OnClose();
+            Hide();
             
             Saver.CurrentScore.Delete();
             Saver.CurrentBalls.Delete();
             Saver.CurrentWeightedBalls.Delete();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        
-        private void OnSettings()
-        {
-            Debug.Log("Settings button clicked");
         }
         
         #endregion

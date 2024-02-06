@@ -4,10 +4,12 @@ using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
 using Game.Modules.GameMode;
+using Game.Modules.Ui.Popups;
 using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace Game.Modules.Manager
@@ -15,6 +17,9 @@ namespace Game.Modules.Manager
     public class LevelManager : MonoBehaviour
     {
         #region Statements
+        
+        [Space, Title("Ui")]
+        [SerializeField] private UiLooseButtonsHandler _uiLooseButtonsHandler;
         
         [Space, Title("Board")]
         [SerializeField] private GameObject _ballPrefab;
@@ -276,6 +281,7 @@ namespace Game.Modules.Manager
         {
             _isLoose.Value = true;
             _looseEvent.Raise();
+            _uiLooseButtonsHandler.Show();
         }
 
         private void FillBoardGrid()
