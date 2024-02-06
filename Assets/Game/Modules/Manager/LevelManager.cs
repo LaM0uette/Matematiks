@@ -36,9 +36,6 @@ namespace Game.Modules.Manager
         [SerializeField] private BoolVariable _ongoingAction;
         [SerializeField] private BoolVariable _isLoose;
         [SerializeField] private ScriptableEventNoParam _looseEvent;
-
-        [Space, Title("Score")]
-        [ShowInInspector, ReadOnly] private int _maxBallNumber = 1;
         
         private IGameMode _gameMode;
         

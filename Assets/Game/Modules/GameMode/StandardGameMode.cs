@@ -94,7 +94,7 @@ namespace Game.Modules.GameMode
             }
             else
             {
-                weightedBall.Weight += mergedBall.Number /GameVar.DefaultBallWeightDiviser + countBallsSelected;
+                weightedBall.Weight += mergedBall.Number / GameVar.DefaultBallWeightDiviser + countBallsSelected;
             }
         }
         

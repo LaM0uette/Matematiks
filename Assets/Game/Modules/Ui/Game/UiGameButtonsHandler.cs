@@ -1,5 +1,6 @@
 using Game.Modules.Utils;
 using Obvious.Soap;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -10,6 +11,12 @@ namespace Game.Modules.Ui.Game
     {
         #region Statements
         
+        [Space, Title("Ui")]
+        [SerializeField] private UIDocument _pausePanel;
+        private VisualElement _pauseRootElement;
+        private VisualElement _veContainer;
+        
+        [Space, Title("Soap")]
         [SerializeField] private ScriptableEventInt _bonusEvent;
         [SerializeField] private ScriptableEventNoParam _looseEvent;
         [SerializeField] private ScriptableEventNoParam _updateBoardEvent;
@@ -39,6 +46,7 @@ namespace Game.Modules.Ui.Game
         {
             _uiDocument = GetComponent<UIDocument>();
             _rootElement = _uiDocument.rootVisualElement;
+            _pauseRootElement = _pausePanel.rootVisualElement;
             
             SetElements();
         }
@@ -103,6 +111,7 @@ namespace Game.Modules.Ui.Game
         {
             _veBonus = _rootElement.Q<VisualElement>("ve_bonusicons");
             _veLoose = _rootElement.Q<VisualElement>("ve_loose");
+            _veContainer = _pauseRootElement.Q<VisualElement>("ve_container");
             
             _shopButton = _rootElement.Q<Button>("button_shop");
             _pauseButton = _rootElement.Q<Button>("button_pause");
@@ -136,7 +145,7 @@ namespace Game.Modules.Ui.Game
         
         private void OnPauseButton()
         {
-            SceneManager.LoadScene(GameVar.MenuScene);
+            _veContainer.style.display = DisplayStyle.Flex;
         }
 
         private void OnUpdateBoardEvent()

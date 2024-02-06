@@ -13,8 +13,8 @@ namespace Game.Modules.Board.Balls
         
         [Title("Properties")]
         [ShowInInspector, ReadOnly] public int Number { get; set; }
-        public Color Color { get; private set; }
         
+        public Color Color { get; private set; }
         public bool IsVisited { get; set; }
         
         [Space, Title("Ui")]

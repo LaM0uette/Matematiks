@@ -65,7 +65,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="ve_pauseicon">
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_pause" class="button-icon" style="background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/home.svg?fileID=7388822144124034973&amp;guid=fa1ae8b73620f464ea641ee8faf89a4e&amp;type=3#home&apos;); margin-top: 20px; margin-bottom: 0; margin-right: 50px; margin-left: 0; width: 100px; height: 100px;" />
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_pause" class="button-icon" style="background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/pause.svg?fileID=7388822144124034973&amp;guid=ea6c1468fa4f76840a5a53dd05e27d9a&amp;type=3#pause&apos;); margin-top: 20px; margin-bottom: 0; margin-right: 50px; margin-left: 0; width: 100px; height: 100px;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
