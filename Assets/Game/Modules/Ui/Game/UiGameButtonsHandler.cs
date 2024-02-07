@@ -1,3 +1,4 @@
+using Game.Modules.Ui.Popups;
 using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
@@ -12,6 +13,7 @@ namespace Game.Modules.Ui.Game
         #region Statements
         
         [Space, Title("Ui")]
+        [SerializeField] private UiShopButtonsHandler _uiShopButtonsHandler;
         [SerializeField] private UIDocument _pausePanel;
         private VisualElement _pauseRootElement;
         private VisualElement _veContainer;
@@ -140,7 +142,7 @@ namespace Game.Modules.Ui.Game
         
         private void OnShopButton()
         {
-            Debug.Log("Shop button clicked");
+            _uiShopButtonsHandler.Show();
         }
         
         private void OnPauseButton()

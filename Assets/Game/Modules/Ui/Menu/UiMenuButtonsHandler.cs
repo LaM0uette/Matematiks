@@ -1,5 +1,7 @@
 using System;
+using Game.Modules.Ui.Popups;
 using Game.Modules.Utils;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -10,6 +12,8 @@ namespace Game.Modules.Ui.Menu
     {
         #region Statements
 
+        [Space, Title("Ui")]
+        [SerializeField] private UiShopButtonsHandler _uiShopButtonsHandler;
         private UIDocument _uiDocument;
         private VisualElement _rootElement;
         
@@ -44,7 +48,6 @@ namespace Game.Modules.Ui.Menu
             _rankButtonIcon.clicked += OnRankButton;
             
             _settingsButton.SetEnabled(false);
-            _shopButtonIcon.SetEnabled(false);
             _profilButtonIcon.SetEnabled(false);
             _rankButtonIcon.SetEnabled(false);
         }
@@ -82,9 +85,9 @@ namespace Game.Modules.Ui.Menu
             Debug.Log("Settings");
         }
         
-        private static void OnShopButton()
+        private void OnShopButton()
         {
-            Debug.Log("Shop");
+            _uiShopButtonsHandler.Show();
         }
         
         private static void OnProfilButton()

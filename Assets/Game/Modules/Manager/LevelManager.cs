@@ -9,7 +9,6 @@ using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace Game.Modules.Manager

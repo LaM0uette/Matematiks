@@ -3,7 +3,7 @@ Label {
 }
 
 .button-action {
-    width: 700px;
+    width: 900px;
     height: 135px;
     border-top-width: 6px;
     border-right-width: 6px;
@@ -28,12 +28,12 @@ Label {
     padding-left: 0;
     font-size: 45px;
     -unity-font-style: bold;
-    color: rgb(33, 36, 41);
+    color: rgb(44, 46, 51);
 }
 
 .button-icon {
     background-color: rgba(0, 0, 0, 0);
-    -unity-background-image-tint-color: rgb(33, 36, 41);
+    -unity-background-image-tint-color: rgb(44, 46, 51);
     -unity-background-scale-mode: scale-to-fit;
     border-left-color: rgba(0, 0, 0, 0);
     border-right-color: rgba(0, 0, 0, 0);
@@ -81,4 +81,21 @@ Label {
     border-right-width: 6px;
     border-bottom-width: 6px;
     border-left-width: 6px;
+}
+
+.label_shop-price {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-font-style: normal;
+    -unity-text-align: middle-right;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 30px;
 }

@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141cd49236558d04586e3afee1cc84fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiShopButtonsHandler: {fileID: 7308103453159445346}
 --- !u!114 &845136207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,6 +419,7 @@ Transform:
   - {fileID: 1487415204}
   - {fileID: 559138773}
   - {fileID: 845136203}
+  - {fileID: 7308103453159445345}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1812989484
@@ -512,6 +514,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &7308103453159445344
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1579001702}
+    m_Modifications:
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853507017899401488, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+      propertyPath: m_Name
+      value: UIShopPanel
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+--- !u!4 &7308103453159445345 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2081434438351956407, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+  m_PrefabInstance: {fileID: 7308103453159445344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7308103453159445346 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1497301185582669376, guid: d05ce94a32ca3894fbafff890977e1b1, type: 3}
+  m_PrefabInstance: {fileID: 7308103453159445344}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d088576b5a784c45acd14058ad4191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
