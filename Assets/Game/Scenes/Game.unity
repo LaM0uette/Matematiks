@@ -4846,7 +4846,7 @@ PrefabInstance:
       objectReference: {fileID: 1049077457}
     - target: {fileID: 5975422263484483861, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
       propertyPath: _removeOldBallsThreshold
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8787136138896609841, guid: af0334c804c298442bfa75b89afb1b48, type: 3}
       propertyPath: m_Name
