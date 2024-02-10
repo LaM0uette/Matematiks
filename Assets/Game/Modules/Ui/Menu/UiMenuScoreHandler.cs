@@ -1,4 +1,5 @@
 using Game.Modules.Utils;
+using Obvious.Soap;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,6 +8,8 @@ namespace Game.Modules.Ui.Menu
     public class UiMenuScoreHandler : MonoBehaviour
     {
         #region Statements
+        
+        [SerializeField] private ScriptableEventInt _shopGemEvent;
 
         private UIDocument _uiDocument;
         private VisualElement _rootElement;
@@ -37,6 +40,20 @@ namespace Game.Modules.Ui.Menu
         }
 
         #endregion
+        
+        #region Events
+
+        private void OnEnable()
+        {
+            _shopGemEvent.OnRaised += OnShopGem;
+        }
+        
+        private void OnDisable()
+        {
+            _shopGemEvent.OnRaised -= OnShopGem;
+        }
+
+        #endregion
 
         #region Functions
 
@@ -46,6 +63,12 @@ namespace Game.Modules.Ui.Menu
             _highscoreLabel = _rootElement.Q<Label>("label_highscore");
             _lastscoreLabel = _rootElement.Q<Label>("label_lastscore");
             _lastscoreTitleLabel = _rootElement.Q<Label>("label_lastscore_title");
+        }
+        
+        private void OnShopGem(int _)
+        {
+            var score = Saver.Gem.LoadInt();
+            _gemLabel.text = score.ToString();
         }
 
         #endregion

@@ -39,11 +39,13 @@ namespace Game.Modules.GameMode
         private void OnEnable()
         {
             _levelManager.BonusEvent.OnRaised += OnBonusEvent;
+            _levelManager.ShopGemEvent.OnRaised += OnShopGemEvent;
         }
 
         private void OnDisable()
         {
             _levelManager.BonusEvent.OnRaised -= OnBonusEvent;
+            _levelManager.ShopGemEvent.OnRaised -= OnShopGemEvent;
         }
         
         public void Initialize()
@@ -264,6 +266,12 @@ namespace Game.Modules.GameMode
             }
             
             Saver.Gem.Save(_gem);
+            _levelManager.RaiseGemEvent(_gem);
+        }
+        
+        private void OnShopGemEvent(int value)
+        {
+            _gem += value;
             _levelManager.RaiseGemEvent(_gem);
         }
         

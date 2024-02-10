@@ -1,4 +1,6 @@
+using Game.Modules.Ads;
 using Game.Modules.Utils;
+using Obvious.Soap;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,6 +9,10 @@ namespace Game.Modules.Ui.Popups
     public class UiShopButtonsHandler : MonoBehaviour
     {
         #region Statements
+        
+        [SerializeField] private ScriptableEventInt _shopGemEvent;
+        
+        private RewardedAdsGem _rewardedAdsGem;
         
         private UIDocument _uiDocument;
         private VisualElement _rootElement;
@@ -26,6 +32,7 @@ namespace Game.Modules.Ui.Popups
 
         private void Awake()
         {
+            _rewardedAdsGem = GetComponent<RewardedAdsGem>();
             _uiDocument = GetComponent<UIDocument>();
             _rootElement = _uiDocument.rootVisualElement;
             
@@ -38,6 +45,8 @@ namespace Game.Modules.Ui.Popups
 
         private void OnEnable()
         {
+            _shopGemEvent.OnRaised += OnShopGem;
+            
             _closeButton.clicked += OnClose;
             _buyGemButtonAds.clicked += OnAdsGem;
             _buyGemButton0.clicked += () => OnBuyGem(0);
@@ -51,6 +60,8 @@ namespace Game.Modules.Ui.Popups
         
         private void OnDisable()
         {
+            _shopGemEvent.OnRaised -= OnShopGem;
+            
             _closeButton.clicked -= OnClose;
             _buyGemButtonAds.clicked -= OnAdsGem;
         }
@@ -93,6 +104,12 @@ namespace Game.Modules.Ui.Popups
             
             _gemLabel = _rootElement.Q<Label>("label_shop-gem");
         }
+        
+        private void OnShopGem(int _)
+        {
+            var score = Saver.Gem.LoadInt();
+            SetGem(score);
+        }
 
         private void OnClose()
         {
@@ -101,14 +118,14 @@ namespace Game.Modules.Ui.Popups
         
         private void OnAdsGem()
         {
-            Debug.Log("Ads gem");
-            Hide();
+            _rewardedAdsGem.ShowAd();
+            //Hide();
         }
 
         private void OnBuyGem(int value)
         {
             Debug.Log("Buy gem: " + value);
-            Hide();
+            //Hide();
         }
         #endregion
     }

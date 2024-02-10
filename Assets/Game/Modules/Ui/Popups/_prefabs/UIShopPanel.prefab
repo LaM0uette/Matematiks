@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2081434438351956407}
   - component: {fileID: 7729326749581839139}
   - component: {fileID: 1497301185582669376}
+  - component: {fileID: 8560071434105690656}
   m_Layer: 5
   m_Name: UIShopPanel
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2853507017899401488}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -61,3 +62,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d088576b5a784c45acd14058ad4191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shopGemEvent: {fileID: 11400000, guid: bff60921899486a489bc67a07023248e, type: 2}
+--- !u!114 &8560071434105690656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2853507017899401488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e55c85755f86e4e9c0015ffa72bafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shopGemEvent: {fileID: 11400000, guid: bff60921899486a489bc67a07023248e, type: 2}
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
