@@ -1,3 +1,4 @@
+using System;
 using Game.Modules.Utils;
 using Obvious.Soap;
 using UnityEngine;
@@ -23,6 +24,11 @@ namespace Game.Modules.Ads
 #elif UNITY_ANDROID
             _adUnitId = _androidAdUnitId;
 #endif
+        }
+
+        private void Start()
+        {
+            LoadAd();
         }
 
         #endregion
@@ -63,6 +69,8 @@ namespace Game.Modules.Ads
                 
                 _shopGemEvent.Raise(reward);
                 Debug.Log("Unity Ads Rewarded Ad Completed");
+                
+                LoadAd();
             }
         }
 
@@ -71,12 +79,16 @@ namespace Game.Modules.Ads
         {
             Debug.Log($"Error loading Ad Unit {adUnitId}: {error.ToString()} - {message}");
             // Use the error details to determine whether to try to load another ad.
+            
+            LoadAd();
         }
 
         public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
         {
             Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
             // Use the error details to determine whether to try to load another ad.
+            
+            LoadAd();
         }
 
         public void OnUnityAdsShowStart(string adUnitId)
