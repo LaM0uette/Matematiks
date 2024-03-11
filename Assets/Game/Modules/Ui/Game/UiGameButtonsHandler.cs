@@ -1,4 +1,3 @@
-using Game.Modules.Ui.Popups;
 using Game.Modules.Utils;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
@@ -13,7 +12,6 @@ namespace Game.Modules.Ui.Game
         #region Statements
         
         [Space, Title("Ui")]
-        [SerializeField] private UiShopButtonsHandler _uiShopButtonsHandler;
         [SerializeField] private UIDocument _pausePanel;
         private VisualElement _pauseRootElement;
         private VisualElement _veContainer;
@@ -29,7 +27,6 @@ namespace Game.Modules.Ui.Game
         private VisualElement _veBonus;
         private VisualElement _veLoose;
         
-        private Button _shopButton;
         private Button _pauseButton;
         
         private Button _bonusButton1;
@@ -63,7 +60,6 @@ namespace Game.Modules.Ui.Game
             
             _looseEvent.OnRaised += OnLooseEvent;
             
-            _shopButton.clicked += OnShopButton;
             _pauseButton.clicked += OnPauseButton;
             _bonusButton1.clicked += OnBonus1Button;
             _bonusButton2.clicked += OnBonus2Button;
@@ -73,7 +69,6 @@ namespace Game.Modules.Ui.Game
             _looseHomeButton.clicked += OnLooseHomeButton;
             _looseReplayButton.clicked += OnLooseReplayButton;
             
-            _shopButton.style.visibility = Visibility.Visible;
             _pauseButton.style.visibility = Visibility.Visible;
             _veBonus.style.display = DisplayStyle.Flex;
             _veLoose.style.display = DisplayStyle.None;
@@ -94,7 +89,6 @@ namespace Game.Modules.Ui.Game
             
             _looseEvent.OnRaised -= OnLooseEvent;
             
-            _shopButton.clicked -= OnShopButton;
             _pauseButton.clicked -= OnPauseButton;
             _bonusButton1.clicked -= OnBonus1Button;
             _bonusButton2.clicked -= OnBonus2Button;
@@ -115,7 +109,6 @@ namespace Game.Modules.Ui.Game
             _veLoose = _rootElement.Q<VisualElement>("ve_loose");
             _veContainer = _pauseRootElement.Q<VisualElement>("ve_container");
             
-            _shopButton = _rootElement.Q<Button>("button_shop");
             _pauseButton = _rootElement.Q<Button>("button_pause");
             
             _bonusButton1 = _rootElement.Q<Button>("button_bonus1");
@@ -136,13 +129,7 @@ namespace Game.Modules.Ui.Game
             _veBonus.style.display = DisplayStyle.None;
             _veLoose.style.display = DisplayStyle.Flex;
             
-            _shopButton.style.visibility = Visibility.Hidden;
             _pauseButton.style.visibility = Visibility.Hidden;
-        }
-        
-        private void OnShopButton()
-        {
-            _uiShopButtonsHandler.Show();
         }
         
         private void OnPauseButton()

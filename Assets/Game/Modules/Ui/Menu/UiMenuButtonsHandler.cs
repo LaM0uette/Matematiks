@@ -13,7 +13,6 @@ namespace Game.Modules.Ui.Menu
         #region Statements
 
         [Space, Title("Ui")]
-        [SerializeField] private UiShopButtonsHandler _uiShopButtonsHandler;
         private UIDocument _uiDocument;
         private VisualElement _rootElement;
         
@@ -43,7 +42,6 @@ namespace Game.Modules.Ui.Menu
             _newGameButton.clicked += OnNewGameButton;
             _settingsButton.clicked += OnSettingsButton;
             
-            _shopButtonIcon.clicked += OnShopButton;
             _profilButtonIcon.clicked += OnProfilButton;
             _rankButtonIcon.clicked += OnRankButton;
             
@@ -58,7 +56,6 @@ namespace Game.Modules.Ui.Menu
             _newGameButton.clicked -= OnNewGameButton;
             _settingsButton.clicked -= OnSettingsButton;
             
-            _shopButtonIcon.clicked -= OnShopButton;
             _profilButtonIcon.clicked -= OnProfilButton;
             _rankButtonIcon.clicked -= OnRankButton;
         }
@@ -83,11 +80,6 @@ namespace Game.Modules.Ui.Menu
         private static void OnSettingsButton()
         {
             Debug.Log("Settings");
-        }
-        
-        private void OnShopButton()
-        {
-            _uiShopButtonsHandler.Show();
         }
         
         private static void OnProfilButton()
