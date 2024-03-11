@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="GemScore" src="project://database/Assets/Game/Ui/Components/GemScore/GemScore.uxml?fileID=9197481963319205126&amp;guid=5ecf1b47a2b684442bf9e950113b0878&amp;type=3#GemScore" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Instance template="GemScore" name="GemScore" />
+    </ui:VisualElement>
+</ui:UXML>

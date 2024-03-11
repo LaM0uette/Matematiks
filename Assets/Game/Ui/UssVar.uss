@@ -1,0 +1,5 @@
+:root {
+    --primary-color: aliceblue;
+    --secondary-color: #2C2E33;
+    --tertiary-color: #4E535D;
+}

@@ -1,0 +1,43 @@
+.gem-score__container {
+    flex-direction: row;
+    align-items: center;
+}
+
+.gem-score__icon-container {
+    width: 75px;
+    height: 75px;
+    align-items: flex-end;
+    justify-content: center;
+    margin-right: 6px;
+}
+
+.gem-score__icon {
+    width: 75%;
+    height: 75%;
+    background-image: url('project://database/Assets/Game/Sprites/SVG/diamond.svg?fileID=7388822144124034973&guid=f3703b269aadc3d468e241c2e823526d&type=3#diamond');
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: #F0F8FF;
+}
+
+.gem-score__separator {
+    width: 1px;
+    height: 80%;
+    background-color: #F0F8FF;
+}
+
+.gem-score__gem-number-container {
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 6px;
+}
+
+.gem-score__gem-number {
+    font-size: 50px;
+    -unity-font-style: bold;
+    color: #F0F8FF;
+}
+
+.gem-score__gem-number-title {
+    font-size: 25px;
+    color: #2C2E33;
+}
