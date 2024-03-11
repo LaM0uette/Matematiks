@@ -1,6 +1,5 @@
 .gem-score__icon-container {
     align-items: flex-end;
-    margin-right: 6px;
 }
 
 .gem-score__icon {
@@ -10,5 +9,4 @@
 .gem-score__gem-number-container {
     align-items: flex-start;
     justify-content: center;
-    margin-left: 6px;
 }

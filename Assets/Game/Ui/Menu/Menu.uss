@@ -3,13 +3,13 @@
     justify-content: space-between;
     margin-right: 5%;
     margin-left: 5%;
-    margin-top: 15%;
+    margin-top: 16%;
 }
 
 .menu__separator {
     height: 2px;
     background-color: #F0F8FF;
-    margin-right: 12%;
-    margin-left: 12%;
-    margin-top: 58px;
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 90px;
 }

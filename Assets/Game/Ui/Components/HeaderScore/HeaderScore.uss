@@ -19,6 +19,7 @@
 .header-score__separator {
     width: 2px;
     height: 80%;
+    margin: 0 10px 0 10px;
     background-color: #F0F8FF;
 }
 
