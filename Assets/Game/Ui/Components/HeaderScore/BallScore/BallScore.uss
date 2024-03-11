@@ -1,0 +1,14 @@
+.ball-score__ball-number-container {
+    align-items: flex-end;
+    justify-content: center;
+    margin-right: 6px;
+}
+
+.ball-score__icon-container {
+    align-items: flex-start;
+    margin-left: 6px;
+}
+
+.ball-score__icon {
+    background-image: url('project://database/Assets/Game/Sprites/SVG/ball.svg?fileID=7388822144124034973&guid=79fe8c657c355e54c8aecea44af594d8&type=3#ball');
+}

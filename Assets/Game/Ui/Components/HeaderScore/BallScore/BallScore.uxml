@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/Ui/Components/HeaderScore/BallScore/BallScore.uss?fileID=7433441132597879392&amp;guid=acbcb0d95c92a9746afd198025109a6a&amp;type=3#BallScore" />
+    <Style src="project://database/Assets/Game/Ui/Components/HeaderScore/HeaderScore.uss?fileID=7433441132597879392&amp;guid=978657add1c9e3144a9eca23141f05e6&amp;type=3#HeaderScore" />
+    <ui:VisualElement name="BallScoreContainer" class="header-score__container">
+        <ui:VisualElement name="BallNumberContainer" class="ball-score__ball-number-container">
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BallNumber" text="0" class="header-score__number" />
+            <ui:Label tabindex="-1" text="HIGHSCORE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="header-score__title" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Separator" class="header-score__separator" />
+        <ui:VisualElement name="IconContainer" class="header-score__icon-container ball-score__icon-container">
+            <ui:VisualElement name="Icon" class="header-score__icon ball-score__icon" style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

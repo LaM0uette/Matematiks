@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/Ui/Components/HeaderScore/GemScore/GemScore.uss?fileID=7433441132597879392&amp;guid=787195c12579c0d49ac0e3d57bfe7eb1&amp;type=3#GemScore" />
+    <Style src="project://database/Assets/Game/Ui/Components/HeaderScore/HeaderScore.uss?fileID=7433441132597879392&amp;guid=978657add1c9e3144a9eca23141f05e6&amp;type=3#HeaderScore" />
+    <ui:VisualElement name="GemScoreContainer" class="header-score__container">
+        <ui:VisualElement name="IconContainer" class="header-score__icon-container gem-score__icon-container">
+            <ui:VisualElement name="Icon" class="header-score__icon gem-score__icon" style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Separator" class="header-score__separator" />
+        <ui:VisualElement name="GemNumberContainer" class="gem-score__gem-number-container">
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GemNumber" text="0" class="header-score__number" />
+            <ui:Label tabindex="-1" text="GEM" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="header-score__title" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

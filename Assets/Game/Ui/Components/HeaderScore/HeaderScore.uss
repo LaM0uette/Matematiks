@@ -1,0 +1,34 @@
+.header-score__container {
+    flex-direction: row;
+    align-items: center;
+}
+
+.header-score__icon-container {
+    width: 75px;
+    height: 75px;
+    justify-content: center;
+}
+
+.header-score__icon {
+    width: 75%;
+    height: 75%;
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: #F0F8FF;
+}
+
+.header-score__separator {
+    width: 2px;
+    height: 80%;
+    background-color: #F0F8FF;
+}
+
+.header-score__number {
+    font-size: 50px;
+    -unity-font-style: bold;
+    color: #F0F8FF;
+}
+
+.header-score__title {
+    font-size: 25px;
+    color: #2C2E33;
+}
