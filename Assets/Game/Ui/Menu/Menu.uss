@@ -1,15 +1,32 @@
-.menu-container {
-    flex-direction: row;
-    justify-content: space-between;
-    margin-right: 5%;
-    margin-left: 5%;
-    margin-top: 16%;
+.menu {
+    background-color: rgb(72, 76, 84);
 }
 
-.menu__separator {
-    height: 2px;
-    background-color: #F0F8FF;
-    margin-right: 20%;
-    margin-left: 20%;
-    margin-top: 90px;
+.middle-score {
+    align-items: center;
+    justify-content: center;
+    height: 32%;
+}
+
+.middle-score__value {
+    font-size: 150px;
+    -unity-font-style: bold;
+    color: rgb(240, 248, 255);
+}
+
+.middle-score__title {
+    font-size: 60px;
+    color: rgb(44, 46, 51);
+}
+
+.buttons-container {
+    flex-grow: 1;
+    align-items: stretch;
+    margin-right: 8%;
+    margin-left: 8%;
+}
+
+.buttons-container__game-buttons {
+    height: 400px;
+    justify-content: space-around;
 }

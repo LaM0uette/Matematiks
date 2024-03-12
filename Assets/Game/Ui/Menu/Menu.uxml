@@ -1,10 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="GemScore" src="project://database/Assets/Game/Ui/Components/GemScore/GemScore.uxml?fileID=9197481963319205126&amp;guid=5ecf1b47a2b684442bf9e950113b0878&amp;type=3#GemScore" />
-    <ui:Template name="BallScore" src="project://database/Assets/Game/Ui/Components/BallScore/BallScore.uxml?fileID=9197481963319205126&amp;guid=25b763fe677f83f49814d6640f4d2575&amp;type=3#BallScore" />
+    <ui:Template name="HeaderScores" src="project://database/Assets/Game/Ui/HeaderScores/HeaderScores.uxml?fileID=9197481963319205126&amp;guid=ad2789fdb614a1144b59b4389c18b2a6&amp;type=3#HeaderScores" />
     <Style src="project://database/Assets/Game/Ui/Menu/Menu.uss?fileID=7433441132597879392&amp;guid=cce3484ccb343274094b811f3b4ab9e8&amp;type=3#Menu" />
-    <ui:VisualElement name="MenuContainer" class="menu-container">
-        <ui:Instance template="GemScore" name="GemScore" />
-        <ui:Instance template="BallScore" name="BallScore" />
+    <ui:VisualElement name="Menu" class="menu" style="flex-grow: 1;">
+        <ui:Instance template="HeaderScores" name="HeaderScores" />
+        <ui:VisualElement name="MiddleScore" class="middle-score">
+            <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MiddleScoreValue" class="middle-score__value" />
+            <ui:Label tabindex="-1" text="MIDDLE-SCORE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MiddleScoreTitle" class="middle-score__title" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ButtonsContainer" class="buttons-container">
+            <ui:VisualElement name="GameButtons" class="buttons-container__game-buttons">
+                <GameButton text="Continue" icon-name="play" name="ContinueGameButton" />
+                <GameButton text="New game" icon-name="modes" name="NewGameGameButton" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="Separator" class="menu__separator" />
 </ui:UXML>
