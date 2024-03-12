@@ -143,7 +143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &845136202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1715788003}
   - component: {fileID: 1715788002}
+  - component: {fileID: 1715788004}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -383,6 +384,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1715788004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715787997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c973c0fb03e8d4f863d304b7bbba6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1812989484
 GameObject:
   m_ObjectHideFlags: 0

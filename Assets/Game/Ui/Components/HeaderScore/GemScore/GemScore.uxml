@@ -7,8 +7,8 @@
         </ui:VisualElement>
         <ui:VisualElement name="Separator" class="header-score__separator" />
         <ui:VisualElement name="GemScoreContainer" class="gem-score__container">
-            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GemNumber" text="0" class="header-score__value" />
-            <ui:Label tabindex="-1" text="GEM" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="header-score__title" />
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GemScoreValue" text="0" class="header-score__value" />
+            <ui:Label tabindex="-1" text="GEM" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GemScoreTitle" class="header-score__title" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

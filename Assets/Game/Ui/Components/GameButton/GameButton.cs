@@ -5,6 +5,8 @@ namespace Game.Ui.Components.GameButton
 {
     public class GameButton : Button
     {
+        #region Statements
+
         public new class UxmlFactory : UxmlFactory<GameButton, UxmlTraits> { }
     
         public new class UxmlTraits : Button.UxmlTraits
@@ -33,6 +35,10 @@ namespace Game.Ui.Components.GameButton
             AddIcon();
         }
 
+        #endregion
+
+        #region Functions
+
         private void AddStyleSheet()
         {
             var styleSheet = Resources.Load<StyleSheet>( "GameButton" );
@@ -51,5 +57,7 @@ namespace Game.Ui.Components.GameButton
             iconElement.style.backgroundImage = new StyleBackground( icon );
             Add( iconElement );
         }
+
+        #endregion
     }
 }
