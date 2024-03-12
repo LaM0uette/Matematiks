@@ -23,7 +23,7 @@
     background-color: #F0F8FF;
 }
 
-.header-score__number {
+.header-score__value {
     font-size: 50px;
     -unity-font-style: bold;
     color: #F0F8FF;

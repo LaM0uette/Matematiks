@@ -1,12 +1,20 @@
-.ball-score__ball-number-container {
+.high-score__container {
     align-items: flex-end;
     justify-content: center;
 }
 
-.ball-score__icon-container {
+.high-ball__icon-container {
     align-items: flex-start;
 }
 
-.ball-score__icon {
+.high-ball__icon {
     background-image: url('project://database/Assets/Game/Sprites/SVG/ball.svg?fileID=7388822144124034973&guid=79fe8c657c355e54c8aecea44af594d8&type=3#ball');
+    align-items: center;
+    justify-content: center;
+}
+
+.high-ball__value {
+    font-size: 19px;
+    color: rgb(44, 46, 51);
+    -unity-font-style: bold;
 }

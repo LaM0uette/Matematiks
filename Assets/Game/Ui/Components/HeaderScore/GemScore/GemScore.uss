@@ -6,7 +6,7 @@
     background-image: url('project://database/Assets/Game/Sprites/SVG/diamond.svg?fileID=7388822144124034973&guid=f3703b269aadc3d468e241c2e823526d&type=3#diamond');
 }
 
-.gem-score__gem-number-container {
+.gem-score__container {
     align-items: flex-start;
     justify-content: center;
 }
