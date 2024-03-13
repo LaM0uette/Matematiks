@@ -57,7 +57,6 @@ namespace Game.Modules.Ui.Game
         private void OnEnable()
         {
             _updateBoardEvent.OnRaised += OnUpdateBoardEvent;
-            
             _looseEvent.OnRaised += OnLooseEvent;
             
             _pauseButton.clicked += OnPauseButton;

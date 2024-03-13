@@ -296,6 +296,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pausePanel: {fileID: 441426820}
+  _bonusEvent: {fileID: 11400000, guid: 2d3da0ee2e318414dac63c4569fd34c3, type: 2}
+  _looseEvent: {fileID: 11400000, guid: 7f55554a1ac311f418c2adbda1a14de6, type: 2}
+  _updateBoardEvent: {fileID: 11400000, guid: 53a79b5d038c0a641a9986c0f56a9210, type: 2}
   _gemEvent: {fileID: 11400000, guid: ed95edbd384282c4ba2c096659b57c08, type: 2}
   _currentScoreEvent: {fileID: 11400000, guid: b4623d526e8229740959cd5e54662433, type: 2}
 --- !u!1 &212237147

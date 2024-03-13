@@ -11,6 +11,9 @@ namespace Game.Ui.Game
         
         // TODO: a supprimer probablement
         [SerializeField] private UIDocument _pausePanel;
+        [SerializeField] private ScriptableEventInt _bonusEvent;
+        [SerializeField] private ScriptableEventNoParam _looseEvent;
+        [SerializeField] private ScriptableEventNoParam _updateBoardEvent;
         
         private const string _currentScoreKey = "CurrentScoreValue";
         private const string _bonusCard01Key = "BonusCard01";
@@ -95,7 +98,13 @@ namespace Game.Ui.Game
         {
             _gemEvent.OnRaised += OnGemRaised;
             _currentScoreEvent.OnRaised += OnCurrentScoreRaised;
+            _updateBoardEvent.OnRaised += OnUpdateBoardEvent;
+            _looseEvent.OnRaised += OnLooseEvent;
             
+            _bonusCard01.clicked += OnBonusCard01Clicked;
+            _bonusCard02.clicked += OnBonusCard02Clicked;
+            _bonusCard03.clicked += OnBonusCard03Clicked;
+            _bonusCard04.clicked += OnBonusCard04Clicked;
             _pauseButton.clicked += OnPauseButtonClicked;
         }
         
@@ -103,13 +112,47 @@ namespace Game.Ui.Game
         {
             _gemEvent.OnRaised -= OnGemRaised;
             _currentScoreEvent.OnRaised -= OnCurrentScoreRaised;
+            _updateBoardEvent.OnRaised -= OnUpdateBoardEvent;
+            _looseEvent.OnRaised -= OnLooseEvent;
             
+            _bonusCard01.clicked -= OnBonusCard01Clicked;
+            _bonusCard02.clicked -= OnBonusCard02Clicked;
+            _bonusCard03.clicked -= OnBonusCard03Clicked;
+            _bonusCard04.clicked -= OnBonusCard04Clicked;
             _pauseButton.clicked -= OnPauseButtonClicked;
         }
 
         #endregion
         
         #region Button Events
+        
+        private void OnBonusCard01Clicked()
+        {
+            HideBonusCards();
+            //_veBonus1.style.display = DisplayStyle.Flex;
+            _bonusEvent.Raise(1);
+        }
+        
+        private void OnBonusCard02Clicked()
+        {
+            HideBonusCards();
+            //_veBonus1.style.display = DisplayStyle.Flex;
+            _bonusEvent.Raise(2);
+        }
+        
+        private void OnBonusCard03Clicked()
+        {
+            HideBonusCards();
+            //_veBonus1.style.display = DisplayStyle.Flex;
+            _bonusEvent.Raise(3);
+        }
+        
+        private void OnBonusCard04Clicked()
+        {
+            HideBonusCards();
+            //_veBonus1.style.display = DisplayStyle.Flex;
+            _bonusEvent.Raise(4);
+        }
         
         private void OnPauseButtonClicked()
         {
@@ -136,7 +179,42 @@ namespace Game.Ui.Game
             Saver.HighScore.Save(value);
             _headerScores.UpdateHighScore(value);
         }
+        
+        private void ShowBonusCards()
+        {
+            _bonusCard01.style.display = DisplayStyle.Flex;
+            _bonusCard02.style.display = DisplayStyle.Flex;
+            _bonusCard03.style.display = DisplayStyle.Flex;
+            _bonusCard04.style.display = DisplayStyle.Flex;
+        }
+        
+        private void HideBonusCards()
+        {
+            _bonusCard01.style.display = DisplayStyle.None;
+            _bonusCard02.style.display = DisplayStyle.None;
+            _bonusCard03.style.display = DisplayStyle.None;
+            _bonusCard04.style.display = DisplayStyle.None;
+        }
 
         #endregion
+        
+        // TODO: a supprimer probablement
+        
+        private void OnUpdateBoardEvent()
+        {
+            ShowBonusCards();
+            //_veBonus1.style.display = DisplayStyle.None;
+            //_veBonus2.style.display = DisplayStyle.None;
+            //_veBonus3.style.display = DisplayStyle.None;
+            //_veBonus4.style.display = DisplayStyle.None;
+        }
+        
+        private void OnLooseEvent()
+        {
+            //_veBonus.style.display = DisplayStyle.None;
+            //_veLoose.style.display = DisplayStyle.Flex;
+            
+            _pauseButton.style.visibility = Visibility.Hidden;
+        }
     }
 }
