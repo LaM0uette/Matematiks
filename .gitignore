@@ -90,7 +90,6 @@ buildE2ETest/log/*
 .gradle/
 ExportedObj/
 *.snap
-Resources*
 *.apk
 *.dwlt
 *.aab

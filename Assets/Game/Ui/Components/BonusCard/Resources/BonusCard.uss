@@ -1,0 +1,56 @@
+.bonus-card {
+    align-items: center;
+    width: 135px;
+    height: 200px;
+    background-color: rgb(78, 83, 93);
+    border-width: 6px;
+    border-color: rgb(44, 46, 51);
+    border-radius: 15px;
+}
+
+.bonus-card:enabled:hover {
+    background-color: rgba(78, 83, 93, 0.5);
+}
+
+.bonus-card--selected {
+    width: 500px;
+}
+
+.bonus-card__icon {
+    width: 95px;
+    height: 95px;
+    margin-top: 15px;
+    -unity-background-image-tint-color: rgb(44, 46, 51);
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.price-container {
+    position: absolute;
+    bottom: 5px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.price-container__icon {
+    width: 34px;
+    height: 34px;
+    -unity-background-image-tint-color: rgb(44, 46, 51);
+}
+
+.price-container__value {
+    font-size: 34px;
+    -unity-font-style: bold;
+    color: rgb(240, 248, 255);
+}
+
+.bonus-card--selected > .price-container {
+    display: none;
+}
+
+.bonus-card--selected > .bonus-card__icon {
+    width: 125px;
+    height: 100%;
+    margin-top: 0;
+}
