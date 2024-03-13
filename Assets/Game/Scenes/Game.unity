@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff8127e46e245a49a4a92c995e31629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pausePanel: {fileID: 441426820}
   _gemEvent: {fileID: 11400000, guid: ed95edbd384282c4ba2c096659b57c08, type: 2}
   _currentScoreEvent: {fileID: 11400000, guid: b4623d526e8229740959cd5e54662433, type: 2}
 --- !u!1 &212237147
