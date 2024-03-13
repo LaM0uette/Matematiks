@@ -134,28 +134,40 @@ namespace Game.Ui.Game
         private void OnBonusCard01Clicked()
         {
             HideBonusCards();
-            _bonusCard01.style.display = DisplayStyle.Flex;
+            
+            _bonusCard01.Show();
+            _bonusCard01.Select();
+            
             _bonusEvent.Raise(1);
         }
         
         private void OnBonusCard02Clicked()
         {
             HideBonusCards();
-            _bonusCard02.style.display = DisplayStyle.Flex;
+            
+            _bonusCard02.Show();
+            _bonusCard02.Select();
+            
             _bonusEvent.Raise(2);
         }
         
         private void OnBonusCard03Clicked()
         {
             HideBonusCards();
-            _bonusCard03.style.display = DisplayStyle.Flex;
+            
+            _bonusCard03.Show();
+            _bonusCard03.Select();
+            
             _bonusEvent.Raise(3);
         }
         
         private void OnBonusCard04Clicked()
         {
             HideBonusCards();
-            _bonusCard04.style.display = DisplayStyle.Flex;
+            
+            _bonusCard04.Show();
+            _bonusCard04.Select();
+            
             _bonusEvent.Raise(4);
         }
         
@@ -187,18 +199,26 @@ namespace Game.Ui.Game
         
         private void ShowBonusCards()
         {
-            _bonusCard01.style.display = DisplayStyle.Flex;
-            _bonusCard02.style.display = DisplayStyle.Flex;
-            _bonusCard03.style.display = DisplayStyle.Flex;
-            _bonusCard04.style.display = DisplayStyle.Flex;
+            _bonusCard01.Unselect();
+            _bonusCard01.Show();
+            _bonusCard02.Unselect();
+            _bonusCard02.Show();
+            _bonusCard03.Unselect();
+            _bonusCard03.Show();
+            _bonusCard04.Unselect();
+            _bonusCard04.Show();
         }
         
         private void HideBonusCards()
         {
-            _bonusCard01.style.display = DisplayStyle.None;
-            _bonusCard02.style.display = DisplayStyle.None;
-            _bonusCard03.style.display = DisplayStyle.None;
-            _bonusCard04.style.display = DisplayStyle.None;
+            _bonusCard01.Unselect();
+            _bonusCard01.Hide();
+            _bonusCard02.Unselect();
+            _bonusCard02.Hide();
+            _bonusCard03.Unselect();
+            _bonusCard03.Hide();
+            _bonusCard04.Unselect();
+            _bonusCard04.Hide();
         }
 
         #endregion

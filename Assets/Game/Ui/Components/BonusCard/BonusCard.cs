@@ -46,6 +46,11 @@ namespace Game.Ui.Components.BonusCard
         #endregion
 
         #region Functions
+        
+        public void Select() => AddToClassList("bonus-card--selected");
+        public void Unselect() => RemoveFromClassList("bonus-card--selected");
+        public void Show() => style.display = DisplayStyle.Flex;
+        public void Hide() => style.display = DisplayStyle.None;
 
         private void AddStyleSheet()
         {
