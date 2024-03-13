@@ -2017,7 +2017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6700edf545ee843ba41c0457528db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiShopButtonsHandler: {fileID: 0}
   _pausePanel: {fileID: 441426820}
   _bonusEvent: {fileID: 11400000, guid: 2d3da0ee2e318414dac63c4569fd34c3, type: 2}
   _looseEvent: {fileID: 11400000, guid: 7f55554a1ac311f418c2adbda1a14de6, type: 2}
