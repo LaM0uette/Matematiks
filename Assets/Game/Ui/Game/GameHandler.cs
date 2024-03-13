@@ -1,4 +1,5 @@
 using Game.Modules.Utils;
+using Game.Ui.Components.BonusCard;
 using Obvious.Soap;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -32,10 +33,11 @@ namespace Game.Ui.Game
         
         private Label _currentScoreLabel;
         
-        private Button _bonusCard01;
-        private Button _bonusCard02;
-        private Button _bonusCard03;
-        private Button _bonusCard04;
+        private BonusCard _bonusCard01;
+        private BonusCard _bonusCard02;
+        private BonusCard _bonusCard03;
+        private BonusCard _bonusCard04;
+        
         private Button _pauseButton;
         
         private void Awake()
@@ -80,10 +82,11 @@ namespace Game.Ui.Game
         
         private void SetupButtons()
         {
-            _bonusCard01 = _root.Q<Button>(_bonusCard01Key);
-            _bonusCard02 = _root.Q<Button>(_bonusCard02Key);
-            _bonusCard03 = _root.Q<Button>(_bonusCard03Key);
-            _bonusCard04 = _root.Q<Button>(_bonusCard04Key);
+            _bonusCard01 = _root.Q<BonusCard>(_bonusCard01Key);
+            _bonusCard02 = _root.Q<BonusCard>(_bonusCard02Key);
+            _bonusCard03 = _root.Q<BonusCard>(_bonusCard03Key);
+            _bonusCard04 = _root.Q<BonusCard>(_bonusCard04Key);
+            
             _pauseButton = _root.Q<Button>(_pauseButtonKey);
         }
         private void InitButtons()
@@ -105,6 +108,7 @@ namespace Game.Ui.Game
             _bonusCard02.clicked += OnBonusCard02Clicked;
             _bonusCard03.clicked += OnBonusCard03Clicked;
             _bonusCard04.clicked += OnBonusCard04Clicked;
+            
             _pauseButton.clicked += OnPauseButtonClicked;
         }
         
@@ -119,6 +123,7 @@ namespace Game.Ui.Game
             _bonusCard02.clicked -= OnBonusCard02Clicked;
             _bonusCard03.clicked -= OnBonusCard03Clicked;
             _bonusCard04.clicked -= OnBonusCard04Clicked;
+            
             _pauseButton.clicked -= OnPauseButtonClicked;
         }
 
@@ -129,6 +134,7 @@ namespace Game.Ui.Game
         private void OnBonusCard01Clicked()
         {
             HideBonusCards();
+            _bonusCard01.style.display = DisplayStyle.Flex;
             //_veBonus1.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(1);
         }
@@ -136,6 +142,7 @@ namespace Game.Ui.Game
         private void OnBonusCard02Clicked()
         {
             HideBonusCards();
+            _bonusCard02.style.display = DisplayStyle.Flex;
             //_veBonus1.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(2);
         }
@@ -143,6 +150,7 @@ namespace Game.Ui.Game
         private void OnBonusCard03Clicked()
         {
             HideBonusCards();
+            _bonusCard03.style.display = DisplayStyle.Flex;
             //_veBonus1.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(3);
         }
@@ -150,6 +158,7 @@ namespace Game.Ui.Game
         private void OnBonusCard04Clicked()
         {
             HideBonusCards();
+            _bonusCard04.style.display = DisplayStyle.Flex;
             //_veBonus1.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(4);
         }
