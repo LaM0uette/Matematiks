@@ -135,7 +135,6 @@ namespace Game.Ui.Game
         {
             HideBonusCards();
             _bonusCard01.style.display = DisplayStyle.Flex;
-            //_veBonus1.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(1);
         }
         
@@ -143,7 +142,6 @@ namespace Game.Ui.Game
         {
             HideBonusCards();
             _bonusCard02.style.display = DisplayStyle.Flex;
-            //_veBonus1.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(2);
         }
         
@@ -151,7 +149,6 @@ namespace Game.Ui.Game
         {
             HideBonusCards();
             _bonusCard03.style.display = DisplayStyle.Flex;
-            //_veBonus1.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(3);
         }
         
@@ -159,7 +156,6 @@ namespace Game.Ui.Game
         {
             HideBonusCards();
             _bonusCard04.style.display = DisplayStyle.Flex;
-            //_veBonus1.style.display = DisplayStyle.Flex;
             _bonusEvent.Raise(4);
         }
         
@@ -212,10 +208,6 @@ namespace Game.Ui.Game
         private void OnUpdateBoardEvent()
         {
             ShowBonusCards();
-            //_veBonus1.style.display = DisplayStyle.None;
-            //_veBonus2.style.display = DisplayStyle.None;
-            //_veBonus3.style.display = DisplayStyle.None;
-            //_veBonus4.style.display = DisplayStyle.None;
         }
         
         private void OnLooseEvent()
