@@ -8,6 +8,10 @@
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="BottomContainer" class="game-bottom">
+        <Game.Ui.Components.BonusCard.BonusCard name="HammerBonus" icon-name="hammer" price="200" />
+        <Game.Ui.Components.BonusCard.BonusCard name="MinusOneBonus" icon-name="minus-one" price="400" />
+        <Game.Ui.Components.BonusCard.BonusCard name="PlusOneBonus" icon-name="plus-one" price="600" />
+        <Game.Ui.Components.BonusCard.BonusCard name="DestroyBonus" icon-name="destroy" price="999" />
         <Game.Ui.Components.IconButton.IconButton icon-name="pause" name="PauseButton" class="game-bottom__pause-button" />
     </ui:VisualElement>
 </ui:UXML>

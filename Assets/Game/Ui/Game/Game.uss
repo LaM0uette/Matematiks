@@ -20,12 +20,17 @@
 }
 
 .game-bottom {
-    height: 265px;
+    height: 300px;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    padding-right: 180px;
+    padding-left: 180px;
 }
 
 .game-bottom__pause-button {
     position: absolute;
-    right: 65px;
+    right: 50px;
     bottom: 175px;
     width: 85px;
     height: 85px;

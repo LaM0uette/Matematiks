@@ -11,10 +11,10 @@ namespace Game.Ui.Components.IconButton
 
         public IconButton()
         {
-            RegisterCallback<AttachToPanelEvent>( OnAttachedToPanel );
+            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
         }
     
-        private void OnAttachedToPanel( AttachToPanelEvent evt )
+        private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
             AddStyleSheet();
         }
@@ -25,9 +25,9 @@ namespace Game.Ui.Components.IconButton
 
         private void AddStyleSheet()
         {
-            var styleSheet = Resources.Load<StyleSheet>( "IconButton" );
-            styleSheets.Add( styleSheet );
-            AddToClassList( "icon-button" );
+            var styleSheet = Resources.Load<StyleSheet>( "IconButton");
+            styleSheets.Add(styleSheet);
+            AddToClassList("icon-button");
         }
 
         #endregion
