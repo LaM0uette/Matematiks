@@ -44,7 +44,8 @@ namespace Game.Ui.Menu
         }
         private void InitHeaderScores()
         {
-            _headerScores.UpdateScore();
+            _headerScores.UpdateHighScore();
+            _headerScores.UpdateHighBall(Saver.HighBall.LoadInt());
         }
         
         private void SetupMiddleScore()
