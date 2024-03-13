@@ -1,5 +1,6 @@
 using Game.Modules.Utils;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace Game.Ui.Menu
@@ -10,6 +11,8 @@ namespace Game.Ui.Menu
         
         private const string _midleScoreKey = "MiddleScoreValue";
         private const string _midleScoreTitleKey = "MiddleScoreTitle";
+        private const string _continueButtonKey = "ContinueGameButton";
+        private const string _newGameButtonKey = "NewGameGameButton";
 
         private UIDocument _uiDocument;
         private VisualElement _root;
@@ -19,6 +22,9 @@ namespace Game.Ui.Menu
         private Label _midleScoreLabel;
         private Label _midleScoreTitleLabel;
         
+        private Button _continueButton;
+        private Button _newGameButton;
+        
         private void Awake()
         {
             _uiDocument = GetComponent<UIDocument>();
@@ -26,17 +32,19 @@ namespace Game.Ui.Menu
 
             SetupHeaderScores();
             SetupMiddleScore();
+            SetupGameButtons();
         }
 
         private void Start()
         {
             InitHeaderScores();
             InitMiddleScore();
+            InitGameButtons();
         }
 
         #endregion
 
-        #region Functions
+        #region Setup/Init
 
         private void SetupHeaderScores()
         {
@@ -60,6 +68,62 @@ namespace Game.Ui.Menu
             
             var score = currentScore > 0 ? currentScore : Saver.LastScore.LoadInt();
             _midleScoreLabel.text = score.ToString();
+        }
+        
+        private void SetupGameButtons()
+        {
+            _continueButton = _root.Q<Button>(_continueButtonKey);
+            _newGameButton = _root.Q<Button>(_newGameButtonKey);
+        }
+        private void InitGameButtons()
+        {
+            SetContinueButtonState();
+        }
+
+        #endregion
+        
+        #region Events
+
+        private void OnEnable()
+        {
+            _continueButton.clicked += OnContinueButtonCliked;
+            _newGameButton.clicked += OnNewGameButtonCliked;
+        }
+        
+        private void OnDisable()
+        {
+            _continueButton.clicked -= OnContinueButtonCliked;
+            _newGameButton.clicked -= OnNewGameButtonCliked;
+        }
+
+        #endregion
+        
+        #region Button Events
+        
+        private static void OnContinueButtonCliked()
+        {
+            LoadGameScene();
+        }
+        
+        private static void OnNewGameButtonCliked()
+        {
+            Saver.ResetAllCurrentScores();
+            LoadGameScene();
+        }
+        
+        #endregion
+
+        #region Functions
+
+        private void SetContinueButtonState()
+        {
+            var currentScore = Saver.CurrentScore.LoadInt();
+            _continueButton.SetEnabled(currentScore > 0);
+        }
+        
+        private static void LoadGameScene()
+        {
+            SceneManager.LoadScene(GameVar.GameScene);
         }
 
         #endregion

@@ -90,5 +90,16 @@ namespace Game.Modules.Utils
         }
 
         #endregion
+
+        #region Functions
+
+        public static void ResetAllCurrentScores()
+        {
+            CurrentScore.Delete();
+            CurrentBalls.Delete();
+            CurrentWeightedBalls.Delete();
+        }
+
+        #endregion
     }
 }
