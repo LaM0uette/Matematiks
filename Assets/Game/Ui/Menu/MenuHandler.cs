@@ -37,22 +37,22 @@ namespace Game.Ui.Menu
 
         private void Start()
         {
-            InitHeaderScores();
+            UpdateHeaderScores();
             InitMiddleScore();
-            InitGameButtons();
+            UpdateGameButtons();
         }
 
         #endregion
 
-        #region Setup/Init
+        #region Setup/Update
 
         private void SetupHeaderScores()
         {
             _headerScores = _root.Q<HeaderScores.HeaderScores>();
         }
-        private void InitHeaderScores()
+        private void UpdateHeaderScores()
         {
-            _headerScores.UpdateHighScore();
+            _headerScores.UpdateHeaderScore();
             _headerScores.UpdateHighBall(Saver.HighBall.LoadInt());
         }
         
@@ -75,7 +75,7 @@ namespace Game.Ui.Menu
             _continueButton = _root.Q<Button>(_continueButtonKey);
             _newGameButton = _root.Q<Button>(_newGameButtonKey);
         }
-        private void InitGameButtons()
+        private void UpdateGameButtons()
         {
             SetContinueButtonState();
         }

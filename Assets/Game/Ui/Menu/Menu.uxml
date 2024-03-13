@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Game/Ui/Menu/Menu.uss?fileID=7433441132597879392&amp;guid=cce3484ccb343274094b811f3b4ab9e8&amp;type=3#Menu" />
-    <ui:VisualElement name="Menu" class="menu" style="flex-grow: 1;">
+    <ui:VisualElement name="Menu" class="menu">
         <Game.Ui.HeaderScores.HeaderScores />
         <ui:VisualElement name="MiddleScore" class="middle-score">
             <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MiddleScoreValue" class="middle-score__value" />

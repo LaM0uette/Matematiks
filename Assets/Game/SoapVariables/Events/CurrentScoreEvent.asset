@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed2a53a13d3e4066b3ccfe94e017a207, type: 3}
-  m_Name: ScoreEvent
+  m_Name: CurrentScoreEvent
   m_EditorClassIdentifier: 
   CategoryIndex: 0
   _debugLogEnabled: 0

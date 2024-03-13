@@ -1,0 +1,20 @@
+.game {
+    flex-grow: 1;
+}
+
+.current-score {
+    align-items: center;
+    justify-content: center;
+    height: 18%;
+}
+
+.current-score__value {
+    font-size: 100px;
+    -unity-font-style: bold;
+    color: rgb(240, 248, 255);
+}
+
+.current-score__title {
+    font-size: 40px;
+    color: rgb(44, 46, 51);
+}

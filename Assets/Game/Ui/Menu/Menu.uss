@@ -1,4 +1,5 @@
 .menu {
+    flex-grow: 1;
     background-color: rgb(72, 76, 84);
 }
 

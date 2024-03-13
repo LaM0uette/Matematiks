@@ -41,10 +41,20 @@ namespace Game.Ui.HeaderScores
         
         #region Functions
         
-        public void UpdateHighScore()
+        public void UpdateHeaderScore()
         {
             _gemNumberLabel.text = Saver.Gem.LoadInt().ToString();
             _highScoreLabel.text = Saver.HighScore.LoadInt().ToString();
+        }
+        
+        public void UpdateGem(int value)
+        {
+            _gemNumberLabel.text = value.ToString();
+        }
+        
+        public void UpdateHighScore(int value)
+        {
+            _highScoreLabel.text = value.ToString();
         }
         
         public void UpdateHighBall(int highBall)
