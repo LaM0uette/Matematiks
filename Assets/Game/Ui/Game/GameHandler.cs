@@ -234,7 +234,8 @@ namespace Game.Ui.Game
         {
             //_veBonus.style.display = DisplayStyle.None;
             //_veLoose.style.display = DisplayStyle.Flex;
-            
+
+            HideBonusCards();
             _pauseButton.style.visibility = Visibility.Hidden;
         }
     }
