@@ -18,9 +18,6 @@ namespace Game.Modules.Manager
     {
         #region Statements
         
-        [Space, Title("Ui")]
-        [SerializeField] private UiLooseButtonsHandler _uiLooseButtonsHandler;
-        
         [Space, Title("Board")]
         [SerializeField] private GameObject _ballPrefab;
         [SerializeField] private LineRenderer _lineRenderer;
@@ -278,8 +275,6 @@ namespace Game.Modules.Manager
         public void LooseGame()
         {
             _isLoose.Value = true;
-            _uiLooseButtonsHandler.Show();
-            
             UiEvents.LooseEvent.Invoke();
         }
 

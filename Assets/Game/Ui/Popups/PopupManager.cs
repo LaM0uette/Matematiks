@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Ui.Popups.Loose;
 using Game.Ui.Popups.Pause;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,15 +12,17 @@ namespace Game.Ui.Popups
         
         private const string _mainLayoutKey = "Main";
         private const string _pausePopupKey = "PausePopup";
+        private const string _loosePopupKey = "LoosePopup";
 
         private UIDocument _uiDocument;
         private VisualElement _root;
         private VisualElement _main;
 
-        private List<Popup> _allPopups = new();
+        private readonly List<Popup> _allPopups = new();
         private Popup _currentPopup;
 
         private Popup _pausePopup;
+        private Popup _loosePopup;
         
         private void Awake()
         {
@@ -57,20 +60,26 @@ namespace Game.Ui.Popups
         private void SetupPopups()
         {
             _pausePopup = new PausePopup(_root.Q<VisualElement>(_pausePopupKey));
+            _loosePopup = new LoosePopup(_root.Q<VisualElement>(_loosePopupKey));
             
             _allPopups.Add(_pausePopup);
+            _allPopups.Add(_loosePopup);
         }
         
         private void SubscribeToEvents()
         {
             UiEvents.ClosePopup += HideMainLayout;
             UiEvents.PausePopupShow += ShowPausePopup;
+            
+            UiEvents.LooseEvent += ShowLoosePopup;
         }
 
         private void UnsubscribeFromEvents()
         {
             UiEvents.ClosePopup -= HideMainLayout;
             UiEvents.PausePopupShow -= ShowPausePopup;
+            
+            UiEvents.LooseEvent -= ShowLoosePopup;
         }
         
         private void ShowPopup(Popup newPopup)
@@ -90,6 +99,11 @@ namespace Game.Ui.Popups
         private void ShowPausePopup()
         {
             ShowPopup(_pausePopup);
+        }
+        
+        private void ShowLoosePopup()
+        {
+            ShowPopup(_loosePopup);
         }
 
         #endregion

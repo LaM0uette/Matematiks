@@ -15,7 +15,7 @@
 }
 
 .loose-buttons-container {
-    width: 100%;
+    width: 80%;
     align-items: center;
     justify-content: center;
 }
@@ -23,12 +23,8 @@
 .loose-button-container__placement {
     width: 100%;
     align-items: center;
-    height: 500px;
+    height: 725px;
     justify-content: space-around;
-}
-
-.loose-continue-button {
-    width: 100%;
 }
 
 .loose-button {
