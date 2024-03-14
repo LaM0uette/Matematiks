@@ -10,7 +10,7 @@
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_pause-home" class="button-action" style="width: 550px;">
                     <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/home.svg?fileID=7388822144124034973&amp;guid=fa1ae8b73620f464ea641ee8faf89a4e&amp;type=3#home&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(44, 46, 51); margin-top: 25px; margin-right: 25px; margin-bottom: 25px; margin-left: 25px; align-self: center; width: 135px;" />
                 </ui:Button>
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_pause-continue" class="button-action" style="width: 850px; height: 200px;">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_pause-resume" class="button-action" style="width: 850px; height: 200px;">
                     <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Game/Sprites/SVG/play.svg?fileID=7388822144124034973&amp;guid=6a204af9c9fa66e4cbc1a61ec9ec862a&amp;type=3#play&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(44, 46, 51); margin-top: 25px; margin-right: 25px; margin-bottom: 25px; margin-left: 25px; align-self: center; width: 135px;" />
                 </ui:Button>
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="button_pause-replay" class="button-action" style="width: 550px;">

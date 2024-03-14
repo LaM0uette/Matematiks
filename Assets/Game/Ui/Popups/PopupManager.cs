@@ -15,11 +15,11 @@ namespace Game.Ui.Popups
         private UIDocument _uiDocument;
         private VisualElement _root;
         private VisualElement _main;
-        
-        List<Popup> _allPopups = new();
-        Popup _currentPopup;
-        
-        Popup _pausePopup;
+
+        private List<Popup> _allPopups = new();
+        private Popup _currentPopup;
+
+        private Popup _pausePopup;
         
         private void Awake()
         {

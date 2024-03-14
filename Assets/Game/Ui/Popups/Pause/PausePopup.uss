@@ -27,7 +27,7 @@
     justify-content: space-around;
 }
 
-.pause-continue-button {
+.pause-resume-button {
     width: 100%;
 }
 

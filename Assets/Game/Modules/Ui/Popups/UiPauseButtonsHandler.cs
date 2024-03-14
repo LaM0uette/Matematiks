@@ -15,7 +15,7 @@ namespace Game.Modules.Ui.Popups
         
         private Button _closeButton;
         private Button _homeButton;
-        private Button _continueButton;
+        private Button _resumeButton;
         private Button _replayButton;
         private Button _settingsButton;
 
@@ -35,7 +35,7 @@ namespace Game.Modules.Ui.Popups
         {
             _closeButton.clicked += OnClose;
             _homeButton.clicked += OnHome;
-            _continueButton.clicked += OnContinue;
+            _resumeButton.clicked += OnResume;
             _replayButton.clicked += OnReplay;
             _settingsButton.clicked += OnSettings;
             
@@ -46,7 +46,7 @@ namespace Game.Modules.Ui.Popups
         {
             _closeButton.clicked -= OnClose;
             _homeButton.clicked -= OnHome;
-            _continueButton.clicked -= OnContinue;
+            _resumeButton.clicked -= OnResume;
             _replayButton.clicked -= OnReplay;
             _settingsButton.clicked -= OnSettings;
         }
@@ -61,7 +61,7 @@ namespace Game.Modules.Ui.Popups
             
             _closeButton = _rootElement.Q<Button>("button_pause-close");
             _homeButton = _rootElement.Q<Button>("button_pause-home");
-            _continueButton = _rootElement.Q<Button>("button_pause-continue");
+            _resumeButton = _rootElement.Q<Button>("button_pause-resume");
             _replayButton = _rootElement.Q<Button>("button_pause-replay");
             _settingsButton = _rootElement.Q<Button>("button_pause-settings");
         }
@@ -77,7 +77,7 @@ namespace Game.Modules.Ui.Popups
             SceneManager.LoadScene(GameVar.MenuScene);
         }
         
-        private void OnContinue()
+        private void OnResume()
         {
             OnClose();
         }

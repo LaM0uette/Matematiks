@@ -7,16 +7,19 @@ namespace Game.Ui.Popups
     {
         #region Statements
 
-        protected VisualElement _topElement;
-        protected bool _hideOnAwake = true;
+        protected readonly VisualElement TopElement;
         
-        public Popup(VisualElement topElement)
+        private readonly bool _hideOnAwake;
+
+        protected Popup(VisualElement topElement, bool hideOnAwake = true)
         {
-            _topElement = topElement ?? throw new ArgumentNullException(nameof(topElement));
+            TopElement = topElement ?? throw new ArgumentNullException(nameof(topElement));
+            _hideOnAwake = hideOnAwake;
+            
             Initialize();
         }
-        
-        public virtual void Initialize()
+
+        protected virtual void Initialize()
         {
             if (_hideOnAwake)
             {
@@ -39,12 +42,12 @@ namespace Game.Ui.Popups
 
         public virtual void Show()
         {
-            _topElement.style.display = DisplayStyle.Flex;
+            TopElement.style.display = DisplayStyle.Flex;
         }
 
         public virtual void Hide()
         {
-            _topElement.style.display = DisplayStyle.None;
+            TopElement.style.display = DisplayStyle.None;
         }
 
         public virtual void Dispose()

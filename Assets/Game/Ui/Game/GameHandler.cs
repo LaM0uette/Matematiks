@@ -11,7 +11,6 @@ namespace Game.Ui.Game
         #region Statements
         
         // TODO: a supprimer probablement
-        [SerializeField] private UIDocument _pausePanel;
         [SerializeField] private ScriptableEventInt _bonusEvent;
         [SerializeField] private ScriptableEventNoParam _looseEvent;
         [SerializeField] private ScriptableEventNoParam _updateBoardEvent;
@@ -54,7 +53,6 @@ namespace Game.Ui.Game
         {
             UpdateHeaderScores();
             UpdateCurrentScore(Saver.CurrentScore.LoadInt());
-            InitButtons();
         }
 
         #endregion
@@ -88,9 +86,6 @@ namespace Game.Ui.Game
             _bonusCard04 = _root.Q<BonusCard>(_bonusCard04Key);
             
             _pauseButton = _root.Q<Button>(_pauseButtonKey);
-        }
-        private void InitButtons()
-        {
         }
 
         #endregion
@@ -171,9 +166,8 @@ namespace Game.Ui.Game
             _bonusEvent.Raise(4);
         }
         
-        private void OnPauseButtonClicked()
+        private static void OnPauseButtonClicked()
         {
-            //_pausePanel.rootVisualElement.Q<VisualElement>("ve_container").style.display = DisplayStyle.Flex;
             UiEvents.PausePopupShow.Invoke();
         }
         

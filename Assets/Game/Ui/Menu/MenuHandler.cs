@@ -11,7 +11,7 @@ namespace Game.Ui.Menu
         
         private const string _midleScoreKey = "MiddleScoreValue";
         private const string _midleScoreTitleKey = "MiddleScoreTitle";
-        private const string _continueButtonKey = "ContinueGameButton";
+        private const string _resumeButtonKey = "ResumeGameButton";
         private const string _newGameButtonKey = "NewGameGameButton";
 
         private UIDocument _uiDocument;
@@ -22,7 +22,7 @@ namespace Game.Ui.Menu
         private Label _midleScoreLabel;
         private Label _midleScoreTitleLabel;
         
-        private Button _continueButton;
+        private Button _resumeButton;
         private Button _newGameButton;
         
         private void Awake()
@@ -72,12 +72,12 @@ namespace Game.Ui.Menu
         
         private void SetupGameButtons()
         {
-            _continueButton = _root.Q<Button>(_continueButtonKey);
+            _resumeButton = _root.Q<Button>(_resumeButtonKey);
             _newGameButton = _root.Q<Button>(_newGameButtonKey);
         }
         private void UpdateGameButtons()
         {
-            SetContinueButtonState();
+            SetResumeButtonState();
         }
 
         #endregion
@@ -86,13 +86,13 @@ namespace Game.Ui.Menu
 
         private void OnEnable()
         {
-            _continueButton.clicked += OnContinueButtonCliked;
+            _resumeButton.clicked += OnResumeButtonCliked;
             _newGameButton.clicked += OnNewGameButtonCliked;
         }
         
         private void OnDisable()
         {
-            _continueButton.clicked -= OnContinueButtonCliked;
+            _resumeButton.clicked -= OnResumeButtonCliked;
             _newGameButton.clicked -= OnNewGameButtonCliked;
         }
 
@@ -100,7 +100,7 @@ namespace Game.Ui.Menu
         
         #region Button Events
         
-        private static void OnContinueButtonCliked()
+        private static void OnResumeButtonCliked()
         {
             LoadGameScene();
         }
@@ -115,10 +115,10 @@ namespace Game.Ui.Menu
 
         #region Functions
 
-        private void SetContinueButtonState()
+        private void SetResumeButtonState()
         {
             var currentScore = Saver.CurrentScore.LoadInt();
-            _continueButton.SetEnabled(currentScore > 0);
+            _resumeButton.SetEnabled(currentScore > 0);
         }
         
         private static void LoadGameScene()
