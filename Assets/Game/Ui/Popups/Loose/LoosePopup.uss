@@ -8,7 +8,7 @@
 }
 
 .loose-title {
-    font-size: 140px;
+    font-size: 120px;
     -unity-font-style: bold;
     color: rgb(44, 46, 51);
     margin-top: 65px;
@@ -20,11 +20,30 @@
     justify-content: center;
 }
 
-.loose-button-container__placement {
-    width: 100%;
+.loose-button-container__score {
+    justify-content: center;
     align-items: center;
+    width: 100%;
     height: 725px;
+}
+
+.loose-button-container__score-value {
+    font-size: 140px;
+    -unity-font-style: bold;
+    color: rgb(240, 248, 255);
+}
+
+.loose-button-container__score-title {
+    font-size: 50px;
+    color: rgb(44, 46, 51);
+}
+
+.loose-button-container__placement {
     justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 500px;
+    margin-bottom: 155px;
 }
 
 .loose-button {

@@ -4,7 +4,6 @@ using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
 using Game.Modules.GameMode;
-using Game.Modules.Ui.Popups;
 using Game.Modules.Utils;
 using Game.Ui;
 using Obvious.Soap;

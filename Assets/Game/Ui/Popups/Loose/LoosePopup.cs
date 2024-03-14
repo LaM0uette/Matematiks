@@ -8,8 +8,11 @@ namespace Game.Ui.Popups.Loose
     {
         #region Statements
         
+        private const string _looseScoreKey = "LooseScoreValue";
         private const string _menuButtonKey = "LooseMenuButton";
         private const string _restartButtonKey = "LooseRestartButton";
+        
+        private Label _looseScore;
         
         private Button _menuButton;
         private Button _restartButton;
@@ -24,6 +27,8 @@ namespace Game.Ui.Popups.Loose
         
         protected override void SetVisualElements()
         {
+            _looseScore = TopElement.Q<Label>(_looseScoreKey);
+            
             _menuButton = TopElement.Q<Button>(_menuButtonKey);
             _restartButton = TopElement.Q<Button>(_restartButtonKey);
         }
@@ -38,6 +43,12 @@ namespace Game.Ui.Popups.Loose
         {
             _menuButton.clicked -= OnMenuButtonClicked;
             _restartButton.clicked -= OnRestartButtonClicked;
+        }
+
+        public override void Show()
+        {
+            base.Show();
+            _looseScore.text = Saver.LastScore.LoadInt().ToString();
         }
         
         private static void OnMenuButtonClicked()

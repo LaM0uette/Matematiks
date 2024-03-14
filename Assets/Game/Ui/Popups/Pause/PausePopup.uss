@@ -1,4 +1,4 @@
-.loose-popup__container {
+.pause-popup__container {
     flex-grow: 1;
     background-color: rgb(78, 83, 93);
     border-width: 6px;
@@ -7,30 +7,30 @@
     align-items: center;
 }
 
-.loose-title {
+.pause-title {
     font-size: 140px;
     -unity-font-style: bold;
     color: rgb(44, 46, 51);
     margin-top: 65px;
 }
 
-.loose-buttons-container {
+.pause-buttons-container {
     width: 100%;
     align-items: center;
     justify-content: center;
 }
 
-.loose-button-container__placement {
+.pause-button-container__placement {
     width: 100%;
     align-items: center;
-    height: 500px;
+    height: 740px;
     justify-content: space-around;
 }
 
-.loose-continue-button {
-    width: 100%;
+.pause-resume-button {
+    width: 90%;
 }
 
-.loose-button {
+.pause-button {
     width: 65%;
 }
