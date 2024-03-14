@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
+using Game.Ui;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -222,7 +223,7 @@ namespace Game.Modules.GameMode
                     if (_gem < 200)
                     {
                         GameManager.Instance.CurrentBonus = 0;
-                        _levelManager.UpdateBoardEvent.Raise();
+                        UiEvents.RefreshUiEvent.Invoke();
                         return;
                     }
                     GameManager.Instance.CurrentBonus = 1;
@@ -232,7 +233,7 @@ namespace Game.Modules.GameMode
                     if (_gem < 400)
                     {
                         GameManager.Instance.CurrentBonus = 0;
-                        _levelManager.UpdateBoardEvent.Raise();
+                        UiEvents.RefreshUiEvent.Invoke();
                         return;
                     }
                     GameManager.Instance.CurrentBonus = 2;
@@ -242,7 +243,7 @@ namespace Game.Modules.GameMode
                     if (_gem < 600)
                     {
                         GameManager.Instance.CurrentBonus = 0;
-                        _levelManager.UpdateBoardEvent.Raise();
+                        UiEvents.RefreshUiEvent.Invoke();
                         return;
                     }
                     GameManager.Instance.CurrentBonus = 3;
@@ -252,7 +253,7 @@ namespace Game.Modules.GameMode
                     if (_gem < 999)
                     {
                         GameManager.Instance.CurrentBonus = 0;
-                        _levelManager.UpdateBoardEvent.Raise();
+                        UiEvents.RefreshUiEvent.Invoke();
                         return;
                     }
                     GameManager.Instance.CurrentBonus = 4;

@@ -1,5 +1,6 @@
 using Game.Modules.Manager;
 using Game.Modules.Utils;
+using Game.Ui;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -24,7 +25,6 @@ namespace Game.Modules.Board.Balls
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _mouseIsDownVariable;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
-        [SerializeField] private ScriptableEventNoParam _updateBoardEvent;
 
         #endregion
         
@@ -35,7 +35,7 @@ namespace Game.Modules.Board.Balls
             if (GameManager.Instance.CurrentBonus == 1)
             {
                 GameManager.Instance.CurrentBonus = 0;
-                _updateBoardEvent.Raise();
+                UiEvents.RefreshUiEvent.Invoke();
                 Destroy(gameObject);
                 return;
             }
@@ -48,7 +48,7 @@ namespace Game.Modules.Board.Balls
                 
                 SetNum(--Number);
                 
-                _updateBoardEvent.Raise();
+                UiEvents.RefreshUiEvent.Invoke();
                 return;
             }
             if (GameManager.Instance.CurrentBonus == 3)
@@ -57,7 +57,7 @@ namespace Game.Modules.Board.Balls
                 
                 SetNum(++Number);
                 
-                _updateBoardEvent.Raise();
+                UiEvents.RefreshUiEvent.Invoke();
                 return;
             }
             if (GameManager.Instance.CurrentBonus == 4)
@@ -71,7 +71,7 @@ namespace Game.Modules.Board.Balls
                         Destroy(ball.gameObject);
                 }
                 
-                _updateBoardEvent.Raise();
+                UiEvents.RefreshUiEvent.Invoke();
                 return;
             }
             

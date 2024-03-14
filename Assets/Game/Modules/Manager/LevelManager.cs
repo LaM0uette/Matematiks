@@ -6,6 +6,7 @@ using Game.Modules.Board.Cells;
 using Game.Modules.GameMode;
 using Game.Modules.Ui.Popups;
 using Game.Modules.Utils;
+using Game.Ui;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -30,7 +31,6 @@ namespace Game.Modules.Manager
         [Space, Title("Soap")]
         public ScriptableListWeightedBall WeightedBalls;
         public ScriptableEventInt BonusEvent;
-        public ScriptableEventNoParam UpdateBoardEvent;
         [SerializeField] private ScriptableEventNoParam _releaseEvent;
         [SerializeField] private ScriptableEventInt _gemEvent;
         [SerializeField] private ScriptableEventInt _scoreEvent;
@@ -39,7 +39,6 @@ namespace Game.Modules.Manager
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
         [SerializeField] private BoolVariable _isLoose;
-        [SerializeField] private ScriptableEventNoParam _looseEvent;
         
         private IGameMode _gameMode;
         
@@ -104,14 +103,14 @@ namespace Game.Modules.Manager
         private void OnEnable()
         {
             _releaseEvent.OnRaised += OnRelease;
-            UpdateBoardEvent.OnRaised += OnUpdateBoard;
+            UiEvents.RefreshUiEvent += OnUpdateBoard;
             _ballSelectedEvent.OnRaised += OnBallSelected;
         }
 
         private void OnDisable()
         {
             _releaseEvent.OnRaised -= OnRelease;
-            UpdateBoardEvent.OnRaised -= OnUpdateBoard;
+            UiEvents.RefreshUiEvent -= OnUpdateBoard;
             _ballSelectedEvent.OnRaised -= OnBallSelected;
         }
 
@@ -279,8 +278,9 @@ namespace Game.Modules.Manager
         public void LooseGame()
         {
             _isLoose.Value = true;
-            _looseEvent.Raise();
             _uiLooseButtonsHandler.Show();
+            
+            UiEvents.LooseEvent.Invoke();
         }
 
         private void FillBoardGrid()

@@ -12,8 +12,6 @@ namespace Game.Ui.Game
         
         // TODO: a supprimer probablement
         [SerializeField] private ScriptableEventInt _bonusEvent;
-        [SerializeField] private ScriptableEventNoParam _looseEvent;
-        [SerializeField] private ScriptableEventNoParam _updateBoardEvent;
         
         private const string _currentScoreKey = "CurrentScoreValue";
         private const string _bonusCard01Key = "BonusCard01";
@@ -94,10 +92,11 @@ namespace Game.Ui.Game
 
         private void OnEnable()
         {
+            UiEvents.LooseEvent += OnLooseEvent;
+            UiEvents.RefreshUiEvent += OnUpdateBoardEvent;
+            
             _gemEvent.OnRaised += OnGemRaised;
             _currentScoreEvent.OnRaised += OnCurrentScoreRaised;
-            _updateBoardEvent.OnRaised += OnUpdateBoardEvent;
-            _looseEvent.OnRaised += OnLooseEvent;
             
             _bonusCard01.clicked += OnBonusCard01Clicked;
             _bonusCard02.clicked += OnBonusCard02Clicked;
@@ -109,10 +108,11 @@ namespace Game.Ui.Game
         
         private void OnDisable()
         {
+            UiEvents.LooseEvent -= OnLooseEvent;
+            UiEvents.RefreshUiEvent -= OnUpdateBoardEvent;
+            
             _gemEvent.OnRaised -= OnGemRaised;
             _currentScoreEvent.OnRaised -= OnCurrentScoreRaised;
-            _updateBoardEvent.OnRaised -= OnUpdateBoardEvent;
-            _looseEvent.OnRaised -= OnLooseEvent;
             
             _bonusCard01.clicked -= OnBonusCard01Clicked;
             _bonusCard02.clicked -= OnBonusCard02Clicked;
@@ -219,7 +219,6 @@ namespace Game.Ui.Game
         #endregion
         
         // TODO: a supprimer probablement
-        
         private void OnUpdateBoardEvent()
         {
             ShowBonusCards();
