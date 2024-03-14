@@ -15,8 +15,9 @@
 }
 
 .game-button__icon {
-    width: 75px;
-    height: 75px;
-    margin-left: 30px;
+    width: 85px;
+    height: 75%;
+    margin-left: 35px;
     -unity-background-image-tint-color: rgb(44, 46, 51);
+    -unity-background-scale-mode: scale-to-fit;
 }

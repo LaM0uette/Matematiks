@@ -1,0 +1,13 @@
+.main {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0.45);
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.popup {
+    width: 95%;
+    height: 60%;
+    margin-top: 410px;
+}

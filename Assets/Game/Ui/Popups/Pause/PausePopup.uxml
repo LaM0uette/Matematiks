@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/Ui/Popups/Pause/PausePopup.uss?fileID=7433441132597879392&amp;guid=70f67f1ab25f2c342b51d2d8c3bbfb44&amp;type=3#PausePopup" />
+    <ui:VisualElement name="PausePopupContainer" class="pause-popup__container">
+        <ui:Label tabindex="-1" text="PAUSE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseTitle" class="pause-title" />
+        <ui:VisualElement name="PauseButtonsContainer" class="pause-buttons-container" style="flex-grow: 1;">
+            <ui:VisualElement class="pause-button-container__placement">
+                <Game.Ui.Components.GameButton.GameButton text="MENU" icon-name="home" name="PauseMenuButton" class="pause-button" />
+                <Game.Ui.Components.GameButton.GameButton text="CONTINUE" icon-name="play" name="PauseContinueButton" class="pause-continue-button" style="height: 250px; font-size: 80px;" />
+                <Game.Ui.Components.GameButton.GameButton text="RESTART" icon-name="refresh" name="PauseRestartButton" class="pause-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

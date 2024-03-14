@@ -3828,6 +3828,67 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3603367633483972895, guid: 06fa704d40485bb45b93fb9bf20e2a4b, type: 3}
   m_PrefabInstance: {fileID: 1611864994}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1656902191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1656902192}
+  - component: {fileID: 1656902194}
+  - component: {fileID: 1656902193}
+  m_Layer: 5
+  m_Name: PopupManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1656902192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656902191}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1764050988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1656902193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656902191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1517b237dda674f9e1d86150dce811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1656902194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656902191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 8d3a3c431b3551245833f0db768ca6c8, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 6b4a281aa37ea9644bb07c4d08b33e71, type: 3}
+  m_SortingOrder: 0
 --- !u!1001 &1696843228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4086,8 +4147,9 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1698804975}
-  - {fileID: 190752984}
   - {fileID: 1332964288}
+  - {fileID: 190752984}
+  - {fileID: 1656902192}
   - {fileID: 441426821}
   - {fileID: 1049077454}
   m_Father: {fileID: 0}

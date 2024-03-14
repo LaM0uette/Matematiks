@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="PausePopup" src="project://database/Assets/Game/Ui/Popups/Pause/PausePopup.uxml?fileID=9197481963319205126&amp;guid=2a27b51d23bd7b5458fc4f4e5e7792f9&amp;type=3#PausePopup" />
+    <Style src="project://database/Assets/Game/Ui/Popups/Popup.uss?fileID=7433441132597879392&amp;guid=a2547df0b83a14c4e8ff73be31bac3c4&amp;type=3#Popup" />
+    <ui:VisualElement name="Main" class="main">
+        <ui:Instance template="PausePopup" name="PausePopup" class="popup" />
+    </ui:VisualElement>
+</ui:UXML>

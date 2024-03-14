@@ -1,0 +1,36 @@
+.pause-popup__container {
+    flex-grow: 1;
+    background-color: rgb(78, 83, 93);
+    border-width: 6px;
+    border-color: rgb(44, 46, 51);
+    border-radius: 15px;
+    align-items: center;
+}
+
+.pause-title {
+    font-size: 140px;
+    -unity-font-style: bold;
+    color: rgb(44, 46, 51);
+    margin-top: 65px;
+}
+
+.pause-buttons-container {
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+}
+
+.pause-button-container__placement {
+    width: 100%;
+    align-items: center;
+    height: 725px;
+    justify-content: space-around;
+}
+
+.pause-continue-button {
+    width: 100%;
+}
+
+.pause-button {
+    width: 65%;
+}

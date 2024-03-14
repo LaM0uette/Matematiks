@@ -173,7 +173,8 @@ namespace Game.Ui.Game
         
         private void OnPauseButtonClicked()
         {
-            _pausePanel.rootVisualElement.Q<VisualElement>("ve_container").style.display = DisplayStyle.Flex;
+            //_pausePanel.rootVisualElement.Q<VisualElement>("ve_container").style.display = DisplayStyle.Flex;
+            UiEvents.PausePopupShow.Invoke();
         }
         
         #endregion
@@ -232,9 +233,6 @@ namespace Game.Ui.Game
         
         private void OnLooseEvent()
         {
-            //_veBonus.style.display = DisplayStyle.None;
-            //_veLoose.style.display = DisplayStyle.Flex;
-
             HideBonusCards();
             _pauseButton.style.visibility = Visibility.Hidden;
         }
