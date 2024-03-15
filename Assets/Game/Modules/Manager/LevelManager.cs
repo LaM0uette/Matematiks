@@ -22,6 +22,8 @@ namespace Game.Modules.Manager
         [SerializeField] private GameObject _ballPrefab;
         [SerializeField] private LineRenderer _lineRenderer;
         [SerializeField] private Material _lineRendererMaterial;
+        
+        [Space, Title("Board settings")]
         [SerializeField] private float _maxDistanceBetweenBalls = 1.3f;
         [SerializeField] private int _removeOldBallsThreshold = 8;
         
