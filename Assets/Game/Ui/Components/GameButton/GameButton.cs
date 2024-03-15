@@ -22,19 +22,30 @@ namespace Game.Ui.Components.GameButton
             }
         }
 
-        public string IconName { get; set; }
+        private string _iconName;
+        public string IconName
+        {
+            get => _iconName;
+            set
+            {
+                var icon = Resources.Load<VectorImage>(value);
+            
+                if(icon == null)
+                    return;
+            
+                _iconName = value;
+                _iconElement.style.backgroundImage = new StyleBackground(icon);
+            }
+        }
+
+        private VisualElement _iconElement;
 
         public GameButton()
         {
-            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
-        }
-    
-        private void OnAttachedToPanel(AttachToPanelEvent evt)
-        {
             AddStyleSheet();
-            AddIcon();
+            CreateIcon();
         }
-
+        
         #endregion
 
         #region Functions
@@ -46,16 +57,11 @@ namespace Game.Ui.Components.GameButton
             AddToClassList("game-button");
         }
 
-        private void AddIcon()
+        private void CreateIcon()
         {
-            var icon = Resources.Load<VectorImage>(IconName);
-            if(icon == null)
-                return;
-
-            VisualElement iconElement = new() { name = "Icon", pickingMode = PickingMode.Ignore };
-            iconElement.AddToClassList("game-button__icon");
-            iconElement.style.backgroundImage = new StyleBackground(icon);
-            Add(iconElement);
+            _iconElement = new VisualElement { name = "Icon", pickingMode = PickingMode.Ignore };
+            _iconElement.AddToClassList("game-button__icon");
+            Add(_iconElement);
         }
 
         #endregion

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.Modules.Bonus;
 using Game.Modules.Events;
@@ -49,6 +50,7 @@ namespace Game.Ui.Game
         
         private void Start()
         {
+            InitBonusData();
             UpdateHeaderScores();
             UpdateCurrentScore(Saver.CurrentScore.LoadInt());
         }
@@ -69,6 +71,20 @@ namespace Game.Ui.Game
                     Debug.LogWarning($"Duplicate Bonus ID found: {bonus.BonusId}. Ignoring duplicate.");
                 }
             }
+        }
+
+        private void InitBonusData()
+        {
+            if (_bonusDataDictionary == null)
+                throw new Exception("No bonus data found. Skipping initialization.");
+            
+            if (_bonusDataDictionary.Count < 4)
+                throw new Exception("Not enough bonus data found. Skipping initialization.");
+            
+            _bonusCard01.SetPrice(_bonusDataDictionary[0].Cost);
+            _bonusCard02.SetPrice(_bonusDataDictionary[1].Cost);
+            _bonusCard03.SetPrice(_bonusDataDictionary[2].Cost);
+            _bonusCard04.SetPrice(_bonusDataDictionary[3].Cost);
         }
         
         private void SetupHeaderScores()

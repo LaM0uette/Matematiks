@@ -8,9 +8,9 @@
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="BottomContainer" class="game-bottom">
-        <Game.Ui.Components.BonusCard.BonusCard name="BonusCard01" icon-name="Icons/hammer" price="200" />
-        <Game.Ui.Components.BonusCard.BonusCard name="BonusCard02" icon-name="Icons/minus-one" price="400" />
-        <Game.Ui.Components.BonusCard.BonusCard name="BonusCard03" icon-name="Icons/plus-one" price="600" />
+        <Game.Ui.Components.BonusCard.BonusCard name="BonusCard01" icon-name="Icons/hammer" price="250" />
+        <Game.Ui.Components.BonusCard.BonusCard name="BonusCard02" icon-name="Icons/minus-one" price="450" />
+        <Game.Ui.Components.BonusCard.BonusCard name="BonusCard03" icon-name="Icons/plus-one" price="650" />
         <Game.Ui.Components.BonusCard.BonusCard name="BonusCard04" icon-name="Icons/destroy" price="999" />
         <Game.Ui.Components.IconButton.IconButton icon-name="pause" name="PauseButton" class="game-bottom__pause-button" />
     </ui:VisualElement>

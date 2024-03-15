@@ -12,7 +12,6 @@ namespace Game.Ui.Components.BonusCard
         public new class UxmlTraits : Button.UxmlTraits
         {
             private readonly UxmlStringAttributeDescription _iconName = new() { name = "icon-name" };
-            private readonly UxmlIntAttributeDescription _price = new() { name = "price" };
 
             public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
             {
@@ -22,36 +21,52 @@ namespace Game.Ui.Components.BonusCard
                     return;
                 
                 bonusCard.IconName = _iconName.GetValueFromBag(bag, cc);
-                bonusCard.Price = _price.GetValueFromBag(bag, cc);
             }
         }
 
         private const string _gemIconKey = "Icons/diamond";
         
-        public string IconName { get; set; }
-        public int Price { get; set; }
+        private string _iconName;
+        public string IconName
+        {
+            get => _iconName;
+            set
+            {
+                var icon = Resources.Load<VectorImage>(value);
+            
+                if(icon == null)
+                    return;
+            
+                _iconName = value;
+                _iconElement.style.backgroundImage = new StyleBackground(icon);
+            }
+        }
 
+        private VisualElement _iconElement;
+        private VisualElement _priceIconElement;
+        private Label _priceLabel;
+        
         public BonusCard()
         {
-            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
-        }
-    
-        private void OnAttachedToPanel(AttachToPanelEvent evt)
-        {
             AddStyleSheet();
-            AddIcon();
-            AddPrice();
+            CreateIcon();
+            CreatePrice();
         }
 
         #endregion
 
         #region Functions
+
+        public void SetPrice(int value)
+        {
+            _priceLabel.text = value.ToString();
+        }
         
         public void Select() => AddToClassList("bonus-card--selected");
         public void Unselect() => RemoveFromClassList("bonus-card--selected");
         public void Show() => style.display = DisplayStyle.Flex;
         public void Hide() => style.display = DisplayStyle.None;
-
+        
         private void AddStyleSheet()
         {
             var styleSheet = Resources.Load<StyleSheet>( "BonusCard");
@@ -59,37 +74,28 @@ namespace Game.Ui.Components.BonusCard
             AddToClassList("bonus-card");
         }
 
-        private void AddIcon()
+        private void CreateIcon()
         {
-            var icon = Resources.Load<VectorImage>(IconName);
-            if(icon == null)
-                return;
-
-            VisualElement iconElement = new() { name = "Icon", pickingMode = PickingMode.Ignore };
-            iconElement.AddToClassList("bonus-card__icon");
-            iconElement.style.backgroundImage = new StyleBackground(icon);
-            Add(iconElement);
+            _iconElement = new VisualElement { name = "Icon", pickingMode = PickingMode.Ignore };
+            _iconElement.AddToClassList("bonus-card__icon");
+            Add(_iconElement);
         }
         
-        private void AddPrice()
+        private void CreatePrice()
         {
-            VisualElement priceContainerElement = new() { name = "PriceContainer", pickingMode = PickingMode.Ignore };
+            var priceContainerElement = new VisualElement { name = "PriceContainer", pickingMode = PickingMode.Ignore };
             priceContainerElement.AddToClassList("price-container");
-            
-            var icon = Resources.Load<VectorImage>(_gemIconKey);
-            if(icon == null)
-                return;
 
-            VisualElement iconElement = new() { name = "PriceIcon", pickingMode = PickingMode.Ignore };
-            iconElement.AddToClassList("price-container__icon");
-            iconElement.style.backgroundImage = new StyleBackground(icon);
+            _priceIconElement = new VisualElement { name = "PriceIcon", pickingMode = PickingMode.Ignore };
+            var icon = Resources.Load<VectorImage>(_gemIconKey);
+            _priceIconElement.style.backgroundImage = new StyleBackground(icon);
+            _priceIconElement.AddToClassList("price-container__icon");
             
-            Label priceLabel = new() { name = "PriceLabel", pickingMode = PickingMode.Ignore };
-            priceLabel.AddToClassList("price-container__value");
-            priceLabel.text = Price.ToString();
+            _priceLabel = new Label { name = "PriceLabel", pickingMode = PickingMode.Ignore };
+            _priceLabel.AddToClassList("price-container__value");
             
-            priceContainerElement.Add(iconElement);
-            priceContainerElement.Add(priceLabel);
+            priceContainerElement.Add(_priceIconElement);
+            priceContainerElement.Add(_priceLabel);
             Add(priceContainerElement);
         }
 

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bonus_01
   m_EditorClassIdentifier: 
   BonusId: 0
-  Cost: 200
+  Cost: 250
