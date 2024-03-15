@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Game.Modules.Board.Balls;
 using UnityEngine;
 
@@ -6,7 +8,29 @@ namespace Game.Modules.Utils
 {
     public static class Saver
     {
-        #region Keys
+        #region Wrapper
+
+        [Serializable]
+        private class IntWrapper
+        {
+            public int value;
+        }
+        
+        [Serializable]
+        private class IntListWrapper
+        {
+            public List<int> list;
+        }
+        
+        [Serializable]
+        private class WeightedBallListWrapper
+        {
+            public List<WeightedBall> list;
+        }
+
+        #endregion
+
+        #region Statements
 
         public const string Gem = "Gem";
         public const string HighScore = "HighScore";
@@ -16,31 +40,31 @@ namespace Game.Modules.Utils
         public const string CurrentBalls = "CurrentBalls";
         public const string CurrentWeightedBalls = "CurrentWeightedBalls";
         
+        private static string FilePath(string key) => Path.Combine(Application.persistentDataPath, $"{key}.json");
+
         #endregion
 
         #region Save
 
         public static void Save(this string key, int value)
         {
-            PlayerPrefs.SetInt(key, value);
+            var wrapper = new IntWrapper { value = value };
+            var json = JsonUtility.ToJson(wrapper);
+            File.WriteAllText(FilePath(key), json);
         }
-        
+
         public static void Save(this string key, IEnumerable<int> values)
         {
-            var parsedValue = "";
-            
-            foreach (var value in values)
-            {
-                parsedValue += value + ";";
-            }
-            
-            PlayerPrefs.SetString(key, parsedValue);
+            var wrapper = new IntListWrapper { list = new List<int>(values) };
+            var json = JsonUtility.ToJson(wrapper);
+            File.WriteAllText(FilePath(key), json);
         }
-        
+
         public static void Save(this string key, List<WeightedBall> weightedBalls)
         {
-            var json = JsonUtility.ToJson(new Serialization<List<WeightedBall>>(weightedBalls));
-            PlayerPrefs.SetString(key, json);
+            var wrapper = new WeightedBallListWrapper { list = weightedBalls };
+            var json = JsonUtility.ToJson(wrapper);
+            File.WriteAllText(FilePath(key), json);
         }
 
         #endregion
@@ -49,50 +73,57 @@ namespace Game.Modules.Utils
 
         public static int LoadInt(this string key)
         {
-            return PlayerPrefs.GetInt(key, 0);
+            var path = FilePath(key);
+            
+            if (!File.Exists(path)) 
+                return 0;
+            
+            var json = File.ReadAllText(path);
+            var wrapper = JsonUtility.FromJson<IntWrapper>(json);
+            return wrapper.value;
         }
-        
+
         public static List<int> LoadListInt(this string key)
         {
-            var ballsParsed = PlayerPrefs.GetString(key, "");
-            var balls = new List<int>();
+            var path = FilePath(key);
             
-            foreach (var ballNumber in ballsParsed.Split(';'))
-            {
-                if (ballNumber == "") 
-                    continue;
-                
-                balls.Add(int.Parse(ballNumber));
-            }
-
-            return balls;
+            if (!File.Exists(path)) 
+                return new List<int>();
+            
+            var json = File.ReadAllText(path);
+            var wrapper = JsonUtility.FromJson<IntListWrapper>(json);
+            return wrapper.list;
         }
-        
+
         public static List<WeightedBall> LoadListWeightedBall(this string key)
         {
-            if (PlayerPrefs.HasKey(key))
-            {
-                var json = PlayerPrefs.GetString(key);
-                var serialization = JsonUtility.FromJson<Serialization<List<WeightedBall>>>(json);
-                return serialization.data;
-            }
-
-            return new List<WeightedBall>();
+            var path = FilePath(key);
+            
+            if (!File.Exists(path)) 
+                return new List<WeightedBall>();
+            
+            var json = File.ReadAllText(path);
+            var wrapper = JsonUtility.FromJson<WeightedBallListWrapper>(json);
+            return wrapper.list;
         }
 
         #endregion
-        
+
         #region Delete
 
         public static void Delete(this string key)
         {
-            PlayerPrefs.DeleteKey(key);
+            var path = FilePath(key);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
         }
 
         #endregion
 
-        #region Functions
-        
+        #region Reset
+
         public static void ResetAll()
         {
             Gem.Delete();

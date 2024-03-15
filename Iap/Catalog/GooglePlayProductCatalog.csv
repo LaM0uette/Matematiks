@@ -1,8 +1,0 @@
-Product ID,Published State,Purchase Type,Auto Translate,Locale; Title; Description,Auto Fill Prices,Price,Pricing Template ID
-gem_tier_1,published,managed_by_android,false,en_US;GEM PACK TIER 1;Gain 400 gem,true,990000,
-gem_tier_2,published,managed_by_android,false,en_US;GEM PACK TIER 2;Gain 1 000 gem,true,1990000,
-gem_tier_3,published,managed_by_android,false,en_US;GEM PACK TIER 3;Gain 5 000 gem,true,4990000,
-gem_tier_4,published,managed_by_android,false,en_US;GEM PACK TIER 4;Gain 15 000 gem,true,9990000,
-gem_tier_5,published,managed_by_android,false,en_US;GEM PACK TIER 5;Gain 50 000 gem,true,24990000,
-gem_tier_6,published,managed_by_android,false,en_US;GEM PACK TIER 6;Gain 150 000 gem,true,49990000,
-gem_tier_7,published,managed_by_android,false,en_US;GEM PACK TIER 7;Gain 500 000 gem,true,99990000,
