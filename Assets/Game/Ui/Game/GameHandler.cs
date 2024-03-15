@@ -98,10 +98,10 @@ namespace Game.Ui.Game
             _gemEvent.OnRaised += OnGemRaised;
             _currentScoreEvent.OnRaised += OnCurrentScoreRaised;
             
-            _bonusCard01.clicked += OnBonusCard01Clicked;
-            _bonusCard02.clicked += OnBonusCard02Clicked;
-            _bonusCard03.clicked += OnBonusCard03Clicked;
-            _bonusCard04.clicked += OnBonusCard04Clicked;
+            _bonusCard01.clicked += () => OnBonusCardClicked(_bonusCard01, 1);
+            _bonusCard02.clicked += () => OnBonusCardClicked(_bonusCard02, 2);
+            _bonusCard03.clicked += () => OnBonusCardClicked(_bonusCard03, 3);
+            _bonusCard04.clicked += () => OnBonusCardClicked(_bonusCard04, 4);
             
             _pauseButton.clicked += OnPauseButtonClicked;
         }
@@ -114,11 +114,6 @@ namespace Game.Ui.Game
             _gemEvent.OnRaised -= OnGemRaised;
             _currentScoreEvent.OnRaised -= OnCurrentScoreRaised;
             
-            _bonusCard01.clicked -= OnBonusCard01Clicked;
-            _bonusCard02.clicked -= OnBonusCard02Clicked;
-            _bonusCard03.clicked -= OnBonusCard03Clicked;
-            _bonusCard04.clicked -= OnBonusCard04Clicked;
-            
             _pauseButton.clicked -= OnPauseButtonClicked;
         }
 
@@ -126,44 +121,14 @@ namespace Game.Ui.Game
         
         #region Button Events
         
-        private void OnBonusCard01Clicked()
+        private void OnBonusCardClicked(BonusCard bonusCard, int bonusId)
         {
             HideBonusCards();
             
-            _bonusCard01.Show();
-            _bonusCard01.Select();
+            bonusCard.Show();
+            bonusCard.Select();
             
-            _bonusEvent.Raise(1);
-        }
-        
-        private void OnBonusCard02Clicked()
-        {
-            HideBonusCards();
-            
-            _bonusCard02.Show();
-            _bonusCard02.Select();
-            
-            _bonusEvent.Raise(2);
-        }
-        
-        private void OnBonusCard03Clicked()
-        {
-            HideBonusCards();
-            
-            _bonusCard03.Show();
-            _bonusCard03.Select();
-            
-            _bonusEvent.Raise(3);
-        }
-        
-        private void OnBonusCard04Clicked()
-        {
-            HideBonusCards();
-            
-            _bonusCard04.Show();
-            _bonusCard04.Select();
-            
-            _bonusEvent.Raise(4);
+            _bonusEvent.Raise(bonusId);
         }
         
         private static void OnPauseButtonClicked()
@@ -192,6 +157,17 @@ namespace Game.Ui.Game
             _headerScores.UpdateHighScore(value);
         }
         
+        private void OnUpdateBoardEvent()
+        {
+            ShowBonusCards();
+        }
+        
+        private void OnLooseEvent()
+        {
+            HideBonusCards();
+            _pauseButton.style.visibility = Visibility.Hidden;
+        }
+        
         private void ShowBonusCards()
         {
             _bonusCard01.Unselect();
@@ -217,17 +193,5 @@ namespace Game.Ui.Game
         }
 
         #endregion
-        
-        // TODO: a supprimer probablement
-        private void OnUpdateBoardEvent()
-        {
-            ShowBonusCards();
-        }
-        
-        private void OnLooseEvent()
-        {
-            HideBonusCards();
-            _pauseButton.style.visibility = Visibility.Hidden;
-        }
     }
 }
