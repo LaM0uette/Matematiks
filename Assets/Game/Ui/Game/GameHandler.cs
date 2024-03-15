@@ -60,6 +60,7 @@ namespace Game.Ui.Game
             InitBonusData();
             UpdateHeaderScores();
             UpdateCurrentScore(Saver.CurrentScore.LoadInt());
+            DisableBonusCardsToExpensives(Saver.Gem.LoadInt());
         }
 
         #endregion
