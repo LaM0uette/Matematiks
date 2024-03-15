@@ -1,12 +1,17 @@
+using System;
 using UnityEngine;
 
 namespace Game.Modules.Manager
 {
-    public class GameManager : MonoBehaviour
+    public class BonusManager : MonoBehaviour
     {
         #region Statements
 
-        public static GameManager Instance { get; private set; }
+        public static BonusManager Instance { get; private set; }
+        
+        public Action<int> BonusEvent;
+        
+        public int CurrentBonus { get; set; }
         
         private void Awake()
         {

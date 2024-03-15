@@ -44,7 +44,7 @@ namespace Game.Modules.Player
 
         private void OnPress()
         {
-            if (_ongoingAction.Value || GameManager.Instance.CurrentBonus != 0) 
+            if (_ongoingAction.Value || BonusManager.Instance.CurrentBonus != 0) 
                 return;
             
             _mouseDownVariable.Value = true;
@@ -52,7 +52,7 @@ namespace Game.Modules.Player
         
         private void OnRelease()
         {
-            if (_mouseDownVariable.Value == false || GameManager.Instance.CurrentBonus != 0) 
+            if (_mouseDownVariable.Value == false || BonusManager.Instance.CurrentBonus != 0) 
                 return;
 
             _mouseDownVariable.Value = false;

@@ -39,12 +39,12 @@ namespace Game.Modules.GameMode
 
         private void OnEnable()
         {
-            _levelManager.BonusEvent.OnRaised += OnBonusEvent;
+            BonusManager.Instance.BonusEvent += OnBonusEvent;
         }
 
         private void OnDisable()
         {
-            _levelManager.BonusEvent.OnRaised -= OnBonusEvent;
+            BonusManager.Instance.BonusEvent -= OnBonusEvent;
         }
         
         public void Initialize()
@@ -222,45 +222,45 @@ namespace Game.Modules.GameMode
                 case 1:
                     if (_gem < 200)
                     {
-                        GameManager.Instance.CurrentBonus = 0;
+                        BonusManager.Instance.CurrentBonus = 0;
                         UiEvents.RefreshUiEvent.Invoke();
                         return;
                     }
-                    GameManager.Instance.CurrentBonus = 1;
+                    BonusManager.Instance.CurrentBonus = 1;
                     _gem -= 200;
                     break;
                 case 2:
                     if (_gem < 400)
                     {
-                        GameManager.Instance.CurrentBonus = 0;
+                        BonusManager.Instance.CurrentBonus = 0;
                         UiEvents.RefreshUiEvent.Invoke();
                         return;
                     }
-                    GameManager.Instance.CurrentBonus = 2;
+                    BonusManager.Instance.CurrentBonus = 2;
                     _gem -= 400;
                     break;
                 case 3:
                     if (_gem < 600)
                     {
-                        GameManager.Instance.CurrentBonus = 0;
+                        BonusManager.Instance.CurrentBonus = 0;
                         UiEvents.RefreshUiEvent.Invoke();
                         return;
                     }
-                    GameManager.Instance.CurrentBonus = 3;
+                    BonusManager.Instance.CurrentBonus = 3;
                     _gem -= 600;
                     break;
                 case 4:
                     if (_gem < 999)
                     {
-                        GameManager.Instance.CurrentBonus = 0;
+                        BonusManager.Instance.CurrentBonus = 0;
                         UiEvents.RefreshUiEvent.Invoke();
                         return;
                     }
-                    GameManager.Instance.CurrentBonus = 4;
+                    BonusManager.Instance.CurrentBonus = 4;
                     _gem -= 999;
                     break;
                 default:
-                    GameManager.Instance.CurrentBonus = 0;
+                    BonusManager.Instance.CurrentBonus = 0;
                     break;
             }
             

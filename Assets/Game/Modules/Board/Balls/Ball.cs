@@ -32,37 +32,37 @@ namespace Game.Modules.Board.Balls
         
         private void OnMouseDown()
         {
-            if (GameManager.Instance.CurrentBonus == 1)
+            if (BonusManager.Instance.CurrentBonus == 1)
             {
-                GameManager.Instance.CurrentBonus = 0;
+                BonusManager.Instance.CurrentBonus = 0;
                 UiEvents.RefreshUiEvent.Invoke();
                 Destroy(gameObject);
                 return;
             }
-            if (GameManager.Instance.CurrentBonus == 2)
+            if (BonusManager.Instance.CurrentBonus == 2)
             {
                 if (Number <= 1)
                     return;
                 
-                GameManager.Instance.CurrentBonus = 0;
+                BonusManager.Instance.CurrentBonus = 0;
                 
                 SetNum(--Number);
                 
                 UiEvents.RefreshUiEvent.Invoke();
                 return;
             }
-            if (GameManager.Instance.CurrentBonus == 3)
+            if (BonusManager.Instance.CurrentBonus == 3)
             {
-                GameManager.Instance.CurrentBonus = 0;
+                BonusManager.Instance.CurrentBonus = 0;
                 
                 SetNum(++Number);
                 
                 UiEvents.RefreshUiEvent.Invoke();
                 return;
             }
-            if (GameManager.Instance.CurrentBonus == 4)
+            if (BonusManager.Instance.CurrentBonus == 4)
             {
-                GameManager.Instance.CurrentBonus = 0;
+                BonusManager.Instance.CurrentBonus = 0;
                 
                 var balls = FindObjectsOfType<Ball>();
                 foreach (var ball in balls)

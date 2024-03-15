@@ -26,7 +26,6 @@ namespace Game.Modules.Manager
         
         [Space, Title("Soap")]
         public ScriptableListWeightedBall WeightedBalls;
-        public ScriptableEventInt BonusEvent;
         [SerializeField] private ScriptableEventNoParam _releaseEvent;
         [SerializeField] private ScriptableEventInt _gemEvent;
         [SerializeField] private ScriptableEventInt _scoreEvent;

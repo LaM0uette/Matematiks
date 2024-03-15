@@ -1,3 +1,4 @@
+using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui.Components.BonusCard;
 using Obvious.Soap;
@@ -9,9 +10,6 @@ namespace Game.Ui.Game
     public class GameHandler : MonoBehaviour
     {
         #region Statements
-        
-        // TODO: a supprimer probablement
-        [SerializeField] private ScriptableEventInt _bonusEvent;
         
         private const string _currentScoreKey = "CurrentScoreValue";
         private const string _bonusCard01Key = "BonusCard01";
@@ -128,7 +126,7 @@ namespace Game.Ui.Game
             bonusCard.Show();
             bonusCard.Select();
             
-            _bonusEvent.Raise(bonusId);
+            BonusManager.Instance.BonusEvent?.Invoke(bonusId);
         }
         
         private static void OnPauseButtonClicked()
