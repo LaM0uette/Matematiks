@@ -32,50 +32,25 @@ namespace Game.Modules.Board.Balls
         
         private void OnMouseDown()
         {
-            if (BonusManager.Instance.CurrentBonus == 1)
+            if (BonusManager.Instance.CurrentBonus == null)
             {
-                BonusManager.Instance.CurrentBonus = 0;
-                UiEvents.RefreshUiEvent.Invoke();
-                Destroy(gameObject);
-                return;
-            }
-            if (BonusManager.Instance.CurrentBonus == 2)
-            {
-                if (Number <= 1)
-                    return;
-                
-                BonusManager.Instance.CurrentBonus = 0;
-                
-                SetNum(--Number);
-                
-                UiEvents.RefreshUiEvent.Invoke();
-                return;
-            }
-            if (BonusManager.Instance.CurrentBonus == 3)
-            {
-                BonusManager.Instance.CurrentBonus = 0;
-                
-                SetNum(++Number);
-                
-                UiEvents.RefreshUiEvent.Invoke();
-                return;
-            }
-            if (BonusManager.Instance.CurrentBonus == 4)
-            {
-                BonusManager.Instance.CurrentBonus = 0;
-                
-                var balls = FindObjectsOfType<Ball>();
-                foreach (var ball in balls)
-                {
-                    if (ball.Number == Number)
-                        Destroy(ball.gameObject);
-                }
-                
-                UiEvents.RefreshUiEvent.Invoke();
+                OnBallSelected();
                 return;
             }
             
-            OnBallSelected();
+            var bonusId = BonusManager.Instance.CurrentBonus.BonusId;
+            
+            switch (bonusId)
+            {
+                case 0: Bonus01(); break;
+                case 1 when Number <= 1: return;
+                case 1: Bonus02(); break;
+                case 2: Bonus03(); break;
+                case 3: Bonus04(); break;
+            }
+            
+            BonusManager.Instance.CurrentBonus = null;
+            UiEvents.RefreshUiEvent.Invoke();
         }
         
         private void OnMouseEnter()
@@ -148,6 +123,31 @@ namespace Game.Modules.Board.Balls
         {
             var luminance = 0.2126f * backgroundColor.r + 0.7152f * backgroundColor.g + 0.0722f * backgroundColor.b;
             return luminance > 0.5f ? ColorVar.BlackColor : ColorVar.WhiteColor;
+        }
+        
+        private void Bonus01()
+        {
+            Destroy(gameObject);
+        }
+        
+        private void Bonus02()
+        {
+            SetNum(--Number);
+        }
+        
+        private void Bonus03()
+        {
+            SetNum(++Number);
+        }
+        
+        private void Bonus04()
+        {
+            var balls = FindObjectsOfType<Ball>();
+            foreach (var ball in balls)
+            {
+                if (ball.Number == Number)
+                    Destroy(ball.gameObject);
+            }
         }
 
         #endregion

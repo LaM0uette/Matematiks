@@ -1,4 +1,5 @@
 using System;
+using Game.Modules.Bonus;
 using UnityEngine;
 
 namespace Game.Modules.Manager
@@ -9,9 +10,9 @@ namespace Game.Modules.Manager
 
         public static BonusManager Instance { get; private set; }
         
-        public Action<int> BonusEvent;
+        public Action<BonusData> BonusEvent;
         
-        public int CurrentBonus { get; set; }
+        public BonusData CurrentBonus { get; set; }
         
         private void Awake()
         {

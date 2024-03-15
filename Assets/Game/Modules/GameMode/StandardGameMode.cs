@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Modules.Board.Balls;
+using Game.Modules.Bonus;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui;
@@ -215,55 +216,18 @@ namespace Game.Modules.GameMode
             _levelManager.LooseGame();
         }
         
-        private void OnBonusEvent(int value)
+        private void OnBonusEvent(BonusData bonusData)
         {
-            switch (value)
+            if (_gem < bonusData.Cost)
             {
-                case 1:
-                    if (_gem < 200)
-                    {
-                        BonusManager.Instance.CurrentBonus = 0;
-                        UiEvents.RefreshUiEvent.Invoke();
-                        return;
-                    }
-                    BonusManager.Instance.CurrentBonus = 1;
-                    _gem -= 200;
-                    break;
-                case 2:
-                    if (_gem < 400)
-                    {
-                        BonusManager.Instance.CurrentBonus = 0;
-                        UiEvents.RefreshUiEvent.Invoke();
-                        return;
-                    }
-                    BonusManager.Instance.CurrentBonus = 2;
-                    _gem -= 400;
-                    break;
-                case 3:
-                    if (_gem < 600)
-                    {
-                        BonusManager.Instance.CurrentBonus = 0;
-                        UiEvents.RefreshUiEvent.Invoke();
-                        return;
-                    }
-                    BonusManager.Instance.CurrentBonus = 3;
-                    _gem -= 600;
-                    break;
-                case 4:
-                    if (_gem < 999)
-                    {
-                        BonusManager.Instance.CurrentBonus = 0;
-                        UiEvents.RefreshUiEvent.Invoke();
-                        return;
-                    }
-                    BonusManager.Instance.CurrentBonus = 4;
-                    _gem -= 999;
-                    break;
-                default:
-                    BonusManager.Instance.CurrentBonus = 0;
-                    break;
+                BonusManager.Instance.CurrentBonus = null;
+                UiEvents.RefreshUiEvent.Invoke();
+                return;
             }
             
+            BonusManager.Instance.CurrentBonus = bonusData;
+            
+            _gem -= bonusData.Cost;
             Saver.Gem.Save(_gem);
             _levelManager.RaiseGemEvent(_gem);
         }

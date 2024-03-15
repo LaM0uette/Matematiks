@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Game.Modules.Bonus;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui.Components.BonusCard;
@@ -28,6 +30,7 @@ namespace Game.Ui.Game
         
         private Label _currentScoreLabel;
         
+        private Dictionary<int, BonusData> _bonusDataDictionary;
         private BonusCard _bonusCard01;
         private BonusCard _bonusCard02;
         private BonusCard _bonusCard03;
@@ -39,6 +42,8 @@ namespace Game.Ui.Game
         {
             _uiDocument = GetComponent<UIDocument>();
             _root = _uiDocument.rootVisualElement;
+            
+            LoadBonusData();
             
             SetupHeaderScores();
             SetupCurrentScore();
@@ -54,6 +59,20 @@ namespace Game.Ui.Game
         #endregion
         
         #region Setup/Update
+        
+        private void LoadBonusData()
+        {
+            var bonuses = Resources.LoadAll<BonusData>("BonusData");
+            _bonusDataDictionary = new Dictionary<int, BonusData>();
+
+            foreach (var bonus in bonuses)
+            {
+                if (!_bonusDataDictionary.TryAdd(bonus.BonusId, bonus))
+                {
+                    Debug.LogWarning($"Duplicate Bonus ID found: {bonus.BonusId}. Ignoring duplicate.");
+                }
+            }
+        }
         
         private void SetupHeaderScores()
         {
@@ -96,10 +115,10 @@ namespace Game.Ui.Game
             _gemEvent.OnRaised += OnGemRaised;
             _currentScoreEvent.OnRaised += OnCurrentScoreRaised;
             
-            _bonusCard01.clicked += () => OnBonusCardClicked(_bonusCard01, 1);
-            _bonusCard02.clicked += () => OnBonusCardClicked(_bonusCard02, 2);
-            _bonusCard03.clicked += () => OnBonusCardClicked(_bonusCard03, 3);
-            _bonusCard04.clicked += () => OnBonusCardClicked(_bonusCard04, 4);
+            _bonusCard01.clicked += () => OnBonusCardClicked(_bonusCard01, 0);
+            _bonusCard02.clicked += () => OnBonusCardClicked(_bonusCard02, 1);
+            _bonusCard03.clicked += () => OnBonusCardClicked(_bonusCard03, 2);
+            _bonusCard04.clicked += () => OnBonusCardClicked(_bonusCard04, 3);
             
             _pauseButton.clicked += OnPauseButtonClicked;
         }
@@ -126,7 +145,15 @@ namespace Game.Ui.Game
             bonusCard.Show();
             bonusCard.Select();
             
-            BonusManager.Instance.BonusEvent?.Invoke(bonusId);
+            if (_bonusDataDictionary.TryGetValue(bonusId, out var bonusData))
+            {
+                BonusManager.Instance.BonusEvent?.Invoke(bonusData);
+            }
+            else
+            {
+                Debug.LogWarning($"No bonus data found for ID: {bonusId}");
+                ShowBonusCards();
+            }
         }
         
         private static void OnPauseButtonClicked()
