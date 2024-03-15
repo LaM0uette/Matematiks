@@ -105,7 +105,7 @@ namespace Game.Modules.GameMode
             _gem += 1 + mergedBallNumber / 3 + countBallsSelected / 3;
             
             Saver.Gem.Save(_gem);
-            _levelManager.RaiseGemEvent(_gem);
+            LevelManager.RaiseGemEvent(_gem);
         }
 
         private void UpdateHighBall(int newBallNumber)
@@ -125,7 +125,7 @@ namespace Game.Modules.GameMode
             _currentScore += (int)Math.Pow(value, 3);
             
             Saver.CurrentScore.Save(_currentScore);
-            _levelManager.RaiseScoreEvent(_currentScore);
+            LevelManager.RaiseScoreEvent(_currentScore);
         }
 
         private void CheckLoose()
@@ -229,7 +229,7 @@ namespace Game.Modules.GameMode
             
             _gem -= bonusData.Cost;
             Saver.Gem.Save(_gem);
-            _levelManager.RaiseGemEvent(_gem);
+            LevelManager.RaiseGemEvent(_gem);
         }
         
         #endregion

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Game.Modules.Bonus;
+using Game.Modules.Events;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui.Components.BonusCard;
-using Obvious.Soap;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,9 +19,6 @@ namespace Game.Ui.Game
         private const string _bonusCard03Key = "BonusCard03";
         private const string _bonusCard04Key = "BonusCard04";
         private const string _pauseButtonKey = "PauseButton";
-
-        [SerializeField] private ScriptableEventInt _gemEvent;
-        [SerializeField] private ScriptableEventInt _currentScoreEvent;
         
         private UIDocument _uiDocument;
         private VisualElement _root;
@@ -112,8 +109,8 @@ namespace Game.Ui.Game
             UiEvents.LooseEvent += OnLooseEvent;
             UiEvents.RefreshUiEvent += OnUpdateBoardEvent;
             
-            _gemEvent.OnRaised += OnGemRaised;
-            _currentScoreEvent.OnRaised += OnCurrentScoreRaised;
+            DataEvents.GemEvent += OnGemRaised;
+            DataEvents.CurrentScoreEvent += OnCurrentScoreRaised;
             
             _bonusCard01.clicked += () => OnBonusCardClicked(_bonusCard01, 0);
             _bonusCard02.clicked += () => OnBonusCardClicked(_bonusCard02, 1);
@@ -128,8 +125,8 @@ namespace Game.Ui.Game
             UiEvents.LooseEvent -= OnLooseEvent;
             UiEvents.RefreshUiEvent -= OnUpdateBoardEvent;
             
-            _gemEvent.OnRaised -= OnGemRaised;
-            _currentScoreEvent.OnRaised -= OnCurrentScoreRaised;
+            DataEvents.GemEvent -= OnGemRaised;
+            DataEvents.CurrentScoreEvent -= OnCurrentScoreRaised;
             
             _pauseButton.clicked -= OnPauseButtonClicked;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
+using Game.Modules.Events;
 using Game.Modules.GameMode;
 using Game.Modules.Utils;
 using Game.Ui;
@@ -27,8 +28,6 @@ namespace Game.Modules.Manager
         [Space, Title("Soap")]
         public ScriptableListWeightedBall WeightedBalls;
         [SerializeField] private ScriptableEventNoParam _releaseEvent;
-        [SerializeField] private ScriptableEventInt _gemEvent;
-        [SerializeField] private ScriptableEventInt _scoreEvent;
         [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private ScriptableListBall _ballsSelected;
         [SerializeField] private BoolVariable _mouseDownVariable;
@@ -113,14 +112,14 @@ namespace Game.Modules.Manager
 
         #region SoapEvents
         
-        public void RaiseGemEvent(int value)
+        public static void RaiseGemEvent(int value)
         {
-            _gemEvent.Raise(value);
+            DataEvents.GemEvent.Invoke(value);
         }
         
-        public void RaiseScoreEvent(int value)
+        public static void RaiseScoreEvent(int value)
         {
-            _scoreEvent.Raise(value);
+            DataEvents.CurrentScoreEvent.Invoke(value);
         }
         
         private void OnRelease()
