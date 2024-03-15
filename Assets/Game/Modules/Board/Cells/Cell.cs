@@ -29,6 +29,14 @@ namespace Game.Modules.Board.Cells
 
         #region Functions
         
+        public Vector2Int ExtractCellPosition()
+        {
+            var parts = gameObject.name.Split('_');
+            var x = int.Parse(parts[1]);
+            var y = int.Parse(parts[2]);
+            return new Vector2Int(x, y);
+        }
+        
         private void CheckIsEmpty()
         {
             var childCount = transform.childCount;
@@ -82,8 +90,6 @@ namespace Game.Modules.Board.Cells
                 yield return null;
             }
         }
-
-        
 
         #endregion
     }

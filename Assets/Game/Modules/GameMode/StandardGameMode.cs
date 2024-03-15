@@ -17,21 +17,10 @@ namespace Game.Modules.GameMode
         #region Statements
 
         private LevelManager _levelManager;
-        private int _gem;
-        private int _currentScore;
         
         private void Awake()
         {
             _levelManager = GetComponent<LevelManager>();
-        }
-
-        private void Start()
-        {
-            _currentScore = Saver.CurrentScore.LoadInt();
-#if UNITY_EDITOR
-            Saver.Gem.Save(5000);
-#endif
-            _gem = Saver.Gem.LoadInt();
         }
 
         #endregion
@@ -48,42 +37,42 @@ namespace Game.Modules.GameMode
             BonusManager.BonusEvent -= OnBonusEvent;
         }
         
-        public void Initialize()
-        {
-            BoardHandler.IsPressing = false;
-            BoardHandler.IsLost = false;
-            
-            _levelManager.InitializeWeightedBalls();
-            _levelManager.InitializeBallsToMerge(3, 99);
-        }
-
-        public void MergeBalls(Ball mergedBall, int countBallsSelected)
-        {
-            var mergedBallNumber = mergedBall.Number + 1;
-            
-            mergedBall.SetNum(mergedBallNumber);
-            _levelManager.UpdateWeightedBalls(mergedBall, countBallsSelected);
-            
-            GainGem(mergedBallNumber, countBallsSelected);
-            UpdateHighBall(mergedBallNumber);
-            UpdateScore(mergedBallNumber);
-        }
-
-        public void AfterMergeBalls()
-        {
-            CheckLoose();
-        }
-        
         #endregion
 
         #region Functions
         
-        private void GainGem(int mergedBallNumber, int countBallsSelected)
+        public void Initialize()
         {
-            _gem += 1 + mergedBallNumber / 3 + countBallsSelected / 3;
+            BoardHandler.Initialize();
+
+            _levelManager.InitializeBallsToMerge(3, 99);
             
-            Saver.Gem.Save(_gem);
-            LevelManager.RaiseGemEvent(_gem);
+            var balls = Saver.CurrentBalls.LoadListInt();
+            if (balls.Count > 0)
+                _levelManager.LoadCurrentGame();
+            else
+                _levelManager.InitializeWeightedBalls();
+        }
+
+        public void MergeBallsUpdate(int mergedBallNumber, int countBallsSelected)
+        {
+            UpdateGem(mergedBallNumber, countBallsSelected);
+            UpdateHighBall(mergedBallNumber);
+            UpdateScore(mergedBallNumber);
+        }
+
+        public void MergeBallsComplete()
+        {
+            CheckLoose();
+        }
+        
+        private static void UpdateGem(int mergedBallNumber, int countBallsSelected)
+        {
+            var gem = Saver.Gem.LoadInt();
+            gem += 1 + mergedBallNumber / 3 + countBallsSelected / 3;
+            
+            Saver.Gem.Save(gem);
+            RaiseGemEvent(gem);
         }
 
         private static void UpdateHighBall(int newBallNumber)
@@ -95,12 +84,13 @@ namespace Game.Modules.GameMode
             GameEvents.HighBallEvent.Invoke(newBallNumber);
         }
         
-        private void UpdateScore(int value)
+        private static void UpdateScore(int value)
         {
-            _currentScore += (int)Math.Pow(value, 3);
+            var currentScore = Saver.CurrentScore.LoadInt();
+            currentScore += (int)Math.Pow(value, 3);
             
-            Saver.CurrentScore.Save(_currentScore);
-            LevelManager.RaiseScoreEvent(_currentScore);
+            Saver.CurrentScore.Save(currentScore);
+            RaiseScoreEvent(currentScore);
         }
 
         private void CheckLoose()
@@ -179,18 +169,20 @@ namespace Game.Modules.GameMode
             return count;
         }
 
-        private void LooseGame()
+        private static void LooseGame()
         {
-            Saver.LastScore.Save(_currentScore);
-            _currentScore = 0;
+            var currentScore = Saver.CurrentScore.LoadInt();
+            Saver.LastScore.Save(currentScore);
             
             Saver.ResetAllCurrentScores();
             
-            LevelManager.LooseGame();
+            BoardHandler.IsLost = true;
+            UiEvents.LooseEvent.Invoke();
         }
         
-        private void OnBonusEvent(BonusData bonusData)
+        private static void OnBonusEvent(BonusData bonusData)
         {
+            var _gem = Saver.Gem.LoadInt();
             if (_gem < bonusData.Cost)
             {
                 BonusManager.CurrentBonus = null;
@@ -202,7 +194,24 @@ namespace Game.Modules.GameMode
             
             _gem -= bonusData.Cost;
             Saver.Gem.Save(_gem);
-            LevelManager.RaiseGemEvent(_gem);
+            RaiseGemEvent(_gem);
+        }
+        
+        private static void RaiseGemEvent(int value)
+        {
+            GameEvents.GemEvent.Invoke(value);
+        }
+        
+        private static void RaiseScoreEvent(int value)
+        {
+            GameEvents.CurrentScoreEvent.Invoke(value);
+            
+            var highScore = Saver.HighScore.LoadInt();
+            if (value <= highScore) 
+                return;
+            
+            Saver.HighScore.Save(value);
+            GameEvents.HighScoreEvent.Invoke(value);
         }
         
         #endregion

@@ -4,20 +4,20 @@ using System.Linq;
 using Game.Modules.Board;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
-using Game.Modules.Events;
 using Game.Modules.GameMode;
 using Game.Modules.Utils;
 using Game.Ui;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Game.Modules.Manager
 {
     public class LevelManager : MonoBehaviour
     {
         #region Statements
+        
+        public readonly GameObject[,] BoardGrid = new GameObject[7, 5];
         
         [Space, Title("Board")]
         [SerializeField] private GameObject _ballPrefab;
@@ -34,7 +34,6 @@ namespace Game.Modules.Manager
         
         private IGameMode _gameMode;
         
-        public readonly GameObject[,] BoardGrid = new GameObject[7, 5];
         private int _minBallsToMerge;
         private int _maxBallsToMerge;
 
@@ -44,48 +43,24 @@ namespace Game.Modules.Manager
             
             FillBoardGrid();
         }
+        
+        private void FillBoardGrid()
+        {
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
 
+                var position = cell.ExtractCellPosition();
+                BoardGrid[position.x, position.y] = cell.gameObject;
+            }
+        }
+        
         private void Start()
         {
             _gameMode.Initialize();
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-            // CurrentBalls
-            var ballNumbers = Saver.CurrentBalls.LoadListInt();
-            if (ballNumbers.Count <= 0)
-                return;
-
-            var width = BoardGrid.GetLength(0);
-            var height = BoardGrid.GetLength(1);
-            
-            var i = 0;
-            for (var x = 0; x < width; x++)
-            {
-                for (var y = 0; y < height; y++)
-                {
-                    var ballGo = Instantiate(_ballPrefab, BoardGrid[x, y].transform);
-                    ballGo.transform.localPosition = Vector3.zero;
-                    
-                    var ball = ballGo.GetComponent<Ball>();
-                    ball.SetNum(ballNumbers[i]);
-                    i++;
-                }
-            }
-            
-            // CurrentWeightedBalls
-            var weightedBalls = Saver.CurrentWeightedBalls.LoadListWeightedBall();
-            
-            if (weightedBalls.Count <= 0)
-                return;
-
-            _weightedBalls.Reset();
-            foreach (var weightedBall in weightedBalls)
-            {
-                _weightedBalls.Add(weightedBall);
-            }
         }
 
         #endregion
@@ -94,49 +69,18 @@ namespace Game.Modules.Manager
         
         private void OnEnable()
         {
+            BoardEvents.CurrentBallSelectedEvent += OnBallSelected;
             BoardEvents.ReleaseEvent += OnRelease;
             UiEvents.RefreshUiEvent += OnUpdateBoard;
-            BoardEvents.CurrentBallSelectedEvent += OnBallSelected;
         }
 
         private void OnDisable()
         {
+            BoardEvents.CurrentBallSelectedEvent -= OnBallSelected;
             BoardEvents.ReleaseEvent -= OnRelease;
             UiEvents.RefreshUiEvent -= OnUpdateBoard;
-            BoardEvents.CurrentBallSelectedEvent -= OnBallSelected;
-        }
-
-        #endregion
-
-        #region SoapEvents
-        
-        public static void RaiseGemEvent(int value)
-        {
-            GameEvents.GemEvent.Invoke(value);
         }
         
-        public static void RaiseScoreEvent(int value)
-        {
-            GameEvents.CurrentScoreEvent.Invoke(value);
-            
-            var highScore = Saver.HighScore.LoadInt();
-            if (value <= highScore) 
-                return;
-            
-            Saver.HighScore.Save(value);
-            GameEvents.HighScoreEvent.Invoke(value);
-        }
-        
-        private void OnRelease()
-        {
-            StartCoroutine(MergeBalls());
-        }
-
-        private void OnUpdateBoard()
-        {
-            Invoke(nameof(AfterMergeBalls), 1f);
-        }
-
         private void OnBallSelected(Ball ball)
         {
             if (BoardHandler.IsPressing == false || BoardHandler.IsLost) 
@@ -144,13 +88,21 @@ namespace Game.Modules.Manager
             
             if (_ballSelection.Count == 0)
             {
-                AddFirstBall(ball);
+                // Add first ball
+                _ballSelection.Add(ball);
+                _lineRenderer.positionCount = 1;
+                _lineRenderer.SetPosition(0, ball.transform.position);
                 return;
             }
 
             if (_ballSelection.Contains(ball) && _ballSelection.Count > 1)
             {
-                RemovePreviousBall(ball);
+                // Remove last ball
+                if (_ballSelection[^2] != ball) 
+                    return;
+            
+                _ballSelection.Remove(_ballSelection[^1]);
+                _lineRenderer.positionCount = _ballSelection.Count;
                 return;
             }
 
@@ -180,6 +132,16 @@ namespace Game.Modules.Manager
             _lineRenderer.SetPosition(_ballSelection.Count - 1, ball.transform.position);
         }
         
+        private void OnRelease()
+        {
+            StartCoroutine(MergeBalls());
+        }
+
+        private void OnUpdateBoard()
+        {
+            Invoke(nameof(MergeBallsComplete), 1f);
+        }
+        
         #endregion
 
         #region Functions
@@ -187,8 +149,8 @@ namespace Game.Modules.Manager
         public void InitializeWeightedBalls()
         {
             _weightedBalls.Add(new WeightedBall(1, 80f));
-            _weightedBalls.Add(new WeightedBall(2, 40f));
-            _weightedBalls.Add(new WeightedBall(3, 20f));
+            _weightedBalls.Add(new WeightedBall(2, 20f));
+            _weightedBalls.Add(new WeightedBall(3, 5f));
         }
 
         public void InitializeBallsToMerge(int min, int max)
@@ -197,21 +159,48 @@ namespace Game.Modules.Manager
             _maxBallsToMerge = max;
         }
         
-        public void UpdateWeightedBalls(Ball mergedBall, int countBallsSelected)
+        public void LoadCurrentGame()
         {
-            if (mergedBall.Number <= 1)
-                return;
+            LoadBalls();
+            LoadWeightedBalls();
+        }
+        
+        private void LoadBalls()
+        {
+            var balls = Saver.CurrentBalls.LoadListInt();
             
-            var weightedBall = _weightedBalls.FirstOrDefault(wb => wb.Number == mergedBall.Number);
+            if (balls.Count <= 0)
+                return;
 
-            if (!_weightedBalls.Contains(weightedBall) || weightedBall == null)
+            var width = BoardGrid.GetLength(0);
+            var height = BoardGrid.GetLength(1);
+            
+            var i = 0;
+            for (var x = 0; x < width; x++)
             {
-                var newWeightedBall = new WeightedBall(mergedBall.Number, GameVar.DefaultNewBallWeight + countBallsSelected);
-                _weightedBalls.Add(newWeightedBall);
+                for (var y = 0; y < height; y++)
+                {
+                    var ballGo = Instantiate(_ballPrefab, BoardGrid[x, y].transform);
+                    ballGo.transform.localPosition = Vector3.zero;
+                    
+                    var ball = ballGo.GetComponent<Ball>();
+                    ball.SetNum(balls[i]);
+                    i++;
+                }
             }
-            else
+        }
+        
+        private void LoadWeightedBalls()
+        {
+            var weightedBalls = Saver.CurrentWeightedBalls.LoadListWeightedBall();
+            
+            if (weightedBalls.Count <= 0)
+                return;
+
+            _weightedBalls.Reset();
+            foreach (var weightedBall in weightedBalls)
             {
-                weightedBall.Weight += mergedBall.Number / GameVar.DefaultBallWeightDiviser + countBallsSelected;
+                _weightedBalls.Add(weightedBall);
             }
         }
         
@@ -250,12 +239,17 @@ namespace Game.Modules.Manager
             }
             
             var mergedBall = _ballSelection[^1];
-            _gameMode.MergeBalls(mergedBall, _ballSelection.Count);
+            var mergedBallNumber = ++mergedBall.Number;
+            mergedBall.SetNum(mergedBallNumber);
+            
+            UpdateWeightedBalls(mergedBall, _ballSelection.Count);
+            
+            _gameMode.MergeBallsUpdate(mergedBallNumber, _ballSelection.Count);
             
             _ballSelection.Clear();
             BoardHandler.OngoingAction = false;
             
-            Invoke(nameof(AfterMergeBalls), 1f);
+            Invoke(nameof(MergeBallsComplete), 1f);
         }
         
         private void RemoveLineRendererFirstPosition() 
@@ -278,66 +272,37 @@ namespace Game.Modules.Manager
             _lineRenderer.positionCount = positionsCount - 1;
             _lineRenderer.SetPositions(newPositions);
         }
-        
-        private void AddFirstBall(Ball ball)
-        {
-            _ballSelection.Add(ball);
-            _lineRenderer.positionCount = 1;
-            _lineRenderer.SetPosition(0, ball.transform.position);
-        }
 
-        private void RemovePreviousBall(Object ball)
+        private void UpdateWeightedBalls(Ball mergedBall, int countBallsSelected)
         {
-            if (_ballSelection[^2] != ball) 
+            if (mergedBall.Number <= 1)
                 return;
             
-            _ballSelection.Remove(_ballSelection[^1]);
-            _lineRenderer.positionCount = _ballSelection.Count;
-        }
+            var weightedBall = _weightedBalls.FirstOrDefault(wb => wb.Number == mergedBall.Number);
 
-        #endregion
-
-        #region Loose
-        
-        public static void LooseGame()
-        {
-            BoardHandler.IsLost = true;
-            UiEvents.LooseEvent.Invoke();
-        }
-
-        private void FillBoardGrid()
-        {
-            var cells = FindObjectsOfType<Cell>();
-            
-            foreach (var cell in cells)
+            if (!_weightedBalls.Contains(weightedBall) || weightedBall == null)
             {
-                if (cell.transform.CompareTag("CellCache")) 
-                    continue;
-
-                var position = ExtractCellPositionFromName(cell.name);
-                BoardGrid[position.x, position.y] = cell.gameObject;
+                var newWeightedBall = new WeightedBall(mergedBall.Number, GameVar.DefaultNewBallWeight + countBallsSelected);
+                _weightedBalls.Add(newWeightedBall);
+            }
+            else
+            {
+                weightedBall.Weight += mergedBall.Number / GameVar.DefaultBallWeightDiviser + countBallsSelected;
             }
         }
         
-        private static Vector2Int ExtractCellPositionFromName(string name)
-        {
-            var parts = name.Split('_');
-            var x = int.Parse(parts[1]);
-            var y = int.Parse(parts[2]);
-            return new Vector2Int(x, y);
-        }
-
-        private void AfterMergeBalls()
+        private void MergeBallsComplete()
         {
             if (BoardHandler.OngoingAction)
                 return;
             
-            RemoveOldWeightedBalls();
+            RemoveSmallerWeightedBalls();
             SaveCurrentBalls();
-            _gameMode.AfterMergeBalls();
+            
+            _gameMode.MergeBallsComplete();
         }
         
-        private void RemoveOldWeightedBalls()
+        private void RemoveSmallerWeightedBalls()
         {
             var width = BoardGrid.GetLength(0);
             var height = BoardGrid.GetLength(1);
@@ -425,7 +390,7 @@ namespace Game.Modules.Manager
                 if (cell.transform.CompareTag("CellCache")) 
                     continue;
 
-                var position = ExtractCellPositionFromName(cell.name);
+                var position = cell.ExtractCellPosition();
                 board[position.x, position.y] = cell.gameObject;
             }
             
@@ -462,7 +427,7 @@ namespace Game.Modules.Manager
                 if (cell.transform.CompareTag("CellCache")) 
                     continue;
 
-                var position = ExtractCellPositionFromName(cell.name);
+                var position = cell.ExtractCellPosition();
                 board[position.x, position.y] = cell.gameObject;
             }
             
@@ -511,7 +476,7 @@ namespace Game.Modules.Manager
                 if (cell.transform.CompareTag("CellCache")) 
                     continue;
 
-                var position = ExtractCellPositionFromName(cell.name);
+                var position = cell.ExtractCellPosition();
                 board[position.x, position.y] = cell.gameObject;
             }
             
@@ -548,7 +513,7 @@ namespace Game.Modules.Manager
                 if (cell.transform.CompareTag("CellCache")) 
                     continue;
 
-                var position = ExtractCellPositionFromName(cell.name);
+                var position = cell.ExtractCellPosition();
                 board[position.x, position.y] = cell.gameObject;
             }
             
@@ -570,16 +535,12 @@ namespace Game.Modules.Manager
                 ball.SetNum(1);
             }
         }
-        
-        #region Odin
 
         [Button]
         public void ResetPlayerPref()
         {
             Saver.ResetAll();
         }
-
-        #endregion
 
         #endregion
     }

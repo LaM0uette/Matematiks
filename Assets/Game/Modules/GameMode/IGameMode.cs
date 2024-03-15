@@ -1,13 +1,9 @@
-using Game.Modules.Board.Balls;
-
 namespace Game.Modules.GameMode
 {
     public interface IGameMode
     {
         public void Initialize();
-        
-        public void MergeBalls(Ball mergedBall, int countBallsSelected);
-
-        public void AfterMergeBalls();
+        public void MergeBallsUpdate(int mergedBallNumber, int countBallsSelected);
+        public void MergeBallsComplete();
     }
 }
