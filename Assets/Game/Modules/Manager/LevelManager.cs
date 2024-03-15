@@ -165,6 +165,17 @@ namespace Game.Modules.Manager
             LoadWeightedBalls();
         }
         
+        public void LooseGame()
+        {
+            var currentScore = Saver.CurrentScore.LoadInt();
+            Saver.LastScore.Save(currentScore);
+            
+            Saver.ResetAllCurrentScores();
+            
+            BoardHandler.IsLost = true;
+            UiEvents.LooseEvent.Invoke();
+        }
+        
         private void LoadBalls()
         {
             var balls = Saver.CurrentBalls.LoadListInt();

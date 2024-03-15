@@ -37,6 +37,24 @@ namespace Game.Modules.GameMode
             BonusManager.BonusEvent -= OnBonusEvent;
         }
         
+        private static void OnBonusEvent(BonusData bonusData)
+        {
+            var gem = Saver.Gem.LoadInt();
+            
+            if (bonusData.Cost > gem)
+            {
+                BonusManager.CurrentBonus = null;
+                UiEvents.RefreshUiEvent.Invoke();
+                return;
+            }
+            
+            BonusManager.CurrentBonus = bonusData;
+            
+            gem -= bonusData.Cost;
+            Saver.Gem.Save(gem);
+            RaiseGemEvent(gem);
+        }
+        
         #endregion
 
         #region Functions
@@ -93,110 +111,6 @@ namespace Game.Modules.GameMode
             RaiseScoreEvent(currentScore);
         }
 
-        private void CheckLoose()
-        {
-            var width = _levelManager.BoardGrid.GetLength(0);
-            var height = _levelManager.BoardGrid.GetLength(1);
-
-            List<Ball> balls = new();
-            for (var x = 0; x < width; x++)
-            {
-                for (var y = 0; y < height; y++)
-                {
-                    var ball = _levelManager.BoardGrid[x, y].transform.GetComponentInChildren<Ball>();
-                    balls.Add(ball);
-                }
-            }
-            
-            ResetVisited(balls);
-
-            for (var x = 0; x < width; x++)
-            {
-                for (var y = 0; y < height; y++)
-                {
-                    var ball = _levelManager.BoardGrid[x, y].transform.GetComponentInChildren<Ball>();
-
-                    if (ball == null || ball.IsVisited) 
-                        continue;
-                    
-                    if (DFS(x, y, ball.Number) >= 3)
-                    {
-                        return;
-                    }
-                }
-            }
-            
-            LooseGame();
-        }
-        
-        private static void ResetVisited(IEnumerable<Ball> balls)
-        {
-            foreach (var ball in balls)
-            {
-                if (ball.IsDestroyed() || ball == null)
-                    continue;
-                
-                ball.IsVisited = false;
-            }
-        }
-        
-        private int DFS(int x, int y, int number)
-        {
-            var width = _levelManager.BoardGrid.GetLength(0);
-            var height = _levelManager.BoardGrid.GetLength(1);
-            
-            if (x < 0 || y < 0 || x >= width || y >= height)
-                return 0;
-            
-            var ball = _levelManager.BoardGrid[x, y].transform.GetComponentInChildren<Ball>();
-            
-            if (ball == null || ball.IsDestroyed() || ball.IsVisited || ball.Number != number)
-                return 0;
-
-            ball.IsVisited = true;
-            var count = 1;
-
-            // Vérifier les huit directions (verticales, horizontales et diagonales)
-            count += DFS(x + 1, y, number);
-            count += DFS(x - 1, y, number);
-            count += DFS(x, y + 1, number);
-            count += DFS(x, y - 1, number);
-            count += DFS(x + 1, y + 1, number);
-            count += DFS(x - 1, y - 1, number);
-            count += DFS(x + 1, y - 1, number);
-            count += DFS(x - 1, y + 1, number);
-
-            return count;
-        }
-
-        private static void LooseGame()
-        {
-            var currentScore = Saver.CurrentScore.LoadInt();
-            Saver.LastScore.Save(currentScore);
-            
-            Saver.ResetAllCurrentScores();
-            
-            BoardHandler.IsLost = true;
-            UiEvents.LooseEvent.Invoke();
-        }
-        
-        private static void OnBonusEvent(BonusData bonusData)
-        {
-            var _gem = Saver.Gem.LoadInt();
-            if (_gem < bonusData.Cost)
-            {
-                BonusManager.CurrentBonus = null;
-                UiEvents.RefreshUiEvent.Invoke();
-                return;
-            }
-            
-            BonusManager.CurrentBonus = bonusData;
-            
-            _gem -= bonusData.Cost;
-            Saver.Gem.Save(_gem);
-            RaiseGemEvent(_gem);
-        }
-        
         private static void RaiseGemEvent(int value)
         {
             GameEvents.GemEvent.Invoke(value);
@@ -212,6 +126,84 @@ namespace Game.Modules.GameMode
             
             Saver.HighScore.Save(value);
             GameEvents.HighScoreEvent.Invoke(value);
+        }
+        
+        private void CheckLoose()
+        {
+            var boardGrid = _levelManager.BoardGrid;
+            var width = boardGrid.GetLength(0);
+            var height = boardGrid.GetLength(1);
+
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = boardGrid[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+            
+            ResetVisited(balls);
+
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = boardGrid[x, y].transform.GetComponentInChildren<Ball>();
+
+                    if (ball == null || ball.IsVisited) 
+                        continue;
+                    
+                    if (DFS(x, y, ball.Number) >= 3)
+                    {
+                        return;
+                    }
+                }
+            }
+            
+            _levelManager.LooseGame();
+        }
+        
+        private static void ResetVisited(IEnumerable<Ball> balls)
+        {
+            foreach (var ball in balls)
+            {
+                if (ball.IsDestroyed() || ball == null)
+                    continue;
+                
+                ball.IsVisited = false;
+            }
+        }
+        
+        private int DFS(int x, int y, int number)
+        {
+            var boardGrid = _levelManager.BoardGrid;
+            var width = boardGrid.GetLength(0);
+            var height = boardGrid.GetLength(1);
+            
+            if (x < 0 || y < 0 || x >= width || y >= height)
+                return 0;
+            
+            var ball = boardGrid[x, y].transform.GetComponentInChildren<Ball>();
+            
+            if (ball == null || ball.IsDestroyed() || ball.IsVisited || ball.Number != number)
+                return 0;
+
+            ball.IsVisited = true;
+            var count = 1;
+
+            // Check all eight directions (vertical, horizontal and diagonal)
+            count += DFS(x + 1, y, number);
+            count += DFS(x - 1, y, number);
+            count += DFS(x, y + 1, number);
+            count += DFS(x, y - 1, number);
+            count += DFS(x + 1, y + 1, number);
+            count += DFS(x - 1, y - 1, number);
+            count += DFS(x + 1, y - 1, number);
+            count += DFS(x - 1, y + 1, number);
+
+            return count;
         }
         
         #endregion
