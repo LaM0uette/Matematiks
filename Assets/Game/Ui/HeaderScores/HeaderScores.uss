@@ -1,15 +1,16 @@
 .header-score {
     flex-direction: row;
     justify-content: space-between;
-    margin-right: 5%;
-    margin-left: 5%;
-    margin-top: 16%;
+    width: 900px;
+    height: 125px;
+    align-self: center;
+    margin-top: 180px;
 }
 
 .header-score__separator {
     height: 2px;
-    background-color: #F0F8FF;
-    margin-right: 20%;
-    margin-left: 20%;
+    background-color: rgb(240, 248, 255);
     margin-top: 90px;
+    width: 750px;
+    align-self: center;
 }
