@@ -111,6 +111,8 @@ namespace Game.Ui.Game
             
             DataEvents.GemEvent += OnGemRaised;
             DataEvents.CurrentScoreEvent += OnCurrentScoreRaised;
+            DataEvents.HighScoreEvent += OnHighScoreRaised;
+            DataEvents.HighBallEvent += OnHighBallRaised;
             
             _bonusCard01.clicked += () => OnBonusCardClicked(_bonusCard01, 0);
             _bonusCard02.clicked += () => OnBonusCardClicked(_bonusCard02, 1);
@@ -127,6 +129,8 @@ namespace Game.Ui.Game
             
             DataEvents.GemEvent -= OnGemRaised;
             DataEvents.CurrentScoreEvent -= OnCurrentScoreRaised;
+            DataEvents.HighScoreEvent -= OnHighScoreRaised;
+            DataEvents.HighBallEvent -= OnHighBallRaised;
             
             _pauseButton.clicked -= OnPauseButtonClicked;
         }
@@ -170,13 +174,16 @@ namespace Game.Ui.Game
         private void OnCurrentScoreRaised(int value)
         {
             _currentScoreLabel.text = value.ToString();
-            
-            var highScore = Saver.HighScore.LoadInt();
-            if (value <= highScore) 
-                return;
-            
-            Saver.HighScore.Save(value);
+        }
+        
+        private void OnHighScoreRaised(int value)
+        {
             _headerScores.UpdateHighScore(value);
+        }
+        
+        private void OnHighBallRaised(int value)
+        {
+            _headerScores.UpdateHighBall(value);
         }
         
         private void OnUpdateBoardEvent()

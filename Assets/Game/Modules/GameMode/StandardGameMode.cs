@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Bonus;
+using Game.Modules.Events;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui;
@@ -117,6 +118,7 @@ namespace Game.Modules.GameMode
             if (newBallNumber > Saver.HighBall.LoadInt())
             {
                 Saver.HighBall.Save(newBallNumber);
+                DataEvents.HighBallEvent.Invoke(newBallNumber);
             }
         }
         
