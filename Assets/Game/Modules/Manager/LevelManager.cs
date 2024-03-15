@@ -104,8 +104,6 @@ namespace Game.Modules.Manager
             BoardEvents.ReleaseEvent -= OnRelease;
             UiEvents.RefreshUiEvent -= OnUpdateBoard;
             BoardEvents.CurrentBallSelectedEvent -= OnBallSelected;
-            
-            _lineRendererMaterial.color =  ColorVar.Ball1Color;
         }
 
         #endregion
