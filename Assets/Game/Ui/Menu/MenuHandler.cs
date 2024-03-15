@@ -106,6 +106,7 @@ namespace Game.Ui.Menu
         
         private static void OnNewGameButtonCliked()
         {
+            Saver.LastScore.Save(Saver.CurrentScore.LoadInt());
             Saver.ResetAllCurrentScores();
             LoadGameScene();
         }

@@ -211,9 +211,7 @@ namespace Game.Modules.GameMode
             Saver.LastScore.Save(_currentScore);
             _currentScore = 0;
             
-            Saver.CurrentScore.Delete();
-            Saver.CurrentBalls.Delete();
-            Saver.CurrentWeightedBalls.Delete();
+            Saver.ResetAllCurrentScores();
             
             _levelManager.LooseGame();
         }

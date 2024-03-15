@@ -58,6 +58,7 @@ namespace Game.Ui.Popups.Pause
         
         private static void OnRestartButtonClicked()
         {
+            Saver.LastScore.Save(Saver.CurrentScore.LoadInt());
             Saver.ResetAllCurrentScores();
             SceneManager.LoadScene(GameVar.GameScene);
         }
