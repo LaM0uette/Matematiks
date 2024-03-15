@@ -159,7 +159,7 @@ namespace Game.Ui.Game
         
         private static void OnPauseButtonClicked()
         {
-            UiEvents.PausePopupShow.Invoke();
+            UiEvents.PauseEvent.Invoke();
         }
         
         #endregion

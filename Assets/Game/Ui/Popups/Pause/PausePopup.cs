@@ -53,7 +53,7 @@ namespace Game.Ui.Popups.Pause
         private void OnResumeButtonClicked()
         {
             Hide();
-            UiEvents.ClosePopup.Invoke();
+            UiEvents.ClosePopupEvent.Invoke();
         }
         
         private static void OnRestartButtonClicked()

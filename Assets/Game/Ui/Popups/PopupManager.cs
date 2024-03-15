@@ -68,16 +68,16 @@ namespace Game.Ui.Popups
         
         private void SubscribeToEvents()
         {
-            UiEvents.ClosePopup += HideMainLayout;
-            UiEvents.PausePopupShow += ShowPausePopup;
+            UiEvents.ClosePopupEvent += HideMainLayout;
+            UiEvents.PauseEvent += ShowPausePopup;
             
             UiEvents.LooseEvent += ShowLoosePopup;
         }
 
         private void UnsubscribeFromEvents()
         {
-            UiEvents.ClosePopup -= HideMainLayout;
-            UiEvents.PausePopupShow -= ShowPausePopup;
+            UiEvents.ClosePopupEvent -= HideMainLayout;
+            UiEvents.PauseEvent -= ShowPausePopup;
             
             UiEvents.LooseEvent -= ShowLoosePopup;
         }
