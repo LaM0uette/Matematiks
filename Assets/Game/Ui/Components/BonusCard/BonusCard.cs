@@ -66,6 +66,8 @@ namespace Game.Ui.Components.BonusCard
         public void Unselect() => RemoveFromClassList("bonus-card--selected");
         public void Show() => style.display = DisplayStyle.Flex;
         public void Hide() => style.display = DisplayStyle.None;
+        public void Enable() => SetEnabled(true);
+        public void Disable() => SetEnabled(false);
         
         private void AddStyleSheet()
         {

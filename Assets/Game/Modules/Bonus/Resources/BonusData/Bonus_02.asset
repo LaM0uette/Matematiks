@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa3041408d1e3544a1d16def08a7203, type: 3}
   m_Name: Bonus_02
   m_EditorClassIdentifier: 
-  BonusId: 1
+  Id: 1
   Cost: 450

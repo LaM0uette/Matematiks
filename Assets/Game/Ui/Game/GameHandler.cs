@@ -13,6 +13,12 @@ namespace Game.Ui.Game
     public class GameHandler : MonoBehaviour
     {
         #region Statements
+
+        private struct BonusCardData
+        {
+            public BonusCard BonusCard;
+            public BonusData BonusData;
+        }
         
         private const string _currentScoreKey = "CurrentScoreValue";
         private const string _bonusCard01Key = "BonusCard01";
@@ -28,7 +34,8 @@ namespace Game.Ui.Game
         
         private Label _currentScoreLabel;
         
-        private Dictionary<int, BonusData> _bonusDataDictionary;
+        private List<BonusCardData> _bonusCardDataList;
+        private List<BonusCard> _bonusCardList;
         private BonusCard _bonusCard01;
         private BonusCard _bonusCard02;
         private BonusCard _bonusCard03;
@@ -41,11 +48,11 @@ namespace Game.Ui.Game
             _uiDocument = GetComponent<UIDocument>();
             _root = _uiDocument.rootVisualElement;
             
-            LoadBonusData();
-            
+            SetupButtons();
             SetupHeaderScores();
             SetupCurrentScore();
-            SetupButtons();
+            
+            LoadBonusData();
         }
         
         private void Start()
@@ -61,30 +68,31 @@ namespace Game.Ui.Game
         
         private void LoadBonusData()
         {
+            _bonusCardDataList = new List<BonusCardData>();
+            
             var bonuses = Resources.LoadAll<BonusData>("BonusData");
-            _bonusDataDictionary = new Dictionary<int, BonusData>();
-
+            
             foreach (var bonus in bonuses)
             {
-                if (!_bonusDataDictionary.TryAdd(bonus.BonusId, bonus))
+                var newBonusCard = new BonusCardData
                 {
-                    Debug.LogWarning($"Duplicate Bonus ID found: {bonus.BonusId}. Ignoring duplicate.");
-                }
+                    BonusCard = _bonusCardList[bonus.Id],
+                    BonusData = bonus
+                };
+                
+                _bonusCardDataList.Add(newBonusCard);
             }
         }
 
         private void InitBonusData()
         {
-            if (_bonusDataDictionary == null)
-                throw new Exception("No bonus data found. Skipping initialization.");
-            
-            if (_bonusDataDictionary.Count < 4)
+            if (_bonusCardDataList.Count < 4)
                 throw new Exception("Not enough bonus data found. Skipping initialization.");
             
-            _bonusCard01.SetPrice(_bonusDataDictionary[0].Cost);
-            _bonusCard02.SetPrice(_bonusDataDictionary[1].Cost);
-            _bonusCard03.SetPrice(_bonusDataDictionary[2].Cost);
-            _bonusCard04.SetPrice(_bonusDataDictionary[3].Cost);
+            foreach (var bonusCardData in _bonusCardDataList)
+            {
+                bonusCardData.BonusCard.SetPrice(bonusCardData.BonusData.Cost);
+            }
         }
         
         private void SetupHeaderScores()
@@ -112,6 +120,8 @@ namespace Game.Ui.Game
             _bonusCard02 = _root.Q<BonusCard>(_bonusCard02Key);
             _bonusCard03 = _root.Q<BonusCard>(_bonusCard03Key);
             _bonusCard04 = _root.Q<BonusCard>(_bonusCard04Key);
+            
+            _bonusCardList = new List<BonusCard> { _bonusCard01, _bonusCard02, _bonusCard03, _bonusCard04 };
             
             _pauseButton = _root.Q<Button>(_pauseButtonKey);
         }
@@ -162,15 +172,8 @@ namespace Game.Ui.Game
             bonusCard.Show();
             bonusCard.Select();
             
-            if (_bonusDataDictionary.TryGetValue(bonusId, out var bonusData))
-            {
-                BonusManager.BonusEvent?.Invoke(bonusData);
-            }
-            else
-            {
-                Debug.LogWarning($"No bonus data found for ID: {bonusId}");
-                ShowBonusCards();
-            }
+            var bonusData = _bonusCardDataList[bonusId].BonusData;
+            BonusManager.BonusEvent?.Invoke(bonusData);
         }
         
         private static void OnPauseButtonClicked()
@@ -185,6 +188,7 @@ namespace Game.Ui.Game
         private void OnGemRaised(int value)
         {
             _headerScores.UpdateGem(value);
+            DisableBonusCardsToExpensives(value);
         }
         
         private void OnCurrentScoreRaised(int value)
@@ -235,6 +239,17 @@ namespace Game.Ui.Game
             _bonusCard03.Hide();
             _bonusCard04.Unselect();
             _bonusCard04.Hide();
+        }
+        
+        private void DisableBonusCardsToExpensives(int gem)
+        {
+            foreach (var bonusCardData in _bonusCardDataList)
+            {
+                if (bonusCardData.BonusData.Cost > gem )
+                    bonusCardData.BonusCard.Disable();
+                else
+                    bonusCardData.BonusCard.Enable();
+            }
         }
 
         #endregion

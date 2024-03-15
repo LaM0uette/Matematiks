@@ -34,7 +34,7 @@ namespace Game.Modules.Board.Balls
                 return;
             }
             
-            var bonusId = BonusManager.CurrentBonus.BonusId;
+            var bonusId = BonusManager.CurrentBonus.Id;
             
             switch (bonusId)
             {
