@@ -92,15 +92,25 @@ namespace Game.Modules.Utils
         #endregion
 
         #region Functions
+        
+        public static void ResetAll()
+        {
+            Gem.Delete();
+            HighScore.Delete();
+            HighBall.Delete();
+            LastScore.Delete();
+            CurrentScore.Delete();
+            CurrentBalls.Delete();
+            CurrentWeightedBalls.Delete();
+            
+            HighBall.Save(1);
+        }
 
         public static void ResetAllCurrentScores()
         {
             CurrentScore.Delete();
             CurrentBalls.Delete();
             CurrentWeightedBalls.Delete();
-            
-            //HighScore.Delete();
-            //HighBall.Delete();
         }
 
         #endregion

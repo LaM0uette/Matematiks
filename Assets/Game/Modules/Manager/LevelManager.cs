@@ -570,6 +570,16 @@ namespace Game.Modules.Manager
                 ball.SetNum(1);
             }
         }
+        
+        #region Odin
+
+        [Button]
+        public void ResetPlayerPref()
+        {
+            Saver.ResetAll();
+        }
+
+        #endregion
 
         #endregion
     }
