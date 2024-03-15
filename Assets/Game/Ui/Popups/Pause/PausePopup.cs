@@ -8,10 +8,12 @@ namespace Game.Ui.Popups.Pause
     {
         #region Statements
         
+        private const string _closeButtonKey = "PauseCloseButton";
         private const string _menuButtonKey = "PauseMenuButton";
         private const string _resumeButtonKey = "PauseResumeButton";
         private const string _restartButtonKey = "PauseRestartButton";
         
+        private Button _closeButton;
         private Button _menuButton;
         private Button _resumeButton;
         private Button _restartButton;
@@ -26,6 +28,7 @@ namespace Game.Ui.Popups.Pause
         
         protected override void SetVisualElements()
         {
+            _closeButton = TopElement.Q<Button>(_closeButtonKey);
             _menuButton = TopElement.Q<Button>(_menuButtonKey);
             _resumeButton = TopElement.Q<Button>(_resumeButtonKey);
             _restartButton = TopElement.Q<Button>(_restartButtonKey);
@@ -33,6 +36,7 @@ namespace Game.Ui.Popups.Pause
 
         protected override void RegisterButtonCallbacks()
         {
+            _closeButton.clicked += OnCloseButtonClicked;
             _menuButton.clicked += OnMenuButtonClicked;
             _resumeButton.clicked += OnResumeButtonClicked;
             _restartButton.clicked += OnRestartButtonClicked;
@@ -40,9 +44,16 @@ namespace Game.Ui.Popups.Pause
         
         protected override void UnregisterButtonCallbacks()
         {
+            _closeButton.clicked -= OnCloseButtonClicked;
             _menuButton.clicked -= OnMenuButtonClicked;
             _resumeButton.clicked -= OnResumeButtonClicked;
             _restartButton.clicked -= OnRestartButtonClicked;
+        }
+        
+        private void OnCloseButtonClicked()
+        {
+            Hide();
+            UiEvents.ClosePopupEvent.Invoke();
         }
         
         private static void OnMenuButtonClicked()

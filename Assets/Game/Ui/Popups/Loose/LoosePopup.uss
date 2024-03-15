@@ -8,10 +8,11 @@
 }
 
 .loose-title {
-    font-size: 120px;
+    font-size: 115px;
     -unity-font-style: bold;
     color: rgb(44, 46, 51);
     margin-top: 65px;
+    -unity-text-align: upper-center;
 }
 
 .loose-buttons-container {
@@ -48,4 +49,14 @@
 
 .loose-button {
     width: 90%;
+}
+
+.loose-close-button {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 100px;
+    height: 100px;
+    background-image: resource('Icons/close');
+    -unity-background-image-tint-color: rgb(44, 46, 51);
 }

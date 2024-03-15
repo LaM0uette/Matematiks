@@ -7,7 +7,7 @@
 }
 
 .popup {
-    height: 60%;
-    margin-top: 410px;
-    width: 1075px;
+    height: 55%;
+    margin-top: 405px;
+    width: 975px;
 }

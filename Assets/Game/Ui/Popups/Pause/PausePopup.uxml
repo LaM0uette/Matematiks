@@ -9,5 +9,6 @@
                 <Game.Ui.Components.GameButton.GameButton text="RESTART" icon-name="Icons/refresh" name="PauseRestartButton" class="pause-button" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <Game.Ui.Components.IconButton.IconButton focusable="true" name="PauseCloseButton" class="pause-close-button" />
     </ui:VisualElement>
 </ui:UXML>

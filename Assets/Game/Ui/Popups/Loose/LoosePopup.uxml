@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Game/Ui/Popups/Loose/LoosePopup.uss?fileID=7433441132597879392&amp;guid=be4b35e61a2e21441aa1d415b54e967a&amp;type=3#LoosePopup" />
     <ui:VisualElement name="LoosePopupContainer" class="loose-popup__container">
-        <ui:Label tabindex="-1" text="YOU LOOSE !" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LooseTitle" class="loose-title" />
+        <ui:Label tabindex="-1" text="GAME&#10;OVER" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LooseTitle" class="loose-title" />
         <ui:VisualElement name="LooseButtonsContainer" class="loose-buttons-container" style="flex-grow: 1;">
             <ui:VisualElement name="LooseButtonsContainerScore" class="loose-button-container__score">
                 <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LooseScoreValue" class="loose-button-container__score-value" />
@@ -12,5 +12,6 @@
                 <Game.Ui.Components.GameButton.GameButton text="RESTART" icon-name="Icons/refresh" name="LooseRestartButton" class="loose-button" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <Game.Ui.Components.IconButton.IconButton focusable="true" name="LooseCloseButton" class="loose-close-button" />
     </ui:VisualElement>
 </ui:UXML>
