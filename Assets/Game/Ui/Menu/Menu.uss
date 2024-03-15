@@ -23,8 +23,8 @@
 .buttons-container {
     flex-grow: 1;
     align-items: stretch;
-    margin-right: 8%;
-    margin-left: 8%;
+    width: 900px;
+    align-self: center;
 }
 
 .buttons-container__game-buttons {
