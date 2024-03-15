@@ -24,7 +24,6 @@ namespace Game.Modules.Board.Balls
 
         [Space, Title("Soap")]
         [SerializeField] private BoolVariable _mouseIsDownVariable;
-        [SerializeField] private ScriptableEventBall _ballSelectedEvent;
 
         #endregion
         
@@ -67,7 +66,7 @@ namespace Game.Modules.Board.Balls
             if (_mouseIsDownVariable.Value == false) 
                 return;
             
-            _ballSelectedEvent.Raise(this);
+            BoardEvents.CurrentBallSelectedEvent.Invoke(this);
         }
 
         #endregion

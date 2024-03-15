@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Modules.Board;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
 using Game.Modules.Events;
@@ -30,7 +31,6 @@ namespace Game.Modules.Manager
         [Space, Title("Soap")]
         public ScriptableListWeightedBall WeightedBalls;
         [SerializeField] private ScriptableEventNoParam _releaseEvent;
-        [SerializeField] private ScriptableEventBall _ballSelectedEvent;
         [SerializeField] private ScriptableListBall _ballsSelected;
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
@@ -100,14 +100,14 @@ namespace Game.Modules.Manager
         {
             _releaseEvent.OnRaised += OnRelease;
             UiEvents.RefreshUiEvent += OnUpdateBoard;
-            _ballSelectedEvent.OnRaised += OnBallSelected;
+            BoardEvents.CurrentBallSelectedEvent += OnBallSelected;
         }
 
         private void OnDisable()
         {
             _releaseEvent.OnRaised -= OnRelease;
             UiEvents.RefreshUiEvent -= OnUpdateBoard;
-            _ballSelectedEvent.OnRaised -= OnBallSelected;
+            BoardEvents.CurrentBallSelectedEvent -= OnBallSelected;
         }
 
         #endregion
