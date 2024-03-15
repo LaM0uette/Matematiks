@@ -2,7 +2,7 @@ using System;
 
 namespace Game.Modules.Events
 {
-    public static class DataEvents
+    public static class GameEvents
     {
         public static Action<int> GemEvent;
         public static Action<int> CurrentScoreEvent;

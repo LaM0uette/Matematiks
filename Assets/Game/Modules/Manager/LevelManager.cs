@@ -116,19 +116,19 @@ namespace Game.Modules.Manager
         
         public static void RaiseGemEvent(int value)
         {
-            DataEvents.GemEvent.Invoke(value);
+            GameEvents.GemEvent.Invoke(value);
         }
         
         public static void RaiseScoreEvent(int value)
         {
-            DataEvents.CurrentScoreEvent.Invoke(value);
+            GameEvents.CurrentScoreEvent.Invoke(value);
             
             var highScore = Saver.HighScore.LoadInt();
             if (value <= highScore) 
                 return;
             
             Saver.HighScore.Save(value);
-            DataEvents.HighScoreEvent.Invoke(value);
+            GameEvents.HighScoreEvent.Invoke(value);
         }
         
         private void OnRelease()

@@ -109,10 +109,10 @@ namespace Game.Ui.Game
             UiEvents.LooseEvent += OnLooseEvent;
             UiEvents.RefreshUiEvent += OnUpdateBoardEvent;
             
-            DataEvents.GemEvent += OnGemRaised;
-            DataEvents.CurrentScoreEvent += OnCurrentScoreRaised;
-            DataEvents.HighScoreEvent += OnHighScoreRaised;
-            DataEvents.HighBallEvent += OnHighBallRaised;
+            GameEvents.GemEvent += OnGemRaised;
+            GameEvents.CurrentScoreEvent += OnCurrentScoreRaised;
+            GameEvents.HighScoreEvent += OnHighScoreRaised;
+            GameEvents.HighBallEvent += OnHighBallRaised;
             
             _bonusCard01.clicked += () => OnBonusCardClicked(_bonusCard01, 0);
             _bonusCard02.clicked += () => OnBonusCardClicked(_bonusCard02, 1);
@@ -127,10 +127,10 @@ namespace Game.Ui.Game
             UiEvents.LooseEvent -= OnLooseEvent;
             UiEvents.RefreshUiEvent -= OnUpdateBoardEvent;
             
-            DataEvents.GemEvent -= OnGemRaised;
-            DataEvents.CurrentScoreEvent -= OnCurrentScoreRaised;
-            DataEvents.HighScoreEvent -= OnHighScoreRaised;
-            DataEvents.HighBallEvent -= OnHighBallRaised;
+            GameEvents.GemEvent -= OnGemRaised;
+            GameEvents.CurrentScoreEvent -= OnCurrentScoreRaised;
+            GameEvents.HighScoreEvent -= OnHighScoreRaised;
+            GameEvents.HighBallEvent -= OnHighBallRaised;
             
             _pauseButton.clicked -= OnPauseButtonClicked;
         }

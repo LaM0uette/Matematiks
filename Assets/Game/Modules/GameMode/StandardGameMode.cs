@@ -118,7 +118,7 @@ namespace Game.Modules.GameMode
             if (newBallNumber > Saver.HighBall.LoadInt())
             {
                 Saver.HighBall.Save(newBallNumber);
-                DataEvents.HighBallEvent.Invoke(newBallNumber);
+                GameEvents.HighBallEvent.Invoke(newBallNumber);
             }
         }
         
