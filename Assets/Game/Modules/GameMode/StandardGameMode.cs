@@ -51,7 +51,7 @@ namespace Game.Modules.GameMode
         
         public void Initialize()
         {
-            InitializeWeightedBalls();
+            _levelManager.InitializeWeightedBalls();
             _levelManager.InitializeBallsToMerge(3, 99);
         }
 
@@ -60,7 +60,7 @@ namespace Game.Modules.GameMode
             var mergedBallNumber = mergedBall.Number + 1;
             
             mergedBall.SetNum(mergedBallNumber);
-            UpdateWeightedBalls(mergedBall, countBallsSelected);
+            _levelManager.UpdateWeightedBalls(mergedBall, countBallsSelected);
             
             GainGem(mergedBallNumber, countBallsSelected);
             UpdateHighBall(mergedBallNumber);
@@ -75,31 +75,6 @@ namespace Game.Modules.GameMode
         #endregion
 
         #region Functions
-
-        private void InitializeWeightedBalls()
-        {
-            _levelManager.WeightedBalls.Add(new WeightedBall(1, 80f));
-            _levelManager.WeightedBalls.Add(new WeightedBall(2, 40f));
-            _levelManager.WeightedBalls.Add(new WeightedBall(3, 20f));
-        }
-
-        private void UpdateWeightedBalls(Ball mergedBall, int countBallsSelected)
-        {
-            if (mergedBall.Number <= 1)
-                return;
-            
-            var weightedBall = _levelManager.WeightedBalls.FirstOrDefault(wb => wb.Number == mergedBall.Number);
-
-            if (!_levelManager.WeightedBalls.Contains(weightedBall) || weightedBall == null)
-            {
-                var newWeightedBall = new WeightedBall(mergedBall.Number, GameVar.DefaultNewBallWeight + countBallsSelected);
-                _levelManager.WeightedBalls.Add(newWeightedBall);
-            }
-            else
-            {
-                weightedBall.Weight += mergedBall.Number / GameVar.DefaultBallWeightDiviser + countBallsSelected;
-            }
-        }
         
         private void GainGem(int mergedBallNumber, int countBallsSelected)
         {

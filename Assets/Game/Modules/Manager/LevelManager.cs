@@ -29,7 +29,7 @@ namespace Game.Modules.Manager
         [SerializeField] private int _removeOldBallsThreshold = 8;
         
         [Space, Title("Soap")]
-        public ScriptableListWeightedBall WeightedBalls;
+        [SerializeField] private ScriptableListWeightedBall _weightedBalls;
         [SerializeField] private ScriptableListBall _ballsSelected;
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
@@ -84,10 +84,10 @@ namespace Game.Modules.Manager
             if (weightedBalls.Count <= 0)
                 return;
 
-            WeightedBalls.Reset();
+            _weightedBalls.Reset();
             foreach (var weightedBall in weightedBalls)
             {
-                WeightedBalls.Add(weightedBall);
+                _weightedBalls.Add(weightedBall);
             }
         }
 
@@ -186,11 +186,36 @@ namespace Game.Modules.Manager
         #endregion
 
         #region Functions
+        
+        public void InitializeWeightedBalls()
+        {
+            _weightedBalls.Add(new WeightedBall(1, 80f));
+            _weightedBalls.Add(new WeightedBall(2, 40f));
+            _weightedBalls.Add(new WeightedBall(3, 20f));
+        }
 
         public void InitializeBallsToMerge(int min, int max)
         {
             _minBallsToMerge = min;
             _maxBallsToMerge = max;
+        }
+        
+        public void UpdateWeightedBalls(Ball mergedBall, int countBallsSelected)
+        {
+            if (mergedBall.Number <= 1)
+                return;
+            
+            var weightedBall = _weightedBalls.FirstOrDefault(wb => wb.Number == mergedBall.Number);
+
+            if (!_weightedBalls.Contains(weightedBall) || weightedBall == null)
+            {
+                var newWeightedBall = new WeightedBall(mergedBall.Number, GameVar.DefaultNewBallWeight + countBallsSelected);
+                _weightedBalls.Add(newWeightedBall);
+            }
+            else
+            {
+                weightedBall.Weight += mergedBall.Number / GameVar.DefaultBallWeightDiviser + countBallsSelected;
+            }
         }
         
         private IEnumerator MergeBalls() 
@@ -344,19 +369,19 @@ namespace Game.Modules.Manager
             }
             
             var balls = FindObjectsOfType<Ball>();
-            for (var i = WeightedBalls.Count - 1; i >= 0; i--)
+            for (var i = _weightedBalls.Count - 1; i >= 0; i--)
             {
-                if (WeightedBalls[i].Number <= maxBallNumber - _removeOldBallsThreshold && WeightedBalls[i].Number < minBallNumber)
+                if (_weightedBalls[i].Number <= maxBallNumber - _removeOldBallsThreshold && _weightedBalls[i].Number < minBallNumber)
                 {
                     foreach (var ball in balls)
                     {
-                        if (ball.Number == WeightedBalls[i].Number)
+                        if (ball.Number == _weightedBalls[i].Number)
                         {
                             Destroy(ball.gameObject);
                         }
                     }
                     
-                    WeightedBalls.Remove(WeightedBalls[i]);
+                    _weightedBalls.Remove(_weightedBalls[i]);
                 }
             }
         }
@@ -385,7 +410,7 @@ namespace Game.Modules.Manager
             }
             
             Saver.CurrentBalls.Save(ballNumbers);
-            Saver.CurrentWeightedBalls.Save(WeightedBalls.ToList());
+            Saver.CurrentWeightedBalls.Save(_weightedBalls.ToList());
         }
         
         #endregion
@@ -460,16 +485,16 @@ namespace Game.Modules.Manager
             
             int[] lstNum = {1,1,1,1,1, 2,2,2,2,2, 3,3,3,3,3, 4,4,4,4,4, 5,5,5,8,9, 6,6,6,8,9, 7,7,7,8,9};
 
-            WeightedBalls.Reset();
-            WeightedBalls.Add(new WeightedBall(1, 80f));
-            WeightedBalls.Add(new WeightedBall(2, 30f));
-            WeightedBalls.Add(new WeightedBall(3, 1f));
-            WeightedBalls.Add(new WeightedBall(4, 1f));
-            WeightedBalls.Add(new WeightedBall(5, 1f));
-            WeightedBalls.Add(new WeightedBall(6, 1f));
-            WeightedBalls.Add(new WeightedBall(7, 1f));
-            WeightedBalls.Add(new WeightedBall(8, 1f));
-            WeightedBalls.Add(new WeightedBall(9, 1f));
+            _weightedBalls.Reset();
+            _weightedBalls.Add(new WeightedBall(1, 80f));
+            _weightedBalls.Add(new WeightedBall(2, 30f));
+            _weightedBalls.Add(new WeightedBall(3, 1f));
+            _weightedBalls.Add(new WeightedBall(4, 1f));
+            _weightedBalls.Add(new WeightedBall(5, 1f));
+            _weightedBalls.Add(new WeightedBall(6, 1f));
+            _weightedBalls.Add(new WeightedBall(7, 1f));
+            _weightedBalls.Add(new WeightedBall(8, 1f));
+            _weightedBalls.Add(new WeightedBall(9, 1f));
             
             for (var i = 0; i < balls.Count; i++)
             {
