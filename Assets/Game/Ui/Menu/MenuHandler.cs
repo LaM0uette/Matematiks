@@ -53,7 +53,6 @@ namespace Game.Ui.Menu
         private void UpdateHeaderScores()
         {
             _headerScores.UpdateHeaderScore();
-            _headerScores.UpdateHighBall(Saver.HighBall.LoadInt());
         }
         
         private void SetupMiddleScore()
