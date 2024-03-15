@@ -1,3 +1,4 @@
+using Game.Modules.Board;
 using Game.Modules.Manager;
 using Game.Modules.Player.Inputs;
 using Obvious.Soap;
@@ -11,7 +12,6 @@ namespace Game.Modules.Player
         #region Statements
         
         [Space, Title("Soap")]
-        [SerializeField] private ScriptableEventNoParam _releaseEvent;
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
 
@@ -56,7 +56,7 @@ namespace Game.Modules.Player
                 return;
 
             _mouseDownVariable.Value = false;
-            _releaseEvent.Raise();
+            BoardEvents.ReleaseEvent?.Invoke();
         }
 
         #endregion

@@ -30,7 +30,6 @@ namespace Game.Modules.Manager
         
         [Space, Title("Soap")]
         public ScriptableListWeightedBall WeightedBalls;
-        [SerializeField] private ScriptableEventNoParam _releaseEvent;
         [SerializeField] private ScriptableListBall _ballsSelected;
         [SerializeField] private BoolVariable _mouseDownVariable;
         [SerializeField] private BoolVariable _ongoingAction;
@@ -98,14 +97,14 @@ namespace Game.Modules.Manager
         
         private void OnEnable()
         {
-            _releaseEvent.OnRaised += OnRelease;
+            BoardEvents.ReleaseEvent += OnRelease;
             UiEvents.RefreshUiEvent += OnUpdateBoard;
             BoardEvents.CurrentBallSelectedEvent += OnBallSelected;
         }
 
         private void OnDisable()
         {
-            _releaseEvent.OnRaised -= OnRelease;
+            BoardEvents.ReleaseEvent -= OnRelease;
             UiEvents.RefreshUiEvent -= OnUpdateBoard;
             BoardEvents.CurrentBallSelectedEvent -= OnBallSelected;
         }
