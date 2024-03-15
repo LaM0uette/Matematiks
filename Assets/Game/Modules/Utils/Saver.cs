@@ -9,7 +9,7 @@ namespace Game.Modules.Utils
         #region Keys
 
         public const string Gem = "Gem";
-        public const string HighScore = "BestScore";
+        public const string HighScore = "HighScore";
         public const string HighBall = "HighBall";
         public const string LastScore = "LastScore";
         public const string CurrentScore = "CurrentScore";
