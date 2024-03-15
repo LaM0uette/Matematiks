@@ -32,13 +32,13 @@ namespace Game.Modules.Board.Balls
         
         private void OnMouseDown()
         {
-            if (BonusManager.Instance.CurrentBonus == null)
+            if (BonusManager.CurrentBonus == null)
             {
                 OnBallSelected();
                 return;
             }
             
-            var bonusId = BonusManager.Instance.CurrentBonus.BonusId;
+            var bonusId = BonusManager.CurrentBonus.BonusId;
             
             switch (bonusId)
             {
@@ -49,7 +49,7 @@ namespace Game.Modules.Board.Balls
                 case 3: Bonus04(); break;
             }
             
-            BonusManager.Instance.CurrentBonus = null;
+            BonusManager.CurrentBonus = null;
             UiEvents.RefreshUiEvent.Invoke();
         }
         

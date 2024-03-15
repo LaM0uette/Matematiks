@@ -148,7 +148,7 @@ namespace Game.Ui.Game
             
             if (_bonusDataDictionary.TryGetValue(bonusId, out var bonusData))
             {
-                BonusManager.Instance.BonusEvent?.Invoke(bonusData);
+                BonusManager.BonusEvent?.Invoke(bonusData);
             }
             else
             {

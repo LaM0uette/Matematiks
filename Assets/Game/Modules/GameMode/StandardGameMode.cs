@@ -41,12 +41,12 @@ namespace Game.Modules.GameMode
 
         private void OnEnable()
         {
-            BonusManager.Instance.BonusEvent += OnBonusEvent;
+            BonusManager.BonusEvent += OnBonusEvent;
         }
 
         private void OnDisable()
         {
-            BonusManager.Instance.BonusEvent -= OnBonusEvent;
+            BonusManager.BonusEvent -= OnBonusEvent;
         }
         
         public void Initialize()
@@ -220,12 +220,12 @@ namespace Game.Modules.GameMode
         {
             if (_gem < bonusData.Cost)
             {
-                BonusManager.Instance.CurrentBonus = null;
+                BonusManager.CurrentBonus = null;
                 UiEvents.RefreshUiEvent.Invoke();
                 return;
             }
             
-            BonusManager.Instance.CurrentBonus = bonusData;
+            BonusManager.CurrentBonus = bonusData;
             
             _gem -= bonusData.Cost;
             Saver.Gem.Save(_gem);
