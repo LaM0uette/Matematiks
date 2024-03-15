@@ -1,7 +1,6 @@
 using System.Collections;
 using Game.Modules.Utils;
 using JetBrains.Annotations;
-using Obvious.Soap;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,7 +14,6 @@ namespace Game.Modules.Board.Cells
         [ShowInInspector, ReadOnly] public bool IsEmpty { get; set; }
         
         [SerializeField, CanBeNull] private GameObject _nextCell;
-        [SerializeField] private BoolVariable _ongoingAction;
 
         #endregion
 
@@ -46,7 +44,7 @@ namespace Game.Modules.Board.Cells
             
             var childGo = transform.GetChild(0).gameObject;
             
-            if (_ongoingAction) 
+            if (BoardHandler.OngoingAction) 
                 return;
             
             childGo.transform.SetParent(_nextCell.transform);

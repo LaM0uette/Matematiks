@@ -1,8 +1,6 @@
 using Game.Modules.Board;
 using Game.Modules.Manager;
 using Game.Modules.Player.Inputs;
-using Obvious.Soap;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Modules.Player
@@ -10,10 +8,6 @@ namespace Game.Modules.Player
     public class PlayerController : MonoBehaviour
     {
         #region Statements
-        
-        [Space, Title("Soap")]
-        [SerializeField] private BoolVariable _mouseDownVariable;
-        [SerializeField] private BoolVariable _ongoingAction;
 
         private PlayerInputsReader _inputsReader;
         
@@ -42,20 +36,20 @@ namespace Game.Modules.Player
 
         #region InputsReaderEvents
 
-        private void OnPress()
+        private static void OnPress()
         {
-            if (_ongoingAction.Value || BonusManager.CurrentBonus != null) 
+            if (BoardHandler.OngoingAction || BonusManager.CurrentBonus != null) 
                 return;
             
-            _mouseDownVariable.Value = true;
+            BoardHandler.IsPressing = true;
         }
         
-        private void OnRelease()
+        private static void OnRelease()
         {
-            if (_mouseDownVariable.Value == false || BonusManager.CurrentBonus != null) 
+            if (BoardHandler.IsPressing == false || BonusManager.CurrentBonus != null) 
                 return;
 
-            _mouseDownVariable.Value = false;
+            BoardHandler.IsPressing = false;
             BoardEvents.ReleaseEvent?.Invoke();
         }
 

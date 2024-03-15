@@ -2,7 +2,6 @@ using Game.Modules.Events;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui;
-using Obvious.Soap;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -22,9 +21,6 @@ namespace Game.Modules.Board.Balls
         [Space, Title("Ui")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private TMP_Text _tmpNumber;
-
-        [Space, Title("Soap")]
-        [SerializeField] private BoolVariable _mouseIsDownVariable;
 
         #endregion
         
@@ -64,7 +60,7 @@ namespace Game.Modules.Board.Balls
 
         private void OnBallSelected()
         {
-            if (_mouseIsDownVariable.Value == false) 
+            if (BoardHandler.IsPressing == false) 
                 return;
             
             BoardEvents.CurrentBallSelectedEvent.Invoke(this);

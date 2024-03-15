@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Modules.Board;
 using Game.Ui.Popups.Loose;
 using Game.Ui.Popups.Pause;
 using UnityEngine;
@@ -84,6 +85,7 @@ namespace Game.Ui.Popups
         
         private void ShowPopup(Popup newPopup)
         {
+            BoardHandler.OngoingAction = true;
             _main.style.display = DisplayStyle.Flex;
             
             _currentPopup?.Hide();
@@ -93,6 +95,7 @@ namespace Game.Ui.Popups
 
         private void HideMainLayout()
         {
+            BoardHandler.OngoingAction = false;
             _main.style.display = DisplayStyle.None;
         }
         

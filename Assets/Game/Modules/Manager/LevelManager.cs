@@ -31,9 +31,6 @@ namespace Game.Modules.Manager
         [Space, Title("Soap")]
         [SerializeField] private ScriptableListWeightedBall _weightedBalls;
         [SerializeField] private ScriptableListBall _ballsSelected;
-        [SerializeField] private BoolVariable _mouseDownVariable;
-        [SerializeField] private BoolVariable _ongoingAction;
-        [SerializeField] private BoolVariable _isLoose;
         
         private IGameMode _gameMode;
         
@@ -144,7 +141,7 @@ namespace Game.Modules.Manager
 
         private void OnBallSelected(Ball ball)
         {
-            if (_mouseDownVariable.Value == false || _isLoose.Value) 
+            if (BoardHandler.IsPressing == false || BoardHandler.IsLost) 
                 return;
             
             if (_ballsSelected.Count == 0)
@@ -230,7 +227,7 @@ namespace Game.Modules.Manager
             }
             
             CancelInvoke();
-            _ongoingAction.Value = true;
+            BoardHandler.OngoingAction = true;
             
             for (var i = 0; i < _ballsSelected.Count - 1; i++) 
             {
@@ -258,7 +255,7 @@ namespace Game.Modules.Manager
             _gameMode.MergeBalls(mergedBall, _ballsSelected.Count);
             
             _ballsSelected.Clear();
-            _ongoingAction.Value = false;
+            BoardHandler.OngoingAction = false;
             
             Invoke(nameof(AfterMergeBalls), 1f);
         }
@@ -304,9 +301,9 @@ namespace Game.Modules.Manager
 
         #region Loose
         
-        public void LooseGame()
+        public static void LooseGame()
         {
-            _isLoose.Value = true;
+            BoardHandler.IsLost = true;
             UiEvents.LooseEvent.Invoke();
         }
 
@@ -334,7 +331,7 @@ namespace Game.Modules.Manager
 
         private void AfterMergeBalls()
         {
-            if (_ongoingAction.Value)
+            if (BoardHandler.OngoingAction)
                 return;
             
             RemoveOldWeightedBalls();
@@ -398,7 +395,7 @@ namespace Game.Modules.Manager
             {
                 for (var y = 0; y < height; y++)
                 {
-                    if (_ongoingAction.Value)
+                    if (BoardHandler.OngoingAction)
                         return;
 
                     var cellGrid = BoardGrid[x, y].transform;

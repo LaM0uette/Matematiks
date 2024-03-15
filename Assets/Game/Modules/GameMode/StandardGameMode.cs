@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Modules.Board;
 using Game.Modules.Board.Balls;
 using Game.Modules.Bonus;
 using Game.Modules.Events;
@@ -49,6 +50,9 @@ namespace Game.Modules.GameMode
         
         public void Initialize()
         {
+            BoardHandler.IsPressing = false;
+            BoardHandler.IsLost = false;
+            
             _levelManager.InitializeWeightedBalls();
             _levelManager.InitializeBallsToMerge(3, 99);
         }
@@ -182,7 +186,7 @@ namespace Game.Modules.GameMode
             
             Saver.ResetAllCurrentScores();
             
-            _levelManager.LooseGame();
+            LevelManager.LooseGame();
         }
         
         private void OnBonusEvent(BonusData bonusData)
