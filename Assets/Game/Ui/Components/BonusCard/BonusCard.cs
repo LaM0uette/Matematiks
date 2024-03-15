@@ -26,7 +26,7 @@ namespace Game.Ui.Components.BonusCard
             }
         }
 
-        private const string _gemIconKey = "diamond";
+        private const string _gemIconKey = "Icons/diamond";
         
         public string IconName { get; set; }
         public int Price { get; set; }

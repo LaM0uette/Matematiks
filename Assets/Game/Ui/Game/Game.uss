@@ -34,5 +34,5 @@
     bottom: 175px;
     width: 85px;
     height: 85px;
-    background-image: url('project://database/Assets/Game/Sprites/SVG/pause.svg?fileID=7388822144124034973&guid=ea6c1468fa4f76840a5a53dd05e27d9a&type=3#pause');
+    background-image: url('project://database/Assets/Game/Ui/Resources/Icons/pause.svg?fileID=7388822144124034973&guid=ea6c1468fa4f76840a5a53dd05e27d9a&type=3#pause');
 }

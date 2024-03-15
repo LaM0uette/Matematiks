@@ -4,9 +4,9 @@
         <ui:Label tabindex="-1" text="PAUSE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseTitle" class="pause-title" />
         <ui:VisualElement name="PauseButtonsContainer" class="pause-buttons-container" style="flex-grow: 1;">
             <ui:VisualElement name="PauseButtonsContainerPlacement" class="pause-button-container__placement">
-                <Game.Ui.Components.GameButton.GameButton text="MENU" icon-name="home" name="PauseMenuButton" class="pause-button" />
-                <Game.Ui.Components.GameButton.GameButton text="RESUME" icon-name="play" name="PauseResumeButton" class="pause-resume-button" style="height: 250px; font-size: 80px;" />
-                <Game.Ui.Components.GameButton.GameButton text="RESTART" icon-name="refresh" name="PauseRestartButton" class="pause-button" />
+                <Game.Ui.Components.GameButton.GameButton text="MENU" icon-name="Icons/home" name="PauseMenuButton" class="pause-button" />
+                <Game.Ui.Components.GameButton.GameButton text="RESUME" icon-name="Icons/play" name="PauseResumeButton" class="pause-resume-button" style="height: 250px; font-size: 80px;" />
+                <Game.Ui.Components.GameButton.GameButton text="RESTART" icon-name="Icons/refresh" name="PauseRestartButton" class="pause-button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

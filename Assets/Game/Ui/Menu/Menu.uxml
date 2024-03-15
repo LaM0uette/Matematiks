@@ -8,8 +8,8 @@
         </ui:VisualElement>
         <ui:VisualElement name="ButtonsContainer" class="buttons-container">
             <ui:VisualElement name="GameButtons" class="buttons-container__game-buttons">
-                <Game.Ui.Components.GameButton.GameButton text="RESUME" icon-name="play" name="ResumeGameButton" />
-                <Game.Ui.Components.GameButton.GameButton icon-name="modes" text="NEW GAME" name="NewGameGameButton" />
+                <Game.Ui.Components.GameButton.GameButton text="RESUME" icon-name="Icons/play" name="ResumeGameButton" />
+                <Game.Ui.Components.GameButton.GameButton icon-name="Icons/modes" text="NEW GAME" name="NewGameGameButton" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

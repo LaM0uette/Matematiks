@@ -3,7 +3,7 @@
 }
 
 .gem-score__icon {
-    background-image: url('project://database/Assets/Game/Sprites/SVG/diamond.svg?fileID=7388822144124034973&guid=f3703b269aadc3d468e241c2e823526d&type=3#diamond');
+    background-image: resource('Icons/diamond');
 }
 
 .gem-score__container {

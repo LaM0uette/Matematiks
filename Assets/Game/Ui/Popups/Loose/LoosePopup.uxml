@@ -8,8 +8,8 @@
                 <ui:Label tabindex="-1" text="SCORE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LooseScoreTitle" class="loose-button-container__score-title" />
             </ui:VisualElement>
             <ui:VisualElement name="LooseButtonsContainerPlacement" class="loose-button-container__placement">
-                <Game.Ui.Components.GameButton.GameButton text="MENU" icon-name="home" name="LooseMenuButton" class="loose-button" />
-                <Game.Ui.Components.GameButton.GameButton text="RESTART" icon-name="refresh" name="LooseRestartButton" class="loose-button" />
+                <Game.Ui.Components.GameButton.GameButton text="MENU" icon-name="Icons/home" name="LooseMenuButton" class="loose-button" />
+                <Game.Ui.Components.GameButton.GameButton text="RESTART" icon-name="Icons/refresh" name="LooseRestartButton" class="loose-button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
