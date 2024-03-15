@@ -12,6 +12,8 @@
         <Game.Ui.Components.BonusCard.BonusCard name="BonusCard02" icon-name="Icons/minus-one" price="450" />
         <Game.Ui.Components.BonusCard.BonusCard name="BonusCard03" icon-name="Icons/plus-one" price="650" />
         <Game.Ui.Components.BonusCard.BonusCard name="BonusCard04" icon-name="Icons/destroy" price="999" />
+        <Game.Ui.Components.IconButton.IconButton focusable="true" name="GameMenuButton" class="game-bottom__loose-button" style="background-image: resource(&apos;Icons/home&apos;);" />
+        <Game.Ui.Components.IconButton.IconButton focusable="true" name="GameRestartButton" class="game-bottom__loose-button" style="background-image: resource(&apos;Icons/refresh&apos;);" />
         <Game.Ui.Components.IconButton.IconButton icon-name="pause" name="PauseButton" class="game-bottom__pause-button" />
     </ui:VisualElement>
 </ui:UXML>

@@ -28,6 +28,12 @@
     align-self: center;
 }
 
+.game-bottom__loose-button {
+    width: 150px;
+    height: 150px;
+    display: none;
+}
+
 .game-bottom__pause-button {
     position: absolute;
     right: -125px;

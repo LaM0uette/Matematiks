@@ -6,6 +6,7 @@ using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui.Components.BonusCard;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace Game.Ui.Game
@@ -25,6 +26,8 @@ namespace Game.Ui.Game
         private const string _bonusCard02Key = "BonusCard02";
         private const string _bonusCard03Key = "BonusCard03";
         private const string _bonusCard04Key = "BonusCard04";
+        private const string _menuButtonKey = "GameMenuButton";
+        private const string _restartButtonKey = "GameRestartButton";
         private const string _pauseButtonKey = "PauseButton";
         
         private UIDocument _uiDocument;
@@ -41,6 +44,8 @@ namespace Game.Ui.Game
         private BonusCard _bonusCard03;
         private BonusCard _bonusCard04;
         
+        private Button _menuButton;
+        private Button _restartButton;
         private Button _pauseButton;
         
         private void Awake()
@@ -49,6 +54,8 @@ namespace Game.Ui.Game
             _root = _uiDocument.rootVisualElement;
             
             SetupButtons();
+            InitButtons();
+            
             SetupHeaderScores();
             SetupCurrentScore();
             
@@ -67,6 +74,25 @@ namespace Game.Ui.Game
         
         #region Setup/Update
         
+        private void SetupButtons()
+        {
+            _bonusCard01 = _root.Q<BonusCard>(_bonusCard01Key);
+            _bonusCard02 = _root.Q<BonusCard>(_bonusCard02Key);
+            _bonusCard03 = _root.Q<BonusCard>(_bonusCard03Key);
+            _bonusCard04 = _root.Q<BonusCard>(_bonusCard04Key);
+            
+            _bonusCardList = new List<BonusCard> { _bonusCard01, _bonusCard02, _bonusCard03, _bonusCard04 };
+            
+            _menuButton = _root.Q<Button>(_menuButtonKey);
+            _restartButton = _root.Q<Button>(_restartButtonKey);
+            _pauseButton = _root.Q<Button>(_pauseButtonKey);
+        }
+        private void InitButtons()
+        {
+            _menuButton.style.display = DisplayStyle.None;
+            _restartButton.style.display = DisplayStyle.None;
+        }
+        
         private void LoadBonusData()
         {
             _bonusCardDataList = new List<BonusCardData>();
@@ -84,7 +110,6 @@ namespace Game.Ui.Game
                 _bonusCardDataList.Add(newBonusCard);
             }
         }
-
         private void InitBonusData()
         {
             if (_bonusCardDataList.Count < 4)
@@ -114,18 +139,6 @@ namespace Game.Ui.Game
         {
             _currentScoreLabel.text = value.ToString();
         }
-        
-        private void SetupButtons()
-        {
-            _bonusCard01 = _root.Q<BonusCard>(_bonusCard01Key);
-            _bonusCard02 = _root.Q<BonusCard>(_bonusCard02Key);
-            _bonusCard03 = _root.Q<BonusCard>(_bonusCard03Key);
-            _bonusCard04 = _root.Q<BonusCard>(_bonusCard04Key);
-            
-            _bonusCardList = new List<BonusCard> { _bonusCard01, _bonusCard02, _bonusCard03, _bonusCard04 };
-            
-            _pauseButton = _root.Q<Button>(_pauseButtonKey);
-        }
 
         #endregion
         
@@ -146,6 +159,8 @@ namespace Game.Ui.Game
             _bonusCard03.clicked += () => OnBonusCardClicked(_bonusCard03, 2);
             _bonusCard04.clicked += () => OnBonusCardClicked(_bonusCard04, 3);
             
+            _menuButton.clicked += OnMenuButtonClicked;
+            _restartButton.clicked += OnRestartButtonClicked;
             _pauseButton.clicked += OnPauseButtonClicked;
         }
         
@@ -159,6 +174,8 @@ namespace Game.Ui.Game
             GameEvents.HighScoreEvent -= OnHighScoreRaised;
             GameEvents.HighBallEvent -= OnHighBallRaised;
             
+            _menuButton.clicked -= OnMenuButtonClicked;
+            _restartButton.clicked -= OnRestartButtonClicked;
             _pauseButton.clicked -= OnPauseButtonClicked;
         }
 
@@ -175,6 +192,17 @@ namespace Game.Ui.Game
             
             var bonusData = _bonusCardDataList[bonusId].BonusData;
             BonusManager.BonusEvent?.Invoke(bonusData);
+        }
+        
+        private static void OnMenuButtonClicked()
+        {
+            SceneManager.LoadScene(GameVar.MenuScene);
+        }
+        
+        private static void OnRestartButtonClicked()
+        {
+            Saver.ResetAllCurrentScores();
+            SceneManager.LoadScene(GameVar.GameScene);
         }
         
         private static void OnPauseButtonClicked()
@@ -216,6 +244,9 @@ namespace Game.Ui.Game
         {
             HideBonusCards();
             _pauseButton.style.visibility = Visibility.Hidden;
+            
+            _menuButton.style.display = DisplayStyle.Flex;
+            _restartButton.style.display = DisplayStyle.Flex;
         }
         
         private void ShowBonusCards()
