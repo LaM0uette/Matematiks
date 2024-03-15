@@ -49,10 +49,6 @@ namespace Game.Modules.GameMode
             }
             
             BonusManager.CurrentBonus = bonusData;
-            
-            gem -= bonusData.Cost;
-            Saver.Gem.Save(gem);
-            RaiseGemEvent(gem);
         }
         
         #endregion

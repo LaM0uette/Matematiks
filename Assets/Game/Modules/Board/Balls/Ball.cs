@@ -34,6 +34,13 @@ namespace Game.Modules.Board.Balls
                 return;
             }
             
+            if (BoardHandler.OngoingAction)
+            {
+                BonusManager.CurrentBonus = null;
+                UiEvents.RefreshUiEvent.Invoke();
+                return;
+            }
+            
             var bonusId = BonusManager.CurrentBonus.Id;
             
             switch (bonusId)
@@ -44,6 +51,12 @@ namespace Game.Modules.Board.Balls
                 case 2: Bonus03(); break;
                 case 3: Bonus04(); break;
             }
+            
+            var bonusData = BonusManager.CurrentBonus;
+            var gem = Saver.Gem.LoadInt();
+            gem -= bonusData.Cost;
+            Saver.Gem.Save(gem);
+            GameEvents.GemEvent.Invoke(gem);
             
             BonusManager.CurrentBonus = null;
             UiEvents.RefreshUiEvent.Invoke();

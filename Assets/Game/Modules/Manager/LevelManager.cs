@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Modules.Board;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
+using Game.Modules.Events;
 using Game.Modules.GameMode;
 using Game.Modules.Utils;
 using Game.Ui;
@@ -551,6 +552,15 @@ namespace Game.Modules.Manager
         public void ResetPlayerPref()
         {
             Saver.ResetAll();
+        }
+        
+        [Button]
+        public void Add5000Gem()
+        {
+            var gem = Saver.Gem.LoadInt();
+            gem += 5000;
+            Saver.Gem.Save(gem);
+            GameEvents.GemEvent.Invoke(gem);
         }
 
         #endregion
