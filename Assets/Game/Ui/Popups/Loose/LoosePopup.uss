@@ -1,6 +1,6 @@
 .loose-popup__container {
     flex-grow: 1;
-    background-color: rgb(78, 83, 93);
+    background-color: rgb(72, 76, 84);
     border-width: 6px;
     border-color: rgb(44, 46, 51);
     border-radius: 15px;
