@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Bonus;
 using Game.Modules.Events;
@@ -18,7 +17,6 @@ namespace Game.Modules.GameMode
 
         private LevelManager _levelManager;
         private int _gem;
-        private int _highBallNumber;
         private int _currentScore;
         
         private void Awake()
@@ -84,17 +82,13 @@ namespace Game.Modules.GameMode
             LevelManager.RaiseGemEvent(_gem);
         }
 
-        private void UpdateHighBall(int newBallNumber)
+        private static void UpdateHighBall(int newBallNumber)
         {
-            if (!Application.isPlaying || newBallNumber <= _highBallNumber)
+            if (!Application.isPlaying || newBallNumber <= Saver.HighBall.LoadInt())
                 return;
             
-            _highBallNumber = newBallNumber;
-            if (newBallNumber > Saver.HighBall.LoadInt())
-            {
-                Saver.HighBall.Save(newBallNumber);
-                GameEvents.HighBallEvent.Invoke(newBallNumber);
-            }
+            Saver.HighBall.Save(newBallNumber);
+            GameEvents.HighBallEvent.Invoke(newBallNumber);
         }
         
         private void UpdateScore(int value)

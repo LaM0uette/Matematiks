@@ -98,6 +98,9 @@ namespace Game.Modules.Utils
             CurrentScore.Delete();
             CurrentBalls.Delete();
             CurrentWeightedBalls.Delete();
+            
+            //HighScore.Delete();
+            //HighBall.Delete();
         }
 
         #endregion

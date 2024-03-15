@@ -1,3 +1,4 @@
+using Game.Modules.Events;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui;
@@ -137,6 +138,7 @@ namespace Game.Modules.Board.Balls
         private void Bonus03()
         {
             SetNum(++Number);
+            CheckForUpdateHighBall(Number);
         }
         
         private void Bonus04()
@@ -147,6 +149,15 @@ namespace Game.Modules.Board.Balls
                 if (ball.Number == Number)
                     Destroy(ball.gameObject);
             }
+        }
+        
+        private static void CheckForUpdateHighBall(int ballNumber)
+        {
+            if (ballNumber <= Saver.HighBall.LoadInt())
+                return;
+            
+            Saver.HighBall.Save(ballNumber);
+            GameEvents.HighBallEvent.Invoke(ballNumber);
         }
 
         #endregion
