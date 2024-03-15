@@ -30,7 +30,7 @@ namespace Game.Modules.Manager
         
         [Space, Title("Soap")]
         [SerializeField] private ScriptableListWeightedBall _weightedBalls;
-        [SerializeField] private ScriptableListBall _ballsSelected;
+        [SerializeField] private ScriptableListBall _ballSelection;
         
         private IGameMode _gameMode;
         
@@ -144,42 +144,42 @@ namespace Game.Modules.Manager
             if (BoardHandler.IsPressing == false || BoardHandler.IsLost) 
                 return;
             
-            if (_ballsSelected.Count == 0)
+            if (_ballSelection.Count == 0)
             {
                 AddFirstBall(ball);
                 return;
             }
 
-            if (_ballsSelected.Contains(ball) && _ballsSelected.Count > 1)
+            if (_ballSelection.Contains(ball) && _ballSelection.Count > 1)
             {
                 RemovePreviousBall(ball);
                 return;
             }
 
-            if (_ballsSelected.Count >= _maxBallsToMerge) 
+            if (_ballSelection.Count >= _maxBallsToMerge) 
                 return;
             
-            var firstNumBall = _ballsSelected[0];
+            var firstNumBall = _ballSelection[0];
             if (firstNumBall.Number != ball.Number) 
                 return;
             
             _lineRendererMaterial.color = ball.Color;
-            _ballsSelected.Add(ball);
+            _ballSelection.Add(ball);
             
-            if (_ballsSelected.Count > 1)
+            if (_ballSelection.Count > 1)
             {
-                var distance = Vector3.Distance(_ballsSelected[^2].transform.position, _ballsSelected[^1].transform.position);
+                var distance = Vector3.Distance(_ballSelection[^2].transform.position, _ballSelection[^1].transform.position);
 
                 if (distance > _maxDistanceBetweenBalls)
                 {
-                    _ballsSelected.Remove(_ballsSelected[^1]);
-                    _lineRenderer.positionCount = _ballsSelected.Count;
+                    _ballSelection.Remove(_ballSelection[^1]);
+                    _lineRenderer.positionCount = _ballSelection.Count;
                     return;
                 }
             }
             
-            _lineRenderer.positionCount = _ballsSelected.Count;
-            _lineRenderer.SetPosition(_ballsSelected.Count - 1, ball.transform.position);
+            _lineRenderer.positionCount = _ballSelection.Count;
+            _lineRenderer.SetPosition(_ballSelection.Count - 1, ball.transform.position);
         }
         
         #endregion
@@ -219,9 +219,9 @@ namespace Game.Modules.Manager
         
         private IEnumerator MergeBalls() 
         {
-            if (_ballsSelected.Count < _minBallsToMerge || _lineRenderer == null)
+            if (_ballSelection.Count < _minBallsToMerge || _lineRenderer == null)
             {
-                _ballsSelected.Clear();
+                _ballSelection.Clear();
                 _lineRenderer.positionCount = 0;
                 yield break;
             }
@@ -229,10 +229,10 @@ namespace Game.Modules.Manager
             CancelInvoke();
             BoardHandler.OngoingAction = true;
             
-            for (var i = 0; i < _ballsSelected.Count - 1; i++) 
+            for (var i = 0; i < _ballSelection.Count - 1; i++) 
             {
-                var currentBall = _ballsSelected[i];
-                var nextBall = _ballsSelected[i + 1];
+                var currentBall = _ballSelection[i];
+                var nextBall = _ballSelection[i + 1];
                 
                 var duration = GameVar.BallMoveDuration;
                 var elapsedTime = 0f;
@@ -251,10 +251,10 @@ namespace Game.Modules.Manager
                 Destroy(currentBall.gameObject);
             }
             
-            var mergedBall = _ballsSelected[^1];
-            _gameMode.MergeBalls(mergedBall, _ballsSelected.Count);
+            var mergedBall = _ballSelection[^1];
+            _gameMode.MergeBalls(mergedBall, _ballSelection.Count);
             
-            _ballsSelected.Clear();
+            _ballSelection.Clear();
             BoardHandler.OngoingAction = false;
             
             Invoke(nameof(AfterMergeBalls), 1f);
@@ -283,18 +283,18 @@ namespace Game.Modules.Manager
         
         private void AddFirstBall(Ball ball)
         {
-            _ballsSelected.Add(ball);
+            _ballSelection.Add(ball);
             _lineRenderer.positionCount = 1;
             _lineRenderer.SetPosition(0, ball.transform.position);
         }
 
         private void RemovePreviousBall(Object ball)
         {
-            if (_ballsSelected[^2] != ball) 
+            if (_ballSelection[^2] != ball) 
                 return;
             
-            _ballsSelected.Remove(_ballsSelected[^1]);
-            _lineRenderer.positionCount = _ballsSelected.Count;
+            _ballSelection.Remove(_ballSelection[^1]);
+            _lineRenderer.positionCount = _ballSelection.Count;
         }
 
         #endregion
