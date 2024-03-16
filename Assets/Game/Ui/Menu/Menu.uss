@@ -1,6 +1,6 @@
 .menu {
     flex-grow: 1;
-    background-color: rgb(72, 76, 84);
+    background-color: rgb(61, 66, 75);
 }
 
 .middle-score {
