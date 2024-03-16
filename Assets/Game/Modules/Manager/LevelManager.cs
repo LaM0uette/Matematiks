@@ -91,6 +91,8 @@ namespace Game.Modules.Manager
             {
                 ball.PlaySelectedFeedback();
                 
+                PutOtherBallInBackground(ball.Number);
+                
                 // Add first ball
                 _ballSelection.Add(ball);
                 _lineRenderer.positionCount = 1;
@@ -139,6 +141,7 @@ namespace Game.Modules.Manager
         
         private void OnRelease()
         {
+            RestoreAllBallInBackground();
             StartCoroutine(MergeBalls());
         }
 
@@ -390,6 +393,48 @@ namespace Game.Modules.Manager
             
             Saver.CurrentBalls.Save(ballNumbers);
             Saver.CurrentWeightedBalls.Save(_weightedBalls.ToList());
+        }
+
+        private void PutOtherBallInBackground(int ballNumber)
+        {
+            var width = BoardGrid.GetLength(0);
+            var height = BoardGrid.GetLength(1);
+            
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var cellGrid = BoardGrid[x, y].transform;
+                    
+                    if (cellGrid.childCount <= 0)
+                        return;
+                    
+                    var ball = cellGrid.GetComponentInChildren<Ball>();
+                    
+                    if (ball.Number != ballNumber)
+                        ball.PutInBackground();
+                }
+            }
+        }
+        
+        private void RestoreAllBallInBackground()
+        {
+            var width = BoardGrid.GetLength(0);
+            var height = BoardGrid.GetLength(1);
+            
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var cellGrid = BoardGrid[x, y].transform;
+                    
+                    if (cellGrid.childCount <= 0)
+                        return;
+                    
+                    var ball = cellGrid.GetComponentInChildren<Ball>();
+                    ball.RestoreBackground();
+                }
+            }
         }
         
         #endregion

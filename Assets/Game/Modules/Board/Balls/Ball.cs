@@ -121,6 +121,25 @@ namespace Game.Modules.Board.Balls
             SetBallColor(number);
         }
 
+        public void PutInBackground()
+        {
+            var colorRgba = Color;
+            colorRgba.a = 0.3f;
+            
+            _spriteRenderer.color = colorRgba;
+            
+            var txtColorRgba = _tmpNumber.color;
+            txtColorRgba.a = 0.65f;
+            
+            _tmpNumber.color = txtColorRgba;
+        }
+        
+        public void RestoreBackground()
+        {
+            _spriteRenderer.color = Color;
+            _tmpNumber.color = GetContrastingTextColor(_spriteRenderer.color);
+        }
+
         private void SetBallColor(int number)
         {
             var color = GetBallColor(number);
