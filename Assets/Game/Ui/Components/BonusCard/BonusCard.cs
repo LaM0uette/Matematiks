@@ -25,6 +25,8 @@ namespace Game.Ui.Components.BonusCard
         }
 
         private const string _gemIconKey = "Icons/diamond";
+        private readonly Color32 _priceEnableColor = new(240, 248, 255, 255);
+        private readonly Color32 _priceDisableColor =  new(44, 46, 51, 255);
         
         private string _iconName;
         public string IconName
@@ -66,8 +68,18 @@ namespace Game.Ui.Components.BonusCard
         public void Unselect() => RemoveFromClassList("bonus-card--selected");
         public void Show() => style.display = DisplayStyle.Flex;
         public void Hide() => style.display = DisplayStyle.None;
-        public void Enable() => SetEnabled(true);
-        public void Disable() => SetEnabled(false);
+
+        public void Enable()
+        {
+            SetEnabled(true);
+            _priceLabel.style.color = new StyleColor(_priceEnableColor);
+        }
+
+        public void Disable()
+        {
+            SetEnabled(false);
+            _priceLabel.style.color = new StyleColor(_priceDisableColor);
+        }
         
         private void AddStyleSheet()
         {
