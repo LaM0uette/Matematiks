@@ -5,7 +5,7 @@ namespace Game.Modules.Utils
     public static class ColorVar
     {
         public static Color32 WhiteColor = new(243, 238, 245, 255);
-        public static Color32 BlackColor = new(28, 28, 28, 255);
+        public static Color32 BlackColor = new(44, 46, 51, 255);
         
         public static Color32 Ball1Color = WhiteColor;
         public static Color32 Ball2Color = new(155, 198, 227, 255);

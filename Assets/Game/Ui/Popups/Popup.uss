@@ -1,6 +1,6 @@
 .main {
     flex-grow: 1;
-    background-color: rgba(0, 0, 0, 0.45);
+    background-color: rgba(31, 31, 31, 0.94);
     align-items: center;
     justify-content: center;
     display: none;
