@@ -143,7 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultVolume: 0.2
   PopClip: {fileID: 8300000, guid: a23602b082410594386b5d70e30f72c6, type: 3}
-  PopEndClip: {fileID: 8300000, guid: bb18d7a21d510ab4986107a973eb420d, type: 3}
+  Bonus01Clip: {fileID: 8300000, guid: e5a0a3bde8e0c3249bf150cc3139970b, type: 3}
+  Bonus02Clip: {fileID: 8300000, guid: 836ae66144c9a364482f8eabacc6ec0e, type: 3}
+  Bonus03Clip: {fileID: 8300000, guid: af506931ed0e8774d83a37cd9fbb08b6, type: 3}
+  Bonus04Clip: {fileID: 8300000, guid: 4d9486d4f1138f34d86c0cd9b4035978, type: 3}
   BallClips:
   - {fileID: 8300000, guid: f46b326eaba2c9f4da715c05e38e5aae, type: 3}
   - {fileID: 8300000, guid: 8f15f9f2037ebd64f858dc8c502ed2f7, type: 3}

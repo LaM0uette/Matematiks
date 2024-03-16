@@ -12,6 +12,10 @@ namespace Game.Modules.Manager
 
         [Space, Title("Clips")] 
         public AudioClip PopClip;
+        public AudioClip Bonus01Clip;
+        public AudioClip Bonus02Clip;
+        public AudioClip Bonus03Clip;
+        public AudioClip Bonus04Clip;
         public AudioClip[] BallClips;
 
         private void Awake()
@@ -22,10 +26,11 @@ namespace Game.Modules.Manager
                 Destroy(gameObject);
         }
         
-        public void PlayPopSound()
-        {
-            PlaySound(PopClip);
-        }
+        public void PlayPopSound() => PlaySound(PopClip);
+        public void PlayBonus01Sound() => PlaySound(Bonus01Clip);
+        public void PlayBonus02Sound() => PlaySound(Bonus02Clip);
+        public void PlayBonus03Sound() => PlaySound(Bonus03Clip);
+        public void PlayBonus04Sound() => PlaySound(Bonus04Clip);
         
         public void PlayBallSound(int index)
         {

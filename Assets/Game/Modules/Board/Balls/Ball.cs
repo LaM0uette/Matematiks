@@ -181,6 +181,7 @@ namespace Game.Modules.Board.Balls
         
         private void Bonus01()
         {
+            SoundManager.Instance.PlayBonus01Sound();
             _bonus01Feedback.PlayFeedbacks();
             
             //Destroy(gameObject);
@@ -188,6 +189,7 @@ namespace Game.Modules.Board.Balls
         
         private void Bonus02()
         {
+            SoundManager.Instance.PlayBonus02Sound();
             _bonus02Feedback.PlayFeedbacks();
             
             SetNum(--Number);
@@ -195,6 +197,7 @@ namespace Game.Modules.Board.Balls
         
         private void Bonus03()
         {
+            SoundManager.Instance.PlayBonus03Sound();
             _bonus03Feedback.PlayFeedbacks();
             
             SetNum(++Number);
@@ -203,6 +206,8 @@ namespace Game.Modules.Board.Balls
         
         private void Bonus04()
         {
+            SoundManager.Instance.PlayBonus04Sound();
+            
             var balls = FindObjectsOfType<Ball>();
             foreach (var ball in balls)
             {
