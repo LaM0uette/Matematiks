@@ -2146,9 +2146,9 @@ MonoBehaviour:
         DebugActive: 0
         Mode: 0
         AnimateScaleTarget: {fileID: 7802694726835230908}
-        AnimateScaleDuration: 0.05
+        AnimateScaleDuration: 0.02
         RemapCurveZero: 0.66
-        RemapCurveOne: 0.72
+        RemapCurveOne: 0.7
         Offset: 0
         AnimateX: 1
         AnimateScaleTweenX:
@@ -2310,7 +2310,7 @@ MonoBehaviour:
           TimescaleMode: 0
           ExcludeFromHoldingPauses: 0
           ContributeToTotalDuration: 1
-          InitialDelay: 0.05
+          InitialDelay: 0.02
           CooldownDuration: 0
           InterruptsOnStop: 1
           NumberOfRepeats: 0
@@ -2566,9 +2566,9 @@ MonoBehaviour:
         DebugActive: 0
         Mode: 0
         AnimateScaleTarget: {fileID: 7802694726835230908}
-        AnimateScaleDuration: 0.2
+        AnimateScaleDuration: 0.15
         RemapCurveZero: 0.66
-        RemapCurveOne: 0.86
+        RemapCurveOne: 0.8
         Offset: 0
         AnimateX: 1
         AnimateScaleTweenX:
@@ -2730,7 +2730,7 @@ MonoBehaviour:
           TimescaleMode: 0
           ExcludeFromHoldingPauses: 0
           ContributeToTotalDuration: 1
-          InitialDelay: 0.2
+          InitialDelay: 0.15
           CooldownDuration: 0
           InterruptsOnStop: 1
           NumberOfRepeats: 0
@@ -2785,9 +2785,9 @@ MonoBehaviour:
         DebugActive: 0
         Mode: 0
         AnimateScaleTarget: {fileID: 7802694726835230908}
-        AnimateScaleDuration: 0.25
+        AnimateScaleDuration: 0.2
         RemapCurveZero: 0.66
-        RemapCurveOne: 0.72
+        RemapCurveOne: 0.7
         Offset: 0
         AnimateX: 1
         AnimateScaleTweenX:
