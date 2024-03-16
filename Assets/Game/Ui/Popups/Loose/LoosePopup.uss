@@ -16,7 +16,7 @@
 }
 
 .loose-buttons-container {
-    width: 80%;
+    width: 100%;
     align-items: center;
     justify-content: center;
 }
@@ -42,13 +42,13 @@
 .loose-button-container__placement {
     justify-content: space-around;
     align-items: center;
-    width: 100%;
+    width: 80%;
     height: 500px;
     margin-bottom: 155px;
 }
 
 .loose-button {
-    width: 90%;
+    width: 100%;
 }
 
 .loose-close-button {

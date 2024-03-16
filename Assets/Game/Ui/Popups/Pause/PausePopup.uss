@@ -21,18 +21,18 @@
 }
 
 .pause-button-container__placement {
-    width: 100%;
+    width: 80%;
     align-items: center;
-    height: 740px;
+    height: 750px;
     justify-content: space-around;
 }
 
 .pause-resume-button {
-    width: 90%;
+    width: 100%;
 }
 
 .pause-button {
-    width: 60%;
+    width: 70%;
 }
 
 .pause-close-button {
