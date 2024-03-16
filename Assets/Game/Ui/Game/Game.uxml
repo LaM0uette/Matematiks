@@ -2,6 +2,7 @@
     <Style src="project://database/Assets/Game/Ui/Game/Game.uss?fileID=7433441132597879392&amp;guid=1ef0817b74c35d3408638a85633d7269&amp;type=3#Game" />
     <ui:VisualElement name="Game" class="game">
         <Game.Ui.HeaderScores.HeaderScores />
+        <ui:Label tabindex="-1" text="GAME OVER !" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CurrentScoreGameOver" class="current-score__game-over" />
         <ui:VisualElement name="CurrentScore" class="current-score">
             <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CurrentScoreValue" class="current-score__value" />
             <ui:Label tabindex="-1" text="SCORE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CurrentScoreTitle" class="current-score__title" />

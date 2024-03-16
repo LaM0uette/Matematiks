@@ -21,6 +21,7 @@ namespace Game.Ui.Game
             public BonusData BonusData;
         }
         
+        private const string _currentScoreGameOverKey = "CurrentScoreGameOver";
         private const string _currentScoreKey = "CurrentScoreValue";
         private const string _bonusCard01Key = "BonusCard01";
         private const string _bonusCard02Key = "BonusCard02";
@@ -35,6 +36,7 @@ namespace Game.Ui.Game
         
         private HeaderScores.HeaderScores _headerScores;
         
+        private Label _currentScoreGameOver;
         private Label _currentScoreLabel;
         
         private List<BonusCardData> _bonusCardDataList;
@@ -58,6 +60,7 @@ namespace Game.Ui.Game
             
             SetupHeaderScores();
             SetupCurrentScore();
+            InitCurrentScore();
             
             LoadBonusData();
         }
@@ -133,7 +136,12 @@ namespace Game.Ui.Game
         
         private void SetupCurrentScore()
         {
+            _currentScoreGameOver = _root.Q<Label>(_currentScoreGameOverKey);
             _currentScoreLabel = _root.Q<Label>(_currentScoreKey);
+        }
+        private void InitCurrentScore()
+        {
+            _currentScoreGameOver.style.display = DisplayStyle.None;
         }
         private void UpdateCurrentScore(int value)
         {
@@ -245,6 +253,7 @@ namespace Game.Ui.Game
             HideBonusCards();
             _pauseButton.style.visibility = Visibility.Hidden;
             
+            _currentScoreGameOver.style.display = DisplayStyle.Flex;
             _menuButton.style.display = DisplayStyle.Flex;
             _restartButton.style.display = DisplayStyle.Flex;
         }
