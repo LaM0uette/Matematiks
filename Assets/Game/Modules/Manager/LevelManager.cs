@@ -89,14 +89,15 @@ namespace Game.Modules.Manager
             
             if (_ballSelection.Count == 0)
             {
-                ball.PlaySelectedFeedback();
-                
-                PutOtherBallInBackground(ball.Number);
-                
                 // Add first ball
                 _ballSelection.Add(ball);
                 _lineRenderer.positionCount = 1;
                 _lineRenderer.SetPosition(0, ball.transform.position);
+                
+                ball.PlaySelectedFeedback();
+                SoundManager.Instance.PlayBallSound(_ballSelection.Count() - 1);
+                PutOtherBallInBackground(ball.Number);
+                
                 return;
             }
 
@@ -106,9 +107,12 @@ namespace Game.Modules.Manager
                 if (_ballSelection[^2] != ball) 
                     return;
             
-                ball.PlaySelectedFeedback();
                 _ballSelection.Remove(_ballSelection[^1]);
                 _lineRenderer.positionCount = _ballSelection.Count;
+                
+                ball.PlaySelectedFeedback();
+                SoundManager.Instance.PlayBallSound(_ballSelection.Count() - 1);
+                
                 return;
             }
 
@@ -134,9 +138,11 @@ namespace Game.Modules.Manager
                 }
             }
             
-            ball.PlaySelectedFeedback();
             _lineRenderer.positionCount = _ballSelection.Count;
             _lineRenderer.SetPosition(_ballSelection.Count - 1, ball.transform.position);
+            
+            ball.PlaySelectedFeedback();
+            SoundManager.Instance.PlayBallSound(_ballSelection.Count() - 1);
         }
         
         private void OnRelease()
@@ -246,6 +252,7 @@ namespace Game.Modules.Manager
                 var endPosition = nextBall.transform.position;
                 
                 RemoveLineRendererFirstPosition();
+                SoundManager.Instance.PlayPopSound();
                 
                 while (elapsedTime < duration) 
                 {
@@ -253,7 +260,7 @@ namespace Game.Modules.Manager
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
-
+                
                 currentBall.PlayDestroyFeedback();
             }
             
