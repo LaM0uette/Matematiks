@@ -27,6 +27,10 @@ namespace Game.Modules.Board.Balls
         [SerializeField] private MMF_Player _selectedFeedback;
         [SerializeField] private MMF_Player _destroyFeedback;
         [SerializeField] private MMF_Player _mergeFeedback;
+        [SerializeField] private MMF_Player _bonus01Feedback;
+        [SerializeField] private MMF_Player _bonus02Feedback;
+        [SerializeField] private MMF_Player _bonus03Feedback;
+        [SerializeField] private MMF_Player _bonus04Feedback;
 
         private void Start()
         {
@@ -38,6 +42,10 @@ namespace Game.Modules.Board.Balls
             _selectedFeedback.Initialization();
             _destroyFeedback.Initialization();
             _mergeFeedback.Initialization();
+            _bonus01Feedback.Initialization();
+            _bonus02Feedback.Initialization();
+            _bonus03Feedback.Initialization();
+            _bonus04Feedback.Initialization();
         }
 
         #endregion
@@ -154,16 +162,22 @@ namespace Game.Modules.Board.Balls
         
         private void Bonus01()
         {
-            Destroy(gameObject);
+            _bonus01Feedback.PlayFeedbacks();
+            
+            //Destroy(gameObject);
         }
         
         private void Bonus02()
         {
+            _bonus02Feedback.PlayFeedbacks();
+            
             SetNum(--Number);
         }
         
         private void Bonus03()
         {
+            _bonus03Feedback.PlayFeedbacks();
+            
             SetNum(++Number);
             CheckForUpdateHighBall(Number);
         }
@@ -174,7 +188,9 @@ namespace Game.Modules.Board.Balls
             foreach (var ball in balls)
             {
                 if (ball.Number == Number)
-                    Destroy(ball.gameObject);
+                {
+                    ball.PlayBonus04Feedback();
+                }
             }
         }
         
@@ -204,6 +220,11 @@ namespace Game.Modules.Board.Balls
         public void PlayMergeFeedback()
         {
             _mergeFeedback.PlayFeedbacks();
+        }
+        
+        public void PlayBonus04Feedback()
+        {
+            _bonus04Feedback.PlayFeedbacks();
         }
 
         #endregion
