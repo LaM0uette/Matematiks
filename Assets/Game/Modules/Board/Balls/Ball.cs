@@ -189,7 +189,7 @@ namespace Game.Modules.Board.Balls
             {
                 if (ball.Number == Number)
                 {
-                    ball.PlayBonus04Feedback();
+                    ball._bonus04Feedback.PlayFeedbacks();
                 }
             }
         }
@@ -220,11 +220,6 @@ namespace Game.Modules.Board.Balls
         public void PlayMergeFeedback()
         {
             _mergeFeedback.PlayFeedbacks();
-        }
-        
-        public void PlayBonus04Feedback()
-        {
-            _bonus04Feedback.PlayFeedbacks();
         }
 
         #endregion
