@@ -89,6 +89,8 @@ namespace Game.Modules.Manager
             
             if (_ballSelection.Count == 0)
             {
+                ball.PlaySelectedFeedback();
+                
                 // Add first ball
                 _ballSelection.Add(ball);
                 _lineRenderer.positionCount = 1;
@@ -102,6 +104,7 @@ namespace Game.Modules.Manager
                 if (_ballSelection[^2] != ball) 
                     return;
             
+                ball.PlaySelectedFeedback();
                 _ballSelection.Remove(_ballSelection[^1]);
                 _lineRenderer.positionCount = _ballSelection.Count;
                 return;
@@ -129,6 +132,7 @@ namespace Game.Modules.Manager
                 }
             }
             
+            ball.PlaySelectedFeedback();
             _lineRenderer.positionCount = _ballSelection.Count;
             _lineRenderer.SetPosition(_ballSelection.Count - 1, ball.transform.position);
         }

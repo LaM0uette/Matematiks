@@ -23,7 +23,7 @@ namespace Game.Modules.Board.Balls
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private TMP_Text _tmpNumber;
 
-        [Space, Title("Feels")]
+        [Space, Title("Feedbacks")]
         [SerializeField] private MMF_Player _selectedFeedback;
 
         private void Start()
@@ -90,7 +90,6 @@ namespace Game.Modules.Board.Balls
             if (BoardHandler.IsPressing == false) 
                 return;
             
-            _selectedFeedback.PlayFeedbacks();
             BoardEvents.CurrentBallSelectedEvent.Invoke(this);
         }
 
@@ -186,6 +185,15 @@ namespace Game.Modules.Board.Balls
 
         #endregion
 
+        #region Feedbacks
+
+        public void PlaySelectedFeedback()
+        {
+            _selectedFeedback.PlayFeedbacks();
+        }
+
+        #endregion
+        
         #region Odin
 
         [Button]

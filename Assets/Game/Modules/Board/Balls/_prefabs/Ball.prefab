@@ -316,7 +316,7 @@ MonoBehaviour:
           InterruptsOnStop: 1
           NumberOfRepeats: 0
           RepeatForever: 0
-          DelayBetweenRepeats: 1
+          DelayBetweenRepeats: 0
           MMFeedbacksDirectionCondition: 0
           PlayDirection: 0
           ConstantIntensity: 0
@@ -367,8 +367,8 @@ MonoBehaviour:
         Mode: 0
         AnimateScaleTarget: {fileID: 7802694726835230908}
         AnimateScaleDuration: 0.2
-        RemapCurveZero: 1
-        RemapCurveOne: 2
+        RemapCurveZero: 0.66
+        RemapCurveOne: 0.8
         Offset: 0
         AnimateX: 1
         AnimateScaleTweenX:
