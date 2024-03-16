@@ -25,6 +25,8 @@ namespace Game.Modules.Board.Balls
 
         [Space, Title("Feedbacks")]
         [SerializeField] private MMF_Player _selectedFeedback;
+        [SerializeField] private MMF_Player _destroyFeedback;
+        [SerializeField] private MMF_Player _mergeFeedback;
 
         private void Start()
         {
@@ -34,6 +36,8 @@ namespace Game.Modules.Board.Balls
         private void InitFeedbacks()
         {
             _selectedFeedback.Initialization();
+            _destroyFeedback.Initialization();
+            _mergeFeedback.Initialization();
         }
 
         #endregion
@@ -190,6 +194,16 @@ namespace Game.Modules.Board.Balls
         public void PlaySelectedFeedback()
         {
             _selectedFeedback.PlayFeedbacks();
+        }
+        
+        public void PlayDestroyFeedback()
+        {
+            _destroyFeedback.PlayFeedbacks();
+        }
+        
+        public void PlayMergeFeedback()
+        {
+            _mergeFeedback.PlayFeedbacks();
         }
 
         #endregion

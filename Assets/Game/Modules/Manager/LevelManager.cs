@@ -251,13 +251,14 @@ namespace Game.Modules.Manager
                     yield return null;
                 }
 
-                Destroy(currentBall.gameObject);
+                currentBall.PlayDestroyFeedback();
             }
             
             var mergedBall = _ballSelection[^1];
+            mergedBall.PlayMergeFeedback();
+            
             var mergedBallNumber = ++mergedBall.Number;
             mergedBall.SetNum(mergedBallNumber);
-            
             UpdateWeightedBalls(mergedBall, _ballSelection.Count);
             
             _gameMode.MergeBallsUpdate(mergedBallNumber, _ballSelection.Count);
