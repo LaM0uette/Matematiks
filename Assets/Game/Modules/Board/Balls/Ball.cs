@@ -2,6 +2,7 @@ using Game.Modules.Events;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui;
+using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -21,6 +22,19 @@ namespace Game.Modules.Board.Balls
         [Space, Title("Ui")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private TMP_Text _tmpNumber;
+
+        [Space, Title("Feels")]
+        [SerializeField] private MMF_Player _selectedFeedback;
+
+        private void Start()
+        {
+            InitFeedbacks();
+        }
+        
+        private void InitFeedbacks()
+        {
+            _selectedFeedback.Initialization();
+        }
 
         #endregion
         
@@ -76,6 +90,7 @@ namespace Game.Modules.Board.Balls
             if (BoardHandler.IsPressing == false) 
                 return;
             
+            _selectedFeedback.PlayFeedbacks();
             BoardEvents.CurrentBallSelectedEvent.Invoke(this);
         }
 
