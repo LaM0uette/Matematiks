@@ -19,7 +19,7 @@ namespace Game.Modules.Save.Savers
 
         public override void Save(IEnumerable<WeightedBall> values)
         {
-            var wrapper = new Wrappers.WeightedBallListWrapper { list = new List<WeightedBall>(values) };
+            var wrapper = new Wrappers.WeightedBallListWrapper { Values = new List<WeightedBall>(values) };
             var json = JsonUtility.ToJson(wrapper);
             File.WriteAllText(GetFilePath(), json);
         }
@@ -33,7 +33,7 @@ namespace Game.Modules.Save.Savers
             
             var json = File.ReadAllText(path);
             var wrapper = JsonUtility.FromJson<Wrappers.WeightedBallListWrapper>(json);
-            return wrapper.list;
+            return wrapper.Values;
         }
 
         #endregion

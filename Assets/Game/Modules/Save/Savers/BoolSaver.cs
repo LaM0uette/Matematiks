@@ -17,7 +17,7 @@ namespace Game.Modules.Save.Savers
 
         public override void Save(bool value)
         {
-            var wrapper = new Wrappers.BoolWrapper { value = value };
+            var wrapper = new Wrappers.BoolWrapper { Value = value };
             var json = JsonUtility.ToJson(wrapper);
             File.WriteAllText(GetFilePath(), json);
         }
@@ -31,7 +31,7 @@ namespace Game.Modules.Save.Savers
             
             var json = File.ReadAllText(path);
             var wrapper = JsonUtility.FromJson<Wrappers.BoolWrapper>(json);
-            return wrapper.value;
+            return wrapper.Value;
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace Game.Modules.Save.Savers
 
         public override void Save(IEnumerable<int> values)
         {
-            var wrapper = new Wrappers.IntListWrapper { list = new List<int>(values) };
+            var wrapper = new Wrappers.IntListWrapper { Values = new List<int>(values) };
             var json = JsonUtility.ToJson(wrapper);
             File.WriteAllText(GetFilePath(), json);
         }
@@ -32,7 +32,7 @@ namespace Game.Modules.Save.Savers
             
             var json = File.ReadAllText(path);
             var wrapper = JsonUtility.FromJson<Wrappers.IntListWrapper>(json);
-            return wrapper.list;
+            return wrapper.Values;
         }
 
         #endregion
