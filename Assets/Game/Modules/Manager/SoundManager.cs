@@ -25,16 +25,16 @@ namespace Game.Modules.Manager
         
         public void PlayPopSound() => PlaySound(PopClip, 0.15f);
         public void PlayBonus01Sound() => PlaySound(Bonus01Clip, 0.2f);
-        public void PlayBonus02Sound() => PlaySound(Bonus02Clip, 0.4f);
-        public void PlayBonus03Sound() => PlaySound(Bonus03Clip, 0.4f);
-        public void PlayBonus04Sound() => PlaySound(Bonus04Clip, 0.3f);
+        public void PlayBonus02Sound() => PlaySound(Bonus02Clip, 0.3f);
+        public void PlayBonus03Sound() => PlaySound(Bonus03Clip, 0.3f);
+        public void PlayBonus04Sound() => PlaySound(Bonus04Clip, 0.25f);
         
         public void PlayBallSound(int index)
         {
             if (index >= 0 && index < BallClips.Length)
             {
                 var clip = BallClips[index];
-                PlaySound(clip, 0.06f);
+                PlaySound(clip, 0.08f);
             }
             else
             {
