@@ -1,0 +1,81 @@
+FR:
+Faites glisser les numéros de même valeur pour les fusionner.
+
+
+EN:
+Slide the numbers of the same value to merge them.
+
+
+ES:
+Desliza los números del mismo valor para fusionarlos.
+
+
+
+//
+
+
+
+FR:
+Faites glisser les numéros de même valeur pour les fusionner.
+
+Matematiks est un jeu captivant et amusant qui vous rendra rapidement accro !
+
+Le principe du jeu est on ne peut plus simple : atteignez le score le plus élevé possible ! Vous devrez constamment vous surpasser en repoussant vos limites, et ce, de plusieurs manières !
+
+Objectifs :
+- Atteindre le score le plus élevé possible ! Chaque mouvement doit être réfléchi pour maximiser votre score.
+- Créer le plus gros chiffre possible ! Avec une limite fixée à 999, seuls les joueurs les plus persévérants atteindront les sommets.
+- Collecter le maximum de Gemmes ! Ces précieuses pierres vous permettront de débloquer des fonctionnalités exclusives et d'améliorer votre expérience de jeu.
+
+Ce jeu s'inspire du célèbre Emoji Formula, autrefois disponible sur iOS, réinventé ici dans une version modernisée et encore plus divertissante !
+
+Avec des graphismes épurés, une interface intuitive et des mécaniques de jeu innovantes, Matematiks promet des heures de divertissement. Que vous soyez un passionné de mathématiques ou simplement à la recherche d'un passe-temps agréable, ce jeu saura vous captiver.
+
+L'équipe LaM0uette est fière de vous présenter ce jeu fantastique et vous souhaite de passer d'excellentes heures à relever ses défis !
+Plongez dans l'univers de Matematiks et laissez-vous emporter par le plaisir de la découverte et de l'amélioration continue. Bon jeu !
+
+LaM0uette
+
+
+EN:
+Slide the numbers of the same value to merge them.
+
+Matematiks is an engaging and fun game that will quickly get you hooked!
+
+The principle of the game couldn't be simpler: achieve the highest score possible! You will need to constantly surpass yourself by pushing your limits, in various ways!
+
+Objectives:
+-Achieve the highest score possible! Every move should be thought out to maximize your score.
+-Create the biggest number possible! With a limit set at 999, only the most persevering players will reach the top.
+-Collect as many Gems as possible! These precious stones will allow you to unlock exclusive features and enhance your gaming experience.
+
+This game is inspired by the famous Emoji Formula, once available on iOS, reinvented here in a modernized and even more entertaining version!
+
+With sleek graphics, an intuitive interface, and innovative gameplay mechanics, Matematiks promises hours of entertainment. Whether you're a math enthusiast or just looking for a pleasant pastime, this game will captivate you.
+
+The LaM0uette team is proud to present this fantastic game and wishes you many great hours of tackling its challenges!
+Dive into the world of Matematiks and let yourself be swept away by the joy of discovery and continuous improvement. Have fun!
+
+LaM0uette
+
+
+ES:
+Desliza los números del mismo valor para fusionarlos.
+
+Matematiks es un juego cautivador y divertido ¡que rápidamente te hará adicto!
+
+El principio del juego es de lo más simple: ¡alcanza el puntaje más alto posible! Deberás superarte constantemente empujando tus límites, ¡y eso de varias maneras!
+
+Objetivos:
+-Alcanzar el puntaje más alto posible! Cada movimiento debe ser pensado para maximizar tu puntaje.
+-Crear el número más grande posible! Con un límite establecido en 999, solo los jugadores más perseverantes alcanzarán las cumbres.
+-Recoger el máximo de Gemas! Estas preciosas piedras te permitirán desbloquear características exclusivas y mejorar tu experiencia de juego.
+
+Este juego se inspira en el famoso Emoji Formula, anteriormente disponible en iOS, reinventado aquí en una versión modernizada y aún más entretenida!
+
+Con gráficos elegantes, una interfaz intuitiva y mecánicas de juego innovadoras, Matematiks promete horas de entretenimiento. Ya seas un entusiasta de las matemáticas o simplemente busques un pasatiempo agradable, este juego te cautivará.
+
+El equipo de LaM0uette está orgulloso de presentarte este fantástico juego y te desea muchas horas excelentes superando sus desafíos.
+¡Sumérgete en el universo de Matematiks y déjate llevar por el placer del descubrimiento y la mejora continua. ¡Buena suerte!
+
+LaM0uette
