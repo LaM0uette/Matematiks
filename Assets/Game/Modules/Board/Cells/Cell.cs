@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Modules.Manager;
 using Game.Modules.Utils;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
@@ -52,7 +53,7 @@ namespace Game.Modules.Board.Cells
             
             var childGo = transform.GetChild(0).gameObject;
             
-            if (BoardHandler.OngoingAction) 
+            if (BoardManager.OngoingAction) 
                 return;
             
             childGo.transform.SetParent(_nextCell.transform);

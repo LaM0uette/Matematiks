@@ -1,4 +1,4 @@
-namespace Game.Modules.GameMode
+namespace Game.Modules.Level.GameMode
 {
     public interface IGameMode
     {

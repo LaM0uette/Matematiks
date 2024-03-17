@@ -1,41 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using Game.Modules.Board.Balls;
 using UnityEngine;
 
 namespace Game.Modules.Utils
 {
     public static class Saver
     {
-        #region Wrapper
-
-        [Serializable]
-        private class IntWrapper
-        {
-            public int value;
-        }
-        
-        [Serializable]
-        private class BoolWrapper
-        {
-            public bool value;
-        }
-        
-        [Serializable]
-        private class IntListWrapper
-        {
-            public List<int> list;
-        }
-        
-        [Serializable]
-        private class WeightedBallListWrapper
-        {
-            public List<WeightedBall> list;
-        }
-
-        #endregion
-
         #region Statements
 
         public const string Gem = "Gem";
@@ -56,29 +26,28 @@ namespace Game.Modules.Utils
 
         public static void Save(this string key, int value)
         {
-            var wrapper = new IntWrapper { value = value };
+            var wrapper = new Wrappers.IntWrapper { value = value };
             var json = JsonUtility.ToJson(wrapper);
             File.WriteAllText(FilePath(key), json);
         }
         
         public static void Save(this string key, bool value)
         {
-            var wrapper = new BoolWrapper { value = value };
+            var wrapper = new Wrappers.BoolWrapper { value = value };
             var json = JsonUtility.ToJson(wrapper);
             File.WriteAllText(FilePath(key), json);
         }
 
         public static void Save(this string key, IEnumerable<int> values)
         {
-            var wrapper = new IntListWrapper { list = new List<int>(values) };
+            var wrapper = new Wrappers.IntListWrapper { list = new List<int>(values) };
             var json = JsonUtility.ToJson(wrapper);
             File.WriteAllText(FilePath(key), json);
         }
 
-        public static void Save(this string key, List<WeightedBall> weightedBalls)
+        public static void Save(this string key, List<Wrappers.WeightedBallWrapper> weightedBalls)
         {
-            var wrapper = new WeightedBallListWrapper { list = weightedBalls };
-            var json = JsonUtility.ToJson(wrapper);
+            var json = JsonUtility.ToJson(weightedBalls);
             File.WriteAllText(FilePath(key), json);
         }
 
@@ -94,7 +63,7 @@ namespace Game.Modules.Utils
                 return 0;
             
             var json = File.ReadAllText(path);
-            var wrapper = JsonUtility.FromJson<IntWrapper>(json);
+            var wrapper = JsonUtility.FromJson<Wrappers.IntWrapper>(json);
             return wrapper.value;
         }
         
@@ -106,7 +75,7 @@ namespace Game.Modules.Utils
                 return false;
             
             var json = File.ReadAllText(path);
-            var wrapper = JsonUtility.FromJson<BoolWrapper>(json);
+            var wrapper = JsonUtility.FromJson<Wrappers.BoolWrapper>(json);
             return wrapper.value;
         }
 
@@ -118,20 +87,20 @@ namespace Game.Modules.Utils
                 return new List<int>();
             
             var json = File.ReadAllText(path);
-            var wrapper = JsonUtility.FromJson<IntListWrapper>(json);
+            var wrapper = JsonUtility.FromJson<Wrappers.IntListWrapper>(json);
             return wrapper.list;
         }
 
-        public static List<WeightedBall> LoadListWeightedBall(this string key)
+        public static IEnumerable<Wrappers.WeightedBallWrapper> LoadWeightedBallWrappers(this string key)
         {
             var path = FilePath(key);
             
             if (!File.Exists(path)) 
-                return new List<WeightedBall>();
+                return new List<Wrappers.WeightedBallWrapper>();
             
             var json = File.ReadAllText(path);
-            var wrapper = JsonUtility.FromJson<WeightedBallListWrapper>(json);
-            return wrapper.list;
+            var weightedBalls = JsonUtility.FromJson<List<Wrappers.WeightedBallWrapper>>(json);
+            return weightedBalls;
         }
 
         #endregion

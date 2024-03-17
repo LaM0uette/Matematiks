@@ -1,4 +1,5 @@
 using Game.Modules.Board;
+using Game.Modules.Bonus;
 using Game.Modules.Manager;
 using Game.Modules.Player.Inputs;
 using UnityEngine;
@@ -38,18 +39,18 @@ namespace Game.Modules.Player
 
         private static void OnPress()
         {
-            if (BoardHandler.OngoingAction || BonusManager.CurrentBonus != null) 
+            if (BoardManager.OngoingAction || BonusManager.CurrentBonus != null) 
                 return;
             
-            BoardHandler.IsPressing = true;
+            BoardManager.IsPressing = true;
         }
         
         private static void OnRelease()
         {
-            if (BoardHandler.IsPressing == false || BonusManager.CurrentBonus != null) 
+            if (BoardManager.IsPressing == false || BonusManager.CurrentBonus != null) 
                 return;
 
-            BoardHandler.IsPressing = false;
+            BoardManager.IsPressing = false;
             BoardEvents.ReleaseEvent?.Invoke();
         }
 

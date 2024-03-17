@@ -1,3 +1,4 @@
+using Game.Modules.Bonus;
 using Game.Modules.Events;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
@@ -60,7 +61,7 @@ namespace Game.Modules.Board.Balls
                 return;
             }
             
-            if (BoardHandler.OngoingAction)
+            if (BoardManager.OngoingAction)
             {
                 BonusManager.CurrentBonus = null;
                 UiEvents.RefreshUiEvent.Invoke();
@@ -99,7 +100,7 @@ namespace Game.Modules.Board.Balls
 
         private void OnBallSelected()
         {
-            if (BoardHandler.IsPressing == false) 
+            if (BoardManager.IsPressing == false) 
                 return;
             
             BoardEvents.CurrentBallSelectedEvent.Invoke(this);

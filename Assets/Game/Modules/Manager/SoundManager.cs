@@ -1,4 +1,3 @@
-using Game.Modules.Board;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ namespace Game.Modules.Manager
 
         private void PlaySound(AudioClip clip, float volume)
         {
-            if (BoardHandler.VolumeIsMute) 
+            if (BoardManager.VolumeIsMute) 
                 return;
             
             var audioSource = gameObject.AddComponent<AudioSource>();

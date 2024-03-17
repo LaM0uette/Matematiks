@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Modules.Board;
 using Game.Modules.Board.Balls;
 using Game.Modules.Bonus;
 using Game.Modules.Events;
@@ -10,7 +9,7 @@ using Game.Ui;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Game.Modules.GameMode
+namespace Game.Modules.Level.GameMode
 {
     public class StandardGameMode : MonoBehaviour, IGameMode
     {
@@ -57,7 +56,7 @@ namespace Game.Modules.GameMode
         
         public void Initialize()
         {
-            BoardHandler.Initialize();
+            BoardManager.Initialize();
 
             _levelManager.InitializeBallsToMerge(3, 99);
             

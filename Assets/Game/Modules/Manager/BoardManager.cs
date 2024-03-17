@@ -1,8 +1,8 @@
 using Game.Modules.Utils;
 
-namespace Game.Modules.Board
+namespace Game.Modules.Manager
 {
-    public static class BoardHandler
+    public static class BoardManager
     {
         public static bool IsPressing { get; set; }
         public static bool OngoingAction { get; set; }

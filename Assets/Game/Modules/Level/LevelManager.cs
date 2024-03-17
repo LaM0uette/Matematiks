@@ -5,14 +5,15 @@ using Game.Modules.Board;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
 using Game.Modules.Events;
-using Game.Modules.GameMode;
+using Game.Modules.Level.GameMode;
+using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Game.Modules.Manager
+namespace Game.Modules.Level
 {
     public class LevelManager : MonoBehaviour
     {
@@ -84,7 +85,7 @@ namespace Game.Modules.Manager
         
         private void OnBallSelected(Ball ball)
         {
-            if (BoardHandler.IsPressing == false || BoardHandler.IsLost) 
+            if (BoardManager.IsPressing == false || BoardManager.IsLost) 
                 return;
             
             if (_ballSelection.Count == 0)
@@ -186,7 +187,7 @@ namespace Game.Modules.Manager
             
             Saver.ResetAllCurrentScores();
             
-            BoardHandler.IsLost = true;
+            BoardManager.IsLost = true;
             UiEvents.LooseEvent.Invoke();
         }
         
@@ -217,7 +218,8 @@ namespace Game.Modules.Manager
         
         private void LoadWeightedBalls()
         {
-            var weightedBalls = Saver.CurrentWeightedBalls.LoadListWeightedBall();
+            var weightedBallWrappers = Saver.CurrentWeightedBalls.LoadWeightedBallWrappers();
+            var weightedBalls = weightedBallWrappers.Select(wb => new WeightedBall(wb.Number, wb.Weight)).ToList();
             
             if (weightedBalls.Count <= 0)
                 return;
@@ -239,7 +241,7 @@ namespace Game.Modules.Manager
             }
             
             CancelInvoke();
-            BoardHandler.OngoingAction = true;
+            BoardManager.OngoingAction = true;
             
             for (var i = 0; i < _ballSelection.Count - 1; i++) 
             {
@@ -274,7 +276,7 @@ namespace Game.Modules.Manager
             _gameMode.MergeBallsUpdate(mergedBallNumber, _ballSelection.Count);
             
             _ballSelection.Clear();
-            BoardHandler.OngoingAction = false;
+            BoardManager.OngoingAction = false;
             
             Invoke(nameof(MergeBallsComplete), 1f);
         }
@@ -320,7 +322,7 @@ namespace Game.Modules.Manager
         
         private void MergeBallsComplete()
         {
-            if (BoardHandler.OngoingAction)
+            if (BoardManager.OngoingAction)
                 return;
             
             RemoveSmallerWeightedBalls();
@@ -385,7 +387,7 @@ namespace Game.Modules.Manager
             {
                 for (var y = 0; y < height; y++)
                 {
-                    if (BoardHandler.OngoingAction)
+                    if (BoardManager.OngoingAction)
                         return;
 
                     var cellGrid = BoardGrid[x, y].transform;
@@ -399,7 +401,9 @@ namespace Game.Modules.Manager
             }
             
             Saver.CurrentBalls.Save(ballNumbers);
-            Saver.CurrentWeightedBalls.Save(_weightedBalls.ToList());
+            
+            var weightedBallWrappers = _weightedBalls.Select(wb => new Wrappers.WeightedBallWrapper(wb.Number, wb.Weight)).ToList();
+            Saver.CurrentWeightedBalls.Save(weightedBallWrappers);
         }
 
         private void PutOtherBallInBackground(int ballNumber)

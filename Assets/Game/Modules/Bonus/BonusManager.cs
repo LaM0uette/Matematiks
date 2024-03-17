@@ -1,7 +1,6 @@
 using System;
-using Game.Modules.Bonus;
 
-namespace Game.Modules.Manager
+namespace Game.Modules.Bonus
 {
     public static class BonusManager
     {

@@ -1,4 +1,4 @@
-using Game.Modules.Board;
+using Game.Modules.Manager;
 using Game.Ui.Components.GameButton;
 using UnityEngine.UIElements;
 
@@ -65,13 +65,13 @@ namespace Game.Ui.Popups.Settings
         
         private void OnSoundEffectButtonClicked()
         {
-            BoardHandler.VolumeIsMute = !BoardHandler.VolumeIsMute;
+            BoardManager.VolumeIsMute = !BoardManager.VolumeIsMute;
             UpdateIcon();
         }
 
         private void UpdateIcon()
         {
-            var iconName = BoardHandler.VolumeIsMute ? "Icons/volume-mute" : "Icons/volume";
+            var iconName = BoardManager.VolumeIsMute ? "Icons/volume-mute" : "Icons/volume";
             _soundEffectsButton.IconName = iconName;
         }
 

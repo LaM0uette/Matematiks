@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Game.Modules.Bonus;
 using Game.Modules.Events;
-using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui.Components.BonusCard;
 using UnityEngine;
