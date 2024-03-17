@@ -7,6 +7,7 @@ namespace Game.Ui
         public static Action ClosePopupEvent;
         public static Action PauseEvent;
         public static Action LooseEvent;
+        public static Action SettingsEvent;
         public static Action RefreshUiEvent;
     }
 }

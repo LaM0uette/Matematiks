@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/Ui/Popups/Settings/SettingsPopup.uss?fileID=7433441132597879392&amp;guid=0575f082ff8b47242ba32ad253b9ca2c&amp;type=3#SettingsPopup" />
+    <Kamgam.UIToolkitGlow.Shadow style="flex-grow: 1;">
+        <ui:VisualElement name="SettingsContainer" class="settings-popup__container">
+            <ui:Label tabindex="-1" text="SETTINGS" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SettingsTitle" class="settings-title" />
+            <ui:VisualElement name="SettingsButtonsContainer" class="settings-buttons-container" style="flex-grow: 1;">
+                <ui:VisualElement name="SettingsButtonsContainerPlacement" class="settings-button-container__placement">
+                    <Game.Ui.Components.GameButton.GameButton text="BACK" icon-name="Icons/back" name="SettingsBackButton" class="settings-button" />
+                    <Game.Ui.Components.GameButton.GameButton text="SOUND EFFECTS" icon-name="Icons/volume" name="SettingsSoundEffectsButton" class="settings-button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <Game.Ui.Components.IconButton.IconButton focusable="true" name="SettingsCloseButton" class="settings-close-button" />
+        </ui:VisualElement>
+    </Kamgam.UIToolkitGlow.Shadow>
+</ui:UXML>

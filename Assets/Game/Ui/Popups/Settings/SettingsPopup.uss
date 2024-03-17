@@ -1,0 +1,42 @@
+.settings-popup__container {
+    flex-grow: 1;
+    background-color: rgb(61, 66, 75);
+    border-width: 6px;
+    border-color: rgb(44, 46, 51);
+    border-radius: 15px;
+    align-items: center;
+}
+
+.settings-title {
+    font-size: 105px;
+    -unity-font-style: bold;
+    color: rgb(44, 46, 51);
+    margin-top: 65px;
+}
+
+.settings-buttons-container {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-button-container__placement {
+    width: 80%;
+    align-items: center;
+    height: 400px;
+    justify-content: space-around;
+}
+
+.settings-button {
+    width: 100%;
+}
+
+.settings-close-button {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 100px;
+    height: 100px;
+    background-image: resource('Icons/close');
+    -unity-background-image-tint-color: rgb(44, 46, 51);
+}

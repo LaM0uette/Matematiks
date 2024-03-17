@@ -12,11 +12,13 @@ namespace Game.Ui.Popups.Pause
         private const string _menuButtonKey = "PauseMenuButton";
         private const string _resumeButtonKey = "PauseResumeButton";
         private const string _restartButtonKey = "PauseRestartButton";
+        private const string _settingsButtonKey = "PauseSettingsButton";
         
         private Button _closeButton;
         private Button _menuButton;
         private Button _resumeButton;
         private Button _restartButton;
+        private Button _settingsButton;
 
         public PausePopup(VisualElement topElement) : base(topElement)
         {
@@ -32,6 +34,7 @@ namespace Game.Ui.Popups.Pause
             _menuButton = TopElement.Q<Button>(_menuButtonKey);
             _resumeButton = TopElement.Q<Button>(_resumeButtonKey);
             _restartButton = TopElement.Q<Button>(_restartButtonKey);
+            _settingsButton = TopElement.Q<Button>(_settingsButtonKey);
         }
 
         protected override void RegisterButtonCallbacks()
@@ -40,6 +43,7 @@ namespace Game.Ui.Popups.Pause
             _menuButton.clicked += OnMenuButtonClicked;
             _resumeButton.clicked += OnResumeButtonClicked;
             _restartButton.clicked += OnRestartButtonClicked;
+            _settingsButton.clicked += OnSettingsButtonClicked;
         }
         
         protected override void UnregisterButtonCallbacks()
@@ -48,6 +52,7 @@ namespace Game.Ui.Popups.Pause
             _menuButton.clicked -= OnMenuButtonClicked;
             _resumeButton.clicked -= OnResumeButtonClicked;
             _restartButton.clicked -= OnRestartButtonClicked;
+            _settingsButton.clicked -= OnSettingsButtonClicked;
         }
         
         private void OnCloseButtonClicked()
@@ -72,6 +77,12 @@ namespace Game.Ui.Popups.Pause
             Saver.LastScore.Save(Saver.CurrentScore.LoadInt());
             Saver.ResetAllCurrentScores();
             SceneManager.LoadScene(GameVar.GameScene);
+        }
+        
+        private void OnSettingsButtonClicked()
+        {
+            Hide();
+            UiEvents.SettingsEvent.Invoke();
         }
 
         #endregion

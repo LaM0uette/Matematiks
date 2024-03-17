@@ -8,6 +8,7 @@
                     <Game.Ui.Components.GameButton.GameButton text="MENU" icon-name="Icons/home" name="PauseMenuButton" class="pause-button" />
                     <Game.Ui.Components.GameButton.GameButton text="RESUME" icon-name="Icons/play" name="PauseResumeButton" class="pause-resume-button" style="height: 250px; font-size: 80px;" />
                     <Game.Ui.Components.GameButton.GameButton text="RESTART" icon-name="Icons/refresh" name="PauseRestartButton" class="pause-button" />
+                    <Game.Ui.Components.GameButton.GameButton text="SETTINGS" icon-name="Icons/settings" name="PauseSettingsButton" class="pause-button" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <Game.Ui.Components.IconButton.IconButton focusable="true" name="PauseCloseButton" class="pause-close-button" />

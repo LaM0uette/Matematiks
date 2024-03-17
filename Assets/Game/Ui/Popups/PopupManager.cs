@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Game.Modules.Board;
 using Game.Ui.Popups.Loose;
 using Game.Ui.Popups.Pause;
+using Game.Ui.Popups.Settings;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -14,6 +15,7 @@ namespace Game.Ui.Popups
         private const string _mainLayoutKey = "Main";
         private const string _pausePopupKey = "PausePopup";
         private const string _loosePopupKey = "LoosePopup";
+        private const string _settingsPopupKey = "SettingsPopup";
 
         private UIDocument _uiDocument;
         private VisualElement _root;
@@ -23,6 +25,7 @@ namespace Game.Ui.Popups
         private Popup _currentPopup;
 
         private Popup _pausePopup;
+        private Popup _settingsPopup;
         private Popup _loosePopup;
         
         private void Awake()
@@ -61,9 +64,11 @@ namespace Game.Ui.Popups
         private void SetupPopups()
         {
             _pausePopup = new PausePopup(_root.Q<VisualElement>(_pausePopupKey));
+            _settingsPopup = new SettingsPopup(_root.Q<VisualElement>(_settingsPopupKey));
             _loosePopup = new LoosePopup(_root.Q<VisualElement>(_loosePopupKey));
             
             _allPopups.Add(_pausePopup);
+            _allPopups.Add(_settingsPopup);
             _allPopups.Add(_loosePopup);
         }
         
@@ -71,7 +76,7 @@ namespace Game.Ui.Popups
         {
             UiEvents.ClosePopupEvent += HideMainLayout;
             UiEvents.PauseEvent += ShowPausePopup;
-            
+            UiEvents.SettingsEvent += ShowSettingsPopup;
             UiEvents.LooseEvent += ShowLoosePopup;
         }
 
@@ -79,7 +84,7 @@ namespace Game.Ui.Popups
         {
             UiEvents.ClosePopupEvent -= HideMainLayout;
             UiEvents.PauseEvent -= ShowPausePopup;
-            
+            UiEvents.SettingsEvent -= ShowSettingsPopup;
             UiEvents.LooseEvent -= ShowLoosePopup;
         }
         
@@ -102,6 +107,11 @@ namespace Game.Ui.Popups
         private void ShowPausePopup()
         {
             ShowPopup(_pausePopup);
+        }
+        
+        private void ShowSettingsPopup()
+        {
+            ShowPopup(_settingsPopup);
         }
         
         private void ShowLoosePopup()

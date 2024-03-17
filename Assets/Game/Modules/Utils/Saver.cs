@@ -17,6 +17,12 @@ namespace Game.Modules.Utils
         }
         
         [Serializable]
+        private class BoolWrapper
+        {
+            public bool value;
+        }
+        
+        [Serializable]
         private class IntListWrapper
         {
             public List<int> list;
@@ -40,6 +46,8 @@ namespace Game.Modules.Utils
         public const string CurrentBalls = "CurrentBalls";
         public const string CurrentWeightedBalls = "CurrentWeightedBalls";
         
+        public const string VolumeIsMute = "VolumeIsMute";
+        
         private static string FilePath(string key) => Path.Combine(Application.persistentDataPath, $"{key}.json");
 
         #endregion
@@ -49,6 +57,13 @@ namespace Game.Modules.Utils
         public static void Save(this string key, int value)
         {
             var wrapper = new IntWrapper { value = value };
+            var json = JsonUtility.ToJson(wrapper);
+            File.WriteAllText(FilePath(key), json);
+        }
+        
+        public static void Save(this string key, bool value)
+        {
+            var wrapper = new BoolWrapper { value = value };
             var json = JsonUtility.ToJson(wrapper);
             File.WriteAllText(FilePath(key), json);
         }
@@ -80,6 +95,18 @@ namespace Game.Modules.Utils
             
             var json = File.ReadAllText(path);
             var wrapper = JsonUtility.FromJson<IntWrapper>(json);
+            return wrapper.value;
+        }
+        
+        public static bool LoadBool(this string key)
+        {
+            var path = FilePath(key);
+            
+            if (!File.Exists(path)) 
+                return false;
+            
+            var json = File.ReadAllText(path);
+            var wrapper = JsonUtility.FromJson<BoolWrapper>(json);
             return wrapper.value;
         }
 
