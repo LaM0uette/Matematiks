@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Game.Modules.Bonus;
 using Game.Modules.Events;
+using Game.Modules.Save;
 using Game.Modules.Utils;
 using Game.Ui.Components.BonusCard;
 using Game.Ui.Events;
@@ -69,8 +70,8 @@ namespace Game.Ui.Game
         {
             InitBonusData();
             UpdateHeaderScores();
-            UpdateCurrentScore(OldSaver.CurrentScore.LoadInt());
-            DisableBonusCardsToExpensives(OldSaver.Gem.LoadInt());
+            UpdateCurrentScore(Saver.CurrentScore.Load());
+            DisableBonusCardsToExpensives(Saver.Gem.Load());
         }
 
         #endregion
@@ -131,7 +132,7 @@ namespace Game.Ui.Game
         private void UpdateHeaderScores()
         {
             _headerScores.UpdateHeaderScore();
-            _headerScores.UpdateHighBall(OldSaver.HighBall.LoadInt());
+            _headerScores.UpdateHighBall(Saver.HighBall.Load());
         }
         
         private void SetupCurrentScore()
@@ -209,7 +210,7 @@ namespace Game.Ui.Game
         
         private static void OnRestartButtonClicked()
         {
-            OldSaver.ResetAllCurrentScores();
+            Saver.ResetCurrentScores();
             SceneManager.LoadScene(GameVar.GameScene);
         }
         

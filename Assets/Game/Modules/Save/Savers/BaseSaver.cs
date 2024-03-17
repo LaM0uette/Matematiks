@@ -5,12 +5,18 @@ namespace Game.Modules.Save.Savers
 {
     public abstract class BaseSaver<T> : ISaver<T>
     {
-        protected string Key;
+        #region Statements
+
+        private readonly string _key;
 
         protected BaseSaver(string key)
         {
-            Key = key;
+            _key = key;
         }
+
+        #endregion
+
+        #region ISaver
 
         public abstract void Save(T value);
 
@@ -23,6 +29,12 @@ namespace Game.Modules.Save.Savers
                 File.Delete(path);
         }
 
-        protected string GetFilePath() => Path.Combine(Application.persistentDataPath, $"{Key}.json");
+        #endregion
+
+        #region Functions
+
+        protected string GetFilePath() => Path.Combine(Application.persistentDataPath, $"{_key}.json");
+
+        #endregion
     }
 }

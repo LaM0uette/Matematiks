@@ -4,6 +4,7 @@ using Game.Modules.Board.Balls;
 using Game.Modules.Bonus;
 using Game.Modules.Events;
 using Game.Modules.Manager;
+using Game.Modules.Save;
 using Game.Modules.Utils;
 using Game.Ui.Events;
 using Unity.VisualScripting;
@@ -38,7 +39,7 @@ namespace Game.Modules.Level.GameMode
         
         private static void OnBonusEvent(BonusData bonusData)
         {
-            var gem = OldSaver.Gem.LoadInt();
+            var gem = Saver.Gem.Load();
             
             if (bonusData.Cost > gem)
             {
@@ -81,28 +82,28 @@ namespace Game.Modules.Level.GameMode
         
         private static void UpdateGem(int mergedBallNumber, int countBallsSelected)
         {
-            var gem = OldSaver.Gem.LoadInt();
+            var gem = Saver.Gem.Load();
             gem += 1 + mergedBallNumber / 3 + countBallsSelected / 2;
             
-            OldSaver.Gem.Save(gem);
+            Saver.Gem.Save(gem);
             RaiseGemEvent(gem);
         }
 
         private static void UpdateHighBall(int newBallNumber)
         {
-            if (!Application.isPlaying || newBallNumber <= OldSaver.HighBall.LoadInt())
+            if (!Application.isPlaying || newBallNumber <= Saver.HighBall.Load())
                 return;
             
-            OldSaver.HighBall.Save(newBallNumber);
+            Saver.HighBall.Save(newBallNumber);
             GameEvents.HighBallEvent.Invoke(newBallNumber);
         }
         
         private static void UpdateScore(int value)
         {
-            var currentScore = OldSaver.CurrentScore.LoadInt();
+            var currentScore = Saver.CurrentScore.Load();
             currentScore += (int)Math.Pow(value, 3);
             
-            OldSaver.CurrentScore.Save(currentScore);
+            Saver.CurrentScore.Save(currentScore);
             RaiseScoreEvent(currentScore);
         }
 
@@ -115,11 +116,11 @@ namespace Game.Modules.Level.GameMode
         {
             GameEvents.CurrentScoreEvent.Invoke(value);
             
-            var highScore = OldSaver.HighScore.LoadInt();
+            var highScore = Saver.HighScore.Load();
             if (value <= highScore) 
                 return;
             
-            OldSaver.HighScore.Save(value);
+            Saver.HighScore.Save(value);
             GameEvents.HighScoreEvent.Invoke(value);
         }
         

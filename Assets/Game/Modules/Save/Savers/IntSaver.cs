@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Game.Modules.Save.Savers
 {
-    public class BoolSaver : BaseSaver<bool>
+    public class IntSaver : BaseSaver<int>
     {
         #region Statements
 
-        public BoolSaver(string key) : base(key)
+        public IntSaver(string key) : base(key)
         {
         }
 
@@ -15,22 +15,22 @@ namespace Game.Modules.Save.Savers
 
         #region ISaver
 
-        public override void Save(bool value)
+        public override void Save(int value)
         {
-            var wrapper = new Wrappers.BoolWrapper { value = value };
+            var wrapper = new Wrappers.IntWrapper { value = value };
             var json = JsonUtility.ToJson(wrapper);
             File.WriteAllText(GetFilePath(), json);
         }
 
-        public override bool Load()
+        public override int Load()
         {
             var path = GetFilePath();
             
             if (!File.Exists(path)) 
-                return false;
+                return 0;
             
             var json = File.ReadAllText(path);
-            var wrapper = JsonUtility.FromJson<Wrappers.BoolWrapper>(json);
+            var wrapper = JsonUtility.FromJson<Wrappers.IntWrapper>(json);
             return wrapper.value;
         }
 

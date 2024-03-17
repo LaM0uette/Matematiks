@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Game.Modules.Utils
+namespace Game.Modules.Save
 {
     public abstract class Wrappers
     {

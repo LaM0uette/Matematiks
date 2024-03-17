@@ -1,3 +1,4 @@
+using Game.Modules.Save;
 using Game.Modules.Utils;
 using Game.Ui.Events;
 using UnityEngine.SceneManagement;
@@ -75,8 +76,8 @@ namespace Game.Ui.Popups.Pause
         
         private static void OnRestartButtonClicked()
         {
-            OldSaver.LastScore.Save(OldSaver.CurrentScore.LoadInt());
-            OldSaver.ResetAllCurrentScores();
+            Saver.LastScore.Save(Saver.CurrentScore.Load());
+            Saver.ResetCurrentScores();
             SceneManager.LoadScene(GameVar.GameScene);
         }
         

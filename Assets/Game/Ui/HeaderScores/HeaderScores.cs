@@ -1,4 +1,5 @@
 using System;
+using Game.Modules.Save;
 using Game.Modules.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -43,9 +44,9 @@ namespace Game.Ui.HeaderScores
         
         public void UpdateHeaderScore()
         {
-            _gemNumberLabel.text = OldSaver.Gem.LoadInt().ToString();
-            _highScoreLabel.text = OldSaver.HighScore.LoadInt().ToString();
-            UpdateHighBall(OldSaver.HighBall.LoadInt());
+            _gemNumberLabel.text = Saver.Gem.Load().ToString();
+            _highScoreLabel.text = Saver.HighScore.Load().ToString();
+            UpdateHighBall(Saver.HighBall.Load());
         }
         
         public void UpdateGem(int value)

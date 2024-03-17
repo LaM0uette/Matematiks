@@ -1,3 +1,4 @@
+using Game.Modules.Save;
 using Game.Modules.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -62,10 +63,10 @@ namespace Game.Ui.Menu
         }
         private void InitMiddleScore()
         {
-            var currentScore = OldSaver.CurrentScore.LoadInt();
+            var currentScore = Saver.CurrentScore.Load();
             _midleScoreTitleLabel.text = currentScore > 0 ? "CURRENT SCORE" : "LAST SCORE";
             
-            var score = currentScore > 0 ? currentScore : OldSaver.LastScore.LoadInt();
+            var score = currentScore > 0 ? currentScore : Saver.LastScore.Load();
             _midleScoreLabel.text = score.ToString();
         }
         
@@ -106,8 +107,8 @@ namespace Game.Ui.Menu
         
         private static void OnNewGameButtonCliked()
         {
-            OldSaver.LastScore.Save(OldSaver.CurrentScore.LoadInt());
-            OldSaver.ResetAllCurrentScores();
+            Saver.LastScore.Save(Saver.CurrentScore.Load());
+            Saver.ResetCurrentScores();
             LoadGameScene();
         }
         
@@ -117,7 +118,7 @@ namespace Game.Ui.Menu
 
         private void SetResumeButtonState()
         {
-            var currentScore = OldSaver.CurrentScore.LoadInt();
+            var currentScore = Saver.CurrentScore.Load();
             _resumeButton.SetEnabled(currentScore > 0);
         }
         

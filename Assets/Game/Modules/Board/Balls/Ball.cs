@@ -1,8 +1,8 @@
 using Game.Modules.Bonus;
 using Game.Modules.Events;
 using Game.Modules.Manager;
+using Game.Modules.Save;
 using Game.Modules.Utils;
-using Game.Ui;
 using Game.Ui.Events;
 using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
@@ -81,9 +81,9 @@ namespace Game.Modules.Board.Balls
             }
             
             var bonusData = BonusManager.CurrentBonus;
-            var gem = OldSaver.Gem.LoadInt();
+            var gem = Saver.Gem.Load();
             gem -= bonusData.Cost;
-            OldSaver.Gem.Save(gem);
+            Saver.Gem.Save(gem);
             GameEvents.GemEvent.Invoke(gem);
             
             BonusManager.CurrentBonus = null;
@@ -222,10 +222,10 @@ namespace Game.Modules.Board.Balls
         
         private static void CheckForUpdateHighBall(int ballNumber)
         {
-            if (ballNumber <= OldSaver.HighBall.LoadInt())
+            if (ballNumber <= Saver.HighBall.Load())
                 return;
             
-            OldSaver.HighBall.Save(ballNumber);
+            Saver.HighBall.Save(ballNumber);
             GameEvents.HighBallEvent.Invoke(ballNumber);
         }
 
