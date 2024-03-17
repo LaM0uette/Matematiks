@@ -1,4 +1,5 @@
 using Game.Modules.Board.Balls;
+using Game.Modules.Board.WeightedBall;
 using UnityEngine;
 
 namespace Obvious.Soap

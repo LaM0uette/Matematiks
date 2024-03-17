@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game.Modules.Board.Balls
+namespace Game.Modules.Board.WeightedBall
 {
     [Serializable]
     public class WeightedBall

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Modules.Board.WeightedBall;
 using Game.Modules.Save.Savers;
 
 namespace Game.Modules.Save
@@ -10,6 +11,7 @@ namespace Game.Modules.Save
         private static readonly Dictionary<string, ISaver<int>> _intSavers = new();
         private static readonly Dictionary<string, ISaver<bool>> _boolSavers = new();
         private static readonly Dictionary<string, ISaver<IEnumerable<int>>> _intListSavers = new();
+        private static readonly Dictionary<string, ISaver<IEnumerable<WeightedBall>>> _weightedBallSavers = new();
         
         // IntSavers
         public static ISaver<int> Gem => _intSavers["Gem"];
@@ -23,13 +25,16 @@ namespace Game.Modules.Save
 
         // IntListSavers
         public static ISaver<IEnumerable<int>> CurrentBalls => _intListSavers["CurrentBalls"];
-        public static ISaver<IEnumerable<int>> CurrentWeightedBalls => _intListSavers["CurrentWeightedBalls"];
+        
+        // WeightedBallSavers
+        public static ISaver<IEnumerable<WeightedBall>> CurrentWeightedBalls => _weightedBallSavers["CurrentWeightedBalls"];
         
         static Saver()
         {
             InitIntSaver();
             InitBoolSaver();
             InitIntListSaver();
+            InitWeightedBallSaver();
         }
 
         #endregion
@@ -55,7 +60,11 @@ namespace Game.Modules.Save
         private static void InitIntListSaver()
         {
             _intListSavers.Add("CurrentBalls", new IntListSaver("CurrentBalls"));
-            _intListSavers.Add("CurrentWeightedBalls", new IntListSaver("CurrentWeightedBalls"));
+        }
+        
+        private static void InitWeightedBallSaver()
+        {
+            _weightedBallSavers.Add("CurrentWeightedBalls", new WeightedBallSaver("CurrentWeightedBalls"));
         }
 
         #endregion

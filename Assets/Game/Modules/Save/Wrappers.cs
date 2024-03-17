@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Modules.Board.WeightedBall;
 
 namespace Game.Modules.Save
 {
@@ -24,16 +25,9 @@ namespace Game.Modules.Save
         }
         
         [Serializable]
-        public class WeightedBallWrapper
+        public class WeightedBallListWrapper
         {
-            public int Number;
-            public float Weight;
-
-            public WeightedBallWrapper(int number, float weight)
-            {
-                Number = number;
-                Weight = weight;
-            }
+            public List<WeightedBall> list;
         }
     }
 }

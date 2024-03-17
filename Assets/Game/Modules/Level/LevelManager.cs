@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
+using Game.Modules.Board.WeightedBall;
 using Game.Modules.Events;
 using Game.Modules.Level.GameMode;
 using Game.Modules.Manager;
@@ -218,8 +219,7 @@ namespace Game.Modules.Level
         
         private void LoadWeightedBalls()
         {
-            var weightedBallWrappers = OldSaver.CurrentWeightedBalls.LoadWeightedBallWrappers();
-            var weightedBalls = weightedBallWrappers.Select(wb => new WeightedBall(wb.Number, wb.Weight)).ToList();
+            var weightedBalls = Saver.CurrentWeightedBalls.Load().ToList();
             
             if (weightedBalls.Count <= 0)
                 return;
@@ -401,9 +401,7 @@ namespace Game.Modules.Level
             }
             
             Saver.CurrentBalls.Save(ballNumbers);
-            
-            var weightedBallWrappers = _weightedBalls.Select(wb => new Utils.Wrappers.WeightedBallWrapper(wb.Number, wb.Weight)).ToList();
-            OldSaver.CurrentWeightedBalls.Save(weightedBallWrappers);
+            Saver.CurrentWeightedBalls.Save(_weightedBalls.ToList());
         }
 
         private void PutOtherBallInBackground(int ballNumber)
