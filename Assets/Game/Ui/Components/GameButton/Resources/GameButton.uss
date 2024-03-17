@@ -10,7 +10,7 @@
     border-radius: 15px;
 }
 
-.game-button:enabled:hover {
+.game-button:enabled:active {
     background-color: rgba(78, 83, 93, 0.5);
 }
 

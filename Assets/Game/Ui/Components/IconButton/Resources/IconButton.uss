@@ -5,6 +5,6 @@
     -unity-background-image-tint-color: rgb(44, 46, 51);
 }
 
-.icon-button:enabled:hover {
+.icon-button:enabled:active {
     -unity-background-image-tint-color: rgba(44, 46, 51, 0.5);
 }
