@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Modules.Board.Balls;
 using Game.Modules.Bonus;
 using Game.Modules.Events;
 using Game.Modules.Manager;
 using Game.Modules.Save;
-using Game.Modules.Utils;
 using Game.Ui.Events;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -61,7 +61,7 @@ namespace Game.Modules.Level.GameMode
 
             _levelManager.InitializeBallsToMerge(3, 99);
             
-            var balls = OldSaver.CurrentBalls.LoadListInt();
+            var balls = Saver.CurrentBalls.Load().ToList();
             if (balls.Count > 0)
                 _levelManager.LoadCurrentGame();
             else

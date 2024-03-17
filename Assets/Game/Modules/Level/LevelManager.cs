@@ -193,7 +193,7 @@ namespace Game.Modules.Level
         
         private void LoadBalls()
         {
-            var balls = OldSaver.CurrentBalls.LoadListInt();
+            var balls = Saver.CurrentBalls.Load().ToList();
             
             if (balls.Count <= 0)
                 return;
@@ -400,7 +400,7 @@ namespace Game.Modules.Level
                 }
             }
             
-            OldSaver.CurrentBalls.Save(ballNumbers);
+            Saver.CurrentBalls.Save(ballNumbers);
             
             var weightedBallWrappers = _weightedBalls.Select(wb => new Utils.Wrappers.WeightedBallWrapper(wb.Number, wb.Weight)).ToList();
             OldSaver.CurrentWeightedBalls.Save(weightedBallWrappers);

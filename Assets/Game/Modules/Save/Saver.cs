@@ -9,6 +9,7 @@ namespace Game.Modules.Save
 
         private static readonly Dictionary<string, ISaver<int>> _intSavers = new();
         private static readonly Dictionary<string, ISaver<bool>> _boolSavers = new();
+        private static readonly Dictionary<string, ISaver<IEnumerable<int>>> _intListSavers = new();
         
         // IntSavers
         public static ISaver<int> Gem => _intSavers["Gem"];
@@ -16,16 +17,19 @@ namespace Game.Modules.Save
         public static ISaver<int> HighBall => _intSavers["HighBall"];
         public static ISaver<int> LastScore => _intSavers["LastScore"];
         public static ISaver<int> CurrentScore => _intSavers["CurrentScore"];
-        public static ISaver<int> CurrentBalls => _intSavers["CurrentBalls"];
-        public static ISaver<int> CurrentWeightedBalls => _intSavers["CurrentWeightedBalls"];
         
         // BoolSavers
         public static ISaver<bool> VolumeMuted => _boolSavers["VolumeMuted"];
 
+        // IntListSavers
+        public static ISaver<IEnumerable<int>> CurrentBalls => _intListSavers["CurrentBalls"];
+        public static ISaver<IEnumerable<int>> CurrentWeightedBalls => _intListSavers["CurrentWeightedBalls"];
+        
         static Saver()
         {
             InitIntSaver();
             InitBoolSaver();
+            InitIntListSaver();
         }
 
         #endregion
@@ -46,6 +50,12 @@ namespace Game.Modules.Save
         private static void InitBoolSaver()
         {
             _boolSavers.Add("VolumeMuted", new BoolSaver("VolumeMuted"));
+        }
+        
+        private static void InitIntListSaver()
+        {
+            _intListSavers.Add("CurrentBalls", new IntListSaver("CurrentBalls"));
+            _intListSavers.Add("CurrentWeightedBalls", new IntListSaver("CurrentWeightedBalls"));
         }
 
         #endregion
