@@ -6,9 +6,6 @@ namespace Game.Modules.Manager
     public class SoundManager : MonoBehaviour
     {
         public static SoundManager Instance { get; private set; }
-        
-        [Space, Title("Properties")]
-        [SerializeField] private float _defaultVolume = 0.3f;
 
         [Space, Title("Clips")] 
         public AudioClip PopClip;
@@ -26,18 +23,18 @@ namespace Game.Modules.Manager
                 Destroy(gameObject);
         }
         
-        public void PlayPopSound() => PlaySound(PopClip);
-        public void PlayBonus01Sound() => PlaySound(Bonus01Clip);
-        public void PlayBonus02Sound() => PlaySound(Bonus02Clip);
-        public void PlayBonus03Sound() => PlaySound(Bonus03Clip);
-        public void PlayBonus04Sound() => PlaySound(Bonus04Clip);
+        public void PlayPopSound() => PlaySound(PopClip, 0.16f);
+        public void PlayBonus01Sound() => PlaySound(Bonus01Clip, 0.2f);
+        public void PlayBonus02Sound() => PlaySound(Bonus02Clip, 0.4f);
+        public void PlayBonus03Sound() => PlaySound(Bonus03Clip, 0.4f);
+        public void PlayBonus04Sound() => PlaySound(Bonus04Clip, 0.3f);
         
         public void PlayBallSound(int index)
         {
             if (index >= 0 && index < BallClips.Length)
             {
                 var clip = BallClips[index];
-                PlaySound(clip);
+                PlaySound(clip, 0.04f);
             }
             else
             {
@@ -45,10 +42,10 @@ namespace Game.Modules.Manager
             }
         }
 
-        private void PlaySound(AudioClip clip)
+        private void PlaySound(AudioClip clip, float volume)
         {
             var audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.volume = _defaultVolume;
+            audioSource.volume = volume;
             
             audioSource.clip = clip;
             audioSource.Play();
