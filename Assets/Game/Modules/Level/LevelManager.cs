@@ -673,6 +673,23 @@ namespace Game.Modules.Level
             Saver.HighScore.Save(score);
             GameEvents.HighScoreEvent.Invoke(score);
         }
+        
+        [Button]
+        public void Add100000Score()
+        {
+            var score = Saver.CurrentScore.LoadInt();
+            score += 100000;
+            Saver.CurrentScore.Save(score);
+            
+            GameEvents.CurrentScoreEvent.Invoke(score);
+            
+            var highScore = Saver.HighScore.LoadInt();
+            if (score <= highScore) 
+                return;
+            
+            Saver.HighScore.Save(score);
+            GameEvents.HighScoreEvent.Invoke(score);
+        }
 
         #endregion
     }
