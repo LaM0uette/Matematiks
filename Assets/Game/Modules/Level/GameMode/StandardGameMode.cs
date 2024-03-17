@@ -5,7 +5,7 @@ using Game.Modules.Bonus;
 using Game.Modules.Events;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
-using Game.Ui;
+using Game.Ui.Events;
 using Unity.VisualScripting;
 using UnityEngine;
 

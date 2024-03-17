@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Modules.Board;
 using Game.Modules.Board.Balls;
 using Game.Modules.Board.Cells;
 using Game.Modules.Events;
 using Game.Modules.Level.GameMode;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
-using Game.Ui;
+using Game.Ui.Events;
 using Obvious.Soap;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -71,15 +70,15 @@ namespace Game.Modules.Level
         
         private void OnEnable()
         {
-            BoardEvents.CurrentBallSelectedEvent += OnBallSelected;
-            BoardEvents.ReleaseEvent += OnRelease;
+            BallEvents.CurrentBallSelectedEvent += OnBallSelected;
+            BallEvents.ReleaseEvent += OnRelease;
             UiEvents.RefreshUiEvent += OnUpdateBoard;
         }
 
         private void OnDisable()
         {
-            BoardEvents.CurrentBallSelectedEvent -= OnBallSelected;
-            BoardEvents.ReleaseEvent -= OnRelease;
+            BallEvents.CurrentBallSelectedEvent -= OnBallSelected;
+            BallEvents.ReleaseEvent -= OnRelease;
             UiEvents.RefreshUiEvent -= OnUpdateBoard;
         }
         

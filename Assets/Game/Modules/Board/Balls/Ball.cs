@@ -3,6 +3,7 @@ using Game.Modules.Events;
 using Game.Modules.Manager;
 using Game.Modules.Utils;
 using Game.Ui;
+using Game.Ui.Events;
 using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -103,7 +104,7 @@ namespace Game.Modules.Board.Balls
             if (BoardManager.IsPressing == false) 
                 return;
             
-            BoardEvents.CurrentBallSelectedEvent.Invoke(this);
+            BallEvents.CurrentBallSelectedEvent.Invoke(this);
         }
 
         #endregion

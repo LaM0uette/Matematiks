@@ -1,4 +1,5 @@
 using Game.Modules.Utils;
+using Game.Ui.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 

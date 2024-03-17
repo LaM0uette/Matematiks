@@ -1,0 +1,19 @@
+{
+    "name": "Popups",
+    "rootNamespace": "",
+    "references": [
+        "GUID:48973fbd2f258c140b66b1316b8067ce",
+        "GUID:3c246775a6d8d844b8fe089bbab7d97d",
+        "GUID:3ed7ecc4b61f3df46858f9690e64f6b8",
+        "GUID:0fe24ba1ed7a60e42a63d785d07bee98"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

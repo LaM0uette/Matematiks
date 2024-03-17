@@ -1,0 +1,24 @@
+{
+    "name": "Level",
+    "rootNamespace": "",
+    "references": [
+        "GUID:21b0c8d1703a94250bfac916590cea4f",
+        "GUID:ee6baafdecd94804a8714654c4bd097f",
+        "GUID:48973fbd2f258c140b66b1316b8067ce",
+        "GUID:3ed7ecc4b61f3df46858f9690e64f6b8",
+        "GUID:584f1bf01dc1b7b41a680bf9ceb2a784",
+        "GUID:47c0c5282708ada4eb97bc0963e0e2d6",
+        "GUID:d2f7f83df286bc640b601d79b2cb4596",
+        "GUID:1fce11e706cbdfd42a4c5abb065495e9",
+        "GUID:0fe24ba1ed7a60e42a63d785d07bee98"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

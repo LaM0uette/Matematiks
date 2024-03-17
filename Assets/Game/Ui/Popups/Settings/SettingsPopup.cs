@@ -1,5 +1,6 @@
 using Game.Modules.Manager;
 using Game.Ui.Components.GameButton;
+using Game.Ui.Events;
 using UnityEngine.UIElements;
 
 namespace Game.Ui.Popups.Settings

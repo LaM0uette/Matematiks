@@ -1,9 +1,8 @@
 using System;
-using Game.Modules.Board.Balls;
 
-namespace Game.Modules.Board
+namespace Game.Modules.Board.Balls
 {
-    public static class BoardEvents
+    public static class BallEvents
     {
         public static Action<Ball> CurrentBallSelectedEvent;
         public static Action ReleaseEvent;

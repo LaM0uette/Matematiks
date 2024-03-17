@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Modules.Manager;
+using Game.Ui.Events;
 using Game.Ui.Popups.Loose;
 using Game.Ui.Popups.Pause;
 using Game.Ui.Popups.Settings;

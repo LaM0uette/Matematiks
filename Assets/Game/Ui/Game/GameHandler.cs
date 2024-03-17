@@ -4,6 +4,7 @@ using Game.Modules.Bonus;
 using Game.Modules.Events;
 using Game.Modules.Utils;
 using Game.Ui.Components.BonusCard;
+using Game.Ui.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;

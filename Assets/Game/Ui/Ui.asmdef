@@ -1,0 +1,28 @@
+{
+    "name": "Ui",
+    "rootNamespace": "",
+    "references": [
+        "GUID:48973fbd2f258c140b66b1316b8067ce",
+        "GUID:3c246775a6d8d844b8fe089bbab7d97d",
+        "GUID:584f1bf01dc1b7b41a680bf9ceb2a784",
+        "GUID:47c0c5282708ada4eb97bc0963e0e2d6",
+        "GUID:0fe24ba1ed7a60e42a63d785d07bee98"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "iOS",
+        "macOSStandalone",
+        "WebGL",
+        "WindowsStandalone32",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

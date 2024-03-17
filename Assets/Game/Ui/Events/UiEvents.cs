@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Ui
+namespace Game.Ui.Events
 {
     public static class UiEvents
     {

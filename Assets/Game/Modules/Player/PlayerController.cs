@@ -1,4 +1,4 @@
-using Game.Modules.Board;
+using Game.Modules.Board.Balls;
 using Game.Modules.Bonus;
 using Game.Modules.Manager;
 using Game.Modules.Player.Inputs;
@@ -51,7 +51,7 @@ namespace Game.Modules.Player
                 return;
 
             BoardManager.IsPressing = false;
-            BoardEvents.ReleaseEvent?.Invoke();
+            BallEvents.ReleaseEvent?.Invoke();
         }
 
         #endregion
