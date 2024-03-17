@@ -82,7 +82,7 @@ namespace Game.Modules.Level.GameMode
         private static void UpdateGem(int mergedBallNumber, int countBallsSelected)
         {
             var gem = Saver.Gem.LoadInt();
-            gem += 1 + mergedBallNumber / 3 + countBallsSelected / 3;
+            gem += 1 + mergedBallNumber / 3 + countBallsSelected / 2;
             
             Saver.Gem.Save(gem);
             RaiseGemEvent(gem);
