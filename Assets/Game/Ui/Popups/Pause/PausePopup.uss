@@ -23,7 +23,7 @@
 .pause-button-container__placement {
     width: 80%;
     align-items: center;
-    height: 750px;
+    height: 950px;
     justify-content: space-around;
 }
 
