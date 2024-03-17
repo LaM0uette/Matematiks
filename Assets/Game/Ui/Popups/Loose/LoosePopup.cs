@@ -60,7 +60,7 @@ namespace Game.Ui.Popups.Loose
         public override void Show()
         {
             base.Show();
-            _looseScore.text = Saver.LastScore.LoadInt().ToString();
+            _looseScore.text = OldSaver.LastScore.LoadInt().ToString();
         }
         
         private static void OnMenuButtonClicked()
@@ -70,7 +70,7 @@ namespace Game.Ui.Popups.Loose
         
         private static void OnRestartButtonClicked()
         {
-            Saver.ResetAllCurrentScores();
+            OldSaver.ResetAllCurrentScores();
             SceneManager.LoadScene(GameVar.GameScene);
         }
 

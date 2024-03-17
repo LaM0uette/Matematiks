@@ -62,10 +62,10 @@ namespace Game.Ui.Menu
         }
         private void InitMiddleScore()
         {
-            var currentScore = Saver.CurrentScore.LoadInt();
+            var currentScore = OldSaver.CurrentScore.LoadInt();
             _midleScoreTitleLabel.text = currentScore > 0 ? "CURRENT SCORE" : "LAST SCORE";
             
-            var score = currentScore > 0 ? currentScore : Saver.LastScore.LoadInt();
+            var score = currentScore > 0 ? currentScore : OldSaver.LastScore.LoadInt();
             _midleScoreLabel.text = score.ToString();
         }
         
@@ -106,8 +106,8 @@ namespace Game.Ui.Menu
         
         private static void OnNewGameButtonCliked()
         {
-            Saver.LastScore.Save(Saver.CurrentScore.LoadInt());
-            Saver.ResetAllCurrentScores();
+            OldSaver.LastScore.Save(OldSaver.CurrentScore.LoadInt());
+            OldSaver.ResetAllCurrentScores();
             LoadGameScene();
         }
         
@@ -117,7 +117,7 @@ namespace Game.Ui.Menu
 
         private void SetResumeButtonState()
         {
-            var currentScore = Saver.CurrentScore.LoadInt();
+            var currentScore = OldSaver.CurrentScore.LoadInt();
             _resumeButton.SetEnabled(currentScore > 0);
         }
         

@@ -1,4 +1,4 @@
-using Game.Modules.Utils;
+using Game.Modules.Save;
 
 namespace Game.Modules.Manager
 {
@@ -15,7 +15,7 @@ namespace Game.Modules.Manager
             set
             {
                 _volumeIsMute = value;
-                Saver.VolumeIsMute.Save(value);
+                Saver.VolumeMuted.Save(value);
             }
         }
         
@@ -25,7 +25,7 @@ namespace Game.Modules.Manager
             OngoingAction = false;
             IsLost = false;
             
-            VolumeIsMute = Saver.VolumeIsMute.LoadBool();
+            VolumeIsMute = Saver.VolumeMuted.Load();
         }
     }
 }

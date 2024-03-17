@@ -81,9 +81,9 @@ namespace Game.Modules.Board.Balls
             }
             
             var bonusData = BonusManager.CurrentBonus;
-            var gem = Saver.Gem.LoadInt();
+            var gem = OldSaver.Gem.LoadInt();
             gem -= bonusData.Cost;
-            Saver.Gem.Save(gem);
+            OldSaver.Gem.Save(gem);
             GameEvents.GemEvent.Invoke(gem);
             
             BonusManager.CurrentBonus = null;
@@ -222,10 +222,10 @@ namespace Game.Modules.Board.Balls
         
         private static void CheckForUpdateHighBall(int ballNumber)
         {
-            if (ballNumber <= Saver.HighBall.LoadInt())
+            if (ballNumber <= OldSaver.HighBall.LoadInt())
                 return;
             
-            Saver.HighBall.Save(ballNumber);
+            OldSaver.HighBall.Save(ballNumber);
             GameEvents.HighBallEvent.Invoke(ballNumber);
         }
 

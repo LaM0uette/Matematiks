@@ -43,9 +43,9 @@ namespace Game.Ui.HeaderScores
         
         public void UpdateHeaderScore()
         {
-            _gemNumberLabel.text = Saver.Gem.LoadInt().ToString();
-            _highScoreLabel.text = Saver.HighScore.LoadInt().ToString();
-            UpdateHighBall(Saver.HighBall.LoadInt());
+            _gemNumberLabel.text = OldSaver.Gem.LoadInt().ToString();
+            _highScoreLabel.text = OldSaver.HighScore.LoadInt().ToString();
+            UpdateHighBall(OldSaver.HighBall.LoadInt());
         }
         
         public void UpdateGem(int value)

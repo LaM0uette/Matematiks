@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Modules.Utils
 {
-    public static class Saver
+    public static class OldSaver
     {
         #region Statements
 

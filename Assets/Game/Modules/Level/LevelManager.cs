@@ -181,10 +181,10 @@ namespace Game.Modules.Level
         
         public void LooseGame()
         {
-            var currentScore = Saver.CurrentScore.LoadInt();
-            Saver.LastScore.Save(currentScore);
+            var currentScore = OldSaver.CurrentScore.LoadInt();
+            OldSaver.LastScore.Save(currentScore);
             
-            Saver.ResetAllCurrentScores();
+            OldSaver.ResetAllCurrentScores();
             
             BoardManager.IsLost = true;
             UiEvents.LooseEvent.Invoke();
@@ -192,7 +192,7 @@ namespace Game.Modules.Level
         
         private void LoadBalls()
         {
-            var balls = Saver.CurrentBalls.LoadListInt();
+            var balls = OldSaver.CurrentBalls.LoadListInt();
             
             if (balls.Count <= 0)
                 return;
@@ -217,7 +217,7 @@ namespace Game.Modules.Level
         
         private void LoadWeightedBalls()
         {
-            var weightedBallWrappers = Saver.CurrentWeightedBalls.LoadWeightedBallWrappers();
+            var weightedBallWrappers = OldSaver.CurrentWeightedBalls.LoadWeightedBallWrappers();
             var weightedBalls = weightedBallWrappers.Select(wb => new WeightedBall(wb.Number, wb.Weight)).ToList();
             
             if (weightedBalls.Count <= 0)
@@ -399,10 +399,10 @@ namespace Game.Modules.Level
                 }
             }
             
-            Saver.CurrentBalls.Save(ballNumbers);
+            OldSaver.CurrentBalls.Save(ballNumbers);
             
             var weightedBallWrappers = _weightedBalls.Select(wb => new Wrappers.WeightedBallWrapper(wb.Number, wb.Weight)).ToList();
-            Saver.CurrentWeightedBalls.Save(weightedBallWrappers);
+            OldSaver.CurrentWeightedBalls.Save(weightedBallWrappers);
         }
 
         private void PutOtherBallInBackground(int ballNumber)
@@ -611,7 +611,7 @@ namespace Game.Modules.Level
         [Button]
         public void ResetPlayerPref()
         {
-            Saver.ResetAll();
+            OldSaver.ResetAll();
         }
         
         [Button]
@@ -651,43 +651,43 @@ namespace Game.Modules.Level
         [Button]
         public void Add5000Gem()
         {
-            var gem = Saver.Gem.LoadInt();
+            var gem = OldSaver.Gem.LoadInt();
             gem += 5000;
-            Saver.Gem.Save(gem);
+            OldSaver.Gem.Save(gem);
             GameEvents.GemEvent.Invoke(gem);
         }
         
         [Button]
         public void Add10000Score()
         {
-            var score = Saver.CurrentScore.LoadInt();
+            var score = OldSaver.CurrentScore.LoadInt();
             score += 10000;
-            Saver.CurrentScore.Save(score);
+            OldSaver.CurrentScore.Save(score);
             
             GameEvents.CurrentScoreEvent.Invoke(score);
             
-            var highScore = Saver.HighScore.LoadInt();
+            var highScore = OldSaver.HighScore.LoadInt();
             if (score <= highScore) 
                 return;
             
-            Saver.HighScore.Save(score);
+            OldSaver.HighScore.Save(score);
             GameEvents.HighScoreEvent.Invoke(score);
         }
         
         [Button]
         public void Add100000Score()
         {
-            var score = Saver.CurrentScore.LoadInt();
+            var score = OldSaver.CurrentScore.LoadInt();
             score += 100000;
-            Saver.CurrentScore.Save(score);
+            OldSaver.CurrentScore.Save(score);
             
             GameEvents.CurrentScoreEvent.Invoke(score);
             
-            var highScore = Saver.HighScore.LoadInt();
+            var highScore = OldSaver.HighScore.LoadInt();
             if (score <= highScore) 
                 return;
             
-            Saver.HighScore.Save(score);
+            OldSaver.HighScore.Save(score);
             GameEvents.HighScoreEvent.Invoke(score);
         }
 

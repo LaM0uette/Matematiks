@@ -69,8 +69,8 @@ namespace Game.Ui.Game
         {
             InitBonusData();
             UpdateHeaderScores();
-            UpdateCurrentScore(Saver.CurrentScore.LoadInt());
-            DisableBonusCardsToExpensives(Saver.Gem.LoadInt());
+            UpdateCurrentScore(OldSaver.CurrentScore.LoadInt());
+            DisableBonusCardsToExpensives(OldSaver.Gem.LoadInt());
         }
 
         #endregion
@@ -131,7 +131,7 @@ namespace Game.Ui.Game
         private void UpdateHeaderScores()
         {
             _headerScores.UpdateHeaderScore();
-            _headerScores.UpdateHighBall(Saver.HighBall.LoadInt());
+            _headerScores.UpdateHighBall(OldSaver.HighBall.LoadInt());
         }
         
         private void SetupCurrentScore()
@@ -209,7 +209,7 @@ namespace Game.Ui.Game
         
         private static void OnRestartButtonClicked()
         {
-            Saver.ResetAllCurrentScores();
+            OldSaver.ResetAllCurrentScores();
             SceneManager.LoadScene(GameVar.GameScene);
         }
         

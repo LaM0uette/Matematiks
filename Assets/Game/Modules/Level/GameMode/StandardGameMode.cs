@@ -38,7 +38,7 @@ namespace Game.Modules.Level.GameMode
         
         private static void OnBonusEvent(BonusData bonusData)
         {
-            var gem = Saver.Gem.LoadInt();
+            var gem = OldSaver.Gem.LoadInt();
             
             if (bonusData.Cost > gem)
             {
@@ -60,7 +60,7 @@ namespace Game.Modules.Level.GameMode
 
             _levelManager.InitializeBallsToMerge(3, 99);
             
-            var balls = Saver.CurrentBalls.LoadListInt();
+            var balls = OldSaver.CurrentBalls.LoadListInt();
             if (balls.Count > 0)
                 _levelManager.LoadCurrentGame();
             else
@@ -81,28 +81,28 @@ namespace Game.Modules.Level.GameMode
         
         private static void UpdateGem(int mergedBallNumber, int countBallsSelected)
         {
-            var gem = Saver.Gem.LoadInt();
+            var gem = OldSaver.Gem.LoadInt();
             gem += 1 + mergedBallNumber / 3 + countBallsSelected / 2;
             
-            Saver.Gem.Save(gem);
+            OldSaver.Gem.Save(gem);
             RaiseGemEvent(gem);
         }
 
         private static void UpdateHighBall(int newBallNumber)
         {
-            if (!Application.isPlaying || newBallNumber <= Saver.HighBall.LoadInt())
+            if (!Application.isPlaying || newBallNumber <= OldSaver.HighBall.LoadInt())
                 return;
             
-            Saver.HighBall.Save(newBallNumber);
+            OldSaver.HighBall.Save(newBallNumber);
             GameEvents.HighBallEvent.Invoke(newBallNumber);
         }
         
         private static void UpdateScore(int value)
         {
-            var currentScore = Saver.CurrentScore.LoadInt();
+            var currentScore = OldSaver.CurrentScore.LoadInt();
             currentScore += (int)Math.Pow(value, 3);
             
-            Saver.CurrentScore.Save(currentScore);
+            OldSaver.CurrentScore.Save(currentScore);
             RaiseScoreEvent(currentScore);
         }
 
@@ -115,11 +115,11 @@ namespace Game.Modules.Level.GameMode
         {
             GameEvents.CurrentScoreEvent.Invoke(value);
             
-            var highScore = Saver.HighScore.LoadInt();
+            var highScore = OldSaver.HighScore.LoadInt();
             if (value <= highScore) 
                 return;
             
-            Saver.HighScore.Save(value);
+            OldSaver.HighScore.Save(value);
             GameEvents.HighScoreEvent.Invoke(value);
         }
         
