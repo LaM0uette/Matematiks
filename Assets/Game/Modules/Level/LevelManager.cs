@@ -615,12 +615,63 @@ namespace Game.Modules.Level
         }
         
         [Button]
+        public void UppAllBalls()
+        {
+            var board = new GameObject[7, 5];
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
+
+                var position = cell.ExtractCellPosition();
+                board[position.x, position.y] = cell.gameObject;
+            }
+            
+            var width = board.GetLength(0);
+            var height = board.GetLength(1);
+            
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = board[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+
+            foreach (var ball in balls)
+            {
+                ball.SetNum(ball.Number + 1);
+            }
+        }
+        
+        [Button]
         public void Add5000Gem()
         {
             var gem = Saver.Gem.LoadInt();
             gem += 5000;
             Saver.Gem.Save(gem);
             GameEvents.GemEvent.Invoke(gem);
+        }
+        
+        [Button]
+        public void Add10000Score()
+        {
+            var score = Saver.CurrentScore.LoadInt();
+            score += 10000;
+            Saver.CurrentScore.Save(score);
+            
+            GameEvents.CurrentScoreEvent.Invoke(score);
+            
+            var highScore = Saver.HighScore.LoadInt();
+            if (score <= highScore) 
+                return;
+            
+            Saver.HighScore.Save(score);
+            GameEvents.HighScoreEvent.Invoke(score);
         }
 
         #endregion
