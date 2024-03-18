@@ -8,7 +8,7 @@
 }
 
 .pause-title {
-    font-size: 140px;
+    font-size: 110px;
     -unity-font-style: bold;
     color: rgb(44, 46, 51);
     margin-top: 65px;
@@ -24,15 +24,17 @@
     width: 80%;
     align-items: center;
     height: 950px;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .pause-resume-button {
     width: 100%;
+    margin-bottom: 40px;
 }
 
 .pause-button {
-    width: 70%;
+    width: 80%;
+    margin-bottom: 40px;
 }
 
 .pause-close-button {

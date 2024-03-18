@@ -29,5 +29,5 @@
 
 .buttons-container__game-buttons {
     height: 400px;
-    justify-content: space-around;
+    justify-content: center;
 }

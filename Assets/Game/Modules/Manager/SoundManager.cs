@@ -23,7 +23,7 @@ namespace Game.Modules.Manager
                 Destroy(gameObject);
         }
         
-        public void PlayPopSound() => PlaySound(PopClip, 0.15f);
+        public void PlayPopSound() => PlaySound(PopClip, 0.2f);
         public void PlayBonus01Sound() => PlaySound(Bonus01Clip, 0.2f);
         public void PlayBonus02Sound() => PlaySound(Bonus02Clip, 0.3f);
         public void PlayBonus03Sound() => PlaySound(Bonus03Clip, 0.3f);
@@ -34,7 +34,7 @@ namespace Game.Modules.Manager
             if (index >= 0 && index < BallClips.Length)
             {
                 var clip = BallClips[index];
-                PlaySound(clip, 0.08f);
+                PlaySound(clip, 0.15f);
             }
             else
             {

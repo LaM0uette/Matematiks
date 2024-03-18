@@ -8,7 +8,7 @@
 }
 
 .loose-title {
-    font-size: 115px;
+    font-size: 110px;
     -unity-font-style: bold;
     color: rgb(44, 46, 51);
     margin-top: 65px;
@@ -40,7 +40,7 @@
 }
 
 .loose-button-container__placement {
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     width: 80%;
     height: 500px;
@@ -49,6 +49,7 @@
 
 .loose-button {
     width: 100%;
+    margin-bottom: 40px;
 }
 
 .loose-close-button {
