@@ -7,14 +7,25 @@
     align-items: flex-start;
 }
 
-.high-ball__icon {
-    background-image: url('project://database/Assets/Game/Sprites/SVG/ball.svg?fileID=7388822144124034973&guid=79fe8c657c355e54c8aecea44af594d8&type=3#ball');
+.high-ball__icon-border {
+    background-image: resource('Icons/ball-border');
     align-items: center;
     justify-content: center;
+    -unity-background-image-tint-color: rgb(148, 0, 164);
+}
+
+.high-ball__icon {
+    background-image: url('project://database/Assets/Game/Ui/Resources/Icons/ball.svg?fileID=7388822144124034973&guid=79fe8c657c355e54c8aecea44af594d8&type=3#ball');
+    align-items: center;
+    justify-content: center;
+    -unity-background-scale-mode: scale-to-fit;
+    width: 90%;
+    height: 90%;
 }
 
 .high-ball__value {
     font-size: 19px;
     color: rgb(44, 46, 51);
     -unity-font-style: bold;
+    -unity-text-align: middle-center;
 }

@@ -19,10 +19,12 @@ namespace Game.Modules.Board.Balls
         [ShowInInspector, ReadOnly] public int Number { get; set; }
         
         public Color Color { get; private set; }
+        public Color BorderColor { get; private set; }
         public bool IsVisited { get; set; }
         
         [Space, Title("Ui")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private SpriteRenderer _spriteBorderRenderer;
         [SerializeField] private TMP_Text _tmpNumber;
 
         [Space, Title("Feedbacks")]
@@ -127,18 +129,21 @@ namespace Game.Modules.Board.Balls
         {
             var colorRgba = Color;
             colorRgba.a = 0.3f;
-            
             _spriteRenderer.color = colorRgba;
+            
+            var borderColorRgba = BorderColor;
+            borderColorRgba.a = 0.3f;
+            _spriteBorderRenderer.color = borderColorRgba;
             
             var txtColorRgba = _tmpNumber.color;
             txtColorRgba.a = 0.65f;
-            
             _tmpNumber.color = txtColorRgba;
         }
         
         public void RestoreBackground()
         {
             _spriteRenderer.color = Color;
+            _spriteBorderRenderer.color = BorderColor;
             _tmpNumber.color = GetContrastingTextColor(_spriteRenderer.color);
         }
 
@@ -147,6 +152,11 @@ namespace Game.Modules.Board.Balls
             var color = GetBallColor(number);
             _spriteRenderer.color = color;
             Color = color;
+            
+            var borderColor = GetBallBorderColor(number);
+            //borderColor.a = 0.85f;
+            _spriteBorderRenderer.color = borderColor;
+            BorderColor = borderColor;
             
             _tmpNumber.color = GetContrastingTextColor(_spriteRenderer.color);
             _tmpNumber.text = number.ToString();
@@ -158,20 +168,37 @@ namespace Game.Modules.Board.Balls
                 return ColorVar.Ball10Color;
 
             var colorIndex = number % 10;
-            var isDark = number > 10;
 
             return colorIndex switch
             {
-                1 => isDark ? ColorVar.Ball1ColorDark : ColorVar.Ball1Color,
-                2 => isDark ? ColorVar.Ball2ColorDark : ColorVar.Ball2Color,
-                3 => isDark ? ColorVar.Ball3ColorDark : ColorVar.Ball3Color,
-                4 => isDark ? ColorVar.Ball4ColorDark : ColorVar.Ball4Color,
-                5 => isDark ? ColorVar.Ball5ColorDark : ColorVar.Ball5Color,
-                6 => isDark ? ColorVar.Ball6ColorDark : ColorVar.Ball6Color,
-                7 => isDark ? ColorVar.Ball7ColorDark : ColorVar.Ball7Color,
-                8 => isDark ? ColorVar.Ball8ColorDark : ColorVar.Ball8Color,
-                9 => isDark ? ColorVar.Ball9ColorDark : ColorVar.Ball9Color,
-                _ => ColorVar.Ball10ColorDark
+                1 => ColorVar.Ball1Color,
+                2 => ColorVar.Ball2Color,
+                3 => ColorVar.Ball3Color,
+                4 => ColorVar.Ball4Color,
+                5 => ColorVar.Ball5Color,
+                6 => ColorVar.Ball6Color,
+                7 => ColorVar.Ball7Color,
+                8 => ColorVar.Ball8Color,
+                9 => ColorVar.Ball9Color,
+                _ => ColorVar.Ball10Color
+            };
+        }
+
+        private static Color GetBallBorderColor(int number)
+        {
+            return number switch
+            {
+                >= 1 and <= 10 => ColorVar.BlackColor,
+                >= 11 and <= 20 => ColorVar.Ball2Color,
+                >= 21 and <= 30 => ColorVar.Ball3Color,
+                >= 31 and <= 40 => ColorVar.Ball4Color,
+                >= 41 and <= 50 => ColorVar.Ball5Color,
+                >= 51 and <= 60 => ColorVar.Ball6Color,
+                >= 61 and <= 70 => ColorVar.Ball7Color,
+                >= 71 and <= 80 => ColorVar.Ball8Color,
+                >= 81 and <= 90 => ColorVar.Ball9Color,
+                >= 91 and <= 100 => ColorVar.Ball10Color,
+                _ => ColorVar.Ball10Color
             };
         }
         
