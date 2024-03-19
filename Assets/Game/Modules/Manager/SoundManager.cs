@@ -23,18 +23,18 @@ namespace Game.Modules.Manager
                 Destroy(gameObject);
         }
         
-        public void PlayPopSound() => PlaySound(PopClip, 0.2f);
-        public void PlayBonus01Sound() => PlaySound(Bonus01Clip, 0.2f);
-        public void PlayBonus02Sound() => PlaySound(Bonus02Clip, 0.3f);
-        public void PlayBonus03Sound() => PlaySound(Bonus03Clip, 0.3f);
-        public void PlayBonus04Sound() => PlaySound(Bonus04Clip, 0.25f);
+        public void PlayPopSound() => PlaySound(PopClip, 0.3f);
+        public void PlayBonus01Sound() => PlaySound(Bonus01Clip, 0.3f);
+        public void PlayBonus02Sound() => PlaySound(Bonus02Clip, 0.4f);
+        public void PlayBonus03Sound() => PlaySound(Bonus03Clip, 0.4f);
+        public void PlayBonus04Sound() => PlaySound(Bonus04Clip, 0.35f);
         
         public void PlayBallSound(int index)
         {
             if (index >= 0 && index < BallClips.Length)
             {
                 var clip = BallClips[index];
-                PlaySound(clip, 0.15f);
+                PlaySound(clip, 0.25f);
             }
             else
             {
