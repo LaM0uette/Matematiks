@@ -8,7 +8,8 @@
         </ui:VisualElement>
         <ui:VisualElement name="Separator" class="header-score__separator" />
         <ui:VisualElement name="HighBallContainer" class="header-score__icon-container high-ball__icon-container">
-            <ui:VisualElement name="HighBallIconBorder" class="header-score__icon high-ball__icon-border" style="flex-grow: 1;">
+            <ui:VisualElement class="header-score__icon" style="flex-grow: 1;">
+                <ui:VisualElement name="HighBallIconBorder" class="high-ball__icon-border" style="flex-grow: 1;" />
                 <ui:VisualElement name="HighBallIcon" class="high-ball__icon" style="flex-grow: 1;">
                     <ui:Label tabindex="-1" text="1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HighBallValue" class="high-ball__value" />
                 </ui:VisualElement>

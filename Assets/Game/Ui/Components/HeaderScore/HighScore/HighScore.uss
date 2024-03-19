@@ -11,7 +11,12 @@
     background-image: resource('Icons/ball-border');
     align-items: center;
     justify-content: center;
-    -unity-background-image-tint-color: rgb(148, 0, 164);
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0);
+    -unity-background-scale-mode: scale-to-fit;
+    position: absolute;
+    width: 37%;
+    height: 36%;
+    bottom: 3px;
 }
 
 .high-ball__icon {

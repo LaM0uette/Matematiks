@@ -13,23 +13,24 @@
     width: 75%;
     height: 75%;
     -unity-background-scale-mode: scale-to-fit;
-    -unity-background-image-tint-color: #F0F8FF;
+    -unity-background-image-tint-color: rgb(240, 248, 255);
+    align-items: center;
 }
 
 .header-score__separator {
     width: 2px;
     height: 80%;
     margin: 0 10px 0 10px;
-    background-color: #F0F8FF;
+    background-color: rgb(240, 248, 255);
 }
 
 .header-score__value {
     font-size: 50px;
     -unity-font-style: bold;
-    color: #F0F8FF;
+    color: rgb(240, 248, 255);
 }
 
 .header-score__title {
     font-size: 25px;
-    color: #2C2E33;
+    color: rgb(44, 46, 51);
 }

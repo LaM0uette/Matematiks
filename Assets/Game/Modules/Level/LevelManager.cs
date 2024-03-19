@@ -486,6 +486,55 @@ namespace Game.Modules.Level
                 ball.SetNum(lstNum[i]);
             }
         }
+        
+        [Button]
+        public void SetAllNums()
+        {
+            var board = new GameObject[7, 5];
+            var cells = FindObjectsOfType<Cell>();
+            
+            foreach (var cell in cells)
+            {
+                if (cell.transform.CompareTag("CellCache")) 
+                    continue;
+
+                var position = cell.ExtractCellPosition();
+                board[position.x, position.y] = cell.gameObject;
+            }
+            
+            var width = board.GetLength(0);
+            var height = board.GetLength(1);
+            
+            List<Ball> balls = new();
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var ball = board[x, y].transform.GetComponentInChildren<Ball>();
+                    balls.Add(ball);
+                }
+            }
+            
+            
+            int[] lstNum = {1,2,3,4,5, 6,7,8,9,10, 1,11,21,12,13, 10,20,30,14,15, 16,17,18,19,22, 23,24,25,26,26, 26,26,26,26,26};
+
+            _weightedBalls.Reset();
+            _weightedBalls.Add(new WeightedBall(1, 80f));
+            _weightedBalls.Add(new WeightedBall(2, 30f));
+            _weightedBalls.Add(new WeightedBall(3, 1f));
+            _weightedBalls.Add(new WeightedBall(4, 1f));
+            _weightedBalls.Add(new WeightedBall(5, 1f));
+            _weightedBalls.Add(new WeightedBall(6, 1f));
+            _weightedBalls.Add(new WeightedBall(7, 1f));
+            _weightedBalls.Add(new WeightedBall(8, 1f));
+            _weightedBalls.Add(new WeightedBall(9, 1f));
+            
+            for (var i = 0; i < balls.Count; i++)
+            {
+                var ball = balls[i];
+                ball.SetNum(lstNum[i]);
+            }
+        }
 
         [Button]
         public void SetAllNumForTestLineRenderer()

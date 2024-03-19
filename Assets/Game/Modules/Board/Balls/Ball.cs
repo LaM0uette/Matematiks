@@ -154,7 +154,7 @@ namespace Game.Modules.Board.Balls
             Color = color;
             
             var borderColor = GetBallBorderColor(number);
-            //borderColor.a = 0.85f;
+            //borderColor.a = 0.7f;
             _spriteBorderRenderer.color = borderColor;
             BorderColor = borderColor;
             
@@ -188,7 +188,7 @@ namespace Game.Modules.Board.Balls
         {
             return number switch
             {
-                >= 1 and <= 10 => ColorVar.BlackColor,
+                >= 1 and <= 10 => new Color(0, 0, 0, 0),
                 >= 11 and <= 20 => ColorVar.Ball2Color,
                 >= 21 and <= 30 => ColorVar.Ball3Color,
                 >= 31 and <= 40 => ColorVar.Ball4Color,
