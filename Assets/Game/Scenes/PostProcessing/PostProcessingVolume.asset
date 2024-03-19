@@ -18,7 +18,7 @@ MonoBehaviour:
     m_Value: 0.06
   contrast:
     m_OverrideState: 1
-    m_Value: 7
+    m_Value: 6
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -49,7 +49,7 @@ MonoBehaviour:
     m_Value: 0.9
   intensity:
     m_OverrideState: 1
-    m_Value: 0.75
+    m_Value: 0.2
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
@@ -75,6 +75,40 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &-1568596366585717865
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
+  m_Name: ShadowsMidtonesHighlights
+  m_EditorClassIdentifier: 
+  active: 1
+  shadows:
+    m_OverrideState: 1
+    m_Value: {x: 0.99011916, y: 1, z: 0.9660671, w: -0.03369839}
+  midtones:
+    m_OverrideState: 1
+    m_Value: {x: 0.9660671, y: 0.97703797, z: 1, w: 0.08424599}
+  highlights:
+    m_OverrideState: 1
+    m_Value: {x: 0.9835401, y: 0.9927124, z: 1, w: -0.016849197}
+  shadowsStart:
+    m_OverrideState: 0
+    m_Value: 0
+  shadowsEnd:
+    m_OverrideState: 0
+    m_Value: 0.3
+  highlightsStart:
+    m_OverrideState: 0
+    m_Value: 0.55
+  highlightsEnd:
+    m_OverrideState: 0
+    m_Value: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,3 +124,27 @@ MonoBehaviour:
   components:
   - {fileID: -2053205947309084125}
   - {fileID: -3044339304164300907}
+  - {fileID: 8141377921006120173}
+  - {fileID: -1568596366585717865}
+--- !u!114 &8141377921006120173
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 1
+  lift:
+    m_OverrideState: 1
+    m_Value: {x: 0.93545353, y: 0.9637571, z: 1, w: 0.01635323}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 0.991049, y: 0.98209804, z: 1, w: 0.049059693}
+  gain:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
