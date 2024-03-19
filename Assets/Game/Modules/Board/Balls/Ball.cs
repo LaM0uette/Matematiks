@@ -1,3 +1,4 @@
+using System.Collections;
 using Game.Modules.Bonus;
 using Game.Modules.Events;
 using Game.Modules.Manager;
@@ -127,24 +128,92 @@ namespace Game.Modules.Board.Balls
 
         public void PutInBackground()
         {
-            var colorRgba = Color;
-            colorRgba.a = 0.3f;
-            _spriteRenderer.color = colorRgba;
-            
-            var borderColorRgba = BorderColor;
-            borderColorRgba.a = 0.3f;
-            _spriteBorderRenderer.color = borderColorRgba;
-            
-            var txtColorRgba = _tmpNumber.color;
-            txtColorRgba.a = 0.65f;
-            _tmpNumber.color = txtColorRgba;
+            StartCoroutine(FadeToBackground());
+        }
+        
+        private IEnumerator FadeToBackground()
+        {
+            float duration = 0.1f; // Durée de la transition en secondes
+            float currentTime = 0f;
+
+            // Sauvegardez les couleurs initiales
+            Color initialSpriteColor = _spriteRenderer.color;
+            Color initialBorderColor = _spriteBorderRenderer.color;
+            Color initialTxtColor = _tmpNumber.color;
+
+            // Définissez les nouvelles opacités
+            float targetSpriteOpacity = 0.5f;
+            float targetBorderOpacity = 0.5f;
+            float targetTxtOpacity = 0.75f;
+
+            while (currentTime < duration)
+            {
+                if (!BoardManager.IsPressing)
+                    RestoreBackground();
+                
+                // Calculez le ratio de progression de la transition
+                float t = currentTime / duration;
+                float smoothT = Mathf.SmoothStep(0f, 1f, t);
+
+                // Interpolez les couleurs pour graduellement changer l'opacité
+                _spriteRenderer.color = new Color(initialSpriteColor.r, initialSpriteColor.g, initialSpriteColor.b, Mathf.Lerp(initialSpriteColor.a, targetSpriteOpacity, smoothT));
+                _spriteBorderRenderer.color = new Color(initialBorderColor.r, initialBorderColor.g, initialBorderColor.b, Mathf.Lerp(initialBorderColor.a, targetBorderOpacity, smoothT));
+                _tmpNumber.color = new Color(initialTxtColor.r, initialTxtColor.g, initialTxtColor.b, Mathf.Lerp(initialTxtColor.a, targetTxtOpacity, smoothT));
+
+                // Incrémentez le temps passé
+                currentTime += Time.deltaTime;
+
+                // Attendez jusqu'à la prochaine frame avant de continuer
+                yield return null;
+            }
+
+            // Assurez-vous que les couleurs finales sont correctement appliquées
+            _spriteRenderer.color = new Color(initialSpriteColor.r, initialSpriteColor.g, initialSpriteColor.b, targetSpriteOpacity);
+            _spriteBorderRenderer.color = new Color(initialBorderColor.r, initialBorderColor.g, initialBorderColor.b, targetBorderOpacity);
+            _tmpNumber.color = new Color(initialTxtColor.r, initialTxtColor.g, initialTxtColor.b, targetTxtOpacity);
+
+            if (!BoardManager.IsPressing)
+                RestoreBackground();
         }
         
         public void RestoreBackground()
         {
-            _spriteRenderer.color = Color;
-            _spriteBorderRenderer.color = BorderColor;
-            _tmpNumber.color = GetContrastingTextColor(_spriteRenderer.color);
+            StopCoroutine(FadeToBackground());
+            StartCoroutine(RestoreBackgroundCoroutine());
+        }
+        
+        private IEnumerator RestoreBackgroundCoroutine()
+        {
+            float duration = 0.1f; // Durée de la transition en secondes
+            float currentTime = 0f;
+
+            // Couleurs actuelles au début de la transition
+            Color startSpriteColor = _spriteRenderer.color;
+            Color startBorderColor = _spriteBorderRenderer.color;
+            Color startTxtColor = _tmpNumber.color;
+
+            // Couleurs cibles (originales ou spécifiques)
+            Color targetSpriteColor = Color; // Mettez votre couleur cible ici
+            Color targetBorderColor = BorderColor; // Mettez votre couleur cible ici
+            Color targetTxtColor = GetContrastingTextColor(targetSpriteColor); // Calculez ou définissez votre couleur cible ici
+
+            while (currentTime < duration)
+            {
+                float t = currentTime / duration;
+                float smoothT = Mathf.SmoothStep(0f, 1f, t);
+
+                _spriteRenderer.color = Color.Lerp(startSpriteColor, targetSpriteColor, smoothT);
+                _spriteBorderRenderer.color = Color.Lerp(startBorderColor, targetBorderColor, smoothT);
+                _tmpNumber.color = Color.Lerp(startTxtColor, targetTxtColor, smoothT);
+
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // Appliquez les couleurs finales pour garantir l'exactitude
+            _spriteRenderer.color = targetSpriteColor;
+            _spriteBorderRenderer.color = targetBorderColor;
+            _tmpNumber.color = targetTxtColor;
         }
 
         private void SetBallColor(int number)
