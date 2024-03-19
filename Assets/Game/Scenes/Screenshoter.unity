@@ -2984,7 +2984,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5}
+  m_AnchoredPosition: {x: 0, y: -0.5000076}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &379002511
@@ -4897,7 +4897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5}
+  m_AnchoredPosition: {x: 0, y: -0.5000076}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &700210411 stripped
@@ -8346,35 +8346,42 @@ MonoBehaviour:
   uploadingEditorLogs: 0
   editorLogsUrl: 
   screenshotResolutions:
-  - active: 1
+  - active: 0
     name: Android
     width: 1440
     height: 2960
     scale: 1
     delay: 0
     waitForUpdates: 1
-  - active: 1
-    name: iOS\iPhone 6-8 Plus (5.5") Tall
+  - active: 0
+    name: ChromeBook
     width: 1080
     height: 1920
     scale: 1
     delay: 0
     waitForUpdates: 1
   - active: 1
+    name: iOS\iPhone 6-8 Plus (5.5") Tall
+    width: 1242
+    height: 2208
+    scale: 1
+    delay: 0
+    waitForUpdates: 1
+  - active: 0
     name: iOS\iPhone 14 Plus (6.5") Tall
     width: 1284
     height: 2778
     scale: 1
     delay: 0
     waitForUpdates: 1
-  - active: 1
+  - active: 0
     name: iOS\iPhone 14 Pro Max (6.7") Tall
     width: 1290
     height: 2796
     scale: 1
     delay: 0
     waitForUpdates: 1
-  - active: 1
+  - active: 0
     name: iOS\iPad Pro 12.9" Tall
     width: 2048
     height: 2732
