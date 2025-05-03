@@ -20,7 +20,7 @@
 }
 
 .high-ball__icon {
-    background-image: url('project://database/Assets/Game/Ui/Resources/Icons/ball.svg?fileID=7388822144124034973&guid=79fe8c657c355e54c8aecea44af594d8&type=3#ball');
+    background-image: url("project://database/Assets/Game/Ui/Resources/Icons/ball.svg?fileID=7388822144124034973&guid=79fe8c657c355e54c8aecea44af594d8&type=3#ball");
     align-items: center;
     justify-content: center;
     -unity-background-scale-mode: scale-to-fit;
@@ -29,8 +29,9 @@
 }
 
 .high-ball__value {
-    font-size: 19px;
+    font-size: 20px;
     color: rgb(44, 46, 51);
     -unity-font-style: bold;
     -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/Unity/TextMesh%20Pro/Fonts/MaxxiBold.TTF?fileID=12800000&guid=bcfd233176c3915449314b2958bd4ece&type=3#MaxxiBold");
 }

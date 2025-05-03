@@ -6,6 +6,7 @@
     border-width: 6px;
     border-color: rgb(44, 46, 51);
     border-radius: 15px;
+    -unity-font-definition: url("project://database/Assets/Unity/TextMesh%20Pro/Fonts/Maxxi.TTF?fileID=12800000&guid=ce76f9976d2eeab45bddbc1f06b93619&type=3#Maxxi");
 }
 
 .bonus-card:enabled:active {

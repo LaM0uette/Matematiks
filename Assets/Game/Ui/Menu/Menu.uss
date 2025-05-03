@@ -13,11 +13,13 @@
     font-size: 150px;
     -unity-font-style: bold;
     color: rgb(240, 248, 255);
+    -unity-font-definition: url("project://database/Assets/Unity/TextMesh%20Pro/Fonts/Maxxi.TTF?fileID=12800000&guid=ce76f9976d2eeab45bddbc1f06b93619&type=3#Maxxi");
 }
 
 .middle-score__title {
     font-size: 60px;
     color: rgb(44, 46, 51);
+    -unity-font-definition: url("project://database/Assets/Unity/TextMesh%20Pro/Fonts/Maxxi.TTF?fileID=12800000&guid=ce76f9976d2eeab45bddbc1f06b93619&type=3#Maxxi");
 }
 
 .buttons-container {
